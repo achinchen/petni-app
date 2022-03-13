@@ -20,11 +20,11 @@ export default defineConfig({
       black: '#262626',
       gray: {
         50: '#F8F8F8'
+      },
+      status: {
+        active: '#FDAAA2',
+        general: '#DEDEDE'
       }
-    },
-    breakpoints: {
-      xs: '360px',
-      sm: '768px'
     }
   },
   transformers: [transformerDirective()]
