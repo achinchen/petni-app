@@ -870,7 +870,7 @@
     gzip-size "^6.0.0"
     sirv "^2.0.2"
 
-"@unocss/preset-attributify@0.28.0":
+"@unocss/preset-attributify@0.28.0", "@unocss/preset-attributify@^0.28.0":
   version "0.28.0"
   resolved "https://registry.yarnpkg.com/@unocss/preset-attributify/-/preset-attributify-0.28.0.tgz#f89caf5e1564c6147623094ec9395445f1de8161"
   integrity sha512-/yl/PbBQlBFFil8FktpR9lDee3TqxKs4B1qlfTGydvYJRJWIaqEzShtV9fX8yvksFe3B297Lz5MmBV6X+nit+A==
@@ -909,7 +909,7 @@
     "@unocss/preset-mini" "0.28.0"
     "@unocss/preset-wind" "0.28.0"
 
-"@unocss/preset-web-fonts@0.28.0":
+"@unocss/preset-web-fonts@0.28.0", "@unocss/preset-web-fonts@^0.28.0":
   version "0.28.0"
   resolved "https://registry.yarnpkg.com/@unocss/preset-web-fonts/-/preset-web-fonts-0.28.0.tgz#d4a2bc4e3f91824a2b0fc0239a2a619c54f5a55e"
   integrity sha512-9M/Ko5RJ26+ddYccjLeLPy22Z6bHbBYrqmyYBYygLZWlaRnW8yCLUYfivpFOa5YDHApxpmbkOK8Np57ertYZfA==
@@ -935,7 +935,7 @@
   resolved "https://registry.yarnpkg.com/@unocss/scope/-/scope-0.28.0.tgz#4f1b344615bc0afddd446dd8283879334cd50bb6"
   integrity sha512-EEO3o47Cd97MFkyjwVnfkpSIxzal50pRafIh4DPYcnFYdY4nFqtMmMvx7z1J+g+CO5iC0gzoyM5lBCd359Uu1A==
 
-"@unocss/transformer-directives@0.28.0":
+"@unocss/transformer-directives@0.28.0", "@unocss/transformer-directives@^0.28.0":
   version "0.28.0"
   resolved "https://registry.yarnpkg.com/@unocss/transformer-directives/-/transformer-directives-0.28.0.tgz#a365dbb277eea5298daa37b82898448faac69c07"
   integrity sha512-jBP85mBh+ef0gKzktiGKeyUQBqSJ9h2XwLngj3zh52AC+SouPHUk1rAKzLyimufXO7kJAyUYNuxNQFZeL5C2VA==
