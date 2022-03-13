@@ -886,7 +886,7 @@
     "@unocss/core" "0.28.0"
     local-pkg "^0.4.1"
 
-"@unocss/preset-mini@0.28.0", "@unocss/preset-mini@^0.28.0":
+"@unocss/preset-mini@0.28.0":
   version "0.28.0"
   resolved "https://registry.yarnpkg.com/@unocss/preset-mini/-/preset-mini-0.28.0.tgz#3182dabcbf90b032eaa1882c3e9c2bef1eefb897"
   integrity sha512-dBBPERIXiKEozSeHv0YIWJae4lbQv5RpUZSRCj0hdutICxS/kVqVLNTvPVodaiiZpnSv4GfrPyELIBZY5WJVtA==

@@ -26,7 +26,6 @@
     "@remix-run/serve": "^1.2.3",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
-    "@unocss/preset-mini": "^0.28.0",
     "concurrently": "^7.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.9.0",
