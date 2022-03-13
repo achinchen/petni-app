@@ -26,7 +26,14 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body
+        font="sans"
+        m="auto"
+        min-h="screen"
+        max-w="1280"
+        bg="gray-50"
+        text="black"
+      >
         <Outlet />
         <ScrollRestoration />
         <Scripts />

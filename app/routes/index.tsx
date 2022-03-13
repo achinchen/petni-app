@@ -1,32 +1,30 @@
-export default function Index() {
+import Logo from '~/components/logo';
+import { CREDITS } from '~/constants';
+
+const Loading = () => {
   return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.4' }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div min-h="screen">
+      <Logo
+        position="relative"
+        display="block"
+        m="auto"
+        w="35.5 md:46.5"
+        top="41 md:67"
+      />
+      <h6
+        position="absolute"
+        m="0"
+        bottom="4 md:5"
+        w="100%"
+        text="center"
+        font="normal"
+      >
+        {CREDITS}
+      </h6>
     </div>
   );
+};
+
+export default function Index() {
+  return <Loading />;
 }

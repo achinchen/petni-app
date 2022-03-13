@@ -6,7 +6,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "npm run build:css && cross-env NODE_ENV=production remix build",
-    "build:css": "unocss './app/**/*.{ts,tsx}'",
+    "build:css": "unocss './app/**/*.{ts,tsx}' -o ./app/styles/uno.css",
     "dev": "concurrently 'npm run dev:css' 'npm run dev:remix' ",
     "dev:remix": "cross-env NODE_ENV=development remix dev",
     "dev:css": "unocss './app/**/*.{ts,tsx}' -o ./app/styles/uno.css --watch",
@@ -15,7 +15,6 @@
   "dependencies": {
     "@remix-run/react": "^1.2.3",
     "@remix-run/vercel": "^1.2.3",
-    "@unocss/reset": "^0.28.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "remix": "^1.2.3"
@@ -26,7 +25,10 @@
     "@remix-run/serve": "^1.2.3",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
-    "@unocss/preset-mini": "^0.28.0",
+    "@unocss/preset-attributify": "^0.28.0",
+    "@unocss/preset-web-fonts": "^0.28.0",
+    "@unocss/reset": "^0.28.0",
+    "@unocss/transformer-directives": "^0.28.0",
     "concurrently": "^7.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.9.0",
