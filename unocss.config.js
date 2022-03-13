@@ -11,12 +11,13 @@ export default defineConfig({
     presetWebFonts({
       provider: 'google',
       fonts: {
-        sans: 'Noto+Sans+TC'
+        sans: 'Noto+Sans+TC:400,700'
       }
     })
   ],
   theme: {
     colors: {
+      black: '#262626',
       gray: {
         50: '#F8F8F8'
       }
