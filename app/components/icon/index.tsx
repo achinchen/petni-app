@@ -9,5 +9,5 @@ type Props = {
 
 export default function Icon({ icon, ...attributifyOptions }: Props) {
   const src = SOURCE[icon];
-  return <img src={src} alt={src} {...attributifyOptions} />;
+  return <img src={src} alt={src} w="9" {...attributifyOptions} />;
 }
