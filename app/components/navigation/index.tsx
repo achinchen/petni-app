@@ -3,7 +3,7 @@ import NavigationAction from './links';
 
 export function NavigationDesktop() {
   return (
-    <nav display="flex lt-md:none" h="20" py="3" px="20" bg="white">
+    <nav display="none md:flex" h="20" py="3" px="20" bg="white">
       <Logo type="horizontal" w="29.5" />
       <NavigationAction withLabel />
     </nav>
