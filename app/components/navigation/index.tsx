@@ -10,7 +10,7 @@ export function NavigationDesktop() {
   );
 }
 
-export const NavigationBottom = () => {
+export function NavigationBottom() {
   return (
     <NavigationAction
       position="fixed"
@@ -21,4 +21,4 @@ export const NavigationBottom = () => {
       w="100%"
     />
   );
-};
+}
