@@ -4,7 +4,6 @@ import HeaderMobile from './header';
 
 type Props = {
   children: JSX.Element;
-  statusChildren: JSX.Element;
 };
 
 export default function Layout({ children }: Props) {
