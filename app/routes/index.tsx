@@ -1,16 +1,16 @@
-// import Logo from '~/components/logo';
+import Logo from '~/components/logo';
 import { CREDITS } from '~/constants';
 
 const Loading = () => {
   return (
     <div min-h="screen">
-      {/* <Logo
+      <Logo
         position="relative"
         display="block"
         m="auto"
         w="35.5 md:46.5"
         top="41 md:67"
-      /> */}
+      />
       <h6
         position="absolute"
         m="0"
