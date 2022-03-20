@@ -8,6 +8,9 @@ import Collar from '~/images/icon/collar.svg';
 import CollarActive from '~/images/icon/collar-active.svg';
 import Hospital from '~/images/icon/hospital.svg';
 import HospitalActive from '~/images/icon/hospital-active.svg';
+import Search from '~/images/icon/search.svg';
+import ArrowLeft from '~/images/icon/arrow-left.svg';
+import ArrowRight from '~/images/icon/arrow-right.svg';
 
 export const SOURCE = {
   Card,
@@ -19,5 +22,8 @@ export const SOURCE = {
   Collar,
   CollarActive,
   Hospital,
-  HospitalActive
+  HospitalActive,
+  Search,
+  ArrowLeft,
+  ArrowRight
 };
