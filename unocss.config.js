@@ -15,16 +15,28 @@ export default defineConfig({
       }
     })
   ],
+  safelist: [
+    '[w="100%"]',
+    '[w="24"]',
+    '[color="status-active"]',
+    '[color="white"]'
+  ],
   theme: {
     colors: {
       black: '#262626',
       gray: {
-        50: '#F8F8F8'
+        50: '#F8F8F8',
+        450: '#878787'
       },
       status: {
         active: '#FDAAA2',
         general: '#DEDEDE'
       }
+    },
+    boxShadow: {
+      default: '0px 2px 7px rgba(10, 10, 10, 0.07)',
+      header: '0px 1px 9px rgba(38, 38, 38, 0.05)',
+      tabs: '0px -3.6px 8px rgba(38, 38, 38, 0.05)'
     }
   },
   transformers: [transformerDirective()]
