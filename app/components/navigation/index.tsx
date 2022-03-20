@@ -4,15 +4,17 @@ import NavigationAction from './links';
 export function NavigationDesktop() {
   return (
     <nav
-      display="none md:flex"
+      display="none md:block"
       h="20"
+      px="4"
       py="3"
-      px="20"
       bg="white"
       shadow="header"
     >
-      <Logo type="horizontal" w="29.5" />
-      <NavigationAction withLabel />
+      <div flex="~" max-w="lg:250" m="auto">
+        <Logo type="horizontal" w="29.5" />
+        <NavigationAction withLabel />
+      </div>
     </nav>
   );
 }

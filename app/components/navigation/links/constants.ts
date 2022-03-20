@@ -20,7 +20,7 @@ export const Actions = [
     icon: 'Collar'
   },
   {
-    to: '/emergency',
+    to: '/hospital',
     label: '急診',
     icon: 'Hospital'
   }
