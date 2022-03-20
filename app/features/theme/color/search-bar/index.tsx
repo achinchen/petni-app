@@ -36,7 +36,7 @@ export default function SearchBar({
         border="rounded-2xl"
         bg="black"
       >
-        <Icon icon="Search" w="6" />
+        <Icon icon="Search" />
       </span>
     </Link>
   );

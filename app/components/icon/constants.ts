@@ -11,6 +11,8 @@ import HospitalActive from '~/images/icon/hospital-active.svg';
 import Search from '~/images/icon/search.svg';
 import ArrowLeft from '~/images/icon/arrow-left.svg';
 import ArrowRight from '~/images/icon/arrow-right.svg';
+import Phone from '~/images/icon/phone.svg';
+import Location from '~/images/icon/location.svg';
 
 export const SOURCE = {
   Card,
@@ -25,5 +27,7 @@ export const SOURCE = {
   HospitalActive,
   Search,
   ArrowLeft,
-  ArrowRight
+  ArrowRight,
+  Phone,
+  Location
 };
