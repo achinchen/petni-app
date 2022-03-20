@@ -1,5 +1,5 @@
-import { City } from '../constants';
-import { getAreaIdByCity } from '../utils';
+import type { City } from '~/features/hospital/constants';
+import { getAreaIdByCity } from './utils';
 
 type Props = {
   city: City;

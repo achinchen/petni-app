@@ -1,3 +1,10 @@
+export enum Area {
+  Northern = 'northern',
+  Central = 'central',
+  Southern = 'southern',
+  Eastern = 'eastern'
+}
+
 export enum City {
   Taipei = 'TAIPEI',
   NewTaipei = 'NEW_TAIPEI',
@@ -480,12 +487,5 @@ export const HOSPITALS = {
     }
   ]
 };
-
-export enum Area {
-  Northern = 'northern',
-  Central = 'central',
-  Southern = 'southern',
-  Eastern = 'eastern'
-}
 
 export const REMINDER = '*資訊僅供參考，建議先電話聯絡再前往。';

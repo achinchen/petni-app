@@ -4,7 +4,8 @@ import HospitalCards from './cards';
 import HospitalAreaPanel from './area-panel';
 import HospitalAreaHashId from './area-hash-id';
 import { useIntersectionObserver } from './hooks';
-import { City, CITY_LABEL, HOSPITALS, REMINDER } from './constants';
+import type { City } from './constants';
+import { CITY_LABEL, HOSPITALS, REMINDER } from './constants';
 import { HospitalContextProvider } from './context';
 
 function Hospital() {
