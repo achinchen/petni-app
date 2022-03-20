@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { AttributifyOptions } from '@unocss/preset-attributify';
 import { createPortal } from 'react-dom';
 import { HEADER_PORTAL_ID } from './constants';
 
@@ -23,6 +22,7 @@ export default function Header() {
       id={HEADER_PORTAL_ID}
       display="flex md:none"
       h="23"
+      p="4"
       bg="white"
       shadow="header"
     />
