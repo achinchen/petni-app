@@ -11,7 +11,7 @@ export default defineConfig({
     presetWebFonts({
       provider: 'google',
       fonts: {
-        sans: 'Noto+Sans+TC:400,700'
+        sans: 'Noto+Sans+TC:400,500,700'
       }
     })
   ],
@@ -19,7 +19,9 @@ export default defineConfig({
     '[w="100%"]',
     '[w="24"]',
     '[color="status-active"]',
-    '[color="white"]'
+    '[color="white"]',
+    '[bg="status-active"]',
+    '[bg="white"]'
   ],
   theme: {
     colors: {
