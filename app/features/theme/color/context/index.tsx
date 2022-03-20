@@ -22,7 +22,7 @@ const initialState = {
   setFamily: () => {},
   index: 0,
   setIndex: () => {},
-  familyInformation: undefined,
+  familyInformation: INFORMATION.CAT,
   currentInfo: INFORMATION.CAT[0]
 };
 
