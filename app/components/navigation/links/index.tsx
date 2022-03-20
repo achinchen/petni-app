@@ -45,7 +45,7 @@ export default function NavigationLinks({
         >
           {({ isActive }) => (
             <Fragment>
-              <Icon icon={getIcon(icon, isActive)} />
+              <Icon w="9" icon={getIcon(icon, isActive)} />
               {withLabel && (
                 <Label isActive={isActive} hovered={getHovered(index)}>
                   {label}

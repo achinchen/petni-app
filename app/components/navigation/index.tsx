@@ -22,10 +22,9 @@ export function NavigationDesktop() {
 export function NavigationBottom() {
   return (
     <NavigationAction
-      position="fixed"
-      display="flex md:none"
-      mt="100%"
+      position="sticky"
       bottom="0"
+      display="flex md:none"
       h="14"
       w="100%"
       shadow="tabs"
