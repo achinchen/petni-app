@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Area } from '~/features/hospital/constants';
 import { useHospitalContext } from '~/features/hospital/context';
+import type { Area } from '~/features/hospital/constants';
 
 export function useIntersectionObserver() {
   const { area, setArea } = useHospitalContext();

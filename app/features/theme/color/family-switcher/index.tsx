@@ -1,5 +1,6 @@
 import { AttributifyOptions } from '@unocss/preset-attributify';
-import { Family, FAMILY_LABEL } from '~/features/theme/color/constants';
+import type { Family } from '~/features/theme/color/constants';
+import { FAMILY_LABEL } from '~/features/theme/color/constants';
 import { useThemeColorContext } from '~/features/theme/color/context';
 
 type Props = {
