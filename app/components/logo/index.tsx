@@ -1,7 +1,15 @@
 import { AttributifyOptions } from '@unocss/preset-attributify';
-import { APP_NAME } from '~/constants';
-import logo from '~/images/logo.gif';
+import { SOURCE, APP_NAME } from './constants';
 
-export default function Logo(attributifyOptions: AttributifyOptions) {
-  return <img src={logo} alt={`${APP_NAME} Logo`} {...attributifyOptions} />;
+type Props = {
+  type?: keyof typeof SOURCE;
+} & AttributifyOptions;
+
+export default function Logo({
+  type = 'vertical',
+  ...attributifyOptions
+}: Props) {
+  const src = SOURCE[type];
+
+  return <img src={src} alt={`${APP_NAME} Logo`} {...attributifyOptions} />;
 }

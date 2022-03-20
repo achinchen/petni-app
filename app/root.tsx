@@ -32,7 +32,7 @@ export default function App() {
         min-h="screen"
         max-w="1280"
         bg="gray-50"
-        text="black"
+        text="black leading-normal"
       >
         <Outlet />
         <ScrollRestoration />
