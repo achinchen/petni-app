@@ -11,7 +11,7 @@ import { HospitalContextProvider } from './context';
 function Hospital() {
   useIntersectionObserver();
   return (
-    <main max-w="lg:250" m="auto" pb="4 lg:none">
+    <main max-w="lg:262" m="auto" pb="4 lg:none">
       <HeaderPortal>
         <HospitalAreaPanel />
       </HeaderPortal>

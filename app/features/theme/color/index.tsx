@@ -18,7 +18,7 @@ function ThemeColor() {
       mx="4 md:auto"
       px="at-lg:24"
       w="lg:90%"
-      max-w="md:168 lg:250"
+      max-w="md:168 lg:262"
     >
       <HeaderPortal>
         <FamilySwitcher m="auto" />
