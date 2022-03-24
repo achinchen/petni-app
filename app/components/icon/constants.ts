@@ -13,6 +13,9 @@ import ArrowLeft from '~/images/icon/arrow-left.svg';
 import ArrowRight from '~/images/icon/arrow-right.svg';
 import Phone from '~/images/icon/phone.svg';
 import Location from '~/images/icon/location.svg';
+import Male from '~/images/icon/male.svg';
+import Female from '~/images/icon/female.svg';
+import Close from '~/images/icon/close.svg';
 
 export const SOURCE = {
   Card,
@@ -29,5 +32,8 @@ export const SOURCE = {
   ArrowLeft,
   ArrowRight,
   Phone,
-  Location
+  Location,
+  Male,
+  Female,
+  Close
 };
