@@ -11,7 +11,7 @@ export function NavigationDesktop() {
       bg="white"
       shadow="header"
     >
-      <div flex="~" max-w="lg:250" m="auto">
+      <div flex="~" max-w="lg:262" m="auto">
         <Logo type="horizontal" w="29.5" />
         <NavigationAction withLabel />
       </div>
@@ -22,7 +22,7 @@ export function NavigationDesktop() {
 export function NavigationBottom() {
   return (
     <NavigationAction
-      position="sticky"
+      position="fixed"
       bottom="0"
       display="flex md:none"
       h="14"
