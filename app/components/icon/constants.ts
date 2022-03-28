@@ -16,6 +16,10 @@ import Location from '~/images/icon/location.svg';
 import Male from '~/images/icon/male.svg';
 import Female from '~/images/icon/female.svg';
 import Close from '~/images/icon/close.svg';
+import CatActive from '~/images/icon/cat-active.svg';
+import Cat from '~/images/icon/cat.svg';
+import DogActive from '~/images/icon/dog-active.svg';
+import Dog from '~/images/icon/dog.svg';
 
 export const SOURCE = {
   Card,
@@ -35,5 +39,9 @@ export const SOURCE = {
   Location,
   Male,
   Female,
-  Close
+  Close,
+  CatActive,
+  Cat,
+  DogActive,
+  Dog
 };
