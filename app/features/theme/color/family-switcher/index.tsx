@@ -1,5 +1,5 @@
 import { AttributifyOptions } from '@unocss/preset-attributify';
-import type { Family } from '~/features/theme/color/constants';
+import type { Family } from '~/constants';
 import { FAMILY_LABEL } from '~/features/theme/color/constants';
 import { useThemeColorContext } from '~/features/theme/color/context';
 

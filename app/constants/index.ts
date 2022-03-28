@@ -1,5 +1,16 @@
 export const APP_NAME = 'PetNi';
 
-const PROGRAMMER = 'Chin Chen';
-const DESIGNER = 'K.T';
-export const CREDITS = `${APP_NAME} © Code: ${PROGRAMMER}  /  Design: ${DESIGNER}`;
+export enum Family {
+  Cat = 'CAT',
+  Dog = 'DOG'
+}
+
+export enum Gender {
+  Male = 'MALE',
+  Female = 'FEMALE'
+}
+
+export enum Age {
+  Kid = 'KID',
+  Adult = 'ADULT'
+}
