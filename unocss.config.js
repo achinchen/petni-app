@@ -18,10 +18,14 @@ export default defineConfig({
   safelist: [
     '[w="100%"]',
     '[w="24"]',
+    '[h="10"]',
     '[color="status-active"]',
     '[color="white"]',
+    '[color="black"]',
     '[bg="status-active"]',
-    '[bg="white"]'
+    '[bg="white"]',
+    '[bg="black"]',
+    '[border="rounded-xl"]'
   ],
   theme: {
     colors: {

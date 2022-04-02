@@ -11,11 +11,11 @@ export default function SwitchButton({ checked, onChange }: Props) {
       h="7"
       w="14"
       cursor="pointer"
-      duration="400"
+      duration="200"
       border="rounded-3xl"
       bg="status-general"
       {...(checked && { bg: 'status-active' })}
-      onChange={onChange}
+      onClick={onChange}
     >
       <span
         role="checkbox"
@@ -29,7 +29,7 @@ export default function SwitchButton({ checked, onChange }: Props) {
         h="5"
         bg="white"
         border="rounded-1/2"
-        duration="400"
+        duration="250"
         {...(checked && {
           style: {
             left: '100%',
