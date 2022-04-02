@@ -4,11 +4,13 @@ type Props = {
   onClick: () => void;
   children: JSX.Element | string;
   isPressed?: boolean;
+  isDark?: boolean;
 } & AttributifyOptions;
 
 export default function Button({
   onClick,
   children,
+  isDark = false,
   isPressed = false,
   ...attributifyOptions
 }: Props) {
@@ -16,11 +18,15 @@ export default function Button({
     <button
       d="block"
       bg="white"
-      shadow="default"
-      {...(isPressed && {
+      {...(isDark && {
         bg: 'black',
         color: 'white'
       })}
+      {...(isPressed && {
+        bg: isDark ? 'white' : 'black',
+        color: isDark ? 'black' : 'white'
+      })}
+      shadow="default"
       onClick={onClick}
       {...attributifyOptions}
     >
