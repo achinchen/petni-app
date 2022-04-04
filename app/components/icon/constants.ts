@@ -24,6 +24,7 @@ import DogActive from '~/images/icon/dog-active.svg';
 import Dog from '~/images/icon/dog.svg';
 import Bone from '~/images/icon/bone.svg';
 import Fish from '~/images/icon/fish.svg';
+import Info from '~/images/icon/info.svg';
 
 export const SOURCE = {
   Card,
@@ -51,5 +52,6 @@ export const SOURCE = {
   DogActive,
   Dog,
   Bone,
-  Fish
+  Fish,
+  Info
 };

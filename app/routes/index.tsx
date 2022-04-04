@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Layout from '~/components/layout';
 import Pairing from '~/features/Pairing';
 import CreditLoading from '~/components/credit-loading';
 
@@ -11,5 +12,11 @@ export default function Index() {
     setTimeout(() => setLoaded(true), LOADING_SECONDS);
   }, []);
 
-  return loaded ? <Pairing /> : <CreditLoading />;
+  return loaded ? (
+    <Layout>
+      <Pairing />
+    </Layout>
+  ) : (
+    <CreditLoading />
+  );
 }

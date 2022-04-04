@@ -1,11 +1,11 @@
 import Panel from './Panel';
-import Card from './Card';
+import PairCards from './PairCards';
 
 export default function Pairing() {
   return (
     <main flex="~">
       <Panel />
-      <Card />
+      <PairCards />
     </main>
   );
 }

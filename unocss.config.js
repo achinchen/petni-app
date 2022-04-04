@@ -41,6 +41,9 @@ export default defineConfig({
     },
     boxShadow: {
       default: '0px 2px 7px rgba(10, 10, 10, 0.07)',
+      card: '-4px 6px 12px rgba(0, 0, 0, 0.25)',
+      'card-light': '0px 4px 24px rgba(0, 0, 0, 0.25)',
+      'card-dark': '0px 9px 11px rgba(0, 0, 0, 0.25)',
       header: '0px 1px 9px rgba(38, 38, 38, 0.05)',
       tabs: '0px -3.6px 8px rgba(38, 38, 38, 0.05)'
     }
