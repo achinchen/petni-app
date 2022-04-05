@@ -7,16 +7,17 @@ export default function FilterPanel() {
   return (
     <section
       position="relative"
+      flex="~ col"
       w="100% lg:120"
-      h="100vh"
       p="8 lg:10"
       shadow="default"
+      style={{ height: 'calc(100vh - 80px)' }}
     >
       <Filter />
       <Setting />
       <Button
         position="fixed lg:relative"
-        mt="6"
+        mt="auto"
         h="16 lg:12"
         w="100vw lg:100%"
         left="0"
@@ -25,6 +26,7 @@ export default function FilterPanel() {
         justify="end"
         onClick={() => {}}
         isDark
+        z="1"
       >
         {SUBMIT_BUTTON}
       </Button>
