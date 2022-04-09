@@ -1,17 +1,21 @@
 import Filter from './Filter';
 import Setting from './Setting';
 import Button from '~/components/button';
+import { usePairContext } from '~/features/Pairing/context';
 import { SUBMIT_BUTTON } from './constants';
 
-export default function FilterPanel() {
+export default function Panel() {
+  const { showPanel } = usePairContext();
+
   return (
     <section
       position="relative"
-      flex="~ col"
-      w="100% lg:120"
-      p="8 lg:10"
+      display="lg:flex"
+      flex="col"
+      w="screen lg:120"
+      p="4 sm:8 lg:10"
       shadow="default"
-      style={{ height: 'calc(100vh - 80px)' }}
+      {...(!showPanel && { display: 'none' })}
     >
       <Filter />
       <Setting />

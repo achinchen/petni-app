@@ -23,7 +23,7 @@ export default function FilterPanel() {
   return (
     <Fragment>
       {SETTING_OPTIONS.map(({ CATEGORY, LABEL }) => (
-        <div flex="~" justify="between" mb="8 lg:3" key={CATEGORY}>
+        <div flex="~" justify="between" mb="8" key={CATEGORY}>
           <div font="medium">{LABEL}</div>
           <SwitchButton
             onChange={onSettingChange(CATEGORY)}

@@ -1,11 +1,22 @@
 import Panel from './Panel';
 import PairCards from './PairCards';
+import Portal from './Portal';
+import Loading from '~/components/Loading';
+import { PairingContextProvider } from './context';
 
 export default function Pairing() {
+  const isLoading = false;
+
   return (
-    <main flex="~">
-      <Panel />
-      <PairCards />
-    </main>
+    <PairingContextProvider>
+      <main
+        flex="~"
+        h="[calc(100vh-160px)] sm:[calc(100vh-120px)] lg:[calc(100vh-80px)]"
+      >
+        <Portal />
+        <Panel />
+        {isLoading ? <Loading /> : <PairCards />}
+      </main>
+    </PairingContextProvider>
   );
 }

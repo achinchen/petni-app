@@ -9,7 +9,7 @@ export default function RecommendCards() {
   );
 
   return (
-    <section display="none lg:flex" m="4" justify="center">
+    <section display="none lg:flex" my="4" justify="center">
       {pets.map(({ id, gender, family, location, image }) => (
         <div
           key={id}

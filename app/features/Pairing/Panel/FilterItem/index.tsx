@@ -20,10 +20,7 @@ export default function PanelFilterItem({
   const buttonSize = ['age', 'color'].includes(category) ? 'sm' : 'base';
 
   return (
-    <div
-      mb="7 lg:3"
-      style={{ width: buttonSize === 'sm' ? '100%' : 'initial' }}
-    >
+    <div mb="8" style={{ width: buttonSize === 'sm' ? '100%' : 'initial' }}>
       <div font="medium">{label}</div>
       <div mt="1" grid="~ cols-3 gap-3" justify="between">
         {options.map(({ VALUE, LABEL }) => {

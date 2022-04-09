@@ -1,10 +1,19 @@
-import Main from './Main';
+import CurrentCard from './CurrentCard';
 import RecommendCards from './RecommendCards';
+import { usePairContext } from '~/features/Pairing/context';
 
 export default function PairCards() {
+  const { showPanel } = usePairContext();
+
   return (
-    <section flex="~ col" justify="between" w="100%">
-      <Main />
+    <section
+      w="100%"
+      h="100%"
+      display="flex"
+      flex="col"
+      {...(showPanel && { display: 'none lg:flex' })}
+    >
+      <CurrentCard />
       <RecommendCards />
     </section>
   );
