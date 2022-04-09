@@ -31,7 +31,7 @@ function ThemeColor() {
       />
       <img
         position="absolute"
-        display="lt-lg:none"
+        display="none lg:block"
         w="81"
         top="22.5"
         left="50%"
