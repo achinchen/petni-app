@@ -25,7 +25,10 @@ export default defineConfig({
     '[bg="status-active"]',
     '[bg="white"]',
     '[bg="black"]',
-    '[border="rounded-xl"]'
+    '[bg="transparent"]',
+    '[border="rounded-xl"]',
+    '[display="none"]',
+    '[display="lg:flex"]'
   ],
   theme: {
     colors: {
