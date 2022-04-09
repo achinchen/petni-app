@@ -25,6 +25,9 @@ import Dog from '~/images/icon/dog.svg';
 import Bone from '~/images/icon/bone.svg';
 import Fish from '~/images/icon/fish.svg';
 import Info from '~/images/icon/info.svg';
+import InfoDark from '~/images/icon/info-dark.svg';
+import Filter from '~/images/icon/filter.svg';
+import Undo from '~/images/icon/undo.svg';
 
 export const SOURCE = {
   Card,
@@ -53,5 +56,8 @@ export const SOURCE = {
   Dog,
   Bone,
   Fish,
-  Info
+  Info,
+  InfoDark,
+  Filter,
+  Undo
 };
