@@ -15,6 +15,8 @@ export default function Panel() {
       w="screen lg:120"
       p="4 sm:8 lg:10"
       shadow="default"
+      bg="gray-50"
+      z="1"
       {...(!showPanel && { display: 'none' })}
     >
       <Filter />

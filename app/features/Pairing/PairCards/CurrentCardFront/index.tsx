@@ -40,6 +40,9 @@ export default function CurrentCardFront() {
         z--1"
       {...(!withImage && { after: 'display-none' })}
       style={style}
+      // onAnimationEnd={}
+      animate="close duration-0.4s count-1 mode-forwards"
+      transform-origin="left"
     >
       <Icon
         position="absolute"

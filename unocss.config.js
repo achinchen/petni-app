@@ -28,7 +28,9 @@ export default defineConfig({
     '[bg="transparent"]',
     '[border="rounded-xl"]',
     '[display="none"]',
-    '[display="lg:flex"]'
+    '[display="lg:flex"]',
+    '[animate="close"]',
+    '[animate="favorite"]'
   ],
   theme: {
     colors: {
@@ -49,6 +51,12 @@ export default defineConfig({
       'card-dark': '0px 9px 11px rgba(0, 0, 0, 0.25)',
       header: '0px 1px 9px rgba(38, 38, 38, 0.05)',
       tabs: '0px -3.6px 8px rgba(38, 38, 38, 0.05)'
+    },
+    animation: {
+      keyframes: {
+        close: '{from{}to{transform:rotate(-20deg) translate(-100vw, -125%)}}',
+        favorite: '{from{}to{transform:rotate(15deg) translate(100vw, -125%)}}'
+      }
     }
   },
   transformers: [transformerDirective()]
