@@ -57,7 +57,7 @@ export default function PetCards(props: Props) {
                 shadow="default"
                 onClick={onDelete(id)}
               >
-                <Icon icon="Close" />
+                <Icon icon="CloseSm" />
               </button>
             </figure>
             <h2 position="relative" text="base" mt="2" mb="0" mx="0">

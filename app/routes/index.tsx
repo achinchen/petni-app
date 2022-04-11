@@ -1,30 +1,22 @@
-import Logo from '~/components/logo';
-import { CREDITS } from '~/constants';
+import { useEffect, useState } from 'react';
+import Layout from '~/components/layout';
+import Pairing from '~/features/Pairing';
+import CreditLoading from '~/components/credit-loading';
 
-const Loading = () => {
-  return (
-    <div min-h="screen">
-      <Logo
-        position="relative"
-        display="block"
-        m="auto"
-        w="35.5 md:46.5"
-        top="41 md:67"
-      />
-      <h6
-        position="absolute"
-        m="0"
-        bottom="4 md:5"
-        w="100%"
-        text="center"
-        font="normal"
-      >
-        {CREDITS}
-      </h6>
-    </div>
-  );
-};
+const LOADING_SECONDS = 1000 * 1.5;
 
 export default function Index() {
-  return <Loading />;
+  const [loaded, setLoaded] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setLoaded(true), LOADING_SECONDS);
+  }, []);
+
+  return loaded ? (
+    <Layout>
+      <Pairing />
+    </Layout>
+  ) : (
+    <CreditLoading />
+  );
 }

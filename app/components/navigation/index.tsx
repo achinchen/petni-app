@@ -4,7 +4,7 @@ import NavigationAction from './links';
 export function NavigationDesktop() {
   return (
     <nav
-      display="none md:block"
+      display="none lg:block"
       h="20"
       px="4"
       py="3"
@@ -24,7 +24,7 @@ export function NavigationBottom() {
     <NavigationAction
       position="fixed"
       bottom="0"
-      display="flex md:none"
+      display="flex lg:none"
       h="14"
       w="100%"
       shadow="tabs"

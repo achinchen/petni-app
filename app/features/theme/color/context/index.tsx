@@ -5,7 +5,8 @@ import {
   Dispatch,
   SetStateAction
 } from 'react';
-import { Family, INFORMATION } from '~/features/theme/color/constants';
+import { Family } from '~/constants';
+import { INFORMATION } from '~/features/theme/color/constants';
 
 type Information = typeof INFORMATION[Family][number];
 type InitialState = {

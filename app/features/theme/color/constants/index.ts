@@ -1,12 +1,8 @@
+import { Family } from '~/constants';
 import CharacterCat from '~/images/theme/character/cat.svg';
 import CharacterDog from '~/images/theme/character/dog.svg';
 import { CATS } from './cats';
 import { DOGS } from './dogs';
-
-export enum Family {
-  Cat = 'CAT',
-  Dog = 'DOG'
-}
 
 export const CHARACTER_IMAGE = {
   [Family.Dog]: CharacterDog,
