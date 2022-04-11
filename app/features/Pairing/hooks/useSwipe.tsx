@@ -1,7 +1,7 @@
 import { useRef, useEffect, useLayoutEffect, useCallback } from 'react';
 
 type Parameters = {
-  dom: HTMLElement;
+  dom?: HTMLElement;
   onSwipeLeft: () => void;
   onSwipeRight: () => void;
 };
@@ -22,14 +22,9 @@ export default function useSwipe({
     if (touchendX > touchstartX) return onSwipeRight();
   }, [onSwipeRight, onSwipeLeft, pointer]);
 
-  useLayoutEffect(() => {
-    pointer.current = {
-      touchstartX: 0,
-      touchendX: 0
-    };
-  }, []);
-
   useEffect(() => {
+    const targetDom = dom || document.body;
+
     const onTouchStart = (event: TouchEvent) => {
       pointer.current.touchstartX = event.changedTouches[0].screenX;
     };
@@ -39,13 +34,13 @@ export default function useSwipe({
       onTouch();
     };
 
-    dom.addEventListener('touchstart', onTouchStart);
+    targetDom.addEventListener('touchstart', onTouchStart);
 
-    dom.addEventListener('touchend', onTouchEnd);
+    targetDom.addEventListener('touchend', onTouchEnd);
 
     return () => {
-      dom.removeEventListener('touchstart', onTouchStart);
-      dom.removeEventListener('touchend', onTouchEnd);
+      targetDom.removeEventListener('touchstart', onTouchStart);
+      targetDom.removeEventListener('touchend', onTouchEnd);
     };
   }, [dom, onTouch]);
 }

@@ -1,15 +1,36 @@
+import { useState } from 'react';
 import Icon from '~/components/icon';
 import IconButton from '~/components/IconButton';
+import useSwipe from '~/features/Pairing/hooks/useSwipe';
+import useSound, { SoundType } from '~/hooks/useSound';
 import { getMockPet } from '../utils';
 import { IMAGE_MISSING, PLACEHOLDER_IMG } from './constants';
 import { getIconByGenderAndFamily } from '~/utils';
 
 export default function CurrentCardFront() {
+  const [animation, setAnimation] = useState<'close' | 'favorite'>();
+
   const { image, id, location, gender, family } = getMockPet();
   const withImage = Boolean(image);
   const style = withImage ? { backgroundImage: `url(${image})` } : {};
-
   const genderIcon = getIconByGenderAndFamily({ gender, family });
+  const onPlay = useSound();
+
+  const onClose = () => {
+    setAnimation('close');
+  };
+  const onFavorite = () => {
+    setAnimation('favorite');
+    onPlay((family ? family.toLowerCase() : 'general') as SoundType);
+  };
+  const onAnimationEnd = () => {
+    setAnimation(undefined);
+  };
+
+  useSwipe({
+    onSwipeLeft: onClose,
+    onSwipeRight: onFavorite
+  });
 
   return (
     <div
@@ -39,10 +60,13 @@ export default function CurrentCardFront() {
         to-black
         z--1"
       {...(!withImage && { after: 'display-none' })}
-      style={style}
-      // onAnimationEnd={}
-      animate="close duration-0.4s count-1 mode-forwards"
       transform-origin="left"
+      style={style}
+      animate="favorite duration-0.4s count-1 mode-forwards"
+      {...(animation && {
+        animate: `${animation} duration-0.4s count-1 mode-forwards`
+      })}
+      onAnimationEnd={onAnimationEnd}
     >
       <Icon
         position="absolute"
@@ -83,6 +107,7 @@ export default function CurrentCardFront() {
           shadow="default"
           icon="Close"
           iconAttributifyOptions={{ w: 7 }}
+          onClick={onClose}
         />
         <div color={withImage ? `white` : 'black'} m="0">
           <span flex="~" text="4.5" font="medium">
@@ -101,6 +126,7 @@ export default function CurrentCardFront() {
           shadow="default"
           icon="LoveActiveFill"
           iconAttributifyOptions={{ w: 10 }}
+          onClick={onFavorite}
         />
       </div>
     </div>
