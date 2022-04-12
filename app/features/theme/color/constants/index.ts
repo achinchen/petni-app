@@ -1,6 +1,6 @@
 import { Family } from '~/constants';
-import CharacterCat from '~/images/theme/character/cat.svg';
-import CharacterDog from '~/images/theme/character/dog.svg';
+import CharacterCat from '~/assets/images/theme/character/cat.svg';
+import CharacterDog from '~/assets/images/theme/character/dog.svg';
 import { CATS } from './cats';
 import { DOGS } from './dogs';
 
