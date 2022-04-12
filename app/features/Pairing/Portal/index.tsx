@@ -19,8 +19,6 @@ export default function Portal() {
       <Fragment>
         {showPanel ? (
           <IconButton
-            pr="4"
-            py="4"
             iconAttributifyOptions={{ w: 5 }}
             icon="ArrowLeft"
             onClick={onClosePanel}
@@ -28,8 +26,6 @@ export default function Portal() {
           />
         ) : (
           <IconButton
-            pr="4"
-            py="4"
             iconAttributifyOptions={{ w: 6 }}
             icon="Undo"
             onClick={onClose}
@@ -39,8 +35,6 @@ export default function Portal() {
         <div m="auto">{state}</div>
         {!showPanel && (
           <IconButton
-            pl="4"
-            py="4"
             bg="transparent"
             iconAttributifyOptions={{ w: 6 }}
             icon="Filter"
