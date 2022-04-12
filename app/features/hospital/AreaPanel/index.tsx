@@ -22,7 +22,7 @@ export default function HospitalAreaPanel({
       {...attributifyOptions}
     >
       <h1
-        display="block md:none"
+        display="block lg:none"
         w="9 sm:100%"
         whitespace="nowrap"
         overflow="hidden"
