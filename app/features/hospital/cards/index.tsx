@@ -1,4 +1,4 @@
-import Icon from '~/components/icon';
+import Icon from '~/components/Icon';
 import { Hospital } from './types';
 import { City } from '~/features/hospital/constants';
 import { LABEL_OF_OPEN_DURING_COVID } from './constants';

@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { NavigationDesktop, NavigationBottom } from '~/components/navigation';
+import { NavigationDesktop, NavigationBottom } from '~/components/Navigation';
 import HeaderMobile from './header';
 import BackgroundSounds from '~/components/BackgroundSounds';
 

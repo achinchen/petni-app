@@ -1,4 +1,4 @@
-import Layout from '~/components/layout';
+import Layout from '~/components/Layout';
 import Hospital from '~/features/hospital';
 
 export default function ThemeColor() {

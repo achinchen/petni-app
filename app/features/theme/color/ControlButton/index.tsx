@@ -1,6 +1,6 @@
 import { AttributifyOptions } from '@unocss/preset-attributify';
 import { useThemeColorContext } from '~/features/theme/color/context';
-import Icon from '~/components/icon';
+import Icon from '~/components/Icon';
 
 type Props = {
   isNext?: boolean;

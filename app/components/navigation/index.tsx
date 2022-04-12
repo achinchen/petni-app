@@ -1,4 +1,4 @@
-import Logo from '~/components/logo';
+import Logo from '~/components/Logo';
 import NavigationAction from './links';
 
 export function NavigationDesktop() {

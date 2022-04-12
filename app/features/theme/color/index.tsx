@@ -1,9 +1,9 @@
-import { HeaderPortal } from '~/components/layout/header';
+import { HeaderPortal } from '~/components/Layout/header';
 import { CHARACTER_IMAGE } from './constants';
 import { ThemeColorContextProvider, useThemeColorContext } from './context';
-import SearchBar from './search-bar';
-import ControlButton from './control-button';
-import FamilySwitcher from './family-switcher';
+import SearchBar from './SearchBar';
+import ControlButton from './ControlButton';
+import FamilySwitcher from './FamilySwitcher';
 
 function ThemeColor() {
   const { family, currentInfo } = useThemeColorContext();

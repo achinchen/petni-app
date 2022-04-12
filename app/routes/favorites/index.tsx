@@ -1,4 +1,4 @@
-import Layout from '~/components/layout';
+import Layout from '~/components/Layout';
 import Favorites from '~/features/favorites';
 
 export default function ThemeColor() {

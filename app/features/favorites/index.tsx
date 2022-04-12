@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import PetCards from '~/components/pet-cards';
-import type { PetCard } from '~/components/pet-cards/types';
-import { HeaderPortal } from '~/components/layout/header';
+import PetCards from '~/components/PetCards';
+import type { PetCard } from '~/components/PetCards/types';
+import { HeaderPortal } from '~/components/Layout/header';
 import { getMockPets, TITLE, SUBTITLE } from './constants';
 
 export default function Favorites() {

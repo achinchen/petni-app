@@ -1,4 +1,4 @@
-import Button from '~/components/button';
+import Button from '~/components/Button';
 
 export type Props = {
   isPressed: boolean;

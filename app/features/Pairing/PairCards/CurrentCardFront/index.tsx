@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Icon from '~/components/icon';
+import Icon from '~/components/Icon';
 import IconButton from '~/components/IconButton';
 import useSwipe from '~/features/Pairing/hooks/useSwipe';
 import useSound, { SoundType } from '~/hooks/useSound';

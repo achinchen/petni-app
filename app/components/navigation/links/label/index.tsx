@@ -1,4 +1,4 @@
-import type { IsActive } from '~/components/navigation/links/types';
+import type { IsActive } from '~/components/Navigation/links/types';
 
 type LabelProps = {
   hovered: boolean;
