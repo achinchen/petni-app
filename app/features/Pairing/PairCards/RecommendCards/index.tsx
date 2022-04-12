@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Icon from '~/components/Icon';
+import Icon from '~/components/common/Icon';
 import { getMockPet } from '../utils';
 import { getIconByGenderAndFamily } from '~/utils';
 

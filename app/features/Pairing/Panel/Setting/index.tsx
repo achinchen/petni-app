@@ -1,5 +1,5 @@
 import { Fragment, useReducer } from 'react';
-import SwitchButton from '~/components/SwitchButton';
+import SwitchButton from '~/components/common/SwitchButton';
 import { Setting, SETTING_OPTIONS } from './constants';
 
 type State = {

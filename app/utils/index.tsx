@@ -1,4 +1,4 @@
-import type { IconType } from '~/components/Icon';
+import type { IconType } from '~/components/common/Icon';
 import { Gender, Family } from '~/constants';
 
 export const getIconByFamily = (family: Family): IconType => {

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import type { LottiePlayer } from '@lottiefiles/lottie-player';
 import source from './loading.json';
 
-export default function Loading() {
+export default function LoadingAnimation() {
   useEffect(() => {
     require('@lottiefiles/lottie-player');
     const player = document.querySelector('lottie-player') as LottiePlayer;

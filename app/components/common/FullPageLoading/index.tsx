@@ -1,7 +1,7 @@
 import Logo from '~/components/Logo';
 import { CREDITS } from './constants';
 
-export default function CreditLoading() {
+export default function FullPageLoading() {
   return (
     <div min-h="screen">
       <Logo

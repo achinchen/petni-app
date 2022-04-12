@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import PetCards from '~/components/PetCards';
-import type { PetCard } from '~/components/PetCards/types';
+import PetCards from '~/components/common/PetCards';
+import type { PetCard } from '~/components/common/PetCards/types';
 import { HeaderPortal } from '~/components/Layout/header';
 import { getMockPets, TITLE, SUBTITLE } from './constants';
 

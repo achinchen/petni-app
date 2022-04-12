@@ -1,6 +1,6 @@
 import { Link } from 'remix';
 import { AttributifyOptions } from '@unocss/preset-attributify';
-import Icon from '~/components/Icon';
+import Icon from '~/components/common/Icon';
 
 type Props = {
   search: string;

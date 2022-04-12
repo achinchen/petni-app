@@ -1,4 +1,4 @@
-import Icon from '~/components/Icon';
+import Icon from '~/components/common/Icon';
 import { HeaderPortal } from '~/components/Layout/header';
 import HospitalCards from './Cards';
 import HospitalAreaPanel from './AreaPanel';

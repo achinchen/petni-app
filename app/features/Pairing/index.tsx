@@ -1,7 +1,7 @@
 import Panel from './Panel';
 import PairCards from './PairCards';
 import Portal from './Portal';
-import Loading from '~/components/Loading';
+import Loading from '~/components/common/LoadingAnimation';
 import { PairingContextProvider } from './context';
 
 export default function Pairing() {

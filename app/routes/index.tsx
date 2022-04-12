@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Layout from '~/components/Layout';
 import Pairing from '~/features/Pairing';
-import CreditLoading from '~/components/CreditLoading';
+import FullPageLoading from '~/components/common/FullPageLoading';
 
 const LOADING_SECONDS = 1000 * 1.5;
 
@@ -17,6 +17,6 @@ export default function Index() {
       <Pairing />
     </Layout>
   ) : (
-    <CreditLoading />
+    <FullPageLoading />
   );
 }

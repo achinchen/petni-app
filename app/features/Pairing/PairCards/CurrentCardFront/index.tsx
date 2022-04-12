@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Icon from '~/components/Icon';
-import IconButton from '~/components/IconButton';
+import Icon from '~/components/common/Icon';
+import IconButton from '~/components/common/IconButton';
 import useSwipe from '~/features/Pairing/hooks/useSwipe';
 import useSound, { SoundType } from '~/hooks/useSound';
 import { getMockPet } from '../utils';
