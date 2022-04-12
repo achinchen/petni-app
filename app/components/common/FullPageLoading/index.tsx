@@ -1,4 +1,4 @@
-import Logo from '~/components/Logo';
+import Logo from '~/components/common/Logo';
 import { CREDITS } from './constants';
 
 export default function FullPageLoading() {

@@ -1,5 +1,6 @@
-import Logo from '~/components/Logo';
-import NavigationAction from './links';
+import { Link as RemixLink } from 'remix';
+import Logo from '~/components/common/Logo';
+import Links from './Links';
 
 export function NavigationDesktop() {
   return (
@@ -12,16 +13,18 @@ export function NavigationDesktop() {
       shadow="header"
     >
       <div flex="~" max-w="lg:262" m="auto">
-        <Logo type="horizontal" w="29.5" />
-        <NavigationAction withLabel />
+        <RemixLink to="/">
+          <Logo type="horizontal" w="29.5" />
+        </RemixLink>
+        <Links withLabel />
       </div>
     </nav>
   );
 }
 
-export function NavigationBottom() {
+export function NavigationMobile() {
   return (
-    <NavigationAction
+    <Links
       position="fixed"
       bottom="0"
       display="flex lg:none"

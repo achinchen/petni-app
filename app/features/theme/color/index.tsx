@@ -1,4 +1,4 @@
-import { HeaderPortal } from '~/components/Layout/header';
+import { HeaderPortal } from '~/components/common/Layout/header';
 import { CHARACTER_IMAGE } from './constants';
 import { ThemeColorContextProvider, useThemeColorContext } from './context';
 import SearchBar from './SearchBar';

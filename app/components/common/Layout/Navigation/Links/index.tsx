@@ -4,7 +4,7 @@ import { AttributifyOptions } from '@unocss/preset-attributify';
 import type { IsActive } from './types';
 import type { IconType } from '~/components/common/Icon';
 import Icon from '~/components/common/Icon';
-import Label from './label';
+import Label from './Label';
 import { Actions } from './constants';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 
 type Index = number;
 
-export default function NavigationLinks({
+export default function Links({
   withLabel = false,
   ...attributifyOptions
 }: Props) {

@@ -1,4 +1,4 @@
-import type { IsActive } from '~/components/Navigation/links/types';
+import type { IsActive } from '~/components/common/Layout/Navigation/Links/types';
 
 type LabelProps = {
   hovered: boolean;
@@ -9,7 +9,9 @@ type LabelProps = {
 export default function Label({ hovered, isActive, children }: LabelProps) {
   const show = hovered || isActive;
 
-  return show ? (
+  if (!show) return null;
+
+  return (
     <span
       color="status-general"
       {...(isActive && { color: 'status-active' })}
@@ -17,5 +19,5 @@ export default function Label({ hovered, isActive, children }: LabelProps) {
     >
       {children}
     </span>
-  ) : null;
+  );
 }

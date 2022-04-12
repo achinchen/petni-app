@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Layout from '~/components/Layout';
 import Pairing from '~/features/Pairing';
 import FullPageLoading from '~/components/common/FullPageLoading';
 
@@ -12,11 +11,5 @@ export default function Index() {
     setTimeout(() => setLoaded(true), LOADING_SECONDS);
   }, []);
 
-  return loaded ? (
-    <Layout>
-      <Pairing />
-    </Layout>
-  ) : (
-    <FullPageLoading />
-  );
+  return loaded ? <Pairing /> : <FullPageLoading />;
 }

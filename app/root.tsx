@@ -8,6 +8,7 @@ import {
 } from 'remix';
 import type { MetaFunction } from 'remix';
 import { styles } from '~/styles';
+import Layout from './components/common/Layout';
 
 export function links() {
   return [...styles];
@@ -34,10 +35,12 @@ export default function App() {
         bg="gray-50"
         text="black leading-normal"
       >
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        <Layout>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </Layout>
       </body>
     </html>
   );

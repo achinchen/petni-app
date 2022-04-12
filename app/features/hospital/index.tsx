@@ -1,5 +1,5 @@
 import Icon from '~/components/common/Icon';
-import { HeaderPortal } from '~/components/Layout/header';
+import { HeaderPortal } from '~/components/common/Layout/header';
 import HospitalCards from './Cards';
 import HospitalAreaPanel from './AreaPanel';
 import HospitalAreaHashId from './AreaHashId';

@@ -1,7 +1,10 @@
 import { Fragment } from 'react';
-import { NavigationDesktop, NavigationBottom } from '~/components/Navigation';
-import HeaderMobile from './header';
-import BackgroundSounds from '~/components/BackgroundSounds';
+import {
+  NavigationDesktop,
+  NavigationMobile
+} from '~/components/common/Layout/Navigation';
+import HeaderMobile from './Header';
+import BackgroundSounds from '~/components/common/Layout/BackgroundSounds';
 
 type Props = {
   children: JSX.Element;
@@ -13,7 +16,7 @@ export default function Layout({ children }: Props) {
       <NavigationDesktop />
       <HeaderMobile />
       {children}
-      <NavigationBottom />
+      <NavigationMobile />
       <BackgroundSounds />
     </Fragment>
   );

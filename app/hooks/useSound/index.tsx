@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { SOUNDS } from '~/components/BackgroundSounds/constants';
+import { SOUNDS } from '~/components/common/Layout/BackgroundSounds/constants';
 
 export type SoundType = keyof typeof SOUNDS;
 type Refs = {
