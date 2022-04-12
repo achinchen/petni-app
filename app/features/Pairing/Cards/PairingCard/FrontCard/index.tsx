@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import Icon from '~/components/common/Icon';
 import IconButton from '~/components/common/IconButton';
-import useSwipe from '~/features/Pairing/hooks/useSwipe';
+import useSwipe from '~/features/pairing/hooks/useSwipe';
 import useSound, { SoundType } from '~/hooks/useSound';
-import { getMockPet } from '../utils';
+import { getMockPet } from '../../utils';
 import { IMAGE_MISSING, PLACEHOLDER_IMG } from './constants';
 import { getIconByGenderAndFamily } from '~/utils';
 
-export default function CurrentCardFront() {
+export default function FrontCard() {
   const [animation, setAnimation] = useState<'close' | 'favorite'>();
 
   const { image, id, location, gender, family } = getMockPet();
@@ -62,7 +62,7 @@ export default function CurrentCardFront() {
       {...(!withImage && { after: 'display-none' })}
       transform-origin="left"
       style={style}
-      animate="favorite duration-0.4s count-1 mode-forwards"
+      animate="duration-0.4s count-1 mode-forwards"
       {...(animation && {
         animate: `${animation} duration-0.4s count-1 mode-forwards`
       })}

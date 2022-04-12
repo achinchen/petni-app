@@ -1,6 +1,6 @@
 import type { Category, Label, Options } from './type';
 import Icon from '~/components/common/Icon';
-import OptionButton from '~/features/Pairing/Panel/FilterItemOptionButton';
+import OptionButton from './OptionButton';
 
 type Props = {
   category: Category;
@@ -10,7 +10,7 @@ type Props = {
   onClick: (value: any) => () => void;
 };
 
-export default function PanelFilterItem({
+export default function Filter({
   category,
   label,
   options,

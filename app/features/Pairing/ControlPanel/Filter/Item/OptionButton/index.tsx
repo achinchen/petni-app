@@ -1,13 +1,13 @@
 import Button from '~/components/common/Button';
 
-export type Props = {
+type Props = {
   isPressed: boolean;
   onClick: () => void;
   children: JSX.Element | string;
   size?: 'base' | 'sm';
 };
 
-export default function PanelFilterItemOptionButton({
+export default function OptionButton({
   isPressed,
   onClick,
   children,

@@ -45,7 +45,7 @@ function NonEmptyBackCard() {
   );
 }
 
-export default function MainCardPlaceholder({ isEmpty }: Props) {
+export default function BackCard({ isEmpty }: Props) {
   if (isEmpty) return <EmptyBackCard />;
   return <NonEmptyBackCard />;
 }
