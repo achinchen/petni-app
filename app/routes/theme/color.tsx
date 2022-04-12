@@ -1,4 +1,4 @@
-import Layout from '~/components/layout';
+import Layout from '~/components/Layout';
 import ThemeColorCat from '~/features/theme/color';
 
 export default function ThemeColor() {

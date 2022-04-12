@@ -1,4 +1,4 @@
-import Logo from '~/components/logo';
+import Logo from '~/components/Logo';
 import { CREDITS } from './constants';
 
 export default function CreditLoading() {

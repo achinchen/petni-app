@@ -1,8 +1,8 @@
-import Icon from '~/components/icon';
-import { HeaderPortal } from '~/components/layout/header';
-import HospitalCards from './cards';
-import HospitalAreaPanel from './area-panel';
-import HospitalAreaHashId from './area-hash-id';
+import Icon from '~/components/Icon';
+import { HeaderPortal } from '~/components/Layout/header';
+import HospitalCards from './Cards';
+import HospitalAreaPanel from './AreaPanel';
+import HospitalAreaHashId from './AreaHashId';
 import { useIntersectionObserver } from './hooks';
 import type { City } from './constants';
 import { CITY_LABEL, HOSPITALS, REMINDER } from './constants';

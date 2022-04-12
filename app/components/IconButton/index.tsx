@@ -1,5 +1,5 @@
 import { AttributifyOptions } from '@unocss/preset-attributify';
-import Icon, { IconType } from '~/components/icon';
+import Icon, { IconType } from '~/components/Icon';
 
 type Props = {
   icon: IconType;

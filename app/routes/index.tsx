@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Layout from '~/components/layout';
+import Layout from '~/components/Layout';
 import Pairing from '~/features/Pairing';
-import CreditLoading from '~/components/credit-loading';
+import CreditLoading from '~/components/CreditLoading';
 
 const LOADING_SECONDS = 1000 * 1.5;
 

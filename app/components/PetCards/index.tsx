@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
-import Icon from '~/components/icon';
-import DeletePanel from '~/components/delete-panel';
+import Icon from '~/components/Icon';
+import DeletePanel from '~/components/DeletePanel';
 import type { PetCard } from './types';
 
 type Props = {

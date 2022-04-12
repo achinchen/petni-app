@@ -1,5 +1,5 @@
 import type { Category, Label, Options } from './type';
-import Icon from '~/components/icon';
+import Icon from '~/components/Icon';
 import OptionButton from '~/features/Pairing/Panel/FilterItemOptionButton';
 
 type Props = {
