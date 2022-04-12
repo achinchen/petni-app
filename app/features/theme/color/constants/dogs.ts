@@ -1,12 +1,12 @@
 import { DogColor, DOG_COLOR_LABEL } from '~/constants/dogs';
-import CalicoDog from '~/images/theme/dog/calico.png';
-import RustDog from '~/images/theme/dog/rust.png';
-import GoldDog from '~/images/theme/dog/gold.png';
-import WhiteDog from '~/images/theme/dog/white.png';
-import BlackDog from '~/images/theme/dog/black.png';
-import TwoColorDog from '~/images/theme/dog/two-color.png';
-import TabbyDog from '~/images/theme/dog/tabby.png';
-import GrayDog from '~/images/theme/dog/gray.png';
+import CalicoDog from '~/assets/images/theme/dog/calico.png';
+import RustDog from '~/assets/images/theme/dog/rust.png';
+import GoldDog from '~/assets/images/theme/dog/gold.png';
+import WhiteDog from '~/assets/images/theme/dog/white.png';
+import BlackDog from '~/assets/images/theme/dog/black.png';
+import TwoColorDog from '~/assets/images/theme/dog/two-color.png';
+import TabbyDog from '~/assets/images/theme/dog/tabby.png';
+import GrayDog from '~/assets/images/theme/dog/gray.png';
 
 export const DOGS = [
   {

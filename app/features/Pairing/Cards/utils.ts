@@ -1,5 +1,5 @@
 import { Gender, Family } from '~/constants';
-import image from '~/images/placeholder.jpg';
+import image from '~/assets/images/placeholder.jpg';
 
 export function getMockPet(index = 0) {
   return {

@@ -1,5 +1,5 @@
-import VerticalLogo from '~/images/logo/vertical.gif';
-import HorizontalLogo from '~/images/logo/horizontal.png';
+import VerticalLogo from '~/assets/images/logo/vertical.gif';
+import HorizontalLogo from '~/assets/images/logo/horizontal.png';
 
 export const SOURCE = {
   horizontal: HorizontalLogo,

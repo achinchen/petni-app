@@ -1,11 +1,11 @@
 import { CatColor, CAT_COLOR_LABEL } from '~/constants/cats';
-import OrangeCat from '~/images/theme/cat/orange.png';
-import CalicoCat from '~/images/theme/cat/calico.png';
-import WhiteCat from '~/images/theme/cat/white.png';
-import BlackCat from '~/images/theme/cat/black.png';
-import TuxedoCat from '~/images/theme/cat/tuxedo.png';
-import TabbyCat from '~/images/theme/cat/tabby.png';
-import TortoiseshellCat from '~/images/theme/cat/tortoiseshell.png';
+import OrangeCat from '~/assets/images/theme/cat/orange.png';
+import CalicoCat from '~/assets/images/theme/cat/calico.png';
+import WhiteCat from '~/assets/images/theme/cat/white.png';
+import BlackCat from '~/assets/images/theme/cat/black.png';
+import TuxedoCat from '~/assets/images/theme/cat/tuxedo.png';
+import TabbyCat from '~/assets/images/theme/cat/tabby.png';
+import TortoiseshellCat from '~/assets/images/theme/cat/tortoiseshell.png';
 
 export const CATS = [
   {

@@ -1,4 +1,4 @@
-import placeholder from '~/images/favorites/placeholder.jpeg';
+import placeholder from '~/assets/images/favorites/placeholder.jpeg';
 
 export enum Gender {
   Male = 'Male',
