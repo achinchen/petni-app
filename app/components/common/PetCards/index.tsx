@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import Icon from '~/components/common/Icon';
 import DeletePanel from '~/components/common/DeletePanel';
 import type { PetCard } from './types';
@@ -8,34 +8,37 @@ type Props = {
   onDeletePet: (id: number) => void;
 };
 
-export default function PetCards(props: Props) {
-  const [pets] = useState<PetCard[]>(props.pets);
+export default function PetCards({ pets, onDeletePet }: Props) {
   const [deletePetId, setDeletePetId] = useState(-1);
 
   const isOpenDeletePanel = deletePetId > 0;
 
   const onDeletePanelClose = () => setDeletePetId(-1);
   const onDeletePanelConfirm = () => {
-    props.onDeletePet(deletePetId);
+    onDeletePet(deletePetId);
     onDeletePanelClose();
   };
 
   const onDelete = (id: number) => () => setDeletePetId(id);
 
   return (
-    <Fragment>
+    <section>
       <DeletePanel
         isOpen={isOpenDeletePanel}
         onClose={onDeletePanelClose}
         onConfirm={onDeletePanelConfirm}
       />
-      <div flex="~ row wrap gap-4.5 lg:gap-3">
+      <div
+        grid="~ gap-4 sm:gap-3"
+        justify="center"
+        className="grid-cols-[repeat(auto-fill,10rem)]"
+      >
         {pets.map(({ id, image, location, gender }) => (
           <section
             key={id}
             flex="~ col"
-            w="38.75 md:42.5 lg:40.5"
-            h="51 md:56.5 lg:53"
+            w="40"
+            h="54"
             p="3"
             bg="white"
             shadow="default"
@@ -70,6 +73,6 @@ export default function PetCards(props: Props) {
           </section>
         ))}
       </div>
-    </Fragment>
+    </section>
   );
 }
