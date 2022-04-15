@@ -12,7 +12,7 @@ export function NavigationDesktop() {
       bg="white"
       shadow="header"
     >
-      <div flex="~" max-w="lg:262" m="auto">
+      <div flex="~" m="auto" className="content-width">
         <RemixLink to="/">
           <Logo type="horizontal" w="29.5" />
         </RemixLink>
