@@ -16,7 +16,8 @@ export default function FamilySwitcher({ ...attributifyOptions }: Props) {
   return (
     <div
       shadow="default"
-      p="1"
+      px="2"
+      py="1"
       border="rounded-xl none"
       bg="white"
       text="black"
@@ -25,9 +26,12 @@ export default function FamilySwitcher({ ...attributifyOptions }: Props) {
       {Object.entries(FAMILY_LABEL).map(([family, label]) => (
         <button
           key={family}
-          border="rounded-2xl"
+          border="rounded-3xl"
           px="2.5"
+          py="1 sm:0"
+          mx="0.5"
           bg="white"
+          color="black"
           {...(getIsCurrentFamily(family) && {
             bg: 'black',
             color: 'white'

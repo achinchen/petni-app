@@ -9,10 +9,7 @@ export default function Pairing() {
 
   return (
     <PairingContextProvider>
-      <main
-        flex="~"
-        h="[calc(100vh-160px)] sm:[calc(100vh-120px)] lg:[calc(100vh-80px)]"
-      >
+      <main flex="~" className="content-height">
         <Portal />
         <ControlPanel />
         {isLoading ? <Loading /> : <PairCards />}

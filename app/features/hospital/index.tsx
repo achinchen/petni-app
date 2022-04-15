@@ -17,15 +17,15 @@ function Hospital() {
       </HeaderPortal>
       <HospitalAreaPanel
         isDesktop
-        display="lt-md:none md:flex"
+        display="lt-lg:none lg:flex"
         justify="center"
         mt="10"
       />
-      <div mt="3" mx="3 lg:none" text="right md:center sm">
+      <div mt="3" mx="3 lg:none" text="right lg:center">
         {REMINDER}
       </div>
       {Object.entries(HOSPITALS).map(([city, hospitals]) => (
-        <section key={city} mx="4 lg:none" mt="8 lg:14">
+        <section key={city} mx="4 lg:1" mt="8 lg:14">
           <HospitalAreaHashId city={city as City} />
           <h2 flex="~" text="lg" font="bold" mt="0" mb="2">
             <Icon icon="Location" />

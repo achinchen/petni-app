@@ -15,6 +15,11 @@ export default defineConfig({
       }
     })
   ],
+  shortcuts: {
+    btn: 'py-2 px-4 font-semibold rounded-lg shadow-md',
+    'content-height':
+      '[h="[calc(100vh-122px)]"] at-sm:(h-[calc(100vh-120px)])  sm:(h-[calc(100vh-148px)]) lg:(h-[calc(100vh-80px)])'
+  },
   safelist: [
     '[w="100%"]',
     '[w="24"]',
