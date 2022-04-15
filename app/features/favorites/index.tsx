@@ -14,7 +14,7 @@ export default function Favorites() {
   }, []);
 
   return (
-    <main max-w="lg:262" m="4 lg:auto">
+    <main className="content-width" m="4 lg:auto">
       <HeaderPortal>
         <div m="auto" text="xl" font="bold">
           {TITLE}

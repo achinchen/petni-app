@@ -19,8 +19,7 @@ function ThemeColor() {
       px="at-lg:24"
       pb="4 sm:12"
       w="lg:90%"
-      max-w="md:168 lg:262"
-      className="content-height"
+      className="content-height content-width"
     >
       <HeaderPortal>
         <FamilySwitcher m="auto" />
