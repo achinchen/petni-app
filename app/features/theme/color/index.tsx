@@ -17,14 +17,16 @@ function ThemeColor() {
       items="center lg:start"
       mx="4 md:auto"
       px="at-lg:24"
+      pb="4 sm:12"
       w="lg:90%"
       max-w="md:168 lg:262"
+      className="content-height"
     >
       <HeaderPortal>
         <FamilySwitcher m="auto" />
       </HeaderPortal>
       <FamilySwitcher
-        display="none md:inline-flex"
+        display="none lg:inline-flex"
         position="absolute"
         top="10"
         right="0"
@@ -38,25 +40,24 @@ function ThemeColor() {
         translate-x="-50%"
         z="-1"
         src={characterImg}
-        alt={family as string}
+        alt={family}
       />
       <section w="100%" display="flex" justify="between lg:end" items="center">
         <ControlButton
-          position="none lg:absolute"
-          bottom="lg:0"
+          position="relative lg:absolute"
+          bottom="lg:12"
           right="lg:16"
         />
         <img
-          w="62.5% sm:120 lg:128.5"
-          min-w="62.5"
-          max-w="at-sm:120"
+          w="[calc(100vw-120px)] sm:60% lg:128.5"
+          max-w="120"
           src={currentInfo.IMAGE}
           alt={currentInfo.LABEL}
         />
         <ControlButton
           isNext
-          position="none lg:absolute"
-          bottom="lg:0"
+          position="relative lg:absolute"
+          bottom="lg:12"
           right="0"
         />
       </section>
@@ -64,7 +65,7 @@ function ThemeColor() {
         <h1 m="0" text="xl lg:7xl leading-normal">
           {currentInfo.LABEL}
         </h1>
-        <p mt="2 lg:8" mb="9 lg:14" text="lg gray-450">
+        <p mt="2 lg:8" mb="2 sm:9 lg:14" text="base md:lg gray-450">
           {currentInfo.CHARACTERISTIC}
         </p>
         <SearchBar

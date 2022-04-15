@@ -34,7 +34,7 @@ export default function Header() {
       position="sticky"
       top="0"
       display="flex lg:none"
-      h="14 sm:23"
+      h="16 sm:23"
       px="2 sm:4"
       py="1 sm:4"
       bg="white"
