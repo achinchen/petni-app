@@ -2,7 +2,7 @@ import Icon from '~/components/common/Icon';
 import { Hospital } from './types';
 import { City } from '~/features/hospital/constants';
 import { LABEL_OF_OPEN_DURING_COVID } from './constants';
-import { getTelephoneLink, getAddressLink } from './utils';
+import { getTelephoneLink, getAddressLink } from '~/utils';
 
 type Props = {
   city: City;
