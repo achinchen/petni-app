@@ -1,4 +1,4 @@
-import { Family } from '~/constants';
+import { Family } from './index';
 import bone from '~/assets/images/placeholder/bone.png';
 import fish from '~/assets/images/placeholder/fish.png';
 

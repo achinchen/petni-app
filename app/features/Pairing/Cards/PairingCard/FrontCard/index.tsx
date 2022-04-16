@@ -4,7 +4,7 @@ import IconButton from '~/components/common/IconButton';
 import useSwipe from '~/features/pairing/hooks/useSwipe';
 import useSound, { SoundType } from '~/hooks/useSound';
 import { getMockPet } from '../../utils';
-import { IMAGE_MISSING, PLACEHOLDER_IMG } from './constants';
+import { IMAGE_MISSING, PLACEHOLDER_IMG } from '~/constants/pet';
 import { getIconByGenderAndFamily } from '~/utils';
 
 export default function FrontCard() {
