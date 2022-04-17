@@ -1,5 +1,10 @@
 import Hospital from '~/features/hospital';
+import Layout from '~/components/common/Layout';
 
 export default function ThemeColor() {
-  return <Hospital />;
+  return (
+    <Layout>
+      <Hospital />
+    </Layout>
+  );
 }

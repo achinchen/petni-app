@@ -15,3 +15,12 @@ export const getIconByGenderAndFamily = ({
   if (!gender) return getIconByFamily(family);
   return gender === Gender.Female ? 'Female' : 'Male';
 };
+
+export const getTelephoneLink = (telephone: string | string[]) => {
+  const tel = Array.isArray(telephone) ? telephone[0] : telephone;
+  return `tel:${tel.replace(' ', '')}`;
+};
+
+export const getAddressLink = (address: string) => {
+  return `http://maps.google.com/maps?q=${address}`;
+};

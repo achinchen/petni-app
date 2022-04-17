@@ -8,13 +8,14 @@ import BackgroundSounds from '~/components/common/Layout/BackgroundSounds';
 
 type Props = {
   children: JSX.Element;
+  withMobileHeader?: boolean;
 };
 
-export default function Layout({ children }: Props) {
+export default function Layout({ children, withMobileHeader = true }: Props) {
   return (
     <Fragment>
       <NavigationDesktop />
-      <HeaderMobile />
+      {withMobileHeader && <HeaderMobile />}
       {children}
       <NavigationMobile />
       <BackgroundSounds />
