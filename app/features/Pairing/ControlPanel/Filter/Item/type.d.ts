@@ -7,12 +7,12 @@ import type {
   AgeOptions,
   Color,
   ColorOptions
-} from '~/features/pairing/ControlPanel/Filter/type';
+} from '~/features/Pairing/ControlPanel/Filter/type';
 
 import {
   GENERAL_FILTER_OPTIONS,
   DYNAMIC_FILTER_OPTIONS
-} from '~/features/pairing/ControlPanel/Filter/constants';
+} from '~/features/Pairing/ControlPanel/Filter/constants';
 
 export type Category =
   | typeof GENERAL_FILTER_OPTIONS[number]['CATEGORY']

@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import type { Family, Gender, Age, Color } from './type';
-import FilterItem from '~/features/pairing/ControlPanel/Filter/Item';
+import FilterItem from '~/features/Pairing/ControlPanel/Filter/Item';
 import {
   DEFAULT_OPTION,
   GENERAL_FILTER_OPTIONS,

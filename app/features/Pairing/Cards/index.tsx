@@ -1,6 +1,6 @@
 import PairingCard from './PairingCard';
 import RecommendCards from './RecommendCards';
-import { usePairContext } from '~/features/pairing/context';
+import { usePairContext } from '~/features/Pairing/context';
 
 export default function PairCards() {
   const { showPanel } = usePairContext();
