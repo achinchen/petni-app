@@ -1,6 +1,6 @@
 import Icon from '~/components/common/Icon';
-import { HeaderPortal } from '~/components/common/Layout/header';
-import HospitalCards from './Cards';
+import { HeaderPortal } from '~/components/common/Layout/Header';
+import HospitalCards from './HospitalCards';
 import HospitalAreaPanel from './AreaPanel';
 import HospitalAreaHashId from './AreaHashId';
 import { useIntersectionObserver } from './hooks';

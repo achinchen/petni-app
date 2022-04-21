@@ -1,5 +1,5 @@
 import { usePairContext } from '../context';
-import { HeaderPortal } from '~/components/common/Layout/header';
+import { HeaderPortal } from '~/components/common/Layout/Header';
 import IconButton from '~/components/common/IconButton';
 import { Fragment } from 'react';
 
