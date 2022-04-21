@@ -1,7 +1,7 @@
 import Filter from './Filter';
 import Setting from './Setting';
 import Button from '~/components/common/Button';
-import { usePairContext } from '~/features/Pairing/context';
+import { usePairContext } from '~/features/pairing/context';
 import { SUBMIT_BUTTON } from './constants';
 
 export default function Panel() {
