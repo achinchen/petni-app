@@ -1,5 +1,4 @@
 import { Gender, Family } from '~/constants';
-import { IMAGE_MISSING, PLACEHOLDER_IMG } from '~/constants/pet';
 import BaseInfo from './BaseInfo';
 import Metadata from './Metadata';
 import AppearanceInfo from './AppearanceInfo';
