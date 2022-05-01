@@ -1,27 +1,19 @@
-import { PUBLIC_ADOPT_ANIMALS_API } from './constants';
 import { Family, Gender, Size } from '@prisma/client';
+import { RawAnimal } from './types';
+import { PUBLIC_ADOPT_ANIMALS_API } from './constants';
 
-type RawAnimal = {
-  animal_id: number;
-  animal_subid: string;
-  animal_kind: string;
-  animal_sex: string;
-  animal_bodytype: string;
-  animal_colour: string;
-  animal_remark: string;
-  animal_opendate: string;
-  album_file: string;
-  shelter_address: string;
-  shelter_tel: string;
+export const fetchAnimals = async (): Promise<RawAnimal[] | undefined> => {
+  try {
+    const response = await fetch(PUBLIC_ADOPT_ANIMALS_API);
+    const animals = await response.json();
+    return animals as RawAnimal[];
+  } catch (error) {
+    console.error(error);
+    return;
+  }
 };
 
-const fetchAnimals = async (): Promise<RawAnimal[]> => {
-  const response = await fetch(PUBLIC_ADOPT_ANIMALS_API);
-  const animals = await response.json();
-  return animals as RawAnimal[];
-};
-
-const formatGender = (gender: string) => {
+export const formatGender = (gender: string) => {
   switch (gender) {
     case 'M':
       return Gender.Male;
@@ -32,7 +24,7 @@ const formatGender = (gender: string) => {
   }
 };
 
-const formatSize = (size: string) => {
+export const formatSize = (size: string) => {
   switch (size) {
     case 'BIG':
       return Size.Large;
@@ -44,7 +36,7 @@ const formatSize = (size: string) => {
   }
 };
 
-const formatFamily = (family: string) => {
+export const formatFamily = (family: string) => {
   switch (family) {
     case '貓':
       return Family.Cat;
@@ -85,6 +77,7 @@ export const formatAnimal = ({
 
 export const getAnimals = async () => {
   const rawAnimal = await fetchAnimals();
+  if (!rawAnimal) return;
   const animals = rawAnimal.map(formatAnimal);
   return animals;
 };

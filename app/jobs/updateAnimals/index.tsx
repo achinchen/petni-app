@@ -5,6 +5,7 @@ const db = new PrismaClient();
 
 export default async function updateAnimals() {
   const animals = await getAnimals();
+  if (!animals) return;
 
   await Promise.allSettled(
     animals.map((animal) =>

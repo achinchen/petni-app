@@ -1,4 +1,4 @@
-import updateAnimals from '~/jobs/update-animals';
+import updateAnimals from '~/jobs/updateAnimals';
 
 export const loader = async () => {
   await updateAnimals();
