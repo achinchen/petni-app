@@ -10,7 +10,8 @@
     "dev": "concurrently 'npm run dev:css' 'npm run dev:remix' ",
     "dev:remix": "cross-env NODE_ENV=development remix dev",
     "dev:css": "unocss './app/**/*.{ts,tsx}' -o ./app/styles/uno.css --watch",
-    "postinstall": "remix setup node"
+    "postinstall": "remix setup node",
+    "test": "jest -i"
   },
   "dependencies": {
     "@lottiefiles/lottie-player": "^1.5.6",
@@ -25,6 +26,7 @@
     "@remix-run/dev": "^1.2.3",
     "@remix-run/eslint-config": "^1.2.3",
     "@remix-run/serve": "^1.2.3",
+    "@types/jest": "^27.4.1",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
     "@unocss/preset-attributify": "^0.30.12",
@@ -35,9 +37,15 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jest": "^26.1.5",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^28.0.3",
+    "jest-environment-jsdom": "^28.0.2",
+    "jest-mock-extended": "^2.0.5",
     "prettier": "^2.5.1",
     "prisma": "^3.12.0",
+    "ts-jest": "next",
+    "ts-node": "^10.7.0",
     "typescript": "^4.5.5",
     "unocss": "^0.28.1"
   },
