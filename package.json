@@ -20,12 +20,13 @@
     "@remix-run/vercel": "^1.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "remix": "^1.2.3"
+    "remix": "^1.4.3"
   },
   "devDependencies": {
-    "@remix-run/dev": "^1.2.3",
-    "@remix-run/eslint-config": "^1.2.3",
-    "@remix-run/serve": "^1.2.3",
+    "@remix-run/dev": "^1.4.3",
+    "@remix-run/eslint-config": "^1.4.3",
+    "@remix-run/node": "^1.4.3",
+    "@remix-run/serve": "^1.4.3",
     "@types/jest": "^27.4.1",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",

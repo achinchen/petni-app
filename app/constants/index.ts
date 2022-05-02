@@ -6,8 +6,8 @@ export enum Family {
 }
 
 export enum Gender {
-  Male = 'MALE',
-  Female = 'FEMALE'
+  Male = 'Male',
+  Female = 'Female'
 }
 
 export enum Age {
