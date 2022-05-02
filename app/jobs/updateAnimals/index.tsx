@@ -1,4 +1,4 @@
-import db from 'database/utils/client';
+import { db } from '~/utils/db.server';
 import { getAnimals } from './utils';
 
 export default async function updateAnimals() {
