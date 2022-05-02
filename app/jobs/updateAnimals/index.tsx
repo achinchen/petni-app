@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import db from 'database/utils/client';
 import { getAnimals } from './utils';
-
-const db = new PrismaClient();
 
 export default async function updateAnimals() {
   const animals = await getAnimals();
