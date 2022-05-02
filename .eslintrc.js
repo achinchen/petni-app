@@ -3,7 +3,8 @@ module.exports = {
     'prettier',
     'plugin:prettier/recommended',
     '@remix-run/eslint-config',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
+    'plugin:jest/recommended'
   ],
   plugins: ['prettier'],
   rules: {
