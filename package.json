@@ -11,6 +11,7 @@
     "dev:remix": "cross-env NODE_ENV=development remix dev",
     "dev:css": "unocss './app/**/*.{ts,tsx}' -o ./app/styles/uno.css --watch",
     "postinstall": "remix setup node",
+    "db:seed": "node --require esbuild-register ./database/seed.ts",
     "test": "jest -i"
   },
   "dependencies": {
@@ -25,7 +26,6 @@
   "devDependencies": {
     "@remix-run/dev": "^1.4.3",
     "@remix-run/eslint-config": "^1.4.3",
-    "@remix-run/node": "^1.4.3",
     "@remix-run/serve": "^1.4.3",
     "@types/jest": "^27.4.1",
     "@types/react": "^17.0.24",
@@ -36,6 +36,7 @@
     "@unocss/transformer-directives": "^0.30.12",
     "concurrently": "^7.0.0",
     "cross-env": "^7.0.3",
+    "esbuild-register": "^3.3.2",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jest": "^26.1.5",
@@ -43,6 +44,7 @@
     "jest": "^28.0.3",
     "jest-environment-jsdom": "^28.0.2",
     "jest-mock-extended": "^2.0.5",
+    "node-fetch": "^3.2.4",
     "prettier": "^2.5.1",
     "prisma": "^3.14.0",
     "ts-jest": "next",

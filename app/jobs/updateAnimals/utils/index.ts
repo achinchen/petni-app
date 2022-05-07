@@ -1,9 +1,13 @@
+import type { RawAnimal } from './types';
 import { Family, Gender, Size } from '@prisma/client';
-import { RawAnimal } from './types';
 import { PUBLIC_ADOPT_ANIMALS_API } from './constants';
 
 export const fetchAnimals = async (): Promise<RawAnimal[] | undefined> => {
   try {
+    let fetch;
+    if (typeof window === 'undefined') {
+      fetch = require('node-fetch');
+    }
     const response = await fetch(PUBLIC_ADOPT_ANIMALS_API);
     const animals = await response.json();
     return animals as RawAnimal[];
