@@ -7,6 +7,7 @@ export type RawAnimal = {
   animal_colour: string;
   animal_remark: string;
   animal_opendate: string;
+  animal_status: string;
   album_file: string;
   shelter_address: string;
   shelter_tel: string;
