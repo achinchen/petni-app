@@ -1,13 +1,10 @@
-import { useReducer } from 'react';
 import type { Family, Gender, Age, Color } from './type';
 import FilterItem from '~/features/pairing/ControlPanel/Filter/Item';
+import { useControlContext } from '~/features/pairing/ControlPanel/context';
 import {
-  DEFAULT_OPTION,
   GENERAL_FILTER_OPTIONS,
   COLOR_OPTION
-} from './constants';
-
-const DEFAULT_OPTION_VALUE = DEFAULT_OPTION.VALUE;
+} from '~/features/pairing/ControlPanel/constants/filter';
 
 type Filter = {
   family: Family;
@@ -16,26 +13,11 @@ type Filter = {
   age: Age;
 };
 
-const initialFilter = {
-  family: DEFAULT_OPTION_VALUE,
-  gender: DEFAULT_OPTION_VALUE,
-  color: DEFAULT_OPTION_VALUE,
-  age: DEFAULT_OPTION_VALUE
-};
-
 type FilterType = keyof Filter;
 type Payload = ValueOf<Filter>;
-type Action = {
-  type: FilterType;
-  value: Payload;
-};
-
-function filterReducer(state: Filter, { type, value }: Action) {
-  return { ...state, [type]: value };
-}
 
 export default function FilterPanel() {
-  const [filter, dispatchFilter] = useReducer(filterReducer, initialFilter);
+  const { filter, dispatchFilter } = useControlContext();
 
   const showColorFilter = Boolean(COLOR_OPTION.OPTIONS(filter.family).length);
 

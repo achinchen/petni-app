@@ -3,16 +3,18 @@ import type { DetailPetCard } from '~/types';
 
 export type InitialState = {
   currentCard?: DetailPetCard;
-  setCurrentCard: (currentCard: DetailPetCard | undefined) => void;
   showPanel: boolean;
+  setIndex: (index: number) => void;
   setShowPanel: (showPanel: boolean) => void;
+  setPets: (pets: DetailPetCard[] | []) => void;
 };
 
 const initialState = {
   currentCard: undefined,
-  setCurrentCard: () => {},
+  setIndex: () => {},
   showPanel: false,
-  setShowPanel: () => {}
+  setShowPanel: () => {},
+  setPets: () => {}
 };
 
 export const PairingContext = createContext<InitialState>(initialState);
@@ -23,9 +25,11 @@ export const PairingContextProvider = ({
 }: {
   children: JSX.Element;
 }) => {
-  const [currentCard, setCurrentCard] = useState<DetailPetCard | undefined>(
-    initialState.currentCard
-  );
+  const [pets, setPets] = useState<DetailPetCard[]>([]);
+
+  const [index, setIndex] = useState(0);
+
+  const currentCard = pets[index];
 
   const [showPanel, setShowPanel] = useState(initialState.showPanel);
 
@@ -33,8 +37,9 @@ export const PairingContextProvider = ({
     <PairingContext.Provider
       value={{
         currentCard,
-        setCurrentCard,
+        setIndex,
         showPanel,
+        setPets,
         setShowPanel
       }}
     >

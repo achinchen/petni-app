@@ -1,6 +1,9 @@
 import { Fragment, useReducer } from 'react';
 import SwitchButton from '~/components/common/SwitchButton';
-import { Setting, SETTING_OPTIONS } from './constants';
+import {
+  Setting,
+  SETTING_OPTIONS
+} from '~/features/pairing/ControlPanel/constants/setting';
 
 type State = {
   [key in Setting]: boolean;
@@ -15,7 +18,7 @@ function reducer(state: State, type: Setting) {
   return { ...state, [type]: !state[type] };
 }
 
-export default function FilterPanel() {
+export default function SettingPanel() {
   const [setting, dispatchSetting] = useReducer(reducer, initial);
 
   const onSettingChange = (type: Setting) => () => dispatchSetting(type);

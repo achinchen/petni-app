@@ -1,7 +1,9 @@
-import { Family, Gender, Age } from '~/constants';
-import { DogColor, DOG_COLOR_LABEL } from '~/constants/dogs';
-import { CatColor, CAT_COLOR_LABEL } from '~/constants/cats';
+import type { DogColor } from '~/constants/dogs';
+import type { CatColor } from '~/constants/cats';
 import type { IconType } from '~/components/common/Icon';
+import { Family, Gender, Age } from '~/constants';
+import { DOG_COLOR_LABEL } from '~/constants/dogs';
+import { CAT_COLOR_LABEL } from '~/constants/cats';
 
 const DOG_COLOR_OPTIONS = Object.entries(DOG_COLOR_LABEL).map(
   ([VALUE, LABEL]) => ({ VALUE: VALUE as DogColor, LABEL })
