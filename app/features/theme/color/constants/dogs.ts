@@ -1,5 +1,4 @@
 import { DogColor, DOG_COLOR_LABEL } from '~/constants/dogs';
-import CalicoDog from '~/assets/images/theme/dog/calico.png';
 import RustDog from '~/assets/images/theme/dog/rust.png';
 import GoldDog from '~/assets/images/theme/dog/gold.png';
 import WhiteDog from '~/assets/images/theme/dog/white.png';
@@ -10,14 +9,8 @@ import GrayDog from '~/assets/images/theme/dog/gray.png';
 
 export const DOGS = [
   {
-    KEY: DogColor.Calico,
-    LABEL: DOG_COLOR_LABEL[DogColor.Calico],
-    CHARACTERISTIC: '個性老實、喜歡社交，溫順黏人的小跟屁蟲。',
-    IMAGE: CalicoDog
-  },
-  {
-    KEY: DogColor.Rust,
-    LABEL: DOG_COLOR_LABEL[DogColor.Rust],
+    KEY: DogColor.Brown,
+    LABEL: DOG_COLOR_LABEL[DogColor.Brown],
     CHARACTERISTIC: '個性獨立、外向、喜歡與人互動。',
     IMAGE: RustDog
   },
