@@ -28,7 +28,7 @@ export const meta: MetaFunction = ({
 
 type LoaderData = { pet: PetType };
 
-export const loader: LoaderFunction = async ({ request, params }) => {
+export const loader: LoaderFunction = async ({ params }) => {
   const result = await db.animal.findUnique({
     where: { id: Number(params.id) },
     include: { _count: { select: { follows: true } } }
