@@ -4,7 +4,8 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 enum Gender {
@@ -25,17 +26,17 @@ enum Size {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  uuid       Int
-  tel        String
-  followings Follow[]
+  id      Int      @id @default(autoincrement())
+  uuid    Int
+  tel     String
+  follows Follow[]
 }
 
 model Follow {
   id        Int      @id @default(autoincrement())
-  User      User?    @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  animal    Animal?  @relation(fields: [animalId], references: [id])
+  animal    Animal   @relation(fields: [animalId], references: [id])
   animalId  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -56,5 +57,5 @@ model Animal {
   openAt    DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  followers Follow[]
+  follows   Follow[]
 }
