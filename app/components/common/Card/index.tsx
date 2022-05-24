@@ -1,4 +1,4 @@
-import { AttributifyOptions } from '@unocss/preset-attributify';
+import type { AttributifyOptions } from '@unocss/preset-attributify';
 
 type Props = {
   children: JSX.Element;

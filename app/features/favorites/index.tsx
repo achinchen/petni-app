@@ -1,6 +1,6 @@
+import type { PetCard } from '~/components/common/PetCards/types';
 import { useEffect, useState } from 'react';
 import PetCards from '~/components/common/PetCards';
-import type { PetCard } from '~/components/common/PetCards/types';
 import { HeaderPortal } from '~/components/common/Layout/Header';
 import { getMockPets, TITLE, SUBTITLE } from './constants';
 
