@@ -1,13 +1,11 @@
 import type { RawAnimal } from './types';
 import { Family, Gender, Size } from '@prisma/client';
+import { installGlobals } from '@remix-run/node';
 import { PUBLIC_ADOPT_ANIMALS_API } from './constants';
 
 export const fetchAnimals = async (): Promise<RawAnimal[] | undefined> => {
   try {
-    let fetch;
-    if (typeof window === 'undefined') {
-      fetch = require('node-fetch');
-    }
+    installGlobals();
     const response = await fetch(PUBLIC_ADOPT_ANIMALS_API);
     const animals = (await response.json()) as RawAnimal[];
     const availableAnimals = animals.filter(getIsAvailableAnimal);
