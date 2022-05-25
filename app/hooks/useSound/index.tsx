@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import { SOUNDS } from '~/components/common/Layout/BackgroundSounds/constants';
 import { getShouldPlaySound } from './utils';
 
+const DEFAULT_VOLUME = 0.25;
+
 export type SoundType = keyof typeof SOUNDS;
 type Refs = {
   [key in SoundType]: HTMLAudioElement;
@@ -21,9 +23,14 @@ export default function useSound() {
 
   useEffect(() => {
     refs.current = Object.keys(SOUNDS).reduce((collection, type) => {
+      const soundDom = document.getElementById(
+        `${type}-sound`
+      ) as HTMLAudioElement;
+      soundDom.volume = DEFAULT_VOLUME;
+
       return {
         ...collection,
-        [type]: document.getElementById(`${type}-sound`) as HTMLAudioElement
+        [type]: soundDom
       };
     }, {}) as Refs;
   }, []);
