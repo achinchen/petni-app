@@ -1,7 +1,11 @@
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import type { Pet as PetType } from '~/features/pet/types';
-import { Link as RemixLink } from 'remix';
-import { useLoaderData, useCatch, useParams } from '@remix-run/react';
+import {
+  Link as RemixLink,
+  useLoaderData,
+  useCatch,
+  useParams
+} from '@remix-run/react';
 import { json } from '@remix-run/node';
 import Pet from '~/features/pet';
 import Layout from '~/components/common/Layout';
