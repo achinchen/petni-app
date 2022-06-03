@@ -1,5 +1,4 @@
-import { AttributifyOptions } from '@unocss/preset-attributify';
-import { Form } from '@remix-run/react';
+import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { usePetContext } from '~/features/pet/context';
 import { getIconByGenderAndFamily } from '~/utils';
 import IconButton from '~/components/common/IconButton';

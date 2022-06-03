@@ -1,5 +1,5 @@
+import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { useState, useEffect, useRef } from 'react';
-import { AttributifyOptions } from '@unocss/preset-attributify';
 import { createPortal } from 'react-dom';
 import { HEADER_PORTAL_ID } from './constants';
 
