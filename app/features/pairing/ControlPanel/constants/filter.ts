@@ -1,7 +1,7 @@
 import type { DogColor } from '~/constants/dogs';
 import type { CatColor } from '~/constants/cats';
 import type { IconType } from '~/components/common/Icon';
-import { Family, Gender, Age } from '~/constants';
+import { Family, Gender, Size } from '~/constants';
 import { DOG_COLOR_LABEL } from '~/constants/dogs';
 import { CAT_COLOR_LABEL } from '~/constants/cats';
 
@@ -65,17 +65,21 @@ export const GENDER_OPTION = {
   ]
 } as const;
 
-export const AGE_OPTION = {
-  CATEGORY: 'age',
-  LABEL: '年齡',
+export const SIZE_OPTION = {
+  CATEGORY: 'size',
+  LABEL: '體型',
   OPTIONS: [
     {
-      VALUE: Age.Kid,
-      LABEL: '幼齡'
+      VALUE: Size.Small,
+      LABEL: '小'
     },
     {
-      VALUE: Age.Adult,
-      LABEL: '成年'
+      VALUE: Size.Medium,
+      LABEL: '中'
+    },
+    {
+      VALUE: Size.Large,
+      LABEL: '大'
     },
     DEFAULT_OPTION
   ]
@@ -84,5 +88,5 @@ export const AGE_OPTION = {
 export const GENERAL_FILTER_OPTIONS = [
   FAMILY_OPTION,
   GENDER_OPTION,
-  AGE_OPTION
+  SIZE_OPTION
 ] as const;

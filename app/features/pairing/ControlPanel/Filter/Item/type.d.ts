@@ -1,7 +1,7 @@
 import type {
   FamilyOptions,
   GenderOptions,
-  AgeOptions,
+  SizeOptions,
   ColorOptions
 } from '~/features/pairing/ControlPanel/Filter/type';
 import type {
@@ -17,4 +17,8 @@ export type Label =
   | typeof GENERAL_FILTER_OPTIONS[number]['LABEL']
   | typeof DYNAMIC_FILTER_OPTIONS[number]['LABEL'];
 
-export type Options = FamilyOptions | GenderOptions | AgeOptions | ColorOptions;
+export type Options =
+  | FamilyOptions
+  | GenderOptions
+  | SizeOptions
+  | ColorOptions;
