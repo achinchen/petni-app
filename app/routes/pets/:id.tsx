@@ -10,7 +10,7 @@ import { json } from '@remix-run/node';
 import Pet from '~/features/pet';
 import Layout from '~/components/common/Layout';
 import Loading from '~/components/common/LoadingAnimation';
-import { db } from '~/utils/db.server';
+import { db } from '~/utils/db/index.server';
 import { APP_NAME } from '~/constants';
 import { DEFAULT_META } from '~/constants/meta';
 
