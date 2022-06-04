@@ -1,4 +1,4 @@
-import { db } from '~/utils/db.server';
+import { db } from '~/utils/db/index.server';
 import { getAnimals } from '~/jobs/updateAnimals/utils';
 
 async function seed() {

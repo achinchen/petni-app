@@ -1,7 +1,7 @@
 import type { DogColor } from '~/constants/dogs';
 import type { CatColor } from '~/constants/cats';
 import type { Family, Animal, Gender, Size } from '@prisma/client';
-import { db } from '~/utils/db.server';
+import { db } from '~/utils/db/index.server';
 import { ANIMAL_COUNT, SEARCH_KEY_DIST } from './constants';
 
 export default async (filter: null | FormData = null): Promise<Animal[]> => {
