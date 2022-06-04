@@ -3,7 +3,6 @@
     "remix.env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "app/jobs/update-animals/utils./indexts"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
