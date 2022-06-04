@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from '~/utils/localStorage';
+import { getLocalStorage, setLocalStorage } from '~/utils/storage';
 
 const PREFERENCE_KEY = 'Sound';
 export const getShouldPlaySound = () => getLocalStorage(PREFERENCE_KEY);
