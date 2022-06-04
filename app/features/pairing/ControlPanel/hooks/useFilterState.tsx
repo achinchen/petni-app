@@ -1,11 +1,12 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import type {
   Family,
   Gender,
-  Age,
+  Size,
   Color
 } from '~/features/pairing/ControlPanel/Filter/type';
 import { DEFAULT_OPTION } from '~/features/pairing/ControlPanel/constants/filter';
+import { getFilterPreference } from '../utils';
 
 const DEFAULT_OPTION_VALUE = DEFAULT_OPTION.VALUE;
 
@@ -13,7 +14,7 @@ export type FilterState = {
   family: Family;
   gender: Gender;
   color: Color;
-  age: Age;
+  size: Size;
 };
 
 type FilterType = keyof FilterState;
@@ -27,7 +28,7 @@ export const initialFilter = {
   family: DEFAULT_OPTION_VALUE,
   gender: DEFAULT_OPTION_VALUE,
   color: DEFAULT_OPTION_VALUE,
-  age: DEFAULT_OPTION_VALUE
+  size: DEFAULT_OPTION_VALUE
 };
 
 function filterReducer(state: FilterState, { type, value }: Action) {
@@ -36,5 +37,14 @@ function filterReducer(state: FilterState, { type, value }: Action) {
 
 export default function useFilterState() {
   const [filter, dispatchFilter] = useReducer(filterReducer, initialFilter);
+
+  useEffect(() => {
+    const filterPreference = getFilterPreference();
+    if (filterPreference)
+      Object.keys(filterPreference).forEach((key) => {
+        dispatchFilter({ type: key, value: filterPreference[key] } as Action);
+      });
+  }, []);
+
   return { filter, dispatchFilter };
 }

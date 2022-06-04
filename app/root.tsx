@@ -9,7 +9,6 @@ import {
 } from '@remix-run/react';
 import { styles } from '~/styles';
 import { DEFAULT_META } from '~/constants/meta';
-
 export function links() {
   return [...styles];
 }

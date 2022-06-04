@@ -1,16 +1,25 @@
 import type { DogColor } from '~/constants/dogs';
 import type { CatColor } from '~/constants/cats';
-import type { Family, Animal, Gender, Size } from '@prisma/client';
+import type { Animal, Family, Gender, Size } from '@prisma/client';
 import { db } from '~/utils/db/index.server';
 import { ANIMAL_COUNT, SEARCH_KEY_DIST } from './constants';
 
-export default async (filter: null | FormData = null): Promise<Animal[]> => {
-  if (!filter) {
+export type Filter = {
+  family?: Family;
+  gender?: Gender;
+  size?: Size;
+  color?: string;
+};
+
+export default async (filter: Filter): Promise<Animal[]> => {
+  if (!Object.keys(filter).length) {
     const animals = await db.$queryRaw<
       Animal[]
     >`SELECT * FROM "Animal" ORDER BY random() LIMIT 10`;
     return animals;
   }
+
+  const { color, family, size, gender } = filter;
 
   const options: {
     family?: Family;
@@ -19,19 +28,15 @@ export default async (filter: null | FormData = null): Promise<Animal[]> => {
     color?: { search: string };
   } = {};
 
-  const family = filter.get('family') as Family;
   if (family) options.family = family;
-
-  const gender = filter.get('gender') as Gender;
+  if (size) options.size = size;
   if (gender) options.gender = gender;
 
-  const size = filter.get('size') as Size;
-  if (size) options.size = size;
-
-  const color = filter.get('color') as DogColor & CatColor;
-
-  const colorSearchKey = SEARCH_KEY_DIST[family]?.[color] || '';
-  if (colorSearchKey) options.color = { search: colorSearchKey };
+  if (color && family) {
+    options.color = {
+      search: SEARCH_KEY_DIST[family]?.[color as DogColor & CatColor]
+    };
+  }
 
   const animalCounts = await db.animal.count({
     where: options

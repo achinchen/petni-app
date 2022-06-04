@@ -1,27 +1,23 @@
-import type { Animal } from '@prisma/client';
-import type { LoaderFunction } from '@remix-run/node';
+import type { ActionFunction } from '@remix-run/node';
+import type { Filter } from '~/utils/db/getAnimalsByFilter';
 import { useEffect, useState } from 'react';
 import PetPairing from '~/features/pairing';
 import FullPageLoading from '~/components/common/FullPageLoading';
-import { useLoaderData } from '@remix-run/react';
-import { json } from '@remix-run/node';
 import Layout from '~/components/common/Layout';
-import { db } from '~/utils/db.server';
-
-type LoaderData = { animals: Animal[] };
-
-export const loader: LoaderFunction = async () => {
-  const animals = await db.$queryRaw<
-    Animal[]
-  >`SELECT * FROM "Animal" ORDER BY random() LIMIT 6`;
-  return json({ animals });
-};
+import getAnimalsByFilter from '~/utils/db/getAnimalsByFilter';
+import { json } from '@remix-run/node';
 
 const LOADING_SECONDS = 1000 * 1.5;
 
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  const filter = formData.get('json') as Filter;
+  const animals = await getAnimalsByFilter(filter);
+  return json({ animals });
+};
+
 export default function Index() {
-  const [loaded, setLoaded] = useState(true);
-  const data = useLoaderData<LoaderData>();
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setLoaded(true), LOADING_SECONDS);
@@ -29,7 +25,7 @@ export default function Index() {
 
   return loaded ? (
     <Layout>
-      <PetPairing animals={data.animals} />
+      <PetPairing />
     </Layout>
   ) : (
     <FullPageLoading />

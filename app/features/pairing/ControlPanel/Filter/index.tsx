@@ -1,4 +1,4 @@
-import type { Family, Gender, Age, Color } from './type';
+import type { Family, Gender, Size, Color } from './type';
 import FilterItem from '~/features/pairing/ControlPanel/Filter/Item';
 import { useControlContext } from '~/features/pairing/ControlPanel/context';
 import {
@@ -10,7 +10,7 @@ type Filter = {
   family: Family;
   gender: Gender;
   color: Color;
-  age: Age;
+  size: Size;
 };
 
 type FilterType = keyof Filter;

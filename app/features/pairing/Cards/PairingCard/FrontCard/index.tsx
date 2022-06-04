@@ -1,19 +1,26 @@
+import type { Animal } from '@prisma/client';
+import type { SoundType } from '~/hooks/useSound';
 import { useState } from 'react';
+import { Link } from '@remix-run/react';
 import Icon from '~/components/common/Icon';
 import IconButton from '~/components/common/IconButton';
 import useSwipe from '~/features/pairing/hooks/useSwipe';
-import type { SoundType } from '~/hooks/useSound';
 import useSound from '~/hooks/useSound';
-import { getMockPet } from '../../utils';
 import { IMAGE_MISSING, PLACEHOLDER_IMG } from '~/constants/pet';
 import { getIconByGenderAndFamily } from '~/utils';
 
-export default function FrontCard() {
+type Props = {
+  currentCard: Animal;
+  onNext: () => void;
+};
+
+export default function FrontCard({ currentCard, onNext }: Props) {
   const [animation, setAnimation] = useState<'close' | 'favorite'>();
 
-  const { image, id, location, gender, family } = getMockPet();
-  const withImage = Boolean(image);
-  const style = withImage ? { backgroundImage: `url(${image})` } : {};
+  const { imageUrl, id, location, gender, family } = currentCard;
+
+  const withImage = Boolean(imageUrl);
+  const style = withImage ? { backgroundImage: `url(${imageUrl})` } : {};
   const genderIcon = getIconByGenderAndFamily({ gender, family });
   const onPlay = useSound();
 
@@ -25,6 +32,7 @@ export default function FrontCard() {
     onPlay((family ? family.toLowerCase() : 'general') as SoundType);
   };
   const onAnimationEnd = () => {
+    onNext();
     setAnimation(undefined);
   };
 
@@ -42,7 +50,7 @@ export default function FrontCard() {
       h="100vmin sm:80vmin md:118"
       p="3"
       m="auto"
-      bg="cover gray-50"
+      bg="cover center gray-50"
       overflow="hidden"
       border="rounded-12 12 white"
       shadow="card"
@@ -63,22 +71,24 @@ export default function FrontCard() {
       {...(!withImage && { after: 'display-none' })}
       transform-origin="left"
       style={style}
-      animate="duration-0.4s count-1 mode-forwards"
+      animate="count-1 mode-forwards"
       {...(animation && {
-        animate: `${animation} duration-0.4s count-1 mode-forwards`
+        animate: `${animation} count-1 mode-forwards`
       })}
       onAnimationEnd={onAnimationEnd}
     >
-      <Icon
-        position="absolute"
-        role="button"
-        icon={withImage ? 'Info' : 'InfoDark'}
-        w="10 sm:13"
-        top="4"
-        right="4"
-        transform="rotate-5"
-        cursor="pointer"
-      />
+      <Link to={`/pets/${id}`}>
+        <Icon
+          position="absolute"
+          role="button"
+          icon={withImage ? 'Info' : 'InfoDark'}
+          w="10 sm:13"
+          top="4"
+          right="4"
+          transform="rotate-5"
+          cursor="pointer"
+        />
+      </Link>
       {!withImage && (
         <figure flex="~ col" items="center" mt="50%">
           <img src={PLACEHOLDER_IMG[family]} alt={IMAGE_MISSING} w="16" />

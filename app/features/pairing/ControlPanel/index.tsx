@@ -1,11 +1,31 @@
+import type { SettingState } from './hooks/useSettingState';
+import type { FilterState } from '~/features/pairing/ControlPanel/hooks/useFilterState';
 import Filter from './Filter';
 import Setting from './Setting';
 import Button from '~/components/common/Button';
 import { usePairContext } from '~/features/pairing/context';
+import { useControlContext, ControlContextProvider } from './context';
 import { SUBMIT_BUTTON } from './constants';
+import { setSoundPreference } from '~/hooks/useSound/utils';
+import { setFilterPreference } from './utils';
 
-export default function Panel() {
-  const { showPanel } = usePairContext();
+function Panel() {
+  const { showPanel, onPreferenceSubmit } = usePairContext();
+  const { filter, setting } = useControlContext();
+
+  const updatePreference = () => {
+    return new Promise((resolve) => {
+      const { sounds } = setting;
+      setFilterPreference(filter);
+      setSoundPreference(sounds);
+      resolve('done');
+    });
+  };
+
+  const onSubmit = async () => {
+    await updatePreference();
+    onPreferenceSubmit();
+  };
 
   return (
     <section
@@ -17,7 +37,7 @@ export default function Panel() {
       shadow="default"
       bg="gray-50"
       z="1"
-      {...(!showPanel && { display: 'none' })}
+      {...(!showPanel && { display: 'lt-lg:none' })}
     >
       <Filter />
       <Setting />
@@ -30,12 +50,20 @@ export default function Panel() {
         bottom="0"
         border="lg:rounded-2xl"
         justify="end"
-        onClick={() => {}}
+        onClick={onSubmit}
         isDark
         z="1"
       >
         {SUBMIT_BUTTON}
       </Button>
     </section>
+  );
+}
+
+export default function PanelWithContext() {
+  return (
+    <ControlContextProvider>
+      <Panel />
+    </ControlContextProvider>
   );
 }
