@@ -2,18 +2,24 @@ import Loading from '~/components/common/LoadingAnimation';
 import ControlPanel from './ControlPanel';
 import PairCards from './Cards';
 import Portal from './Portal';
-import { PairingContextProvider } from './context';
+import { PairingContextProvider, usePairContext } from './context';
 
-export default function Pairing() {
-  const isLoading = false;
+export function Pairing() {
+  const { isLoading } = usePairContext();
 
   return (
+    <main flex="~" className="content-height">
+      <Portal />
+      <ControlPanel />
+      {isLoading ? <Loading /> : <PairCards />}
+    </main>
+  );
+}
+
+export default function PairingWithProvider() {
+  return (
     <PairingContextProvider>
-      <main flex="~" className="content-height">
-        <Portal />
-        <ControlPanel />
-        {isLoading ? <Loading /> : <PairCards />}
-      </main>
+      <Pairing />
     </PairingContextProvider>
   );
 }
