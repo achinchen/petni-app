@@ -18,7 +18,7 @@ function Panel() {
       const { sounds } = setting;
       setFilterPreference(filter);
       setSoundPreference(sounds);
-      resolve('done');
+      resolve(null);
     });
   };
 
@@ -33,7 +33,7 @@ function Panel() {
       display="lg:flex"
       flex="col"
       w="screen lg:120"
-      p="4 sm:8 lg:10"
+      p="4 sm:8"
       shadow="default"
       bg="gray-50"
       z="1"
