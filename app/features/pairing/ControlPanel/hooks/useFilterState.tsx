@@ -6,7 +6,7 @@ import type {
   Color
 } from '~/features/pairing/ControlPanel/Filter/type';
 import { DEFAULT_OPTION } from '~/features/pairing/ControlPanel/constants/filter';
-import { getFilterPreference } from '../utils';
+import { getFilterPreference } from '~/features/pairing/ControlPanel/utils';
 
 const DEFAULT_OPTION_VALUE = DEFAULT_OPTION.VALUE;
 

@@ -2,8 +2,8 @@ import type { Animal } from '@prisma/client';
 import type { Filter } from '~/utils/db/getAnimalsByFilter';
 import { createContext, useState, useEffect, useContext } from 'react';
 import { useFetcher } from '@remix-run/react';
-import { getFilterPreference } from '../ControlPanel/utils';
-import { DEFAULT_OPTION } from '../ControlPanel/constants/filter';
+import { getFilterPreference } from '~/features/pairing/ControlPanel/utils';
+import { DEFAULT_OPTION } from '~/features/pairing/ControlPanel/constants/filter';
 
 export type InitialState = {
   currentCard?: Animal;
@@ -12,7 +12,7 @@ export type InitialState = {
   setShowPanel: (showPanel: boolean) => void;
   isLoading: boolean;
   onNext: () => void;
-  onPreferenceSubmit: () => void;
+  refreshCards: () => void;
 };
 
 const initialState = {
@@ -22,7 +22,7 @@ const initialState = {
   showPanel: false,
   isLoading: false,
   setShowPanel: () => {},
-  onPreferenceSubmit: () => {}
+  refreshCards: () => {}
 };
 
 export const PairingContext = createContext<InitialState>(initialState);
@@ -67,7 +67,7 @@ export const PairingContextProvider = ({ children }: ProviderProps) => {
     });
   };
 
-  const onPreferenceSubmit = () => {
+  const refreshCards = () => {
     setIndex(RANDOM_RECOMMENDATION_COUNT);
     fetchAnimals({ replace: true });
   };
@@ -95,7 +95,7 @@ export const PairingContextProvider = ({ children }: ProviderProps) => {
         currentCard,
         recommendCards,
         onNext,
-        onPreferenceSubmit,
+        refreshCards,
         showPanel,
         setShowPanel,
         isLoading
