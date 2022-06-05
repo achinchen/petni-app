@@ -17,12 +17,20 @@ export default function Filter({
   getIsPressed,
   onClick
 }: Props) {
-  const buttonSize = ['age', 'color'].includes(category) ? 'sm' : 'base';
+  const buttonSize = ['size', 'color'].includes(category) ? 'sm' : 'base';
 
   return (
-    <div mb="8" style={{ width: buttonSize === 'sm' ? '100%' : 'initial' }}>
+    <div
+      mb="8 lg:2"
+      style={{ width: buttonSize === 'sm' ? '100%' : 'initial' }}
+    >
       <div font="medium">{label}</div>
-      <div mt="1" grid="~ cols-3 gap-3" justify="between">
+      <div
+        mt="1"
+        grid="~ cols-3 gap-2"
+        justify="between"
+        {...(category === 'size' && { grid: '~ cols-4 gap-2' })}
+      >
         {options.map(({ VALUE, LABEL }) => {
           const isPressed = getIsPressed(VALUE);
           return (

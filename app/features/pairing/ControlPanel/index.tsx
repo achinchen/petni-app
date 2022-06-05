@@ -33,11 +33,13 @@ function Panel() {
       display="lg:flex"
       flex="col"
       w="screen lg:120"
-      p="4 sm:8"
+      px="9"
+      py="8 lg:4"
       shadow="default"
       bg="gray-50"
       z="1"
-      {...(!showPanel && { display: 'lt-lg:none' })}
+      overflow-y="scroll"
+      {...(!showPanel && { display: 'none lg:flex' })}
     >
       <Filter />
       <Setting />
@@ -49,7 +51,7 @@ function Panel() {
         left="0"
         bottom="0"
         border="lg:rounded-2xl"
-        justify="end"
+        justify="self-end"
         onClick={onSubmit}
         isDark
         z="1"

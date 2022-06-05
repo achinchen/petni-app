@@ -18,8 +18,8 @@ export default function OptionButton({
       onClick={onClick}
       isPressed={isPressed}
       w="22"
-      h="22"
-      border="rounded-3xl"
+      h="22 md:17"
+      border="rounded-3xl md:rounded-xl"
       transition="150"
       {...(size === 'sm' && { h: 10, w: '100% lg:22', border: 'rounded-xl' })}
     >

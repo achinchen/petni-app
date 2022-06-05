@@ -34,6 +34,7 @@ export default defineConfig({
     '[border="rounded-xl"]',
     '[display="none"]',
     '[display="lg:flex"]',
+    '[grid~="cols-4"]',
     '[text="underline"]',
     '[animate~="close"]',
     '[animate~="favorite"]'

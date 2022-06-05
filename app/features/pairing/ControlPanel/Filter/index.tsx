@@ -30,7 +30,7 @@ export default function FilterPanel() {
   };
 
   return (
-    <div flex="~ row wrap lg:col" justify="between">
+    <div flex="~ row wrap lg:col" justify="between" transition="0.3s">
       {GENERAL_FILTER_OPTIONS.map(({ CATEGORY, LABEL, OPTIONS }) => (
         <FilterItem
           key={CATEGORY}
