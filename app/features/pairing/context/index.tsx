@@ -4,6 +4,7 @@ import { createContext, useState, useEffect, useContext } from 'react';
 import { useFetcher } from '@remix-run/react';
 import { getFilterPreference } from '~/features/pairing/ControlPanel/utils';
 import { DEFAULT_OPTION } from '~/features/pairing/ControlPanel/constants/filter';
+import { FETCHER_IDLE_STATE } from '~/constants/utils';
 
 export type InitialState = {
   currentCard?: Animal;
@@ -33,7 +34,6 @@ type ProviderProps = {
 };
 
 const RANDOM_RECOMMENDATION_COUNT = 3;
-const FETCHER_IDLE_STATE = 'idle';
 
 export const PairingContextProvider = ({ children }: ProviderProps) => {
   const [animals, setAnimals] = useState<Animal[]>([]);

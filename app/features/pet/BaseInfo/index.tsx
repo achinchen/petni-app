@@ -1,6 +1,7 @@
 import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { usePetContext } from '~/features/pet/context';
 import { getIconByGenderAndFamily } from '~/utils';
+import useFavorite from '~/hooks/useFavorite';
 import IconButton from '~/components/common/IconButton';
 import Icon from '~/components/common/Icon';
 
@@ -10,6 +11,10 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
   const { pet } = usePetContext();
   const { id, location, gender, family } = pet!;
   const genderIcon = getIconByGenderAndFamily({ gender, family });
+
+  const { ids, onAdd } = useFavorite();
+  const onFavorite = () => onAdd(id);
+  const alreadyFavorite = ids.has(id);
 
   return (
     <div flex="~" justify="between" py="md:4" {...attributifyOptions}>
@@ -30,7 +35,8 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
         shadow="default"
         icon="LoveActiveFill"
         iconAttributifyOptions={{ w: 10 }}
-        onClick={() => {}}
+        onClick={onFavorite}
+        disabled={alreadyFavorite}
       />
     </div>
   );

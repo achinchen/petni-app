@@ -6,6 +6,7 @@ import Icon from '~/components/common/Icon';
 import IconButton from '~/components/common/IconButton';
 import useSwipe from '~/features/pairing/hooks/useSwipe';
 import useSound from '~/hooks/useSound';
+import useFavorite from '~/hooks/useFavorite';
 import { IMAGE_MISSING, PLACEHOLDER_IMG } from '~/constants/pet';
 import { getIconByGenderAndFamily } from '~/utils';
 
@@ -23,11 +24,13 @@ export default function FrontCard({ currentCard, onNext }: Props) {
   const style = withImage ? { backgroundImage: `url(${imageUrl})` } : {};
   const genderIcon = getIconByGenderAndFamily({ gender, family });
   const onPlay = useSound();
+  const { onAdd } = useFavorite();
 
   const onClose = () => {
     setAnimation('close');
   };
   const onFavorite = () => {
+    onAdd(id);
     setAnimation('favorite');
     onPlay((family ? family.toLowerCase() : 'general') as SoundType);
   };
