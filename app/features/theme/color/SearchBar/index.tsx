@@ -1,5 +1,5 @@
-import { Link } from 'remix';
-import { AttributifyOptions } from '@unocss/preset-attributify';
+import type { AttributifyOptions } from '@unocss/preset-attributify';
+import { Link } from '@remix-run/react';
 import Icon from '~/components/common/Icon';
 
 type Props = {

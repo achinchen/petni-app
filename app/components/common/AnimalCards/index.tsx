@@ -1,25 +1,28 @@
+import type { SimpleAnimal } from '~/utils/db/getAnimalByIds';
 import { useState } from 'react';
+import { getIconByGenderAndFamily } from '~/utils';
 import Icon from '~/components/common/Icon';
 import DeletePanel from '~/components/common/DeletePanel';
-import type { PetCard } from './types';
 
 type Props = {
-  pets: PetCard[];
-  onDeletePet: (id: number) => void;
+  animals: SimpleAnimal[];
+  onDelete: (id: number) => void;
 };
 
-export default function PetCards({ pets, onDeletePet }: Props) {
-  const [deletePetId, setDeletePetId] = useState(-1);
+const INITIAL_ID = -1;
 
-  const isOpenDeletePanel = deletePetId > 0;
+export default function AnimalCards({ animals, onDelete }: Props) {
+  const [targetId, setTargetId] = useState(INITIAL_ID);
 
-  const onDeletePanelClose = () => setDeletePetId(-1);
+  const isOpenDeletePanel = targetId > 0;
+
+  const onDeletePanelClose = () => setTargetId(INITIAL_ID);
   const onDeletePanelConfirm = () => {
-    onDeletePet(deletePetId);
+    onDelete(targetId);
     onDeletePanelClose();
   };
 
-  const onDelete = (id: number) => () => setDeletePetId(id);
+  const onDeleteButton = (id: SimpleAnimal['id']) => () => setTargetId(id);
 
   return (
     <section>
@@ -33,7 +36,7 @@ export default function PetCards({ pets, onDeletePet }: Props) {
         justify="center"
         className="grid-cols-[repeat(auto-fill,10rem)]"
       >
-        {pets.map(({ id, image, location, gender }) => (
+        {animals.map(({ id, family, gender, imageUrl, location }) => (
           <section
             key={id}
             flex="~ col"
@@ -44,8 +47,16 @@ export default function PetCards({ pets, onDeletePet }: Props) {
             shadow="default"
             border="rounded-7"
           >
-            <figure position="relative" m="0" border="rounded-7">
-              <img w="100%" src={image} alt={`照片`} />
+            <figure w="100%" h="100%" position="relative" m="0">
+              <div
+                role="img"
+                w="100%"
+                h="100%"
+                bg="cover center"
+                border="rounded-7"
+                style={{ backgroundImage: `url(${imageUrl})` }}
+                alt={`${id} 的照片`}
+              />
               <button
                 position="absolute"
                 flex="~"
@@ -58,14 +69,18 @@ export default function PetCards({ pets, onDeletePet }: Props) {
                 border="rounded-1/2"
                 bg="white"
                 shadow="default"
-                onClick={onDelete(id)}
+                onClick={onDeleteButton(id)}
               >
                 <Icon icon="CloseSm" />
               </button>
             </figure>
             <h2 position="relative" text="base" mt="2" mb="0" mx="0">
               {id}
-              <Icon icon={gender} position="absolute" right="0" />
+              <Icon
+                icon={getIconByGenderAndFamily({ gender, family })}
+                position="absolute"
+                right="0"
+              />
             </h2>
             <div color="gray-450" text="sm" font="medium" m="0">
               {location}

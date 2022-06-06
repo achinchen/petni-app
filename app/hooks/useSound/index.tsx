@@ -1,5 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { SOUNDS } from '~/components/common/Layout/BackgroundSounds/constants';
+import { getShouldPlaySound } from './utils';
+
+const DEFAULT_VOLUME = 0.25;
 
 export type SoundType = keyof typeof SOUNDS;
 type Refs = {
@@ -10,6 +13,7 @@ export default function useSound() {
   const refs = useRef<Refs>();
 
   const onPlay = (type: SoundType) => {
+    if (!getShouldPlaySound()) return;
     const audioDom = refs.current?.[type];
     if (!audioDom) return;
     const promise = audioDom.play();
@@ -19,9 +23,14 @@ export default function useSound() {
 
   useEffect(() => {
     refs.current = Object.keys(SOUNDS).reduce((collection, type) => {
+      const soundDom = document.getElementById(
+        `${type}-sound`
+      ) as HTMLAudioElement;
+      soundDom.volume = DEFAULT_VOLUME;
+
       return {
         ...collection,
-        [type]: document.getElementById(`${type}-sound`) as HTMLAudioElement
+        [type]: soundDom
       };
     }, {}) as Refs;
   }, []);

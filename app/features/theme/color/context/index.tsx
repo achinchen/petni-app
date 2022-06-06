@@ -1,10 +1,5 @@
-import {
-  createContext,
-  useState,
-  useContext,
-  Dispatch,
-  SetStateAction
-} from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import { createContext, useState, useContext } from 'react';
 import { Family } from '~/constants';
 import { INFORMATION } from '~/features/theme/color/constants';
 
@@ -23,8 +18,8 @@ const initialState = {
   setFamily: () => {},
   index: 0,
   setIndex: () => {},
-  familyInformation: INFORMATION.CAT,
-  currentInfo: INFORMATION.CAT[0]
+  familyInformation: INFORMATION.Cat,
+  currentInfo: INFORMATION.Cat[0]
 };
 
 export const ThemeColorContext = createContext<InitialState>(initialState);

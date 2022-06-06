@@ -1,4 +1,4 @@
-version: '3.6'   # Docker Engine release 18.02.0+
+version: '3.6'
 
 services:
   postgres:

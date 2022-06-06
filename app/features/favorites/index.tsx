@@ -1,17 +1,53 @@
+import type { SimpleAnimal } from '~/utils/db/getAnimalByIds';
+import type { FavoriteIdSet } from '~/hooks/useFavorite/utils';
+
 import { useEffect, useState } from 'react';
-import PetCards from '~/components/common/PetCards';
-import type { PetCard } from '~/components/common/PetCards/types';
+import { useFetcher } from '@remix-run/react';
+import AnimalCards from '~/components/common/AnimalCards';
 import { HeaderPortal } from '~/components/common/Layout/Header';
-import { getMockPets, TITLE, SUBTITLE } from './constants';
+import { TITLE, SUBTITLE } from './constants';
+import useFavorite from '~/hooks/useFavorite';
+import { FETCHER_IDLE_STATE } from '~/constants/utils';
+import Loading from '~/components/common/LoadingAnimation';
 
 export default function Favorites() {
-  const [pets, setPets] = useState<PetCard[]>();
+  const [animals, setAnimals] = useState<SimpleAnimal[]>([]);
 
-  const onDelete = (id: number) => {};
+  const { ids, onDelete } = useFavorite();
+
+  const fetcher = useFetcher();
+  const isLoading = fetcher.state !== FETCHER_IDLE_STATE;
+
+  const removeDeletedAnimals = (targetId: number) => {
+    setAnimals((animals) => {
+      return animals.filter(({ id }) => id !== targetId);
+    });
+  };
+
+  const onDeleteAnimal = (targetId: number) => {
+    onDelete(targetId);
+    removeDeletedAnimals(targetId);
+  };
+
+  const fetchAnimals = (ids: FavoriteIdSet) => {
+    const formData = new FormData();
+    formData.set('json', JSON.stringify([...ids]));
+
+    fetcher.submit(formData, {
+      method: 'post',
+      action: '/favorites?index',
+      replace: false
+    });
+  };
 
   useEffect(() => {
-    setPets(getMockPets());
-  }, []);
+    if (fetcher.data?.animals) setAnimals(fetcher.data.animals);
+  }, [fetcher.data]);
+
+  useEffect(() => {
+    if (ids.size) fetchAnimals(ids);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ids]);
 
   return (
     <main className="content-width" m="4 lg:auto">
@@ -23,7 +59,11 @@ export default function Favorites() {
       <div color="gray-450" mt="6" mb="5" text="base center" font="medium">
         {SUBTITLE}
       </div>
-      {pets && <PetCards pets={pets} onDeletePet={onDelete} />}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        animals && <AnimalCards animals={animals} onDelete={onDeleteAnimal} />
+      )}
     </main>
   );
 }

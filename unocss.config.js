@@ -34,8 +34,10 @@ export default defineConfig({
     '[border="rounded-xl"]',
     '[display="none"]',
     '[display="lg:flex"]',
-    '[animate="close"]',
-    '[animate="favorite"]'
+    '[grid~="cols-4"]',
+    '[text="underline"]',
+    '[animate~="close"]',
+    '[animate~="favorite"]'
   ],
   theme: {
     colors: {
@@ -59,8 +61,12 @@ export default defineConfig({
     },
     animation: {
       keyframes: {
-        close: '{from{}to{transform:rotate(-20deg) translate(-100vw, -125%)}}',
-        favorite: '{from{}to{transform:rotate(15deg) translate(100vw, -125%)}}'
+        close: '{100%{transform:rotate(-20deg) translate(-100vw, -125%);}}',
+        favorite: '{100%{transform:rotate(15deg) translate(100vw, -125%);}}'
+      },
+      durations: {
+        close: '0.3s',
+        favorite: '0.3s'
       }
     }
   },

@@ -1,46 +1,39 @@
-import { useReducer } from 'react';
-import type { Family, Gender, Age, Color } from './type';
+import type { Family, Gender, Size, Color } from './type';
 import FilterItem from '~/features/pairing/ControlPanel/Filter/Item';
+import { useControlContext } from '~/features/pairing/ControlPanel/context';
 import {
   DEFAULT_OPTION,
+  FAMILY_OPTION,
   GENERAL_FILTER_OPTIONS,
   COLOR_OPTION
-} from './constants';
-
-const DEFAULT_OPTION_VALUE = DEFAULT_OPTION.VALUE;
+} from '~/features/pairing/ControlPanel/constants/filter';
+import { useEffect } from 'react';
 
 type Filter = {
   family: Family;
   gender: Gender;
   color: Color;
-  age: Age;
-};
-
-const initialFilter = {
-  family: DEFAULT_OPTION_VALUE,
-  gender: DEFAULT_OPTION_VALUE,
-  color: DEFAULT_OPTION_VALUE,
-  age: DEFAULT_OPTION_VALUE
+  size: Size;
 };
 
 type FilterType = keyof Filter;
 type Payload = ValueOf<Filter>;
-type Action = {
-  type: FilterType;
-  value: Payload;
-};
-
-function filterReducer(state: Filter, { type, value }: Action) {
-  return { ...state, [type]: value };
-}
 
 export default function FilterPanel() {
-  const [filter, dispatchFilter] = useReducer(filterReducer, initialFilter);
+  const { filter, dispatchFilter } = useControlContext();
 
   const showColorFilter = Boolean(COLOR_OPTION.OPTIONS(filter.family).length);
 
+  const resetColor = () => {
+    dispatchFilter({
+      type: COLOR_OPTION.CATEGORY,
+      value: DEFAULT_OPTION.VALUE
+    });
+  };
+
   const onFilterClick = (type: FilterType) => (value: Payload) => () => {
     dispatchFilter({ type, value });
+    if (type === FAMILY_OPTION.CATEGORY) resetColor();
   };
 
   const getIsPressed = (type: FilterType) => (value: Payload) => {
@@ -48,7 +41,7 @@ export default function FilterPanel() {
   };
 
   return (
-    <div flex="~ row wrap lg:col" justify="between">
+    <div flex="~ row wrap lg:col" justify="between" transition="0.3s">
       {GENERAL_FILTER_OPTIONS.map(({ CATEGORY, LABEL, OPTIONS }) => (
         <FilterItem
           key={CATEGORY}

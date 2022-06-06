@@ -1,46 +1,37 @@
-import { Gender, Family } from '~/constants';
+import type { Pet as PetType } from './types';
+import { PetContextProvider } from './context';
 import BaseInfo from './BaseInfo';
 import Metadata from './Metadata';
 import AppearanceInfo from './AppearanceInfo';
 import ContactNote from './ContactNote';
 import Photo from './Photo';
-import image from '~/assets/images/placeholder.jpg';
 
-const PET = {
-  id: 238721,
-  code: 'W09C0429-03',
-  gender: Gender.Female,
-  family: Family.Dog,
-  image,
-  location: '桃園市新屋區',
-  color: '虎斑白色',
-  openAt: '2022.01.28',
-  address: '桃園市新屋區永興里3鄰藻礁路1668號',
-  tel: '03-4861760',
-  note: '本站動物皆採現場互動面談後評估能否認養，不接受系統上的預約。',
-  followers: 130
+type Props = {
+  pet: PetType;
 };
 
-export default function Pet() {
-  const { image } = PET;
-  const withImage = Boolean(image);
+export default function Pet({ pet }: Props) {
+  const { imageUrl } = pet;
+  const withImage = Boolean(imageUrl);
 
   return (
-    <main flex="~ col md:row" justify="center" m="md:4 lg:10" h="md:145">
-      <Photo>
-        <BaseInfo
-          display="md:none"
-          mt="auto"
-          z="2"
-          color={withImage ? 'white' : 'black'}
-        />
-      </Photo>
-      <div m="4 md:0" flex="~ col" max-w="lg:100" text="sm">
-        <BaseInfo display="lt-md:none" />
-        <Metadata />
-        <AppearanceInfo />
-        <ContactNote />
-      </div>
-    </main>
+    <PetContextProvider pet={pet}>
+      <main flex="~ col lg:row" justify="center" m="md:4 lg:10" h="lg:145">
+        <Photo>
+          <BaseInfo
+            display="lg:none"
+            mt="auto"
+            z="2"
+            color={withImage ? 'white' : 'black'}
+          />
+        </Photo>
+        <div m="4 lg:0" flex="~ col 1" max-w="lg:100" text="sm">
+          <BaseInfo display="lt-lg:none" />
+          <Metadata />
+          <AppearanceInfo />
+          <ContactNote />
+        </div>
+      </main>
+    </PetContextProvider>
   );
 }

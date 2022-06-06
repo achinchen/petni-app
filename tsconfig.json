@@ -1,5 +1,9 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "app/jobs/update-animals/utils./indexts"],
+  "include": [
+    "remix.env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+  ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "isolatedModules": true,
@@ -15,7 +19,8 @@
       "database": ["./database/*"]
     },
     "typeRoots": ["./node_modules/@types", "./types"],
-    // Remix takes care of building everything in `remix build`.
-    "noEmit": true
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true
   }
 }

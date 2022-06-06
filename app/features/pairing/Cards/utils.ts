@@ -14,6 +14,6 @@ export function getMockPet(index = 0) {
     address: '桃園市新屋區永興里3鄰藻礁路1668號',
     tel: '03-4861760',
     note: '本站動物皆採現場互動面談後評估能否認養，不接受系統上的預約。',
-    followers: 130
+    follows: 130
   };
 }

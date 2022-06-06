@@ -1,6 +1,6 @@
 export enum DogColor {
   Calico = 'CALICO',
-  Rust = 'RUST',
+  Brown = 'BROWN',
   Gold = 'GOLD',
   White = 'WHITE',
   Black = 'BLACK',
@@ -10,12 +10,11 @@ export enum DogColor {
 }
 
 export const DOG_COLOR_LABEL = {
-  [DogColor.Calico]: '三色狗',
-  [DogColor.Rust]: '紅棕狗',
-  [DogColor.Gold]: '黃狗',
-  [DogColor.White]: '白狗',
-  [DogColor.Black]: '黑狗',
+  [DogColor.Brown]: '棕色狗',
+  [DogColor.Gold]: '黃色狗',
+  [DogColor.White]: '白色狗',
+  [DogColor.Black]: '黑色狗',
   [DogColor.TwoColor]: '雙色狗',
   [DogColor.Tabby]: '虎斑狗',
-  [DogColor.Gray]: '灰狗'
+  [DogColor.Gray]: '灰色狗'
 };

@@ -1,6 +1,6 @@
-import { Gender, Family } from '~/constants';
-import { CatColor } from '~/constants/cats';
-import { DogColor } from '~/constants/dogs';
+import type { Gender, Family } from '~/constants';
+import type { CatColor } from '~/constants/cats';
+import type { DogColor } from '~/constants/dogs';
 
 export type DetailPetCard = {
   id: number;

@@ -1,26 +1,27 @@
-import { useState } from 'react';
+import { Link } from '@remix-run/react';
 import Icon from '~/components/common/Icon';
-import { getMockPet } from '../utils';
+import { usePairContext } from '~/features/pairing/context';
 import { getIconByGenderAndFamily } from '~/utils';
 
 export default function RecommendCards() {
-  const [pets] = useState(
-    Array.from({ length: 3 }, (_, index) => getMockPet(index))
-  );
+  const { recommendCards } = usePairContext();
+
+  if (!recommendCards?.length) return null;
 
   return (
     <section display="none lg:flex" my="4" justify="center">
-      {pets.map(({ id, gender, family, location, image }) => (
-        <div
+      {recommendCards.map(({ id, gender, family, location, imageUrl }) => (
+        <Link
           key={id}
           flex="~"
-          min-w="xl:64"
+          min-w="lg:44 xl:64"
           p="4"
           ml="4 first:0"
           border="rounded-3xl"
           overflow="hidden"
-          bg="white"
+          bg="cover center white"
           shadow="default"
+          to={`/pets/${id}`}
         >
           <div
             w="12"
@@ -29,7 +30,7 @@ export default function RecommendCards() {
             border="rounded-1/2"
             bg="cover"
             style={{
-              backgroundImage: `url(${image})`
+              backgroundImage: `url(${imageUrl})`
             }}
           />
           <div>
@@ -44,7 +45,7 @@ export default function RecommendCards() {
               {location}
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </section>
   );
