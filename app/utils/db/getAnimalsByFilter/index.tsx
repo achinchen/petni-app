@@ -25,7 +25,8 @@ export default async (filter: Filter): Promise<Animal[]> => {
     family?: Family;
     gender?: Gender;
     size?: Size;
-    color?: { search: string };
+    color?: { contains: string };
+    OR?: { color: { contains: string } }[];
   } = {};
 
   if (family) options.family = family;
@@ -33,9 +34,11 @@ export default async (filter: Filter): Promise<Animal[]> => {
   if (gender) options.gender = gender;
 
   if (color && family) {
-    options.color = {
-      search: SEARCH_KEY_DIST[family]?.[color as DogColor & CatColor]
-    };
+    const searchKeys = SEARCH_KEY_DIST[family]?.[
+      color as DogColor & CatColor
+    ] as string[];
+    if (searchKeys.length === 1) options.color = { contains: searchKeys[0] };
+    else options.OR = searchKeys.map((key) => ({ color: { contains: key } }));
   }
 
   const animalCounts = await db.animal.count({
