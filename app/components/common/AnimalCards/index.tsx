@@ -1,4 +1,4 @@
-import type { SimpleAnimal } from '~/utils/db/getAnimalByIds';
+import type { SimpleAnimal } from '~/models/animal/getAnimalsByIds/index.server';
 import { useState } from 'react';
 import { getIconByGenderAndFamily } from '~/utils';
 import Icon from '~/components/common/Icon';

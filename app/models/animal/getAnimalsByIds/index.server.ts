@@ -7,7 +7,9 @@ export type SimpleAnimal = Pick<
   'id' | 'family' | 'gender' | 'location' | 'imageUrl'
 >;
 
-export default async (ids: AnimalId[]): Promise<SimpleAnimal[]> => {
+export default async function getAnimalByIds(
+  ids: AnimalId[]
+): Promise<SimpleAnimal[]> {
   const animals = await db.animal.findMany({
     where: {
       id: {
@@ -24,4 +26,4 @@ export default async (ids: AnimalId[]): Promise<SimpleAnimal[]> => {
   });
 
   return animals;
-};
+}

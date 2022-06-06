@@ -10,7 +10,7 @@ import { json } from '@remix-run/node';
 import Pet from '~/features/pet';
 import Layout from '~/components/common/Layout';
 import Loading from '~/components/common/LoadingAnimation';
-import { db } from '~/utils/db/index.server';
+import getAnimalById from '~/models/animal/getAnimalById/index.server';
 import { APP_NAME } from '~/constants';
 import { DEFAULT_META } from '~/constants/meta';
 
@@ -33,19 +33,15 @@ export const meta: MetaFunction = ({
 type LoaderData = { pet: PetType };
 
 export const loader: LoaderFunction = async ({ params }) => {
-  const result = await db.animal.findUnique({
-    where: { id: Number(params.id) },
-    include: { _count: { select: { follows: true } } }
-  });
+  const animal = await getAnimalById(Number(params.id));
 
-  if (!result) {
+  if (!animal) {
     throw new Response(`找不到 No.${params.id} 的浪浪`, {
       status: 404
     });
   }
 
-  const { _count, ...pet } = result;
-  const data: LoaderData = { pet: Object.assign(pet, _count) };
+  const data: LoaderData = { pet: animal };
 
   return json(data);
 };
