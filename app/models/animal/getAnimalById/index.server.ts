@@ -6,10 +6,17 @@ export default async function getAnimalById(
 ): Promise<PetType | null> {
   const animal = await db.animal.findUnique({
     where: { id },
-    include: { _count: { select: { follows: true } } }
+    include: {
+      follows: {
+        select: {
+          count: true
+        }
+      }
+    }
   });
 
   if (!animal) return animal;
-  const { _count, ...restInfo } = animal;
-  return Object.assign(restInfo, _count);
+  const { follows, ...restInfo } = animal;
+  const count = follows[0]?.count || 0;
+  return Object.assign(restInfo, { follows: count });
 }

@@ -30,7 +30,7 @@ model AnimalFollow {
   animalId  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  count     Int      @default(0)
+  count     Int      @default(1)
 }
 
 model Animal {
