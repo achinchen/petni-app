@@ -16,7 +16,7 @@ export default function Pet({ pet }: Props) {
 
   return (
     <PetContextProvider pet={pet}>
-      <main flex="~ col lg:row" justify="center" m="md:4 lg:10" h="lg:145">
+      <main flex="~ col lg:row" justify="center" m="lg:10" h="lg:145">
         <Photo>
           <BaseInfo
             display="lg:none"

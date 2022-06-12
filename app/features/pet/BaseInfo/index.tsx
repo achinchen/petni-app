@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { usePetContext } from '~/features/pet/context';
 import { getIconByGenderAndFamily } from '~/utils';
@@ -12,8 +13,14 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
   const { id, location, gender, family } = pet!;
   const genderIcon = getIconByGenderAndFamily({ gender, family });
 
-  const { ids, onAdd } = useFavorite();
-  const onFavorite = () => onAdd(id);
+  const { ids, onAdd } = useFavorite({
+    refresh: true
+  });
+
+  const onFavorite = async (event: MouseEvent) => {
+    event.stopPropagation();
+    await onAdd(id);
+  };
   const alreadyFavorite = ids.has(id);
 
   return (
@@ -21,7 +28,7 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
       <div text="sm">
         <span flex="~" text="lg" font="medium">
           {id}
-          <Icon display="at-md:none" w="5" icon={genderIcon} />
+          <Icon display="at-md:none" w="5" ml="1" icon={genderIcon} />
         </span>
         <div>{location}</div>
       </div>

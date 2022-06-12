@@ -16,8 +16,7 @@ export const PetContextProvider = (props: {
   children: JSX.Element;
   pet: Pet;
 }) => {
-  const [pet, setPet] = useState(props.pet);
-
+  const [pet] = useState(props.pet);
   return (
     <PetContext.Provider
       value={{

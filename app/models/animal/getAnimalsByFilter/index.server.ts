@@ -11,7 +11,9 @@ export type Filter = {
   color?: string;
 };
 
-export default async (filter: Filter): Promise<Animal[]> => {
+export default async function getAnimalByFilter(
+  filter: Filter
+): Promise<Animal[]> {
   if (!Object.keys(filter).length) {
     const animals = await db.$queryRaw<
       Animal[]
@@ -54,4 +56,4 @@ export default async (filter: Filter): Promise<Animal[]> => {
   });
 
   return animals;
-};
+}

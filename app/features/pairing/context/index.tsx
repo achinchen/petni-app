@@ -1,5 +1,5 @@
 import type { Animal } from '@prisma/client';
-import type { Filter } from '~/utils/db/getAnimalsByFilter';
+import type { Filter } from '~/models/animal/getAnimalsByFilter/index.server';
 import { createContext, useState, useEffect, useContext } from 'react';
 import { useFetcher } from '@remix-run/react';
 import { getFilterPreference } from '~/features/pairing/ControlPanel/utils';

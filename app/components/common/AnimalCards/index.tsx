@@ -1,8 +1,11 @@
-import type { SimpleAnimal } from '~/utils/db/getAnimalByIds';
+import type { SimpleAnimal } from '~/models/animal/getAnimalsByIds/index.server';
+import type { MouseEvent } from 'react';
 import { useState } from 'react';
+import { Link } from '@remix-run/react';
 import { getIconByGenderAndFamily } from '~/utils';
 import Icon from '~/components/common/Icon';
 import DeletePanel from '~/components/common/DeletePanel';
+import IconButton from '~/components/common/IconButton';
 
 type Props = {
   animals: SimpleAnimal[];
@@ -22,7 +25,10 @@ export default function AnimalCards({ animals, onDelete }: Props) {
     onDeletePanelClose();
   };
 
-  const onDeleteButton = (id: SimpleAnimal['id']) => () => setTargetId(id);
+  const onDeleteButton = (id: SimpleAnimal['id']) => (event: MouseEvent) => {
+    event.preventDefault();
+    setTargetId(id);
+  };
 
   return (
     <section>
@@ -37,7 +43,8 @@ export default function AnimalCards({ animals, onDelete }: Props) {
         className="grid-cols-[repeat(auto-fill,10rem)]"
       >
         {animals.map(({ id, family, gender, imageUrl, location }) => (
-          <section
+          <Link
+            to={`/pets/${id}`}
             key={id}
             flex="~ col"
             w="40"
@@ -57,7 +64,7 @@ export default function AnimalCards({ animals, onDelete }: Props) {
                 style={{ backgroundImage: `url(${imageUrl})` }}
                 alt={`${id} 的照片`}
               />
-              <button
+              <IconButton
                 position="absolute"
                 flex="~"
                 justify="center"
@@ -70,9 +77,8 @@ export default function AnimalCards({ animals, onDelete }: Props) {
                 bg="white"
                 shadow="default"
                 onClick={onDeleteButton(id)}
-              >
-                <Icon icon="CloseSm" />
-              </button>
+                icon="CloseSm"
+              />
             </figure>
             <h2 position="relative" text="base" mt="2" mb="0" mx="0">
               {id}
@@ -85,7 +91,7 @@ export default function AnimalCards({ animals, onDelete }: Props) {
             <div color="gray-450" text="sm" font="medium" m="0">
               {location}
             </div>
-          </section>
+          </Link>
         ))}
       </div>
     </section>
