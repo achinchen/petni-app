@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import type { AttributifyOptions } from '@unocss/preset-attributify';
 import type { IconType } from '~/components/common/Icon';
 import Icon from '~/components/common/Icon';
@@ -5,7 +6,7 @@ import Icon from '~/components/common/Icon';
 type Props = {
   icon: IconType;
   iconAttributifyOptions: AttributifyOptions;
-  onClick: () => void;
+  onClick: (event: MouseEvent) => void;
 } & AttributifyOptions;
 
 export default function IconButton({

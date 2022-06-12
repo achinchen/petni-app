@@ -11,8 +11,13 @@ export default function Photo({ children }: Props) {
   const withImage = Boolean(imageUrl);
   const style = withImage ? { backgroundImage: `url(${imageUrl})` } : {};
 
+  const onClick = (event: MouseEvent) => {
+    if (event.target !== event.currentTarget) event.preventDefault();
+    if (withImage) window.open(imageUrl, '_blank');
+  };
+
   return (
-    <a
+    <div
       flex="~ col"
       position="relative"
       top="0"
@@ -22,13 +27,11 @@ export default function Photo({ children }: Props) {
       max-h="sm:150"
       p="3"
       mr="4"
-      bg="cover lg:center gray-50"
+      bg="center gray-50"
       overflow="hidden"
       border="none lg:rounded-8 lg:12 white"
       shadow="default"
-      href={imageUrl}
-      target="_blank"
-      rel="noreferrer"
+      onClick={onClick}
       after="
         position-absolute
         left-0
@@ -53,6 +56,6 @@ export default function Photo({ children }: Props) {
         </figure>
       )}
       {children}
-    </a>
+    </div>
   );
 }
