@@ -5,7 +5,7 @@ import Icon from '~/components/common/Icon';
 
 type Props = {
   icon: IconType;
-  iconAttributifyOptions: AttributifyOptions;
+  iconAttributifyOptions?: AttributifyOptions;
   onClick: (event: MouseEvent) => void;
 } & AttributifyOptions;
 
