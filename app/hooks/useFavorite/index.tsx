@@ -1,9 +1,13 @@
 import type { FavoriteId, FavoriteIdSet } from './utils';
 import { useEffect, useState } from 'react';
 import { getFavoriteIdsPreference, setFavoriteIdsPreference } from './utils';
-import { useFetcher } from 'remix';
+import { useFetcher } from '@remix-run/react';
 
-export default function useFavorite() {
+type Parameters = {
+  refresh?: boolean;
+};
+
+export default function useFavorite({ refresh }: Parameters) {
   const [ids, setIds] = useState<FavoriteIdSet>(new Set());
   const fetcher = useFetcher();
 
@@ -35,6 +39,10 @@ export default function useFavorite() {
       return ids;
     });
   };
+
+  useEffect(() => {
+    if (fetcher.data && refresh) window.location.reload();
+  }, [fetcher.data, refresh]);
 
   useEffect(() => {
     const favoriteIds = getFavoriteIdsPreference();

@@ -5,7 +5,7 @@ import { formatDate } from '~/utils';
 
 export default function Metadata() {
   const { pet } = usePetContext();
-  const { code, follows, openAt } = pet!;
+  const { code, openAt } = pet!;
 
   return (
     <Card flex="~ col sm:row" justify="between" color="gray-450" mb="3">
@@ -18,7 +18,7 @@ export default function Metadata() {
         </div>
         <div flex="~ col" text="sm:right">
           <span text="xl" font="medium" color="black">
-            {follows}
+            {pet!.follows}
           </span>
           followers
         </div>

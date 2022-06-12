@@ -1,5 +1,4 @@
 import type { ActionFunction } from '@remix-run/node';
-import type { Animal } from '@prisma/client';
 import type { AnimalId } from '~/models/animal/getAnimalsByIds/index.server';
 import { json } from '@remix-run/node';
 import increaseFollow from '~/models/animalFollow/increaseFollow/index.server';
@@ -22,6 +21,5 @@ export const action: ActionFunction = async ({ request }) => {
   if (!action) return;
 
   const animals = await action(id);
-  console.log({ animals });
   return json({ animals });
 };

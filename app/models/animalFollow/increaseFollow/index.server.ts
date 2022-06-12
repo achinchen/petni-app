@@ -3,7 +3,6 @@ import { db } from '~/utils/db/index.server';
 
 export default async function createFollow(animalId: Animal['id']) {
   const animal = await db.animalFollow.findFirst({ where: { animalId } });
-  console.log({ animal });
 
   if (!animal) {
     const animalFollow = await db.animalFollow.create({
@@ -18,7 +17,11 @@ export default async function createFollow(animalId: Animal['id']) {
   // work around: https://github.com/prisma/prisma/issues/7290
   const animalFollow = await db.animalFollow.updateMany({
     where: { animalId },
-    data: { count: animal.count + 1 }
+    data: {
+      count: {
+        increment: 1
+      }
+    }
   });
 
   return animalFollow;

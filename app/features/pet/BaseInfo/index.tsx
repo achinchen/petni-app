@@ -13,11 +13,13 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
   const { id, location, gender, family } = pet!;
   const genderIcon = getIconByGenderAndFamily({ gender, family });
 
-  const { ids, onAdd } = useFavorite();
+  const { ids, onAdd } = useFavorite({
+    refresh: true
+  });
 
-  const onFavorite = (event: MouseEvent) => {
+  const onFavorite = async (event: MouseEvent) => {
     event.stopPropagation();
-    onAdd(id);
+    await onAdd(id);
   };
   const alreadyFavorite = ids.has(id);
 
