@@ -7,7 +7,7 @@ type Parameters = {
   refresh?: boolean;
 };
 
-export default function useFavorite({ refresh }: Parameters) {
+export default function useFavorite({ refresh }: Parameters = {}) {
   const [ids, setIds] = useState<FavoriteIdSet>(new Set());
   const fetcher = useFetcher();
 
