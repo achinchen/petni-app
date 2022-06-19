@@ -5,35 +5,26 @@ import { Family, Gender, Size } from '~/constants';
 import { DOG_COLOR_LABEL } from '~/constants/dogs';
 import { CAT_COLOR_LABEL } from '~/constants/cats';
 
-const DOG_COLOR_OPTIONS = Object.entries(DOG_COLOR_LABEL).map(
+export const DOG_COLOR_OPTIONS = Object.entries(DOG_COLOR_LABEL).map(
   ([VALUE, LABEL]) => ({ VALUE: VALUE as DogColor, LABEL })
 );
 
-const CAT_COLOR_OPTIONS = Object.entries(CAT_COLOR_LABEL).map(
+export const CAT_COLOR_OPTIONS = Object.entries(CAT_COLOR_LABEL).map(
   ([VALUE, LABEL]) => ({ VALUE: VALUE as CatColor, LABEL })
 );
 
-export const DEFAULT_OPTION = {
-  VALUE: 'NONE',
-  LABEL: '不拘'
-} as const;
+export const DEFAULT_VALUE = 'NONE';
 
-export const FAMILY_COLOR_OPTIONS = {
-  [Family.Cat]: [...CAT_COLOR_OPTIONS, DEFAULT_OPTION],
-  [Family.Dog]: [...DOG_COLOR_OPTIONS, DEFAULT_OPTION],
-  [DEFAULT_OPTION.VALUE]: []
-};
-
-export const COLOR_OPTION = {
+export const COLOR = {
   CATEGORY: 'color',
-  LABEL: '顏色',
-  OPTIONS: (family: keyof typeof FAMILY_COLOR_OPTIONS) =>
-    FAMILY_COLOR_OPTIONS[family]
+  OPTION: {
+    [Family.Cat]: CAT_COLOR_OPTIONS,
+    [Family.Dog]: DOG_COLOR_OPTIONS
+  }
 } as const;
 
-export const FAMILY_OPTION = {
+export const FAMILY = {
   CATEGORY: 'family',
-  LABEL: '我想尋找',
   OPTIONS: [
     {
       VALUE: Family.Cat,
@@ -42,14 +33,12 @@ export const FAMILY_OPTION = {
     {
       VALUE: Family.Dog,
       LABEL: (isPressed: boolean): IconType => (isPressed ? 'DogActive' : 'Dog')
-    },
-    DEFAULT_OPTION
+    }
   ]
-} as const;
+};
 
-export const GENDER_OPTION = {
+export const GENDER = {
   CATEGORY: 'gender',
-  LABEL: '性別',
   OPTIONS: [
     {
       VALUE: Gender.Male,
@@ -58,14 +47,12 @@ export const GENDER_OPTION = {
     {
       VALUE: Gender.Female,
       LABEL: (): IconType => 'Female'
-    },
-    DEFAULT_OPTION
+    }
   ]
 } as const;
 
-export const SIZE_OPTION = {
+export const SIZE = {
   CATEGORY: 'size',
-  LABEL: '體型',
   OPTIONS: [
     {
       VALUE: Size.Small,
@@ -78,7 +65,6 @@ export const SIZE_OPTION = {
     {
       VALUE: Size.Large,
       LABEL: '大'
-    },
-    DEFAULT_OPTION
+    }
   ]
 } as const;

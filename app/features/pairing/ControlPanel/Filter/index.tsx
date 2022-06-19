@@ -6,7 +6,7 @@ import {
   DEFAULT_OPTION,
   FAMILY_OPTION,
   COLOR_OPTION
-} from '~/constants/options';
+} from '~/features/pairing/ControlPanel/constants/filter';
 
 type Filter = {
   family: Family;

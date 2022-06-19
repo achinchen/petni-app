@@ -3,7 +3,7 @@ import type {
   GENDER_OPTION,
   SIZE_OPTION,
   FAMILY_COLOR_OPTIONS
-} from '~/constants/options';
+} from '~/features/pairing/ControlPanel/constants/filter';
 
 export type FamilyOptions = typeof FAMILY_OPTION.OPTIONS;
 export type GenderOptions = typeof GENDER_OPTION.OPTIONS;

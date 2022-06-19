@@ -5,10 +5,8 @@ import type {
   Size,
   Color
 } from '~/features/pairing/ControlPanel/Filter/type';
-import { DEFAULT_OPTION } from '~/constants/options';
+import { DEFAULT_VALUE } from '~/constants/options';
 import { getFilterPreference } from '~/features/pairing/ControlPanel/utils';
-
-const DEFAULT_OPTION_VALUE = DEFAULT_OPTION.VALUE;
 
 export type FilterState = {
   family: Family;
@@ -25,10 +23,10 @@ export type Action = {
 };
 
 export const initialFilter = {
-  family: DEFAULT_OPTION_VALUE,
-  gender: DEFAULT_OPTION_VALUE,
-  color: DEFAULT_OPTION_VALUE,
-  size: DEFAULT_OPTION_VALUE
+  family: DEFAULT_VALUE,
+  gender: DEFAULT_VALUE,
+  color: DEFAULT_VALUE,
+  size: DEFAULT_VALUE
 };
 
 function filterReducer(state: FilterState, { type, value }: Action) {
