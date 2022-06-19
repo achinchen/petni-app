@@ -6,7 +6,7 @@ import Icon from '~/components/common/Icon';
 type Props = {
   icon: IconType;
   iconAttributifyOptions?: AttributifyOptions;
-  onClick: (event: MouseEvent) => void;
+  onClick: () => void;
 } & AttributifyOptions;
 
 export default function IconButton({
