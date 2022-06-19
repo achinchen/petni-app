@@ -7,7 +7,7 @@ import type {
 import type {
   GENERAL_FILTER_OPTIONS,
   DYNAMIC_FILTER_OPTIONS
-} from '~/features/pairing/ControlPanel/constants/filter';
+} from '~/constants/options';
 
 export type Category =
   | typeof GENERAL_FILTER_OPTIONS[number]['CATEGORY']

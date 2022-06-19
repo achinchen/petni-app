@@ -3,7 +3,7 @@ import type { Filter } from '~/models/animal/getAnimalsByFilter/index.server';
 import { createContext, useState, useEffect, useContext } from 'react';
 import { useFetcher } from '@remix-run/react';
 import { getFilterPreference } from '~/features/pairing/ControlPanel/utils';
-import { DEFAULT_OPTION } from '~/features/pairing/ControlPanel/constants/filter';
+import { DEFAULT_OPTION } from '~/constants/options';
 import { FETCHER_IDLE_STATE } from '~/constants/utils';
 
 export type InitialState = {

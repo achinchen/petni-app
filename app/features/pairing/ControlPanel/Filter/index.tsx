@@ -6,8 +6,7 @@ import {
   FAMILY_OPTION,
   GENERAL_FILTER_OPTIONS,
   COLOR_OPTION
-} from '~/features/pairing/ControlPanel/constants/filter';
-import { useEffect } from 'react';
+} from '~/constants/options';
 
 type Filter = {
   family: Family;
