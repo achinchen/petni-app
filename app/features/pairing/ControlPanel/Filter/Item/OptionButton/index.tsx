@@ -23,7 +23,7 @@ export default function OptionButton({
       border="rounded-3xl md:rounded-xl"
       transition="150"
       {...(size === BUTTON_SIZE.Sm && {
-        h: 10,
+        h: '10',
         w: '100% lg:22',
         border: 'rounded-xl'
       })}
