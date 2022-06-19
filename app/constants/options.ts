@@ -31,8 +31,6 @@ export const COLOR_OPTION = {
     FAMILY_COLOR_OPTIONS[family]
 } as const;
 
-export const DYNAMIC_FILTER_OPTIONS = [COLOR_OPTION] as const;
-
 export const FAMILY_OPTION = {
   CATEGORY: 'family',
   LABEL: '我想尋找',
@@ -84,9 +82,3 @@ export const SIZE_OPTION = {
     DEFAULT_OPTION
   ]
 } as const;
-
-export const GENERAL_FILTER_OPTIONS = [
-  FAMILY_OPTION,
-  GENDER_OPTION,
-  SIZE_OPTION
-] as const;

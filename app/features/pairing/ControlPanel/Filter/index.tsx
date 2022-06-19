@@ -1,10 +1,10 @@
 import type { Family, Gender, Size, Color } from './type';
 import FilterItem from '~/features/pairing/ControlPanel/Filter/Item';
 import { useControlContext } from '~/features/pairing/ControlPanel/context';
+import { GENERAL_FILTER_OPTIONS } from '~/features/pairing/ControlPanel/constants/filter';
 import {
   DEFAULT_OPTION,
   FAMILY_OPTION,
-  GENERAL_FILTER_OPTIONS,
   COLOR_OPTION
 } from '~/constants/options';
 
