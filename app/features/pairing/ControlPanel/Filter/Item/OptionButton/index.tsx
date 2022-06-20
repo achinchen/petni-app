@@ -24,7 +24,7 @@ export default function OptionButton({
       transition="150"
       {...(size === BUTTON_SIZE.Sm && {
         h: '10',
-        w: '100% lg:22',
+        w: '100%',
         border: 'rounded-xl'
       })}
     >

@@ -52,7 +52,7 @@ function Panel() {
         border="lg:rounded-2xl"
         justify="self-end"
         onClick={onSubmit}
-        isDark
+        theme="black"
         z="1"
       >
         {SUBMIT_BUTTON}
