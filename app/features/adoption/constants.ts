@@ -1,5 +1,11 @@
 import type { Family } from '@prisma/client';
-import { FAMILY, GENDER, SIZE, COLOR } from '~/constants/options';
+import {
+  FAMILY,
+  GENDER,
+  SIZE,
+  COLOR,
+  DEFAULT_VALUE
+} from '~/constants/options';
 
 export const TITLE = '送養';
 export const BUTTON = {
@@ -7,18 +13,25 @@ export const BUTTON = {
   SUBMIT: '發佈'
 };
 
+export const DEFAULT_OPTION = {
+  VALUE: DEFAULT_VALUE,
+  LABEL: () => '不明'
+};
+
 export const REQUIRED = '(*必填)';
 
 export const REQUIRED_REMINDER = `標註為 ${REQUIRED} 的項目尚未填寫完成，請填寫完整後再發佈。`;
 
 export const FAMILY_OPTION = {
-  ...FAMILY,
+  CATEGORY: FAMILY.CATEGORY,
+  OPTIONS: FAMILY.OPTIONS,
   LABEL: '種類',
   REQUIRED: true
 };
 
 export const GENDER_OPTION = {
-  ...GENDER,
+  CATEGORY: GENDER.CATEGORY,
+  OPTIONS: [...GENDER.OPTIONS, DEFAULT_OPTION],
   LABEL: '性別',
   REQUIRED: true
 };

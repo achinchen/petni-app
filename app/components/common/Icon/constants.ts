@@ -30,7 +30,7 @@ import Filter from '~/assets/images/icon/filter.svg';
 import Undo from '~/assets/images/icon/undo.svg';
 import Note from '~/assets/images/icon/note.svg';
 
-export const SOURCE = {
+export const ICONS = {
   Card,
   CardActive,
   Love,
