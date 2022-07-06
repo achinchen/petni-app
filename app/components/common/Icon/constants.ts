@@ -29,6 +29,7 @@ import InfoDark from '~/assets/images/icon/info-dark.svg';
 import Filter from '~/assets/images/icon/filter.svg';
 import Undo from '~/assets/images/icon/undo.svg';
 import Note from '~/assets/images/icon/note.svg';
+import AddCircleOutline from '~/assets/images/icon/add.svg';
 
 export const ICONS = {
   Card,
@@ -61,5 +62,6 @@ export const ICONS = {
   InfoDark,
   Filter,
   Undo,
-  Note
+  Note,
+  AddCircleOutline
 };
