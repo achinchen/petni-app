@@ -1,5 +1,5 @@
 import Input from '~/components/common/Input';
-import OptionButton from '../OptionButton';
+import OptionButton from '../CardOptionButton';
 import Card from '../Card';
 
 import {
