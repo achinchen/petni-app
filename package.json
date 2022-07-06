@@ -12,6 +12,7 @@
     "dev:css": "unocss './app/**/*.{ts,tsx}' -o ./app/styles/uno.css --watch",
     "postinstall": "remix setup node",
     "db:seed": "node --require esbuild-register ./database/seed.ts",
+    "img:album": "node --require esbuild-register ./app/utils/imgur/album/index.server.ts ",
     "test": "jest -i"
   },
   "dependencies": {

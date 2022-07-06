@@ -15,5 +15,8 @@ export async function createAlbum() {
     body: formData
   });
 
-  await response.text();
+  const result = await response.text();
+  console.log(result);
 }
+
+createAlbum();
