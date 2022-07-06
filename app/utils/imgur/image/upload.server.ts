@@ -3,6 +3,14 @@ import path from 'node:path';
 import fetch, { FormData } from 'node-fetch';
 import { ENDPOINT, HEADERS, ALBUM_HASH } from '~/utils/imgur/constants';
 
+type ImgurImage = {
+  data: {
+    id: string;
+    deletehash: string;
+    link: string;
+  };
+};
+
 async function getPlaceholderImage() {
   const imagePath = path.resolve(
     __dirname,
@@ -20,7 +28,7 @@ export async function uploadImage(image: string) {
   try {
     const response = await fetch(ENDPOINT.IMAGE, {
       method: 'POST',
-      headers: HEADERS
+      headers: HEADERS,
       body: formData
     });
     const {

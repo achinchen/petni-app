@@ -1,13 +1,5 @@
 import 'dotenv/config';
 
-type ImgurImage = {
-  data: {
-    id: string;
-    deletehash: string;
-    link: string;
-  };
-};
-
 export const ALBUM_HASH = process.env.IMGUR_ALBUM_DELETE_HASH as string;
 
 export const ENDPOINT = {
