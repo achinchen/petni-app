@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import fetch, { FormData } from 'node-fetch';
 import { ENDPOINT, HEADERS, ALBUM_HASH } from '~/utils/imgur/constants';
 
 type ImgurImage = {
@@ -11,18 +10,7 @@ type ImgurImage = {
   };
 };
 
-async function getPlaceholderImage() {
-  const imagePath = path.resolve(
-    __dirname,
-    '../../../assets/images/placeholder.jpg'
-  );
-  const imageBuffer = await fs.readFile(imagePath);
-  return imageBuffer.toString('base64');
-}
-
-export async function uploadImage(image: string) {
-  const formData = new FormData();
-  formData.set('image', image, 'image.jpg');
+export default async function uploadImage(formData: FormData) {
   formData.set('album', ALBUM_HASH);
 
   try {
@@ -32,9 +20,9 @@ export async function uploadImage(image: string) {
       body: formData
     });
     const {
-      data: { link }
+      data: { link: url }
     } = (await response.json()) as ImgurImage;
-    return link;
+    return { url };
   } catch (error) {
     console.error(error);
   }
