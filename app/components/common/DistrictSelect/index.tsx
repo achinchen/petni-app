@@ -22,11 +22,14 @@ export default function DistrictSelection({ onFinish }: Props) {
   );
 
   const onDistrictSelect = (district: string) => {
+    if (!country) return;
     setDistrict(district);
     onFinish({ country, district });
   };
 
-  useEffect(() => setDistrict(''), [country]);
+  useEffect(() => {
+    setDistrict('');
+  }, [country]);
 
   return (
     <fieldset flex="~" gap="2">
@@ -39,6 +42,7 @@ export default function DistrictSelection({ onFinish }: Props) {
         options={districtOptions}
         placeholder="選擇地區"
         disabled={!country}
+        initValue={district}
         onSelect={onDistrictSelect}
       />
     </fieldset>
