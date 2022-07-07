@@ -2,6 +2,7 @@ import type { ChangeEvent } from 'react';
 import { useEffect } from 'react';
 import { useFetcher } from '@remix-run/react';
 import { FETCHER_IDLE_STATE } from '~/constants/utils';
+import { setAdoptionImageUrl } from '~/features/adoption/utils';
 
 type Parameters = {
   onFinish: (url: string) => void;
@@ -26,7 +27,9 @@ export default function useUploadImage({ onFinish }: Parameters) {
 
   useEffect(() => {
     if (fetcher.data?.url) {
-      onFinish(fetcher.data.url);
+      const imageUrl = fetcher.data.url;
+      setAdoptionImageUrl(imageUrl);
+      onFinish(imageUrl);
     }
   }, [fetcher.data, onFinish]);
 

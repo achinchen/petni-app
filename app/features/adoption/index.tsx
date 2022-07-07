@@ -1,7 +1,6 @@
 import type { SimpleAnimal } from '~/utils/db/getAnimalByIds';
 import { useState } from 'react';
 import { useFetcher, useNavigate } from '@remix-run/react';
-import { setAdoptionImageUrl } from './utils';
 import AnimalCards from '~/components/common/AnimalCards';
 import Loading from '~/components/common/LoadingAnimation';
 import Icon from '~/components/common/Icon';
@@ -14,10 +13,7 @@ export default function Adoption() {
   const [animals, setAnimals] = useState<SimpleAnimal[]>([]);
   const navigator = useNavigate();
 
-  const onUploadImageFinish = (url: string) => {
-    setAdoptionImageUrl(url);
-    navigator('/adoption/create');
-  };
+  const onUploadImageFinish = () => navigator('/adoption/create');
 
   const { onUpload, isLoading: isUploadLoading } = useUploadImage({
     onFinish: onUploadImageFinish
