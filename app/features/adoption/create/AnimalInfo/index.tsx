@@ -1,17 +1,16 @@
+import { Fragment } from 'react';
+import { Family } from '@prisma/client';
 import Input from '~/components/common/Input';
-import OptionButton from '../CardOptionButton';
-import Card from '../Card';
-
+import OptionButton from '~/features/adoption/create/CardOptionButton';
+import Card from '~/features/adoption/create/Card';
+import RequiredLabel from '~/features/adoption/create/RequiredLabel';
 import {
   FAMILY_OPTION,
   GENDER_OPTION,
   SIZE_OPTION,
   NAME_OPTION,
-  REQUIRED,
   COLOR_OPTION
 } from './constants';
-import { Fragment } from 'react';
-import { Family } from '@prisma/client';
 
 export default function AnimalInfo() {
   return (
@@ -21,7 +20,7 @@ export default function AnimalInfo() {
           <fieldset>
             <legend>
               {FAMILY_OPTION.LABEL}
-              <span color="status-active">{REQUIRED}</span>
+              <RequiredLabel />
               <div flex="~" gap="1" mt="2">
                 {FAMILY_OPTION.OPTIONS.map(({ LABEL, VALUE }) => {
                   const isPressed = false;
@@ -40,7 +39,7 @@ export default function AnimalInfo() {
           <fieldset>
             <legend>
               {GENDER_OPTION.LABEL}
-              <span color="status-active">{REQUIRED}</span>
+              <RequiredLabel />
               <div flex="~" gap="1" mt="2">
                 {GENDER_OPTION.OPTIONS.map(({ LABEL, VALUE }) => {
                   const isPressed = false;
@@ -62,7 +61,7 @@ export default function AnimalInfo() {
         <fieldset w="100%">
           <legend>
             {SIZE_OPTION.LABEL}
-            <span color="status-active">{REQUIRED}</span>
+            <RequiredLabel />
             <div grid="~ cols-3" gap="2" mt="2">
               {SIZE_OPTION.OPTIONS.map(({ LABEL, VALUE }) => {
                 const isPressed = false;
@@ -92,7 +91,7 @@ export default function AnimalInfo() {
         <fieldset w="100%">
           <legend>
             {COLOR_OPTION.LABEL}
-            <span color="status-active">{REQUIRED}</span>
+            <RequiredLabel />
             <div grid="~ wrap cols-3" gap="2" mt="2">
               {COLOR_OPTION.OPTION(Family.Dog).map(({ LABEL, VALUE }) => {
                 const isPressed = false;

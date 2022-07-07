@@ -6,8 +6,6 @@ import {
   COLOR,
   DEFAULT_VALUE
 } from '~/constants/options';
-import { REQUIRED } from '~/features/adoption/constants';
-export { REQUIRED };
 
 export const DEFAULT_OPTION = {
   VALUE: DEFAULT_VALUE,
