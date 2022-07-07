@@ -1,10 +1,14 @@
 import type { ChangeEvent } from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useFetcher } from '@remix-run/react';
+import { FETCHER_IDLE_STATE } from '~/constants/utils';
 
-export default function useUploadImage() {
+type Parameters = {
+  onFinish: (url: string) => void;
+};
+
+export default function useUploadImage({ onFinish }: Parameters) {
   const fetcher = useFetcher();
-  const [url, setUrl] = useState('');
 
   const onUpload = ({ target: { files } }: ChangeEvent<HTMLInputElement>) => {
     if (!files || !files.length) return;
@@ -22,14 +26,12 @@ export default function useUploadImage() {
 
   useEffect(() => {
     if (fetcher.data?.url) {
-      setUrl(fetcher.data.url);
-      console.log(fetcher.data.url);
+      onFinish(fetcher.data.url);
     }
-  }, [fetcher.data]);
+  }, [fetcher.data, onFinish]);
 
   return {
-    fetcher,
-    url,
+    isLoading: fetcher.state !== FETCHER_IDLE_STATE,
     onUpload
   };
 }
