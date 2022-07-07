@@ -13,7 +13,7 @@ export const CAT_COLOR_OPTIONS = Object.entries(CAT_COLOR_LABEL).map(
   ([VALUE, LABEL]) => ({ VALUE: VALUE as CatColor, LABEL })
 );
 
-export const DEFAULT_VALUE = 'NONE';
+export const DEFAULT_VALUE = 'NONE' as const;
 
 export const COLOR = {
   CATEGORY: 'color',

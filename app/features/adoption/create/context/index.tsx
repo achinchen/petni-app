@@ -1,15 +1,27 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import type { Dispatch } from 'react';
+import type {
+  AnimalInfoState,
+  AnimalInfoAction
+} from '~/features/adoption/create/hooks/useAnimalInfo';
+import { createContext, useState, useContext } from 'react';
 import { useFetcher } from '@remix-run/react';
+import useAnimalInfo, {
+  initialAnimalInfo
+} from '~/features/adoption/create/hooks/useAnimalInfo';
 import { FETCHER_IDLE_STATE } from '~/constants/utils';
 
-export type InitialState = {
+type InitialState = {
   imageUrl: string;
   setImageUrl: (url: string) => void;
+  animalInfo: AnimalInfoState;
+  dispatchAnimalInfo: Dispatch<AnimalInfoAction>;
 };
 
-const initialState = {
+const initialState: InitialState = {
   imageUrl: '',
-  setImageUrl: (url = '') => {}
+  setImageUrl: () => {},
+  animalInfo: initialAnimalInfo,
+  dispatchAnimalInfo: () => {}
 };
 
 export const CreateAdoptionContext = createContext<InitialState>(initialState);
@@ -21,45 +33,18 @@ type ProviderProps = {
 
 export const CreateAdoptionContextProvider = ({ children }: ProviderProps) => {
   const [imageUrl, setImageUrl] = useState('');
+  const { animalInfo, dispatchAnimalInfo } = useAnimalInfo();
 
   const fetcher = useFetcher();
   const isLoading = fetcher.state !== FETCHER_IDLE_STATE;
-
-  // const fetchAnimals = (
-  //   { replace }: { replace: boolean } = { replace: false }
-  // ) => {
-  //   const options = getFilterPreference() || {};
-
-  //   const payload = Object.keys(options).reduce((temp: Filter, key) => {
-  //     const value = options[key as keyof typeof options];
-  //     if (value !== DEFAULT_VALUE) temp[key as keyof Filter] = value;
-  //     return temp;
-  //   }, {});
-
-  //   const formData = new FormData();
-  //   formData.set('json', JSON.stringify(payload));
-
-  //   fetcher.submit(formData, {
-  //     method: 'post',
-  //     action: '/?index',
-  //     replace
-  //   });
-  // };
-
-  // const refreshCards = () => {
-  //   setIndex(RANDOM_RECOMMENDATION_COUNT);
-  //   fetchAnimals({ replace: true });
-  // };
-
-  // useEffect(() => {
-  //   if (fetcher.data?.animals) setAnimals(fetcher.data.animals);
-  // }, [fetcher.data]);
 
   return (
     <CreateAdoptionContext.Provider
       value={{
         imageUrl,
-        setImageUrl
+        setImageUrl,
+        animalInfo,
+        dispatchAnimalInfo
       }}
     >
       {children}

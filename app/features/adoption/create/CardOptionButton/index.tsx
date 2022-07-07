@@ -19,6 +19,7 @@ export default function OptionButton({
   shape = 'square'
 }: Props) {
   const bg = isPressed ? 'black' : 'gray-50';
+  const color = isPressed ? 'white' : 'black';
 
   if (isIcon(label))
     return (
@@ -40,6 +41,7 @@ export default function OptionButton({
         h="13 md:15"
         w="13 md:15"
         bg={bg}
+        color={color}
         border="rounded-xl"
         shadow="none"
         transition="150"
@@ -53,6 +55,7 @@ export default function OptionButton({
       onClick={onClick}
       h="10"
       bg={bg}
+      color={color}
       border="rounded-xl"
       shadow="none"
       transition="150"
