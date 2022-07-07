@@ -11,6 +11,7 @@ type Option = string;
 
 type Props = {
   options: Option[];
+  initValue?: string;
   placeholder?: string;
   disabled?: boolean;
   onSelect: (option: Option) => void;
@@ -18,6 +19,7 @@ type Props = {
 
 export default function DistrictSelection({
   placeholder = '',
+  initValue = '',
   disabled = false,
   onSelect,
   options
@@ -37,6 +39,7 @@ export default function DistrictSelection({
   const onInputBlur = debounce(() => setSelectOpen(false), DEBOUNCE_BLUR_TIMER);
 
   useEffect(() => onSelect(input), [input, onSelect]);
+  useEffect(() => setInput(initValue), [initValue]);
 
   return (
     <label position="relative">
