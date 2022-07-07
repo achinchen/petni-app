@@ -6,7 +6,7 @@ import AnimalCards from '~/components/common/AnimalCards';
 import Loading from '~/components/common/LoadingAnimation';
 import Icon from '~/components/common/Icon';
 import { HeaderPortal } from '~/components/common/Layout/Header';
-import { TITLE, UPLOAD_IMAGE_PLACEHOLDER } from './constants';
+import { TITLE, UPLOAD_IMAGE_PLACEHOLDER, IMAGE_EXTENSION } from './constants';
 import { FETCHER_IDLE_STATE } from '~/constants/utils';
 import useUploadImage from './hooks/useUploadImage';
 
@@ -56,7 +56,7 @@ export default function Adoption() {
               <input
                 type="file"
                 id="image"
-                accept=".jpg,.jpeg,.png"
+                accept={IMAGE_EXTENSION}
                 display="none"
                 onChange={onUpload}
                 disabled={isUploadLoading}
