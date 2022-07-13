@@ -21,15 +21,21 @@ import { DEFAULT_VALUE } from '~/constants/options';
 
 export default function AnimalInfo() {
   const { animalInfo, dispatchAnimalInfo } = useCreateAdoptionContext();
-  const { family, gender, size, color } = animalInfo;
+  const { family, gender, size, color, name } = animalInfo;
   const isSelectedFamily = family !== DEFAULT_VALUE;
 
   const onFamilyChange = (family: FamilyValue) => () =>
     dispatchAnimalInfo({ type: 'family', value: family });
+
   const onGenderChange = (gender: GenderValue) => () =>
     dispatchAnimalInfo({ type: 'gender', value: gender });
+
   const onSizeChange = (size: SizeValue) => () =>
     dispatchAnimalInfo({ type: 'size', value: size });
+
+  const onNameChange = (value: string) =>
+    dispatchAnimalInfo({ type: 'name', value });
+
   const onColorChange = (color: ColorValue) => () =>
     dispatchAnimalInfo({ type: 'color', value: color });
 
@@ -101,7 +107,11 @@ export default function AnimalInfo() {
         <fieldset flex="1">
           <legend flex="~ col">
             {NAME_OPTION.LABEL}
-            <Input placeholder={NAME_OPTION.PLACEHOLDER} />
+            <Input
+              value={name}
+              onValueChange={onNameChange}
+              placeholder={NAME_OPTION.PLACEHOLDER}
+            />
           </legend>
         </fieldset>
       </Card>

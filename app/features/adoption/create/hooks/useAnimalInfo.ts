@@ -12,6 +12,7 @@ export type AnimalInfoState = {
   gender: GenderValue;
   color: ColorValue;
   size: SizeValue;
+  name: string;
 };
 
 type AnimalInfoType = keyof AnimalInfoState;
@@ -26,7 +27,8 @@ export const initialAnimalInfo = {
   family: DEFAULT_VALUE,
   gender: DEFAULT_VALUE,
   color: DEFAULT_VALUE,
-  size: DEFAULT_VALUE
+  size: DEFAULT_VALUE,
+  name: ''
 };
 
 function reducer(state: AnimalInfoState, { type, value }: AnimalInfoAction) {
