@@ -1,8 +1,16 @@
+import type { ChangeEvent } from 'react';
 import type { AttributifyOptions } from '@unocss/preset-attributify';
 
-type Props = React.HTMLAttributes<HTMLInputElement> & AttributifyOptions;
+type Props = {
+  onValueChange?: (value: string) => void;
+} & React.HTMLAttributes<HTMLInputElement> &
+  AttributifyOptions;
 
-export default function Input(props: Props) {
+export default function Input({ onValueChange, ...props }: Props) {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onValueChange?.(event.target.value);
+  };
+
   return (
     <input
       d="block"
@@ -12,6 +20,7 @@ export default function Input(props: Props) {
       bg="gray-50"
       border="none rounded-lg"
       text="sm"
+      onChange={onChange}
       {...props}
     />
   );
