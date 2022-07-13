@@ -1,4 +1,3 @@
-import type { ChangeEvent } from 'react';
 import { useEffect } from 'react';
 import { useMemo, useState } from 'react';
 import { debounce } from 'debounce';
@@ -32,13 +31,9 @@ export default function DistrictSelection({
     return options.filter((option) => option.includes(input));
   }, [input, options]);
 
-  const updateInput = (value: string) => {
+  const onInputChange = (value: string) => {
     onSelect(value);
     setInput(value);
-  };
-
-  const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    updateInput(event.target.value);
   };
 
   const onInputFocus = () => setSelectOpen(true);
@@ -52,7 +47,7 @@ export default function DistrictSelection({
         type="text"
         placeholder={placeholder}
         value={input}
-        onChange={onInputChange}
+        onValueChange={onInputChange}
         onFocus={onInputFocus}
         onBlur={onInputBlur}
         disabled={disabled}
@@ -61,7 +56,7 @@ export default function DistrictSelection({
         show={isSelectOpen}
         options={filteredOptions}
         placeholder={placeholder}
-        onChange={updateInput}
+        onChange={onInputChange}
       />
     </label>
   );

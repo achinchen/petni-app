@@ -1,4 +1,3 @@
-import type { ChangeEvent } from 'react';
 import type { Payload as DistrictPayload } from '~/components/common/DistrictSelect';
 import Input from '~/components/common/Input';
 import Textarea from '~/components/common/Textarea';
@@ -17,12 +16,12 @@ export default function OtherInfo({ children }: { children: JSX.Element }) {
     dispatchOtherInfo({ type: 'location', value: `${country}${district}` });
   };
 
-  const onContactChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatchOtherInfo({ type: 'contact', value: event.target.value });
+  const onContactChange = (value: string) => {
+    dispatchOtherInfo({ type: 'contact', value });
   };
 
-  const onNoteChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    dispatchOtherInfo({ type: 'note', value: event.target.value });
+  const onNoteChange = (value: string) => {
+    dispatchOtherInfo({ type: 'note', value });
   };
 
   return (
@@ -35,7 +34,7 @@ export default function OtherInfo({ children }: { children: JSX.Element }) {
             <Input
               value={contact}
               placeholder={CONTACT_OPTION.TEL_PLACEHOLDER}
-              onChange={onContactChange}
+              onValueChange={onContactChange}
             />
           </legend>
           <DistrictSelect onFinish={onDistrictSelect} />
@@ -49,7 +48,7 @@ export default function OtherInfo({ children }: { children: JSX.Element }) {
               rows="4"
               value={note}
               placeholder={NOTE_OPTION.PLACEHOLDER}
-              onChange={onNoteChange}
+              onValueChange={onNoteChange}
             />
           </legend>
         </fieldset>
