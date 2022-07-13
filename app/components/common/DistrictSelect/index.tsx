@@ -1,15 +1,14 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import SearchSelect from '~/components/common/SearchSelect';
 import { COUNTRIES, DISTRICTS_BY_COUNTRIES } from './constants';
 
+export type Payload = {
+  country: string;
+  district: string;
+};
+
 type Props = {
-  onFinish: ({
-    country,
-    district
-  }: {
-    country: string;
-    district: string;
-  }) => void;
+  onFinish: ({ country, district }: Payload) => void;
 };
 
 export default function DistrictSelection({ onFinish }: Props) {
@@ -21,22 +20,25 @@ export default function DistrictSelection({ onFinish }: Props) {
     [country]
   );
 
-  const onDistrictSelect = (district: string) => {
+  const onDistrictSelect = (district: Payload['district']) => {
     if (!country) return;
     setDistrict(district);
     onFinish({ country, district });
   };
 
-  useEffect(() => {
-    setDistrict('');
-  }, [country]);
+  const onCountrySelect = (country: Payload['country']) => {
+    setCountry((prevCountry) => {
+      if (prevCountry !== country) setDistrict('');
+      return country;
+    });
+  };
 
   return (
     <fieldset flex="~" gap="2">
       <SearchSelect
         options={COUNTRIES}
         placeholder="選擇城市"
-        onSelect={setCountry}
+        onSelect={onCountrySelect}
       />
       <SearchSelect
         options={districtOptions}

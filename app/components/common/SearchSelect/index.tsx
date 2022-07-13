@@ -32,13 +32,18 @@ export default function DistrictSelection({
     return options.filter((option) => option.includes(input));
   }, [input, options]);
 
-  const onInputChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setInput(event.target.value);
+  const updateInput = (value: string) => {
+    onSelect(value);
+    setInput(value);
+  };
+
+  const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    updateInput(event.target.value);
+  };
 
   const onInputFocus = () => setSelectOpen(true);
   const onInputBlur = debounce(() => setSelectOpen(false), DEBOUNCE_BLUR_TIMER);
 
-  useEffect(() => onSelect(input), [input, onSelect]);
   useEffect(() => setInput(initValue), [initValue]);
 
   return (
@@ -56,7 +61,7 @@ export default function DistrictSelection({
         show={isSelectOpen}
         options={filteredOptions}
         placeholder={placeholder}
-        onChange={setInput}
+        onChange={updateInput}
       />
     </label>
   );
