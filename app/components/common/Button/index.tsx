@@ -15,6 +15,7 @@ export default function Button({
   children,
   theme = 'white',
   isPressed = false,
+  disabled = false,
   ...attributifyOptions
 }: Props) {
   const isDark = theme === 'black';
@@ -31,9 +32,14 @@ export default function Button({
         bg: isDark ? 'white' : 'black',
         color: isDark ? 'black' : 'white'
       })}
+      {...(disabled && {
+        style: { filter: 'opacity(0.25)' },
+        cursor: 'not-allowed'
+      })}
       shadow="default"
       border="rounded-lg"
       onClick={onClick}
+      disabled={disabled}
       {...attributifyOptions}
     >
       {children}
