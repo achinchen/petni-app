@@ -1,8 +1,16 @@
+import type { ChangeEvent } from 'react';
 import type { AttributifyOptions } from '@unocss/preset-attributify';
 
-type Props = React.HTMLAttributes<HTMLTextAreaElement> & AttributifyOptions;
+type Props = {
+  onValueChange?: (value: string) => void;
+} & React.HTMLAttributes<HTMLTextAreaElement> &
+  AttributifyOptions;
 
-export default function Textarea(props: Props) {
+export default function Textarea({ onValueChange, ...props }: Props) {
+  const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    onValueChange?.(event.target.value);
+  };
+
   return (
     <textarea
       d="block"
@@ -13,6 +21,7 @@ export default function Textarea(props: Props) {
       border="none rounded-lg"
       text="sm"
       resize="none"
+      onChange={onChange}
       {...props}
     />
   );
