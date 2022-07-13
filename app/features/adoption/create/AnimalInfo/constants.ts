@@ -22,24 +22,20 @@ export const FAMILY_OPTION = {
 export const GENDER_OPTION = {
   CATEGORY: GENDER.CATEGORY,
   OPTIONS: [...GENDER.OPTIONS, DEFAULT_OPTION],
-  LABEL: '性別',
-  REQUIRED: true
+  LABEL: '性別'
 };
 
 export const SIZE_OPTION = {
   ...SIZE,
-  LABEL: '體型',
-  REQUIRED: true
+  LABEL: '體型'
 };
 
 export const NAME_OPTION = {
   LABEL: '牠的名字',
-  PLACEHOLDER: ' 若尚未取名可不填',
-  REQUIRED: true
+  PLACEHOLDER: ' 若尚未取名可不填'
 };
 
 export const COLOR_OPTION = {
   LABEL: '毛色',
-  OPTION: (family: Family) => COLOR.OPTION[family],
-  REQUIRED: true
+  OPTION: (family: Family) => COLOR.OPTION[family]
 };
