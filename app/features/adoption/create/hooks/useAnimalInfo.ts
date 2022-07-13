@@ -29,16 +29,13 @@ export const initialAnimalInfo = {
   size: DEFAULT_VALUE
 };
 
-function filterReducer(
-  state: AnimalInfoState,
-  { type, value }: AnimalInfoAction
-) {
+function reducer(state: AnimalInfoState, { type, value }: AnimalInfoAction) {
   return { ...state, [type]: value };
 }
 
 export default function useAnimalInfo() {
   const [animalInfo, dispatchAnimalInfo] = useReducer(
-    filterReducer,
+    reducer,
     initialAnimalInfo
   );
   return { animalInfo, dispatchAnimalInfo };
