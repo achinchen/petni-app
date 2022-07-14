@@ -1,5 +1,5 @@
 import type { Dispatch } from 'react';
-import type { CreatedAnimal } from '~/utils/db/createAnimal';
+import type { CreatedAnimal } from '~/models/animal/createAnimal/index.server';
 import type {
   AnimalInfoState,
   AnimalInfoAction

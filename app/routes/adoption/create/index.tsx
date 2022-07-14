@@ -1,8 +1,8 @@
 import type { ActionFunction } from '@remix-run/node';
-import type { CreatedAnimal } from '~/utils/db/createAnimal';
+import type { CreatedAnimal } from '~/models/animal/createAnimal/index.server';
 import { json } from '@remix-run/node';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
-import createAnimal from '~/utils/db/createAnimal';
+import createAnimal from '~/models/animal/createAnimal/index.server';
 import Layout from '~/components/common/Layout';
 import CreateAdoption from '~/features/adoption/create';
 
