@@ -1,4 +1,4 @@
-import { AttributifyOptions } from '@unocss/preset-attributify';
+import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { useHospitalContext } from '~/features/hospital/context';
 import { Area } from '~/features/hospital/constants';
 import { AREA_LABEL, TITLE } from './constants';

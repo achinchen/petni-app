@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import AnimalCodeMiddleware from './middleware/createAnimal';
 
 let db: PrismaClient;
 
@@ -13,6 +14,7 @@ if (process.env.NODE_ENV === 'production') {
     global.__db = new PrismaClient({ log: ['info', 'warn', 'error'] });
   }
   db = global.__db;
+  db.$use(AnimalCodeMiddleware);
 }
 
 export { db };

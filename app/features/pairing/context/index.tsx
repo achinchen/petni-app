@@ -3,7 +3,7 @@ import type { Filter } from '~/models/animal/getAnimalsByFilter/index.server';
 import { createContext, useState, useEffect, useContext } from 'react';
 import { useFetcher } from '@remix-run/react';
 import { getFilterPreference } from '~/features/pairing/ControlPanel/utils';
-import { DEFAULT_OPTION } from '~/features/pairing/ControlPanel/constants/filter';
+import { DEFAULT_VALUE } from '~/constants/options';
 import { FETCHER_IDLE_STATE } from '~/constants/utils';
 
 export type InitialState = {
@@ -53,7 +53,7 @@ export const PairingContextProvider = ({ children }: ProviderProps) => {
 
     const payload = Object.keys(options).reduce((temp: Filter, key) => {
       const value = options[key as keyof typeof options];
-      if (value !== DEFAULT_OPTION.VALUE) temp[key as keyof Filter] = value;
+      if (value !== DEFAULT_VALUE) temp[key as keyof Filter] = value;
       return temp;
     }, {});
 

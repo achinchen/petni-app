@@ -1,10 +1,5 @@
-import {
-  createContext,
-  useState,
-  useContext,
-  Dispatch,
-  SetStateAction
-} from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import { createContext, useState, useContext } from 'react';
 import { Area } from '~/features/hospital/constants';
 
 export type InitialState = {

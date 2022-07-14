@@ -1,12 +1,13 @@
 import type {
+  Family,
   FamilyOptions,
   GenderOptions,
   SizeOptions,
   ColorOptions
 } from '~/features/pairing/ControlPanel/Filter/type';
 import type {
-  GENERAL_FILTER_OPTIONS,
-  DYNAMIC_FILTER_OPTIONS
+  DYNAMIC_FILTER_OPTIONS,
+  GENERAL_FILTER_OPTIONS
 } from '~/features/pairing/ControlPanel/constants/filter';
 
 export type Category =

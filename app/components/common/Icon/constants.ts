@@ -29,8 +29,9 @@ import InfoDark from '~/assets/images/icon/info-dark.svg';
 import Filter from '~/assets/images/icon/filter.svg';
 import Undo from '~/assets/images/icon/undo.svg';
 import Note from '~/assets/images/icon/note.svg';
+import AddCircleOutline from '~/assets/images/icon/add.svg';
 
-export const SOURCE = {
+export const ICONS = {
   Card,
   CardActive,
   Love,
@@ -61,5 +62,6 @@ export const SOURCE = {
   InfoDark,
   Filter,
   Undo,
-  Note
+  Note,
+  AddCircleOutline
 };

@@ -27,6 +27,7 @@ export default defineConfig({
     '[color="status-active"]',
     '[color="white"]',
     '[color="black"]',
+    '[cursor="not-allowed"]',
     '[bg="status-active"]',
     '[bg="white"]',
     '[bg="black"]',
