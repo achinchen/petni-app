@@ -12,18 +12,12 @@ export const action: ActionFunction = async ({ request }) => {
     formData,
     fallback: null
   });
+
+  if (!payload) return json({}, 500);
+
   const animal = await createAnimal(payload);
   return json({ animal });
 };
-
-// export const action: ActionFunction = async ({ request }) => {
-//   const formData = await request.formData();
-//   const ids: AnimalId[] = parsePayloadByJson({ formData, fallback: [] });
-//   if (!ids.length) return json({ animals: [] });
-
-//   const animals = await getAnimalByIds(ids);
-//   return json({ animals });
-// };
 
 export default function AdoptionCreate() {
   return (

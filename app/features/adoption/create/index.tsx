@@ -9,10 +9,11 @@ import Photo from './Photo';
 import AnimalInfo from './AnimalInfo';
 import OtherInfo from './OtherInfo';
 import { TITLE } from '~/features/adoption/constants';
-import { BUTTON } from './constants';
+import { BUTTON, REQUIRED_REMINDER } from './constants';
+import { Fragment } from 'react';
 
 export function CreateAdoption() {
-  const { canSubmit } = useCreateAdoptionContext();
+  const { canSubmit, createAnimal, isLoading } = useCreateAdoptionContext();
   return (
     <main className="content-width" m="4 lg:auto" p="md:8">
       <HeaderPortal>
@@ -30,15 +31,20 @@ export function CreateAdoption() {
         <div flex="~ col lg:row" justify="between" gap="4">
           <AnimalInfo />
           <OtherInfo>
-            <Button
-              h="12.5"
-              theme="black"
-              border="rounded-xl"
-              disabled={!canSubmit}
-              onClick={() => {}}
-            >
-              {BUTTON.SUBMIT}
-            </Button>
+            <Fragment>
+              <Button
+                h="12.5"
+                theme="black"
+                border="rounded-xl"
+                disabled={!canSubmit || isLoading}
+                onClick={createAnimal}
+              >
+                {BUTTON.SUBMIT}
+              </Button>
+              <div text="sm" color="status-active" hidden={canSubmit}>
+                {REQUIRED_REMINDER}
+              </div>
+            </Fragment>
           </OtherInfo>
         </div>
       </Form>

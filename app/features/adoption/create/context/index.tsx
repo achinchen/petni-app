@@ -17,6 +17,7 @@ import useOtherInfo, {
   initOtherInfo
 } from '~/features/adoption/create/hooks/useOtherInfo';
 import { FETCHER_IDLE_STATE } from '~/constants/utils';
+import { DEFAULT_VALUE } from '~/constants/options';
 
 type InitialState = {
   imageUrl: string;
@@ -26,6 +27,8 @@ type InitialState = {
   otherInfo: OtherInfoState;
   dispatchOtherInfo: Dispatch<OtherInfoAction>;
   canSubmit: boolean;
+  isLoading: boolean;
+  createAnimal: () => void;
 };
 
 const initialState: InitialState = {
@@ -35,7 +38,9 @@ const initialState: InitialState = {
   dispatchAnimalInfo: () => {},
   otherInfo: initOtherInfo,
   dispatchOtherInfo: () => {},
-  canSubmit: false
+  canSubmit: false,
+  isLoading: false,
+  createAnimal: () => {}
 };
 
 export const CreateAdoptionContext = createContext<InitialState>(initialState);
@@ -51,10 +56,13 @@ export const CreateAdoptionContextProvider = ({ children }: ProviderProps) => {
   const [imageUrl, setImageUrl] = useState('');
   const { animalInfo, dispatchAnimalInfo } = useAnimalInfo();
   const { otherInfo, dispatchOtherInfo } = useOtherInfo();
+
   const canSubmit = useMemo(() => {
-    const info = { ...animalInfo, ...otherInfo };
-    return Object.entries(info).every(
-      ([key, value]) => NOT_REQUIRED_FIELDS.includes(key) || Boolean(value)
+    return Object.entries({ ...animalInfo, ...otherInfo }).every(
+      ([key, value]) => {
+        if (NOT_REQUIRED_FIELDS.includes(key)) return true;
+        return Boolean(value) && value !== DEFAULT_VALUE;
+      }
     );
   }, [animalInfo, otherInfo]);
 
@@ -63,9 +71,21 @@ export const CreateAdoptionContextProvider = ({ children }: ProviderProps) => {
   const fetcher = useFetcher();
   const isLoading = fetcher.state !== FETCHER_IDLE_STATE;
 
-  const createAnimal = (animal: CreatedAnimal) => {
+  const createAnimal = () => {
     const formData = new FormData();
-    formData.set('json', JSON.stringify(animal));
+    const info = {
+      imageUrl,
+      name: animalInfo.name,
+      size: animalInfo.size,
+      color: animalInfo.color,
+      family: animalInfo.family,
+      gender: animalInfo.gender,
+      location: otherInfo.location,
+      address: otherInfo.location,
+      tel: otherInfo.contact,
+      note: otherInfo.note
+    } as CreatedAnimal;
+    formData.set('json', JSON.stringify(info));
 
     fetcher.submit(formData, {
       method: 'post',
@@ -87,7 +107,9 @@ export const CreateAdoptionContextProvider = ({ children }: ProviderProps) => {
         dispatchAnimalInfo,
         otherInfo,
         dispatchOtherInfo,
-        canSubmit
+        canSubmit,
+        isLoading,
+        createAnimal
       }}
     >
       {children}

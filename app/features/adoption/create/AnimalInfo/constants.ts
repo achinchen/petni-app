@@ -1,27 +1,21 @@
 import type { Family } from '@prisma/client';
-import {
-  FAMILY,
-  GENDER,
-  SIZE,
-  COLOR,
-  DEFAULT_VALUE
-} from '~/constants/options';
+import { FAMILY, GENDER, SIZE, COLOR } from '~/constants/options';
+import { DEFAULT_GENDER_VALUE } from '~/features/adoption/create/constants'
 
-export const DEFAULT_OPTION = {
-  VALUE: DEFAULT_VALUE,
+export const DEFAULT_GENDER_OPTION = {
+  VALUE: DEFAULT_GENDER_VALUE,
   LABEL: () => '不明'
 };
 
 export const FAMILY_OPTION = {
   CATEGORY: FAMILY.CATEGORY,
   OPTIONS: FAMILY.OPTIONS,
-  LABEL: '種類',
-  REQUIRED: true
+  LABEL: '種類'
 };
 
 export const GENDER_OPTION = {
   CATEGORY: GENDER.CATEGORY,
-  OPTIONS: [...GENDER.OPTIONS, DEFAULT_OPTION],
+  OPTIONS: [...GENDER.OPTIONS, DEFAULT_GENDER_OPTION],
   LABEL: '性別'
 };
 

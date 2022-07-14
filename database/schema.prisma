@@ -34,8 +34,8 @@ model AnimalFollow {
 }
 
 model Animal {
-  id        Int            @id
-  code      String
+  id        Int            @id @default(autoincrement())
+  code      String?
   size      Size
   color     String
   family    Family
@@ -45,6 +45,7 @@ model Animal {
   address   String
   tel       String
   note      String
+  name      String?        @default("")
   openAt    DateTime?
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
