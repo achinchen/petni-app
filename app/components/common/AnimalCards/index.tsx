@@ -1,5 +1,6 @@
-import type { SimpleAnimal } from '~/utils/db/getAnimalByIds';
-import { Fragment, useState } from 'react';
+import type { SimpleAnimal } from '~/models/animal/getAnimalsByIds/index.server';
+import { useState } from 'react';
+import { Link } from '@remix-run/react';
 import { getIconByGenderAndFamily } from '~/utils';
 import Card from './Card';
 import Icon from '~/components/common/Icon';
@@ -41,11 +42,10 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
         {children && <Card>{children}</Card>}
         {animals.map(({ id, family, gender, imageUrl, location }) => (
           <Card key={id}>
-            <Fragment>
-              <figure w="100%" h="100%" position="relative" m="0">
+            <Link to={`/pets/${id}`}>
+              <figure w="34" h="36" position="relative" m="0">
                 <div
                   role="img"
-                  w="100%"
                   h="100%"
                   bg="cover center"
                   border="rounded-7"
@@ -80,7 +80,7 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
               <div color="gray-450" text="sm" font="medium" m="0">
                 {location}
               </div>
-            </Fragment>
+            </Link>
           </Card>
         ))}
       </div>
