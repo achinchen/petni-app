@@ -35,7 +35,7 @@ model AnimalFollow {
 
 model Animal {
   id        Int            @id @default(autoincrement())
-  code      String?
+  code      String?        @default("")
   size      Size
   color     String
   family    Family
