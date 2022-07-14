@@ -7,4 +7,4 @@ export type FavoriteIdSet = Set<FavoriteId>;
 const PREFERENCE_KEY = 'Favorites';
 export const getFavoriteIdsPreference = () => getLocalStorage(PREFERENCE_KEY);
 export const setFavoriteIdsPreference = (favoriteIds: FavoriteIdSet) =>
-  setLocalStorage(PREFERENCE_KEY, favoriteIds);
+  setLocalStorage(PREFERENCE_KEY, [...favoriteIds]);
