@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useCreateAdoptionContext } from '~/features/adoption/create/context';
+import { useEditAdoptionContext } from '~/features/adoption/edit/context';
 import { getAdoptionImageUrl } from '~/features/adoption/utils';
 import useUploadImage from '~/features/adoption/hooks/useUploadImage';
 import { IMAGE_EXTENSION } from '~/features/adoption/constants';
@@ -7,7 +7,7 @@ import { IMAGE_EXTENSION } from '~/features/adoption/constants';
 const UPDATE_IMAGE = '替換照片';
 
 export default function Photo() {
-  const { imageUrl, setImageUrl } = useCreateAdoptionContext();
+  const { imageUrl, setImageUrl } = useEditAdoptionContext();
 
   const { onUpload, isLoading } = useUploadImage({ onFinish: setImageUrl });
 

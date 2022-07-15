@@ -1,10 +1,7 @@
 import { Form } from '@remix-run/react';
 import { HeaderPortal } from '~/components/common/Layout/Header';
 import Button from '~/components/common/Button';
-import {
-  CreateAdoptionContextProvider,
-  useCreateAdoptionContext
-} from './context';
+import { EditAdoptionContextProvider, useEditAdoptionContext } from './context';
 import Photo from './Photo';
 import AnimalInfo from './AnimalInfo';
 import OtherInfo from './OtherInfo';
@@ -13,7 +10,7 @@ import { BUTTON, REQUIRED_REMINDER } from './constants';
 import { Fragment } from 'react';
 
 export function CreateAdoption() {
-  const { canSubmit, createAnimal, isLoading } = useCreateAdoptionContext();
+  const { canSubmit, createAnimal, isLoading } = useEditAdoptionContext();
   return (
     <main className="content-width" m="4 lg:auto" p="md:8">
       <HeaderPortal>
@@ -54,8 +51,8 @@ export function CreateAdoption() {
 
 export default function CreateAdoptionWithProvider() {
   return (
-    <CreateAdoptionContextProvider>
+    <EditAdoptionContextProvider>
       <CreateAdoption />
-    </CreateAdoptionContextProvider>
+    </EditAdoptionContextProvider>
   );
 }

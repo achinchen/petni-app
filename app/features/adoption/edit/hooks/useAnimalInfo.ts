@@ -3,7 +3,7 @@ import type {
   GenderValue,
   SizeValue,
   ColorValue
-} from '~/features/adoption/create/types';
+} from '~/features/adoption/edit/types';
 import { useReducer } from 'react';
 import { DEFAULT_VALUE } from '~/constants/options';
 

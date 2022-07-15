@@ -1,14 +1,14 @@
 import type { ActionFunction } from '@remix-run/node';
-import type { CreatedAnimal } from '~/models/animal/createAnimal/index.server';
+import type { EditingAnimal } from '~/models/animal/createAnimal/index.server';
 import { json } from '@remix-run/node';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
 import createAnimal from '~/models/animal/createAnimal/index.server';
 import Layout from '~/components/common/Layout';
-import CreateAdoption from '~/features/adoption/create';
+import CreateAdoption from '~/features/adoption/edit';
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const payload: CreatedAnimal = parsePayloadByJson({
+  const payload: EditingAnimal = parsePayloadByJson({
     formData,
     fallback: null
   });
