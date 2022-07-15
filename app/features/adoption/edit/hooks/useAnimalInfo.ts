@@ -3,9 +3,10 @@ import type {
   GenderValue,
   SizeValue,
   ColorValue
-} from '~/features/adoption/create/types';
+} from '~/features/adoption/edit/types';
 import { useReducer } from 'react';
 import { DEFAULT_VALUE } from '~/constants/options';
+import type { Animal } from '@prisma/client';
 
 export type AnimalInfoState = {
   family: FamilyValue;
@@ -23,7 +24,7 @@ export type AnimalInfoAction = {
   value: Payload;
 };
 
-export const initialAnimalInfo = {
+export const INITIAL_ANIMAL_INFO = {
   family: DEFAULT_VALUE,
   gender: DEFAULT_VALUE,
   color: DEFAULT_VALUE,
@@ -31,14 +32,26 @@ export const initialAnimalInfo = {
   name: ''
 };
 
+const getInitialAnimalInfo = (animal?: Animal): AnimalInfoState => {
+  if (!animal) return INITIAL_ANIMAL_INFO;
+
+  return {
+    family: animal.family,
+    gender: animal.gender,
+    color: animal.color as ColorValue,
+    size: animal.size,
+    name: animal.name || ''
+  };
+};
+
 function reducer(state: AnimalInfoState, { type, value }: AnimalInfoAction) {
   return { ...state, [type]: value };
 }
 
-export default function useAnimalInfo() {
+export default function useAnimalInfo(animal?: Animal) {
   const [animalInfo, dispatchAnimalInfo] = useReducer(
     reducer,
-    initialAnimalInfo
+    getInitialAnimalInfo(animal)
   );
   return { animalInfo, dispatchAnimalInfo };
 }

@@ -10,3 +10,5 @@ export const DISTRICTS_BY_COUNTRIES: { [key in Country]: string[] } =
       [country]: districts.map(({ district }) => district)
     });
   }, {});
+
+export const TAIWAN_COUNTRY_COUNT = 3;

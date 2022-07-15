@@ -1,6 +1,6 @@
 import type { Family } from '@prisma/client';
 import { FAMILY, GENDER, SIZE, COLOR } from '~/constants/options';
-import { DEFAULT_GENDER_VALUE } from '~/features/adoption/create/constants'
+import { DEFAULT_GENDER_VALUE } from '~/features/adoption/edit/constants'
 
 export const DEFAULT_GENDER_OPTION = {
   VALUE: DEFAULT_GENDER_VALUE,

@@ -1,3 +1,4 @@
+import type { Animal } from '@prisma/client';
 import { useReducer } from 'react';
 
 export type OtherInfoState = {
@@ -14,17 +15,29 @@ export type OtherInfoAction = {
   value: Payload;
 };
 
-export const initOtherInfo = {
+export const INITIAL_OTHER_INFO = {
   location: '',
   contact: '',
   note: ''
+};
+
+const getInitialOtherInfo = (animal?: Animal) => {
+  if (!animal) return INITIAL_OTHER_INFO;
+  return {
+    location: animal.location,
+    contact: animal.tel,
+    note: animal.note
+  };
 };
 
 function reducer(state: OtherInfoState, { type, value }: OtherInfoAction) {
   return { ...state, [type]: value };
 }
 
-export default function useOtherInfo() {
-  const [otherInfo, dispatchOtherInfo] = useReducer(reducer, initOtherInfo);
+export default function useOtherInfo(animal?: Animal) {
+  const [otherInfo, dispatchOtherInfo] = useReducer(
+    reducer,
+    getInitialOtherInfo(animal)
+  );
   return { otherInfo, dispatchOtherInfo };
 }

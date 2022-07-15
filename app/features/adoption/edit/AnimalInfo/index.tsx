@@ -3,13 +3,13 @@ import type {
   FamilyValue,
   GenderValue,
   SizeValue
-} from '~/features/adoption/create/types';
+} from '~/features/adoption/edit/types';
 import { Fragment } from 'react';
 import Input from '~/components/common/Input';
-import OptionButton from '~/features/adoption/create/CardOptionButton';
-import Card from '~/features/adoption/create/Card';
-import RequiredLabel from '~/features/adoption/create/RequiredLabel';
-import { useCreateAdoptionContext } from '~/features/adoption/create/context';
+import OptionButton from '~/features/adoption/edit/CardOptionButton';
+import Card from '~/features/adoption/edit/Card';
+import RequiredLabel from '~/features/adoption/edit/RequiredLabel';
+import { useEditAdoptionContext } from '~/features/adoption/edit/context';
 import {
   FAMILY_OPTION,
   GENDER_OPTION,
@@ -20,7 +20,7 @@ import {
 import { DEFAULT_VALUE } from '~/constants/options';
 
 export default function AnimalInfo() {
-  const { animalInfo, dispatchAnimalInfo } = useCreateAdoptionContext();
+  const { animalInfo, dispatchAnimalInfo } = useEditAdoptionContext();
   const { family, gender, size, color, name } = animalInfo;
   const isSelectedFamily = family !== DEFAULT_VALUE;
 

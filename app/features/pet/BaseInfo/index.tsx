@@ -1,5 +1,6 @@
 import type { MouseEvent } from 'react';
 import type { AttributifyOptions } from '@unocss/preset-attributify';
+import { Link } from '@remix-run/react';
 import { usePetContext } from '~/features/pet/context';
 import { getIconByGenderAndFamily } from '~/utils';
 import useFavorite from '~/hooks/useFavorite';
@@ -17,11 +18,12 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
     refresh: true
   });
 
-  const onFavorite = async (event: MouseEvent) => {
-    event.stopPropagation();
-    await onAdd(id);
+  const onFavorite = () => {
+    onAdd(id);
   };
   const alreadyFavorite = ids.has(id);
+
+  const isEditable = true;
 
   return (
     <div flex="~" justify="between" py="md:4" {...attributifyOptions}>
@@ -32,19 +34,35 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
         </span>
         <div>{location}</div>
       </div>
-      <IconButton
-        flex="~"
-        justify="center"
-        items="center"
-        w="10 sm:12"
-        h="10 sm:12"
-        border="rounded-1/2"
-        shadow="default"
-        icon="LoveActiveFill"
-        iconAttributifyOptions={{ w: 10 }}
-        onClick={onFavorite}
-        disabled={alreadyFavorite}
-      />
+      {isEditable ? (
+        <IconButton
+          to={`/adoption/${id}`}
+          flex="~"
+          justify="center"
+          items="center"
+          w="10 sm:12"
+          h="10 sm:12"
+          bg="white"
+          border="rounded-1/2"
+          shadow="default"
+          icon="Edit"
+          iconAttributifyOptions={{ w: 5 }}
+        />
+      ) : (
+        <IconButton
+          flex="~"
+          justify="center"
+          items="center"
+          w="10 sm:12"
+          h="10 sm:12"
+          border="rounded-1/2"
+          shadow="default"
+          icon="LoveActiveFill"
+          iconAttributifyOptions={{ w: 10 }}
+          onClick={onFavorite}
+          disabled={alreadyFavorite}
+        />
+      )}
     </div>
   );
 }

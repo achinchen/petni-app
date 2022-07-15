@@ -1,16 +1,16 @@
 import type { Payload as DistrictPayload } from '~/components/common/DistrictSelect';
 import Input from '~/components/common/Input';
 import Textarea from '~/components/common/Textarea';
-import Card from '~/features/adoption/create/Card';
-import RequiredLabel from '~/features/adoption/create/RequiredLabel';
+import Card from '~/features/adoption/edit/Card';
+import RequiredLabel from '~/features/adoption/edit/RequiredLabel';
 import DistrictSelect from '~/components/common/DistrictSelect';
-import { useCreateAdoptionContext } from '~/features/adoption/create/context';
+import { useEditAdoptionContext } from '~/features/adoption/edit/context';
 import { CONTACT_OPTION, NOTE_OPTION } from './constants';
 
 export default function OtherInfo({ children }: { children: JSX.Element }) {
-  const { otherInfo, dispatchOtherInfo } = useCreateAdoptionContext();
+  const { otherInfo, dispatchOtherInfo } = useEditAdoptionContext();
 
-  const { contact, note } = otherInfo;
+  const { contact, location, note } = otherInfo;
 
   const onDistrictSelect = ({ country, district }: DistrictPayload) => {
     dispatchOtherInfo({ type: 'location', value: `${country}${district}` });
@@ -37,7 +37,7 @@ export default function OtherInfo({ children }: { children: JSX.Element }) {
               onValueChange={onContactChange}
             />
           </legend>
-          <DistrictSelect onFinish={onDistrictSelect} />
+          <DistrictSelect location={location} onFinish={onDistrictSelect} />
         </fieldset>
       </Card>
       <Card>

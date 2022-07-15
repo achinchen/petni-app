@@ -1,23 +1,24 @@
 import type { Dispatch } from 'react';
-import type { CreatedAnimal } from '~/utils/db/createAnimal';
+import type { EditingAnimal } from '~/models/animal/type';
 import type {
   AnimalInfoState,
   AnimalInfoAction
-} from '~/features/adoption/create/hooks/useAnimalInfo';
+} from '~/features/adoption/edit/hooks/useAnimalInfo';
 import type {
   OtherInfoState,
   OtherInfoAction
-} from '~/features/adoption/create/hooks/useOtherInfo';
+} from '~/features/adoption/edit/hooks/useOtherInfo';
 import { createContext, useEffect, useState, useMemo, useContext } from 'react';
 import { useFetcher, useNavigate } from '@remix-run/react';
 import useAnimalInfo, {
-  initialAnimalInfo
-} from '~/features/adoption/create/hooks/useAnimalInfo';
+  INITIAL_ANIMAL_INFO
+} from '~/features/adoption/edit/hooks/useAnimalInfo';
 import useOtherInfo, {
-  initOtherInfo
-} from '~/features/adoption/create/hooks/useOtherInfo';
+  INITIAL_OTHER_INFO
+} from '~/features/adoption/edit/hooks/useOtherInfo';
 import { FETCHER_IDLE_STATE } from '~/constants/utils';
 import { DEFAULT_VALUE } from '~/constants/options';
+import type { Animal } from '@prisma/client';
 
 type InitialState = {
   imageUrl: string;
@@ -28,34 +29,41 @@ type InitialState = {
   dispatchOtherInfo: Dispatch<OtherInfoAction>;
   canSubmit: boolean;
   isLoading: boolean;
-  createAnimal: () => void;
+  isEditMode: boolean;
+  onSubmit: () => void;
 };
 
 const initialState: InitialState = {
   imageUrl: '',
   setImageUrl: () => {},
-  animalInfo: initialAnimalInfo,
+  animalInfo: INITIAL_ANIMAL_INFO,
   dispatchAnimalInfo: () => {},
-  otherInfo: initOtherInfo,
+  otherInfo: INITIAL_OTHER_INFO,
   dispatchOtherInfo: () => {},
   canSubmit: false,
   isLoading: false,
-  createAnimal: () => {}
+  isEditMode: false,
+  onSubmit: () => {}
 };
 
-export const CreateAdoptionContext = createContext<InitialState>(initialState);
-CreateAdoptionContext.displayName = 'Adoption';
+export const EditAdoptionContext = createContext<InitialState>(initialState);
+EditAdoptionContext.displayName = 'Adoption';
 
 type ProviderProps = {
+  animal?: Animal;
   children: JSX.Element;
 };
 
 const NOT_REQUIRED_FIELDS = ['note', 'name'];
 
-export const CreateAdoptionContextProvider = ({ children }: ProviderProps) => {
+export const EditAdoptionContextProvider = ({
+  children,
+  animal
+}: ProviderProps) => {
+  const isEditMode = Boolean(animal);
   const [imageUrl, setImageUrl] = useState('');
-  const { animalInfo, dispatchAnimalInfo } = useAnimalInfo();
-  const { otherInfo, dispatchOtherInfo } = useOtherInfo();
+  const { animalInfo, dispatchAnimalInfo } = useAnimalInfo(animal);
+  const { otherInfo, dispatchOtherInfo } = useOtherInfo(animal);
 
   const canSubmit = useMemo(() => {
     return Object.entries({ ...animalInfo, ...otherInfo }).every(
@@ -71,9 +79,10 @@ export const CreateAdoptionContextProvider = ({ children }: ProviderProps) => {
   const fetcher = useFetcher();
   const isLoading = fetcher.state !== FETCHER_IDLE_STATE;
 
-  const createAnimal = () => {
+  const onSubmit = () => {
     const formData = new FormData();
     const info = {
+      id: animal?.id,
       imageUrl,
       name: animalInfo.name,
       size: animalInfo.size,
@@ -84,12 +93,14 @@ export const CreateAdoptionContextProvider = ({ children }: ProviderProps) => {
       address: otherInfo.location,
       tel: otherInfo.contact,
       note: otherInfo.note
-    } as CreatedAnimal;
+    } as EditingAnimal;
     formData.set('json', JSON.stringify(info));
 
     fetcher.submit(formData, {
       method: 'post',
-      action: '/adoption/create?index',
+      action: isEditMode
+        ? `/adoption/${animal!.id}?index`
+        : '/adoption/create?index',
       replace: false
     });
   };
@@ -98,8 +109,12 @@ export const CreateAdoptionContextProvider = ({ children }: ProviderProps) => {
     if (fetcher.data?.animal) navigator('/adoption');
   }, [fetcher.data, navigator]);
 
+  useEffect(() => {
+    if (!imageUrl && animal) setImageUrl(animal.imageUrl);
+  }, [animal, imageUrl]);
+
   return (
-    <CreateAdoptionContext.Provider
+    <EditAdoptionContext.Provider
       value={{
         imageUrl,
         setImageUrl,
@@ -109,19 +124,20 @@ export const CreateAdoptionContextProvider = ({ children }: ProviderProps) => {
         dispatchOtherInfo,
         canSubmit,
         isLoading,
-        createAnimal
+        isEditMode,
+        onSubmit
       }}
     >
       {children}
-    </CreateAdoptionContext.Provider>
+    </EditAdoptionContext.Provider>
   );
 };
 
-export function useCreateAdoptionContext() {
-  const context = useContext(CreateAdoptionContext);
+export function useEditAdoptionContext() {
+  const context = useContext(EditAdoptionContext);
   if (context === undefined) {
     throw new Error(
-      'The CreateAdoptionContext hook must be used within a CreateAdoptionContext.Provider'
+      'The EditAdoptionContext hook must be used within a EditAdoptionContext.Provider'
     );
   }
   return context;

@@ -3,5 +3,6 @@ export const getLocalStorage = (key: string) => {
   return value ? JSON.parse(value) : '';
 };
 
-export const setLocalStorage = (key: string, payload: any) =>
+export const setLocalStorage = (key: string, payload: any) => {
   localStorage.setItem(key, JSON.stringify(payload));
+};
