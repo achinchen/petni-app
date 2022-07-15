@@ -1,10 +1,6 @@
 import type { Animal } from '@prisma/client';
+import type { EditingAnimal } from '~/models/animal/type';
 import { db } from '~/utils/db/index.server';
-
-export type EditingAnimal = Omit<
-  Animal,
-  'code' | 'openAt' | 'createdAt' | 'updatedAt'
->;
 
 export default async (animal: EditingAnimal): Promise<Animal> => {
   const record = await db.animal.create({
