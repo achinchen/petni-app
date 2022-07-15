@@ -1,6 +1,10 @@
 import { useState, useMemo } from 'react';
 import SearchSelect from '~/components/common/SearchSelect';
-import { COUNTRIES, DISTRICTS_BY_COUNTRIES } from './constants';
+import {
+  TAIWAN_COUNTRY_COUNT,
+  COUNTRIES,
+  DISTRICTS_BY_COUNTRIES
+} from './constants';
 
 export type Payload = {
   country: string;
@@ -8,12 +12,26 @@ export type Payload = {
 };
 
 type Props = {
+  location?: string;
   onFinish: ({ country, district }: Payload) => void;
 };
 
-export default function DistrictSelection({ onFinish }: Props) {
-  const [country, setCountry] = useState('');
-  const [district, setDistrict] = useState('');
+const getInitCountryAndDistrict = (location = '') => {
+  if (!location) return ['', ''];
+  return [
+    location.slice(0, TAIWAN_COUNTRY_COUNT),
+    location.slice(TAIWAN_COUNTRY_COUNT)
+  ];
+};
+
+export default function DistrictSelection({ location, onFinish }: Props) {
+  const [initCountry, initDistrict] = useMemo(
+    () => getInitCountryAndDistrict(location),
+    [location]
+  );
+
+  const [country, setCountry] = useState(initCountry);
+  const [district, setDistrict] = useState(initDistrict);
 
   const districtOptions = useMemo(
     () => DISTRICTS_BY_COUNTRIES[country] || [],
@@ -36,6 +54,7 @@ export default function DistrictSelection({ onFinish }: Props) {
   return (
     <fieldset flex="~" gap="2">
       <SearchSelect
+        initValue={country}
         options={COUNTRIES}
         placeholder="選擇城市"
         onSelect={onCountrySelect}
