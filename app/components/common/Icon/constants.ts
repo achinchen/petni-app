@@ -30,6 +30,7 @@ import Filter from '~/assets/images/icon/filter.svg';
 import Undo from '~/assets/images/icon/undo.svg';
 import Note from '~/assets/images/icon/note.svg';
 import AddCircleOutline from '~/assets/images/icon/add.svg';
+import Edit from '~/assets/images/icon/edit.svg';
 
 export const ICONS = {
   Card,
@@ -63,5 +64,6 @@ export const ICONS = {
   Filter,
   Undo,
   Note,
-  AddCircleOutline
+  AddCircleOutline,
+  Edit
 };
