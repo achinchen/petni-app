@@ -72,6 +72,7 @@ export const formatAnimal = ({
   return {
     id,
     code,
+    name: '',
     family: formatFamily(family),
     gender: formatGender(gender),
     size: formatSize(size),

@@ -1,9 +1,6 @@
 import type { ActionFunction } from '@remix-run/node';
-import type { Animal } from '@prisma/client';
 import type { AnimalId } from '~/models/animal/getAnimalsByIds/index.server';
 import { json } from '@remix-run/node';
-import increaseFollow from '~/models/animalFollow/increaseFollow/index.server';
-import decreaseFollow from '~/models/animalFollow/decreaseFollow/index.server';
 import getAnimalByIds from '~/models/animal/getAnimalsByIds/index.server';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
 import Favorites from '~/features/favorites';

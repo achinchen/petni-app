@@ -10,7 +10,7 @@ import { CONTACT_OPTION, NOTE_OPTION } from './constants';
 export default function OtherInfo({ children }: { children: JSX.Element }) {
   const { otherInfo, dispatchOtherInfo } = useEditAdoptionContext();
 
-  const { contact, note } = otherInfo;
+  const { contact, location, note } = otherInfo;
 
   const onDistrictSelect = ({ country, district }: DistrictPayload) => {
     dispatchOtherInfo({ type: 'location', value: `${country}${district}` });
@@ -37,7 +37,7 @@ export default function OtherInfo({ children }: { children: JSX.Element }) {
               onValueChange={onContactChange}
             />
           </legend>
-          <DistrictSelect onFinish={onDistrictSelect} />
+          <DistrictSelect location={location} onFinish={onDistrictSelect} />
         </fieldset>
       </Card>
       <Card>
