@@ -1,8 +1,7 @@
 import type { SimpleAnimal } from '~/models/animal/type';
 import type { User } from '@prisma/client';
 import type { MouseEvent } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from '@remix-run/react';
 import AnimalCards from '~/components/common/AnimalCards';
 import Icon from '~/components/common/Icon';
@@ -22,10 +21,13 @@ export default function Adoption({ user, animals: propsAnimals }: Props) {
   const navigator = useNavigate();
   const [isOpenAuth, setOpenAuth] = useState(false);
 
-  const onUploadImageFinish = () => navigator('/adoption/create');
+  const onFinish = useCallback(
+    () => navigator('/adoption/create'),
+    [navigator]
+  );
 
   const { onUpload, isLoading: isUploadLoading } = useUploadImage({
-    onFinish: onUploadImageFinish
+    onFinish
   });
 
   const { onDelete } = useDeleteAnimal();
