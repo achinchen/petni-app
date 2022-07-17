@@ -1,4 +1,6 @@
 import type { SimpleAnimal } from '~/models/animal/getAnimalsByIds/index.server';
+import type { User } from '@prisma/client';
+import type { MouseEvent } from 'react';
 import { useState } from 'react';
 import { useFetcher, useNavigate } from '@remix-run/react';
 import AnimalCards from '~/components/common/AnimalCards';
@@ -8,16 +10,30 @@ import { HeaderPortal } from '~/components/common/Layout/Header';
 import { TITLE, UPLOAD_IMAGE_PLACEHOLDER, IMAGE_EXTENSION } from './constants';
 import { FETCHER_IDLE_STATE } from '~/constants/utils';
 import useUploadImage from './hooks/useUploadImage';
+import LoginPanel from '~/components/common/LoginPanel';
 
-export default function Adoption() {
+type Props = {
+  user: User | null;
+};
+
+export default function Adoption({ user }: Props) {
   const [animals, setAnimals] = useState<SimpleAnimal[]>([]);
   const navigator = useNavigate();
+  const [isOpenAuth, setOpenAuth] = useState(false);
 
   const onUploadImageFinish = () => navigator('/adoption/create');
 
   const { onUpload, isLoading: isUploadLoading } = useUploadImage({
     onFinish: onUploadImageFinish
   });
+
+  const onCloseAuth = () => setOpenAuth(false);
+
+  const onInputClick = (event: MouseEvent<HTMLInputElement>) => {
+    if (user) return;
+    event.preventDefault();
+    setOpenAuth(true);
+  };
 
   const fetcher = useFetcher();
   const isLoading = fetcher.state !== FETCHER_IDLE_STATE;
@@ -29,6 +45,7 @@ export default function Adoption() {
 
   return (
     <main className="content-width" m="4 lg:auto" pt="10">
+      <LoginPanel isOpen={isOpenAuth} onClose={onCloseAuth} />
       <HeaderPortal>
         <div m="auto" text="xl" font="bold">
           {TITLE}
@@ -54,6 +71,7 @@ export default function Adoption() {
                 id="image"
                 accept={IMAGE_EXTENSION}
                 display="none"
+                onClick={onInputClick}
                 onChange={onUpload}
                 disabled={isUploadLoading}
               />
