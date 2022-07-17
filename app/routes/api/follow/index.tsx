@@ -21,5 +21,7 @@ export const action: ActionFunction = async ({ request }) => {
   if (!action) return;
 
   const animals = await action(id);
+  if (!animals) return json(null, 500);
+
   return json({ animals });
 };
