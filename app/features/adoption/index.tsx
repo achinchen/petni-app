@@ -1,4 +1,4 @@
-import type { SimpleAnimal } from '~/models/animal/getAnimalsByIds/index.server';
+import type { SimpleAnimal } from '~/models/animal/type';
 import type { User } from '@prisma/client';
 import type { MouseEvent } from 'react';
 import { useState } from 'react';
