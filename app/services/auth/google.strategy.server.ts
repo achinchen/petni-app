@@ -1,4 +1,3 @@
-import { AuthorizationError } from 'remix-auth';
 import type { StrategyVerifyCallback } from 'remix-auth';
 import type {
   OAuth2Profile,
