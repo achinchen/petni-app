@@ -1,3 +1,4 @@
+import { AuthorizationError } from 'remix-auth';
 import type { StrategyVerifyCallback } from 'remix-auth';
 import type {
   OAuth2Profile,
@@ -10,6 +11,10 @@ export const PROVIDER_NAME = 'google';
 const SCOPE = {
   USER_INFO: 'https://www.googleapis.com/auth/userinfo.profile',
   USER_EMAIL: 'https://www.googleapis.com/auth/userinfo.email'
+};
+
+const ENDPOINT = {
+  USER_PROFILE: 'https://www.googleapis.com/oauth2/v2/userinfo'
 };
 
 export interface GoogleStrategyOptions {
@@ -69,7 +74,7 @@ export class GoogleStrategy<User> extends OAuth2Strategy<
 > {
   name = PROVIDER_NAME;
   private scope: string;
-  private userInfoURL: string;
+  private userProfileURL: string;
 
   constructor(
     { clientID, clientSecret, callbackURL, scope }: GoogleStrategyOptions,
@@ -81,7 +86,7 @@ export class GoogleStrategy<User> extends OAuth2Strategy<
     super(
       {
         authorizationURL: 'https://accounts.google.com/o/oauth2/v2/auth',
-        tokenURL: 'https://accounts.google.com/o/oauth2/v2/token',
+        tokenURL: 'https://oauth2.googleapis.com/token',
         clientID,
         clientSecret,
         callbackURL
@@ -89,8 +94,8 @@ export class GoogleStrategy<User> extends OAuth2Strategy<
       verify
     );
 
-    this.scope = scope ?? `email`;
-    this.userInfoURL = SCOPE.USER_INFO;
+    this.scope = scope ?? `${SCOPE.USER_INFO} ${SCOPE.USER_EMAIL}`;
+    this.userProfileURL = ENDPOINT.USER_PROFILE;
   }
 
   protected authorizationParams() {
@@ -102,7 +107,7 @@ export class GoogleStrategy<User> extends OAuth2Strategy<
   }
 
   protected async userProfile(accessToken: string): Promise<Auth0Profile> {
-    const response = await fetch(this.userInfoURL, {
+    const response = await fetch(this.userProfileURL, {
       headers: { Authorization: `Bearer ${accessToken}` }
     });
 
