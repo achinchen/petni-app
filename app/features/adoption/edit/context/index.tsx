@@ -90,7 +90,6 @@ export const EditAdoptionContextProvider = ({
       family: animalInfo.family,
       gender: animalInfo.gender,
       location: otherInfo.location,
-      address: otherInfo.location,
       tel: otherInfo.contact,
       note: otherInfo.note
     } as EditingAnimal;
