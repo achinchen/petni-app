@@ -1,7 +1,7 @@
-import type { Animal } from '@prisma/client';
+import type { AnimalId } from '~/models/animal/type';
 import { db } from '~/utils/db/index.server';
 
-export default async function createFollow(animalId: Animal['id']) {
+export default async function createFollow(animalId: AnimalId) {
   const animal = await db.animalFollow.findFirst({ where: { animalId } });
 
   if (!animal) {

@@ -1,8 +1,9 @@
 import type { Pet as PetType } from '~/features/pet/types';
+import type { AnimalId } from '~/models/animal/type';
 import { db } from '~/utils/db/index.server';
 
 export default async function getAnimalById(
-  id: number
+  id: AnimalId
 ): Promise<PetType | null> {
   const animal = await db.animal.findUnique({
     where: { id },

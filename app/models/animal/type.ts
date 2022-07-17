@@ -1,5 +1,7 @@
 import type { Animal } from '@prisma/client';
 
+export type AnimalId = Animal['id'];
+
 export type EditingAnimal = Omit<
   Animal,
   'code' | 'openAt' | 'createdAt' | 'updatedAt' | 'address' | 'userId'

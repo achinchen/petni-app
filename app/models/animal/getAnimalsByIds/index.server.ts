@@ -1,8 +1,6 @@
-import type { Animal } from '@prisma/client';
+import type { AnimalId } from '~/models/animal/type';
 import type { SimpleAnimal } from '~/models/animal/type';
 import { db } from '~/utils/db/index.server';
-
-export type AnimalId = Animal['id'];
 
 export default async function getAnimalByIds(
   ids: AnimalId[]
