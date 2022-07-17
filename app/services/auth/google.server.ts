@@ -4,9 +4,8 @@ import { Authenticator } from 'remix-auth';
 import { sessionStorage } from '~/services/session/index.server';
 import { db } from '~/utils/db/index.server';
 import { GoogleStrategy, PROVIDER_NAME } from './google.strategy.server';
-export { PROVIDER_NAME };
 
-export const authenticator = new Authenticator<User>(sessionStorage);
+const authenticator = new Authenticator<User>(sessionStorage);
 
 authenticator.use(
   new GoogleStrategy(
@@ -26,6 +25,8 @@ authenticator.use(
         imageUrl
       };
 
+      console.log({ user });
+
       return db.user.upsert({
         create: user,
         update: user,
@@ -34,3 +35,5 @@ authenticator.use(
     }
   )
 );
+
+export { authenticator, PROVIDER_NAME };
