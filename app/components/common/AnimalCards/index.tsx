@@ -21,8 +21,8 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
   const isOpenDeletePanel = targetId > 0;
 
   const onDeletePanelClose = () => setTargetId(INITIAL_ID);
-  const onDeletePanelConfirm = () => {
-    onDelete(targetId);
+  const onDeletePanelConfirm = async () => {
+    await onDelete(targetId);
     onDeletePanelClose();
   };
 
