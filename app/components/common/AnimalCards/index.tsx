@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import type { SimpleAnimal } from '~/models/animal/getAnimalsByIds/index.server';
 import { useState } from 'react';
 import { Link } from '@remix-run/react';
@@ -25,7 +26,11 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
     onDeletePanelClose();
   };
 
-  const onDeleteButton = (id: SimpleAnimal['id']) => () => setTargetId(id);
+  const onDeleteButton =
+    (id: SimpleAnimal['id']) => (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      setTargetId(id);
+    };
 
   return (
     <section>
