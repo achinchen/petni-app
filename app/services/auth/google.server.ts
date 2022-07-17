@@ -2,7 +2,7 @@ import type { User } from '@prisma/client';
 import 'dotenv/config';
 import { Authenticator } from 'remix-auth';
 import { sessionStorage } from '~/services/session/index.server';
-import { db } from '~/utils/db/index.server';
+import upsertUser from '~/models/user/upsertUser/index.server';
 import { GoogleStrategy, PROVIDER_NAME } from './google.strategy.server';
 export { PROVIDER_NAME };
 
@@ -26,11 +26,7 @@ authenticator.use(
         imageUrl
       };
 
-      return db.user.upsert({
-        create: user,
-        update: user,
-        where: { email }
-      });
+      return upsertUser(user);
     }
   )
 );
