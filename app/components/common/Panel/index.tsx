@@ -1,3 +1,4 @@
+import type { AttributifyAttributes } from '@unocss/preset-attributify';
 import type { MouseEvent } from 'react';
 import { Fragment } from 'react';
 
@@ -6,13 +7,14 @@ type Props = {
   children: JSX.Element;
   title?: string;
   onClose?: () => void;
-};
+} & AttributifyAttributes;
 
 export default function Panel({
   isOpen = false,
   onClose,
   title = '',
-  children
+  children,
+  ...attributifyAttributes
 }: Props) {
   const onClickDialog = (event: MouseEvent) => event.stopPropagation();
 
@@ -36,16 +38,17 @@ export default function Panel({
         open={isOpen}
         position="absolute"
         z="1"
-        w="70"
-        h="39"
+        min-w="70"
+        min-h="39"
         border="none rounded-xl"
         shadow="default"
         px="14"
         py="10"
         onClick={onClickDialog}
+        {...attributifyAttributes}
       >
         {title && (
-          <p m="0" text="base" color="black">
+          <p m="0" text="base center" color="black">
             {title}
           </p>
         )}
