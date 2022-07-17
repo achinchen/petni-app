@@ -48,7 +48,7 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
         {animals.map(({ id, family, gender, imageUrl, location }) => (
           <Card key={id}>
             <Link to={`/pets/${id}`}>
-              <figure w="34" h="36" position="relative" m="0">
+              <figure w="34" h="34" position="relative" m="0">
                 <div
                   role="img"
                   h="100%"
