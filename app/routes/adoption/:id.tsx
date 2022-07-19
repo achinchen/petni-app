@@ -4,9 +4,10 @@ import type {
   MetaFunction
 } from '@remix-run/node';
 import type { Animal } from '@prisma/client';
-import { json } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import { Link, useLoaderData, useCatch, useParams } from '@remix-run/react';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
+import { authenticator } from '~/services/auth/index.server';
 import updateAnimalById from '~/models/animal/updateAnimalById/index.server';
 import getAnimalById from '~/models/animal/getAnimalById/index.server';
 import Loading from '~/components/common/LoadingAnimation';
@@ -17,14 +18,18 @@ import { APP_NAME } from '~/constants';
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
+  const user = await authenticator.isAuthenticated(request);
+  if (!user) return json({}, 401);
+
   const payload: Animal = parsePayloadByJson({
     formData,
     fallback: null
   });
-
   if (!payload) return json({}, 500);
 
-  const animal = await updateAnimalById(payload);
+  const animal = await updateAnimalById(payload, user);
+  if (!animal) return json({}, 500);
+
   return json({ animal });
 };
 
@@ -39,14 +44,17 @@ export const meta: MetaFunction = ({
 
   const { id, location } = data.animal;
   return {
-    title: `更新 No.${id} ｜ ${APP_NAME} - 陪你找家`,
+    title: `編輯 No.${id} ｜ ${APP_NAME} - 陪你找家`,
     description: `No.${id} - 正在 ${location} 等家`
   };
 };
 
 type LoaderData = { animal: Animal };
 
-export const loader: LoaderFunction = async ({ params }) => {
+export const loader: LoaderFunction = async ({ request, params }) => {
+  const user = await authenticator.isAuthenticated(request);
+  if (!user) return redirect('/');
+
   const animal = await getAnimalById(Number(params.id));
 
   if (!animal) {
