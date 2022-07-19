@@ -1,15 +1,10 @@
-import type { User } from '@prisma/client';
 import 'dotenv/config';
-import { Authenticator } from 'remix-auth';
-import { sessionStorage } from '~/services/session/index.server';
 import upsertUser from '~/models/user/upsertUser/index.server';
 import { GoogleStrategy, PROVIDER_NAME } from './google.strategy.server';
 export { PROVIDER_NAME };
 
-export const authenticator = new Authenticator<User>(sessionStorage);
-
-authenticator.use(
-  new GoogleStrategy(
+export default function getGoogleStrategy() {
+  return new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_AUTH0_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_AUTH0_CLIENT_SECRET!,
@@ -28,5 +23,5 @@ authenticator.use(
 
       return upsertUser(user);
     }
-  )
-);
+  );
+}
