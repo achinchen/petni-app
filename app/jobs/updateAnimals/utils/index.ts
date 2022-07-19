@@ -82,7 +82,8 @@ export const formatAnimal = ({
     location: address.slice(0, 6),
     address,
     tel,
-    openAt: new Date(openAt)
+    openAt: new Date(openAt),
+    userId: null
   };
 };
 

@@ -1,4 +1,5 @@
-import type { SimpleAnimal } from '~/models/animal/getAnimalsByIds/index.server';
+import type { MouseEvent } from 'react';
+import type { SimpleAnimal } from '~/models/animal/type';
 import { useState } from 'react';
 import { Link } from '@remix-run/react';
 import { getIconByGenderAndFamily } from '~/utils';
@@ -20,12 +21,16 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
   const isOpenDeletePanel = targetId > 0;
 
   const onDeletePanelClose = () => setTargetId(INITIAL_ID);
-  const onDeletePanelConfirm = () => {
-    onDelete(targetId);
+  const onDeletePanelConfirm = async () => {
+    await onDelete(targetId);
     onDeletePanelClose();
   };
 
-  const onDeleteButton = (id: SimpleAnimal['id']) => () => setTargetId(id);
+  const onDeleteButton =
+    (id: SimpleAnimal['id']) => (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      setTargetId(id);
+    };
 
   return (
     <section>
@@ -43,7 +48,7 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
         {animals.map(({ id, family, gender, imageUrl, location }) => (
           <Card key={id}>
             <Link to={`/pets/${id}`}>
-              <figure w="34" h="36" position="relative" m="0">
+              <figure w="34" h="34" position="relative" m="0">
                 <div
                   role="img"
                   h="100%"

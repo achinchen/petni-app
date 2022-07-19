@@ -1,5 +1,5 @@
 import type { ActionFunction } from '@remix-run/node';
-import type { AnimalId } from '~/models/animal/getAnimalsByIds/index.server';
+import type { AnimalId } from '~/models/animal/type';
 import { json } from '@remix-run/node';
 import getAnimalByIds from '~/models/animal/getAnimalsByIds/index.server';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';

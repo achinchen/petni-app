@@ -1,4 +1,4 @@
-import type { SimpleAnimal } from '~/models/animal/getAnimalsByIds/index.server';
+import type { SimpleAnimal } from '~/models/animal/type';
 import type { FavoriteIdSet } from '~/hooks/useFavorite/utils';
 
 import { useEffect, useState } from 'react';
