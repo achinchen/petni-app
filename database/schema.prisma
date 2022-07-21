@@ -1,27 +1,10 @@
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-enum Gender {
-  Female
-  Male
-  Null
-}
-
-enum Family {
-  Cat
-  Dog
-}
-
-enum Size {
-  Small
-  Medium
-  Large
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -34,11 +17,11 @@ model User {
 
 model AnimalFollow {
   id        Int      @id @default(autoincrement())
-  animal    Animal   @relation(fields: [animalId], references: [id])
   animalId  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   count     Int      @default(1)
+  animal    Animal   @relation(fields: [animalId], references: [id])
 }
 
 model Animal {
@@ -57,7 +40,24 @@ model Animal {
   openAt    DateTime?
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
-  follows   AnimalFollow[]
-  user      User?          @relation(fields: [userId], references: [id])
   userId    Int?           @default(0)
+  user      User?          @relation(fields: [userId], references: [id])
+  follows   AnimalFollow[]
+}
+
+enum Gender {
+  Female
+  Male
+  Null
+}
+
+enum Family {
+  Cat
+  Dog
+}
+
+enum Size {
+  Small
+  Medium
+  Large
 }
