@@ -3,12 +3,14 @@ import type { CatColor } from '~/constants/cats';
 import type { Animal, Family, Gender, Size } from '@prisma/client';
 import { db } from '~/utils/db/index.server';
 import { ANIMAL_COUNT, SEARCH_KEY_DIST } from './constants';
+import getNearCitiesByCity from './getNearCitiesByCity';
 
 export type Filter = {
   family?: Family;
   gender?: Gender;
   size?: Size;
   color?: string;
+  city?: string;
 };
 
 export default async function getAnimalByFilter(
@@ -17,18 +19,19 @@ export default async function getAnimalByFilter(
   if (!Object.keys(filter).length) {
     const animals = await db.$queryRaw<
       Animal[]
-    >`SELECT * FROM "Animal" ORDER BY random() LIMIT 10`;
+    >`SELECT * FROM "Animal" ORDER BY random() LIMIT ${ANIMAL_COUNT}`;
     return animals;
   }
 
-  const { color, family, size, gender } = filter;
+  const { color, family, size, gender, city } = filter;
 
   const options: {
     family?: Family;
     gender?: Gender;
     size?: Size;
+    location?: { contains: string };
     color?: { contains: string };
-    OR?: { color: { contains: string } }[];
+    OR?: { color?: { contains: string }; location?: { contains: string } }[];
   } = {};
 
   if (family) options.family = family;
@@ -41,6 +44,17 @@ export default async function getAnimalByFilter(
     ] as string[];
     if (searchKeys.length === 1) options.color = { contains: searchKeys[0] };
     else options.OR = searchKeys.map((key) => ({ color: { contains: key } }));
+  }
+
+  if (city) {
+    const cities = getNearCitiesByCity(city);
+    const citiesQuery = cities.map((city) => ({
+      location: { contains: city }
+    }));
+
+    if (cities.length === 1) options.location = { contains: cities[0] };
+    else
+      options.OR = options.OR ? [...options.OR, ...citiesQuery] : citiesQuery;
   }
 
   const animalCounts = await db.animal.count({
