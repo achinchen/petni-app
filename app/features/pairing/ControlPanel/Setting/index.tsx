@@ -10,7 +10,7 @@ type State = {
 };
 
 const initial = {
-  [Setting.SearchNear]: true,
+  [Setting.SearchNear]: false,
   [Setting.Sounds]: true
 };
 
