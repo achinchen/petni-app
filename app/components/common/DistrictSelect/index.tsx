@@ -24,6 +24,8 @@ const getInitCountryAndDistrict = (location = '') => {
   ];
 };
 
+const formatCityInput = (input: string) => input.replace('台', '臺');
+
 export default function DistrictSelection({ location, onFinish }: Props) {
   const [initCountry, initDistrict] = useMemo(
     () => getInitCountryAndDistrict(location),
@@ -58,6 +60,7 @@ export default function DistrictSelection({ location, onFinish }: Props) {
         options={COUNTRIES}
         placeholder="選擇城市"
         onSelect={onCountrySelect}
+        formatFilterInput={formatCityInput}
       />
       <SearchSelect
         options={districtOptions}
