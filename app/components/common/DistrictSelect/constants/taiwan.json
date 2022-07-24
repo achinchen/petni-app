@@ -1,6 +1,6 @@
 [
   {
-    "country": "台北市",
+    "country": "臺北市",
     "districts": [
       {
         "district": "中正區",
@@ -472,7 +472,7 @@
     ]
   },
   {
-    "country": "台中市",
+    "country": "臺中市",
     "districts": [
       {
         "district": "中區",
@@ -934,7 +934,7 @@
     ]
   },
   {
-    "country": "台南市",
+    "country": "臺南市",
     "districts": [
       {
         "district": "中西區",
@@ -1447,7 +1447,7 @@
     ]
   },
   {
-    "country": "台東縣",
+    "country": "臺東縣",
     "districts": [
       {
         "district": "台東市",
