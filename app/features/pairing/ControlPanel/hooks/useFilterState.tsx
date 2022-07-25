@@ -6,7 +6,7 @@ import type {
   Color
 } from '~/features/pairing/ControlPanel/Filter/type';
 import { DEFAULT_VALUE } from '~/constants/options';
-import { getFilterPreference } from '~/features/pairing/ControlPanel/utils';
+import { getFilter } from '~/features/pairing/ControlPanel/utils';
 
 export type FilterState = {
   family: Family;
@@ -37,7 +37,7 @@ export default function useFilterState() {
   const [filter, dispatchFilter] = useReducer(filterReducer, initialFilter);
 
   useEffect(() => {
-    const filterPreference = getFilterPreference();
+    const filterPreference = getFilter();
     if (filterPreference)
       Object.keys(filterPreference).forEach((key) => {
         dispatchFilter({ type: key, value: filterPreference[key] } as Action);

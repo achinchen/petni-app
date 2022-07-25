@@ -1,3 +1,5 @@
+import { setLocationCity } from '~/features/pairing/ControlPanel/utils';
+
 const MATCH_REGEX = /<ctyName>(\w?.*)<\/ctyName>/;
 const ENDPOINT = 'https://api.nlsc.gov.tw/other/TownVillagePointQuery';
 
@@ -53,5 +55,5 @@ export async function getCurrentCity() {
   const geolocation = await getGeolocation();
   const addressXML = await fetchAddressXMLByGeolocation(geolocation);
   const city = getCityFromAddressXML(addressXML);
-  return city;
+  setLocationCity(city);
 }

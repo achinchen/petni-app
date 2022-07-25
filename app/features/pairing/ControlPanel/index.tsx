@@ -5,7 +5,7 @@ import { usePairContext } from '~/features/pairing/context';
 import { useControlContext, ControlContextProvider } from './context';
 import { SUBMIT_BUTTON } from './constants';
 import { setSoundPreference } from '~/hooks/useSound/utils';
-import { setFilterPreference } from '~/features/pairing/ControlPanel/utils';
+import { setFilter } from '~/features/pairing/ControlPanel/utils';
 
 function Panel() {
   const { showPanel, setShowPanel, refreshCards } = usePairContext();
@@ -14,7 +14,7 @@ function Panel() {
   const updatePreference = () => {
     return new Promise((resolve) => {
       const { sounds } = setting;
-      setFilterPreference(filter);
+      setFilter(filter);
       setSoundPreference(sounds);
       resolve(null);
     });
