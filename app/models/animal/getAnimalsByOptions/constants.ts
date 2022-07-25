@@ -2,7 +2,7 @@ import { Family } from '@prisma/client';
 import { DogColor } from '~/constants/dogs';
 import { CatColor } from '~/constants/cats';
 
-export const ANIMAL_COUNT = 10;
+export const ANIMAL_COUNT = 6;
 
 export const SEARCH_KEY_DIST = {
   [Family.Dog]: {

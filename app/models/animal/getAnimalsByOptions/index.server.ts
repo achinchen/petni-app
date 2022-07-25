@@ -5,7 +5,7 @@ import { db } from '~/utils/db/index.server';
 import { ANIMAL_COUNT, SEARCH_KEY_DIST } from './constants';
 import getNearCitiesByCity from './getNearCitiesByCity';
 
-export type Filter = {
+export type Options = {
   family?: Family;
   gender?: Gender;
   size?: Size;
@@ -13,19 +13,19 @@ export type Filter = {
   city?: string;
 };
 
-export default async function getAnimalByFilter(
-  filter: Filter
+export default async function getAnimalByOptions(
+  options: Options
 ): Promise<Animal[]> {
-  if (!Object.keys(filter).length) {
+  if (!Object.keys(options).length) {
     const animals = await db.$queryRaw<
       Animal[]
     >`SELECT * FROM "Animal" ORDER BY random() LIMIT ${ANIMAL_COUNT}`;
     return animals;
   }
 
-  const { color, family, size, gender, city } = filter;
+  const { color, family, size, gender, city } = options;
 
-  const options: {
+  const query: {
     family?: Family;
     gender?: Gender;
     size?: Size;
@@ -34,16 +34,16 @@ export default async function getAnimalByFilter(
     OR?: { color?: { contains: string }; location?: { contains: string } }[];
   } = {};
 
-  if (family) options.family = family;
-  if (size) options.size = size;
-  if (gender) options.gender = gender;
+  if (family) query.family = family;
+  if (size) query.size = size;
+  if (gender) query.gender = gender;
 
   if (color && family) {
     const searchKeys = SEARCH_KEY_DIST[family]?.[
       color as DogColor & CatColor
     ] as string[];
-    if (searchKeys.length === 1) options.color = { contains: searchKeys[0] };
-    else options.OR = searchKeys.map((key) => ({ color: { contains: key } }));
+    if (searchKeys.length === 1) query.color = { contains: searchKeys[0] };
+    else query.OR = searchKeys.map((key) => ({ color: { contains: key } }));
   }
 
   if (city) {
@@ -52,19 +52,18 @@ export default async function getAnimalByFilter(
       location: { contains: city }
     }));
 
-    if (cities.length === 1) options.location = { contains: cities[0] };
-    else
-      options.OR = options.OR ? [...options.OR, ...citiesQuery] : citiesQuery;
+    if (cities.length === 1) query.location = { contains: cities[0] };
+    else query.OR = query.OR ? [...query.OR, ...citiesQuery] : citiesQuery;
   }
 
   const animalCounts = await db.animal.count({
-    where: options
+    where: query
   });
 
   const skip = Math.floor(Math.random() * animalCounts);
 
   const animals = await db.animal.findMany({
-    where: options,
+    where: query,
     take: ANIMAL_COUNT,
     skip: skip
   });
