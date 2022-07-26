@@ -1,5 +1,5 @@
 import type { Animal } from '@prisma/client';
-import type { Filter } from '~/models/animal/getAnimalsByFilter/index.server';
+import type { Options } from '~/models/animal/getAnimalsByOptions/index.server';
 import { createContext, useState, useEffect, useContext } from 'react';
 import { useFetcher } from '@remix-run/react';
 import {
@@ -55,9 +55,9 @@ export const PairingContextProvider = ({ children }: ProviderProps) => {
     const filter = getFilter() || {};
     const city = getLocationCity();
 
-    const payload = Object.keys(filter).reduce((temp: Filter, key) => {
+    const payload = Object.keys(filter).reduce((temp: Options, key) => {
       const value = filter[key as keyof typeof filter];
-      if (value !== DEFAULT_VALUE) temp[key as keyof Filter] = value;
+      if (value !== DEFAULT_VALUE) temp[key as keyof Options] = value;
       return temp;
     }, {});
 
@@ -73,7 +73,7 @@ export const PairingContextProvider = ({ children }: ProviderProps) => {
 
   const refreshCards = () => {
     setIndex(RANDOM_RECOMMENDATION_COUNT);
-    fetchAnimals({ replace: true });
+    fetchAnimals();
   };
 
   const onNext = () => {
@@ -89,7 +89,7 @@ export const PairingContextProvider = ({ children }: ProviderProps) => {
   }, [fetcher.data]);
 
   useEffect(() => {
-    fetchAnimals({ replace: false });
+    fetchAnimals();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
