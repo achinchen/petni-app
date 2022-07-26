@@ -35,7 +35,7 @@ export const FAMILY = {
       LABEL: (isPressed: boolean): IconType => (isPressed ? 'DogActive' : 'Dog')
     }
   ]
-};
+} as const;
 
 export const GENDER = {
   CATEGORY: 'gender',

@@ -1,4 +1,5 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
+import { getLocationCity } from '~/features/pairing/ControlPanel/utils';
 import { Setting } from '~/features/pairing/ControlPanel/constants/setting';
 export { Setting } from '~/features/pairing/ControlPanel/constants/setting';
 
@@ -17,5 +18,11 @@ function reducer(state: SettingState, type: Setting) {
 
 export default function useSettingState() {
   const [setting, dispatchSetting] = useReducer(reducer, initialSetting);
+
+  useEffect(() => {
+    const SearchNear = Boolean(getLocationCity());
+    if (SearchNear) dispatchSetting(Setting.SearchNear);
+  }, [dispatchSetting]);
+
   return { setting, dispatchSetting };
 }

@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
+  id       Int      @id @default(autoincrement()) @unique
   name     String
   imageUrl String
   email    String   @unique
@@ -25,11 +25,11 @@ model AnimalFollow {
 }
 
 model Animal {
-  id        Int            @id @default(autoincrement())
+  id        Int            @id @default(autoincrement()) @unique
   code      String?        @default("")
   size      Size
   color     String
-  family    Family
+  family    Family        
   gender    Gender
   imageUrl  String
   location  String
@@ -43,6 +43,8 @@ model Animal {
   userId    Int?           @default(0)
   user      User?          @relation(fields: [userId], references: [id])
   follows   AnimalFollow[]
+  
+  @@index([family, gender, size], type: Hash)
 }
 
 enum Gender {

@@ -13,6 +13,7 @@ type Props = {
   initValue?: string;
   placeholder?: string;
   disabled?: boolean;
+  formatFilterInput?: (input: string) => string;
   onSelect: (option: Option) => void;
 };
 
@@ -20,6 +21,7 @@ export default function DistrictSelection({
   placeholder = '',
   initValue = '',
   disabled = false,
+  formatFilterInput,
   onSelect,
   options
 }: Props) {
@@ -28,8 +30,9 @@ export default function DistrictSelection({
 
   const filteredOptions = useMemo(() => {
     if (!input) return options;
-    return options.filter((option) => option.includes(input));
-  }, [input, options]);
+    const payload = formatFilterInput?.(input) || input;
+    return options.filter((option) => option.includes(payload));
+  }, [input, options, formatFilterInput]);
 
   const onInputChange = (value: string) => {
     onSelect(value);

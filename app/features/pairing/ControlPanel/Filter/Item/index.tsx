@@ -28,7 +28,7 @@ export default function Filter({
   const isSizeCategory = category === 'size';
 
   return (
-    <div mb="8 lg:2" style={style}>
+    <div mb="8 lg:4" style={style}>
       <div font="medium">{label}</div>
       <div
         mt="1"
