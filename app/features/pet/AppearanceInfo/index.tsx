@@ -1,12 +1,13 @@
-import { usePetContext } from '~/features/pet/context';
+import type { LoaderData } from '~/routes/pets/:id';
+import { useLoaderData } from '@remix-run/react';
 import { getIconByGenderAndFamily } from '~/utils';
 import Icon from '~/components/common/Icon';
 import Card from '~/components/common/Card';
 import { GENDER_LABEL, ADAPT_ME_LABEL } from './constants';
 
 export default function AppearanceInfo() {
-  const { pet } = usePetContext();
-  const { gender, family, color } = pet!;
+  const { pet } = useLoaderData<LoaderData>();
+  const { gender, family, color } = pet;
   const genderIcon = getIconByGenderAndFamily({ gender, family });
   const genderLabel = GENDER_LABEL[gender];
 

@@ -1,11 +1,12 @@
+import type { LoaderData } from '~/routes/pets/:id';
 import { Fragment } from 'react';
+import { useLoaderData } from '@remix-run/react';
 import { getTelephoneLink, getAddressLink } from '~/utils';
 import Card from '~/components/common/Card';
-import { usePetContext } from '~/features/pet/context';
 
 export default function ContactNote() {
-  const { pet } = usePetContext();
-  const { tel, address, note } = pet!;
+  const { pet } = useLoaderData<LoaderData>();
+  const { tel, address, note } = pet;
 
   return (
     <Card flex="md:1" min-h="40">
