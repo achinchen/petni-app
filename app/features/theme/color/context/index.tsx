@@ -30,7 +30,7 @@ export const ThemeColorContextProvider = ({
 }: {
   children: JSX.Element;
 }) => {
-  const [family, setFamily] = useState(initialState.family);
+  const [family, setFamily] = useState<Family>(initialState.family);
   const [index, setIndex] = useState<InitialState['index']>(initialState.index);
   const familyInformation = INFORMATION[family];
   const currentInfo = familyInformation[index];
