@@ -6,10 +6,11 @@ import {
   useCatch,
   useParams
 } from '@remix-run/react';
-import { json } from '@remix-run/node';
+import { redirect, json } from '@remix-run/node';
 import Pet from '~/features/pet';
 import Layout from '~/components/common/Layout';
 import Loading from '~/components/common/LoadingAnimation';
+import { authenticator } from '~/services/auth/index.server';
 import getAnimalById from '~/models/animal/getAnimalById/index.server';
 import { APP_NAME } from '~/constants';
 import { DEFAULT_META } from '~/constants/meta';
@@ -30,18 +31,23 @@ export const meta: MetaFunction = ({
   };
 };
 
-type LoaderData = { pet: PetType };
+export type LoaderData = { pet: PetType };
 
-export const loader: LoaderFunction = async ({ params }) => {
-  const animal = await getAnimalById(Number(params.id));
+export const loader: LoaderFunction = async ({ request, params: { id } }) => {
+  if (!id) redirect('/');
+
+  const user = await authenticator.isAuthenticated(request);
+  const animal = await getAnimalById(Number(id), user?.id);
 
   if (!animal) {
-    throw new Response(`找不到 No.${params.id} 的浪浪`, {
+    throw new Response(`找不到 No.${id} 的浪浪`, {
       status: 404
     });
   }
 
-  const data: LoaderData = { pet: animal };
+  const data: LoaderData = {
+    pet: animal
+  };
 
   return json(data);
 };
