@@ -1,7 +1,6 @@
-import type { MouseEvent } from 'react';
 import type { AttributifyOptions } from '@unocss/preset-attributify';
-import { Link } from '@remix-run/react';
-import { usePetContext } from '~/features/pet/context';
+import type { LoaderData } from '~/routes/pets/:id';
+import { useLoaderData } from '@remix-run/react';
 import { getIconByGenderAndFamily } from '~/utils';
 import useFavorite from '~/hooks/useFavorite';
 import IconButton from '~/components/common/IconButton';
@@ -10,8 +9,8 @@ import Icon from '~/components/common/Icon';
 type Props = AttributifyOptions;
 
 export default function BaseInfo({ ...attributifyOptions }: Props) {
-  const { pet } = usePetContext();
-  const { id, location, gender, family } = pet!;
+  const { pet } = useLoaderData<LoaderData>();
+  const { id, location, gender, family, editable } = pet;
   const genderIcon = getIconByGenderAndFamily({ gender, family });
 
   const { ids, onAdd } = useFavorite({
@@ -23,8 +22,6 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
   };
   const alreadyFavorite = ids.has(id);
 
-  const isEditable = true;
-
   return (
     <div flex="~" justify="between" py="md:4" {...attributifyOptions}>
       <div text="sm">
@@ -34,7 +31,7 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
         </span>
         <div>{location}</div>
       </div>
-      {isEditable ? (
+      {editable ? (
         <IconButton
           to={`/adoption/${id}`}
           flex="~"

@@ -1,12 +1,13 @@
+import type { LoaderData } from '~/routes/pets/:id';
+import { useLoaderData } from '@remix-run/react';
 import { IMAGE_MISSING, PLACEHOLDER_IMG } from '~/constants/pet';
-import { usePetContext } from '~/features/pet/context';
 
 type Props = {
   children?: JSX.Element;
 };
 
 export default function Photo({ children }: Props) {
-  const { pet } = usePetContext();
+  const { pet } = useLoaderData<LoaderData>();
   const { imageUrl, family } = pet!;
   const withImage = Boolean(imageUrl);
   const style = withImage ? { backgroundImage: `url(${imageUrl})` } : {};
