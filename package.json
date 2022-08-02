@@ -28,9 +28,11 @@
     "remix-auth-oauth2": "^1.2.2"
   },
   "devDependencies": {
+    "@babel/helper-string-parser": "^7.18.10",
     "@remix-run/dev": "^1.5.1",
     "@remix-run/eslint-config": "^1.5.1",
     "@remix-run/serve": "^1.5.1",
+    "@testing-library/react": "^12.1",
     "@types/debounce": "^1.2.1",
     "@types/jest": "^27.4.1",
     "@types/react": "^17.0.24",
