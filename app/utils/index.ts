@@ -18,7 +18,7 @@ export const getIconByGenderAndFamily = ({
 
 export const getTelephoneLink = (telephone: string | string[]) => {
   const tel = Array.isArray(telephone) ? telephone[0] : telephone;
-  return `tel:${tel.replace(' ', '')}`;
+  return `tel:${tel.replace(/ /g, '')}`;
 };
 
 export const getAddressLink = (address: string) => {
