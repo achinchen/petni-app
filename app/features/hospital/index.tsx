@@ -1,10 +1,10 @@
+import type { City } from './constants';
 import Icon from '~/components/common/Icon';
 import { HeaderPortal } from '~/components/common/Layout/Header';
 import HospitalCards from './HospitalCards';
 import HospitalAreaPanel from './AreaPanel';
 import HospitalAreaHashId from './AreaHashId';
 import { useIntersectionObserver } from './hooks';
-import type { City } from './constants';
 import { CITY_LABEL, HOSPITALS, REMINDER } from './constants';
 import { HospitalContextProvider } from './context';
 
