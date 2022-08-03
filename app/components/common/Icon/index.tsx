@@ -9,7 +9,9 @@ type Props = {
 
 export default function Icon({ icon, ...attributifyOptions }: Props) {
   const src = ICONS[icon];
-  return <img src={src} alt={src} w="6" {...attributifyOptions} />;
+  const alt = src.replace('.svg', '');
+
+  return <img src={src} alt={alt} w="6" {...attributifyOptions} />;
 }
 
 export { ICONS };
