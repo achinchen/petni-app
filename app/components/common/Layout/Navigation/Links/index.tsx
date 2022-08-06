@@ -1,6 +1,6 @@
-import { NavLink } from 'remix';
+import { NavLink } from '@remix-run/react';
 import { Fragment, useState } from 'react';
-import { AttributifyOptions } from '@unocss/preset-attributify';
+import type { AttributifyOptions } from '@unocss/preset-attributify';
 import type { IsActive } from './types';
 import type { IconType } from '~/components/common/Icon';
 import Icon from '~/components/common/Icon';
