@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 import ControlButton from './ControlButton';
 import FamilySwitcher from './FamilySwitcher';
 
-function ThemeColor() {
+export function ThemeColor() {
   const { family, currentInfo } = useThemeColorContext();
   const characterImg = CHARACTER_IMAGE[family];
 

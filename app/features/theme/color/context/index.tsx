@@ -13,7 +13,7 @@ type InitialState = {
   currentInfo: Information;
 };
 
-const initialState = {
+export const initialState = {
   family: Family.Cat,
   setFamily: () => {},
   index: 0,
