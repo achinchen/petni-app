@@ -67,3 +67,9 @@ export const ICONS = {
   AddCircleOutline,
   Edit
 };
+
+export const ALT_DICT: { [key in keyof typeof ICONS]: string } = {
+  ...ICONS,
+  ArrowLeft: 'Go previous',
+  ArrowRight: 'Go next'
+};
