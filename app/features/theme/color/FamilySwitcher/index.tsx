@@ -1,4 +1,4 @@
-import { AttributifyOptions } from '@unocss/preset-attributify';
+import type { AttributifyOptions } from '@unocss/preset-attributify';
 import type { Family } from '~/constants';
 import { FAMILY_LABEL } from '~/features/theme/color/constants';
 import { useThemeColorContext } from '~/features/theme/color/context';
@@ -8,10 +8,13 @@ type Props = {
 } & AttributifyOptions;
 
 export default function FamilySwitcher({ ...attributifyOptions }: Props) {
-  const { family, setFamily } = useThemeColorContext();
+  const { family, setFamily, setIndex } = useThemeColorContext();
   const getIsCurrentFamily = (currentFamily: string) =>
     currentFamily === family;
-  const onClick = (family: string) => () => setFamily(family as Family);
+  const onClick = (family: string) => () => {
+    setFamily(family as Family);
+    setIndex(0);
+  };
 
   return (
     <div
