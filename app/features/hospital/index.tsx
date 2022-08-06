@@ -1,10 +1,10 @@
+import type { City } from './constants';
 import Icon from '~/components/common/Icon';
 import { HeaderPortal } from '~/components/common/Layout/Header';
 import HospitalCards from './HospitalCards';
 import HospitalAreaPanel from './AreaPanel';
 import HospitalAreaHashId from './AreaHashId';
 import { useIntersectionObserver } from './hooks';
-import type { City } from './constants';
 import { CITY_LABEL, HOSPITALS, REMINDER } from './constants';
 import { HospitalContextProvider } from './context';
 
@@ -27,10 +27,10 @@ function Hospital() {
       {Object.entries(HOSPITALS).map(([city, hospitals]) => (
         <section key={city} mx="4 lg:1" mt="8 lg:14">
           <HospitalAreaHashId city={city as City} />
-          <h2 flex="~" text="lg" font="bold" mt="0" mb="2">
+          <header flex="~" text="lg" font="bold" mt="0" mb="2">
             <Icon icon="Location" />
-            {CITY_LABEL[city as City]}
-          </h2>
+            <h2>{CITY_LABEL[city as City]}</h2>
+          </header>
           <HospitalCards city={city as City} hospitals={hospitals} />
         </section>
       ))}

@@ -23,7 +23,9 @@ export default function HospitalCards({ city, hospitals }: Props) {
             p="3"
             position="relative"
           >
-            <header font="medium">{NAME}</header>
+            <h3 m="0" font="medium">
+              {NAME}
+            </h3>
             <address flex="~ col" text="sm">
               <a
                 href={getTelephoneLink(TEL)}
@@ -55,15 +57,15 @@ export default function HospitalCards({ city, hospitals }: Props) {
             <a
               href={getTelephoneLink(TEL)}
               target="_blank"
+              rel="noreferrer"
               position="absolute"
               right="3"
               bottom="3"
-              bg="black"
               p="2"
+              bg="black"
               border="rounded-1/2"
-              rel="noreferrer"
             >
-              <Icon icon="Phone"></Icon>
+              <Icon icon="Phone" />
             </a>
           </section>
         )

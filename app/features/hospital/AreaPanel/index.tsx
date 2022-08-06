@@ -12,6 +12,7 @@ export default function HospitalAreaPanel({
   ...attributifyOptions
 }: Props) {
   const { area: currentArea } = useHospitalContext();
+  const getIsArea = (area: Area) => area === currentArea;
 
   return (
     <div
@@ -44,8 +45,9 @@ export default function HospitalAreaPanel({
             bg="gray-50"
             font="medium"
             ml="1.5 md:3 first:0"
+            aria-current={getIsArea(area)}
             {...(isDesktop && { bg: 'white' })}
-            {...(currentArea === area && {
+            {...(getIsArea(area) && {
               bg: 'status-active',
               color: 'white'
             })}

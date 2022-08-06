@@ -21,9 +21,9 @@ export enum City {
 }
 
 export const CITY_LABEL = {
-  [City.Taipei]: '台北市',
+  [City.Taipei]: '台北',
   [City.NewTaipei]: '新北',
-  [City.Taoyuan]: '桃園',
+  [City.Taoyuan]: '桃園市',
   [City.Hsinchu]: '新竹',
   [City.Taichung]: '台中',
   [City.Changhua]: '彰化',

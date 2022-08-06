@@ -1,4 +1,5 @@
 import { Area } from '~/features/hospital/constants';
+export { Area };
 
 export const AREA_LABEL = {
   [Area.Northern]: '北部',
