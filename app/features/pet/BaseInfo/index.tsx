@@ -20,6 +20,7 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
   const onFavorite = () => {
     onAdd(id);
   };
+
   const alreadyFavorite = ids.has(id);
 
   return (
