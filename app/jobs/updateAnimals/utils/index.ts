@@ -81,7 +81,7 @@ export const formatAnimal = ({
     note,
     location: address.slice(0, 6),
     address,
-    tel,
+    tel: tel.replace('分機', '#'),
     openAt: new Date(openAt),
     userId: null
   };
