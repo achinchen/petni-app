@@ -1,5 +1,5 @@
 import type { AttributifyOptions } from '@unocss/preset-attributify';
-import { ICONS } from './constants';
+import { ICONS, ALT_DICT } from './constants';
 
 export type IconType = keyof typeof ICONS;
 
@@ -9,7 +9,7 @@ type Props = {
 
 export default function Icon({ icon, ...attributifyOptions }: Props) {
   const src = ICONS[icon];
-  const alt = src.replace('.svg', '');
+  const alt = ALT_DICT[icon] || icon;
 
   return <img src={src} alt={alt} w="6" {...attributifyOptions} />;
 }

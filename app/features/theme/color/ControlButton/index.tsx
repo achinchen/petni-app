@@ -1,4 +1,4 @@
-import { AttributifyOptions } from '@unocss/preset-attributify';
+import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { useThemeColorContext } from '~/features/theme/color/context';
 import Icon from '~/components/common/Icon';
 
