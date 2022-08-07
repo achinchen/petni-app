@@ -29,8 +29,8 @@ const padDate = (date: number) => {
   return `${date}`.padStart(2, '0');
 };
 
-export const formatDate = (inputDate: Date) => {
-  const date = new Date(inputDate);
+export const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
