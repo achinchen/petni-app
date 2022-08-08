@@ -1,4 +1,4 @@
-import * as remixReact from '@remix-run/react';
+import * as Remix from '@remix-run/react';
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Photo from '.';
@@ -10,7 +10,7 @@ const label = getAlt(PET.id, PET.family);
 
 describe('rendering', () => {
   test('render image when imageUrl is truthy', () => {
-    jest.spyOn(remixReact, 'useLoaderData').mockReturnValueOnce({ pet: PET });
+    jest.spyOn(Remix, 'useLoaderData').mockReturnValueOnce({ pet: PET });
     render(<Photo />);
 
     expect(screen.getByLabelText(label)).toHaveProperty(
@@ -23,7 +23,7 @@ describe('rendering', () => {
 
   test('render placeholder caption when imageUrl is falsy', () => {
     jest
-      .spyOn(remixReact, 'useLoaderData')
+      .spyOn(Remix, 'useLoaderData')
       .mockReturnValueOnce({ pet: { ...PET, imageUrl: null } });
     render(<Photo />);
 
@@ -32,7 +32,7 @@ describe('rendering', () => {
 
   test('render placeholder image when imageUrl is falsy', () => {
     jest
-      .spyOn(remixReact, 'useLoaderData')
+      .spyOn(Remix, 'useLoaderData')
       .mockReturnValueOnce({ pet: { ...PET, imageUrl: null } });
     render(<Photo />);
 
@@ -49,7 +49,7 @@ describe('interaction', () => {
   });
 
   test('open image url when click photo with imageUrl', async () => {
-    jest.spyOn(remixReact, 'useLoaderData').mockReturnValueOnce({ pet: PET });
+    jest.spyOn(Remix, 'useLoaderData').mockReturnValueOnce({ pet: PET });
     render(<Photo />);
 
     await act(() => userEvent.click(screen.getByRole('presentation')));
@@ -59,7 +59,7 @@ describe('interaction', () => {
 
   test('not open image url when click photo without imageUrl', async () => {
     jest
-      .spyOn(remixReact, 'useLoaderData')
+      .spyOn(Remix, 'useLoaderData')
       .mockReturnValueOnce({ pet: { ...PET, imageUrl: null } });
     render(<Photo />);
 
