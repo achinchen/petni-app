@@ -1,7 +1,7 @@
 import type { FavoriteId, FavoriteIdSet } from './utils';
 import { useEffect, useState } from 'react';
-import { getFavoriteIdsPreference, setFavoriteIdsPreference } from './utils';
 import { useFetcher } from '@remix-run/react';
+import { getFavoriteIdsPreference, setFavoriteIdsPreference } from './utils';
 
 type Parameters = {
   refresh?: boolean;
@@ -41,7 +41,11 @@ export default function useFavorite({ refresh }: Parameters = {}) {
   };
 
   useEffect(() => {
-    if (fetcher.data && refresh) window.location.reload();
+    if (fetcher.data && refresh) {
+      console.log('~~~~');
+      window.location.replace(window.location.href);
+      console.log('~~~~', window.location.replace);
+    }
   }, [fetcher.data, refresh]);
 
   useEffect(() => {

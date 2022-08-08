@@ -1,6 +1,8 @@
+import type { MouseEvent } from 'react';
 import type { LoaderData } from '~/routes/pets/:id';
 import { useLoaderData } from '@remix-run/react';
 import { IMAGE_MISSING, PLACEHOLDER_IMG } from '~/constants/pet';
+import { getAlt } from './utils';
 
 type Props = {
   children?: JSX.Element;
@@ -8,14 +10,16 @@ type Props = {
 
 export default function Photo({ children }: Props) {
   const { pet } = useLoaderData<LoaderData>();
-  const { imageUrl, family } = pet!;
+  const { id, imageUrl, family } = pet!;
   const withImage = Boolean(imageUrl);
   const style = withImage ? { backgroundImage: `url(${imageUrl})` } : {};
 
-  const onClick = (event: MouseEvent) => {
+  const onClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.target !== event.currentTarget) event.preventDefault();
     if (withImage) window.open(imageUrl, '_blank');
   };
+
+  const alt = withImage ? getAlt(id, family) : '';
 
   return (
     <div
@@ -33,6 +37,8 @@ export default function Photo({ children }: Props) {
       border="none lg:rounded-8 lg:12 white"
       shadow="default"
       onClick={onClick}
+      role="presentation"
+      aria-label={alt}
       after="
         position-absolute
         left-0

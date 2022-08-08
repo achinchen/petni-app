@@ -1,4 +1,4 @@
-import { Family } from '~/constants';
+import { Family, FAMILY_LABEL } from '~/constants';
 import CharacterCat from '~/assets/images/theme/character/cat.svg';
 import CharacterDog from '~/assets/images/theme/character/dog.svg';
 import { CATS } from './cats';
@@ -14,7 +14,4 @@ export const INFORMATION = {
   [Family.Cat]: CATS
 };
 
-export const FAMILY_LABEL = {
-  [Family.Cat]: '喵星人',
-  [Family.Dog]: '汪星人'
-};
+export { FAMILY_LABEL };
