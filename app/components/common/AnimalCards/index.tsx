@@ -7,7 +7,7 @@ import Card from './Card';
 import Icon from '~/components/common/Icon';
 import DeletePanel from '~/components/common/DeletePanel';
 
-type Props = {
+export type Props = {
   animals: SimpleAnimal[];
   onDelete: (id: number) => void;
   children?: JSX.Element;
