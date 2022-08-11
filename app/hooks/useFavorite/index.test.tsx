@@ -127,7 +127,6 @@ describe('onAdd', () => {
 describe('onDelete', () => {
   let ids: ReturnResult['ids'];
   const testId = PET.id;
-  const fetcher = RemixReact.useFetcher();
   beforeEach(() => {
     jest.spyOn(utils, 'setFavoriteIdsPreference');
     const {

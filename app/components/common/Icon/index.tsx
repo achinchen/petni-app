@@ -5,11 +5,12 @@ export type IconType = keyof typeof ICONS;
 
 type Props = {
   icon: IconType;
+  label?: string;
 } & AttributifyOptions;
 
-export default function Icon({ icon, ...attributifyOptions }: Props) {
+export default function Icon({ icon, label, ...attributifyOptions }: Props) {
   const src = ICONS[icon];
-  const alt = ALT_DICT[icon] || icon;
+  const alt = label || ALT_DICT[icon] || icon;
 
   return <img src={src} alt={alt} w="6" {...attributifyOptions} />;
 }

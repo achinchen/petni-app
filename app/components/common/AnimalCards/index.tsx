@@ -7,7 +7,7 @@ import Card from './Card';
 import Icon from '~/components/common/Icon';
 import DeletePanel from '~/components/common/DeletePanel';
 
-type Props = {
+export type Props = {
   animals: SimpleAnimal[];
   onDelete: (id: number) => void;
   children?: JSX.Element;
@@ -49,12 +49,12 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
           <Card key={id}>
             <Link to={`/pets/${id}`}>
               <figure w="34" h="34" position="relative" m="0">
-                <div
-                  role="img"
+                <img
                   h="100%"
-                  bg="cover center"
+                  w="100%"
                   border="rounded-7"
-                  style={{ backgroundImage: `url(${imageUrl})` }}
+                  object="cover center"
+                  src={imageUrl}
                   alt={`${id} 的照片`}
                 />
                 <button
@@ -71,7 +71,7 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
                   shadow="default"
                   onClick={onDeleteButton(id)}
                 >
-                  <Icon icon="CloseSm" />
+                  <Icon icon="CloseSm" label="delete" />
                 </button>
               </figure>
               <h2 position="relative" text="base" mt="2" mb="0" mx="0">

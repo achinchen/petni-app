@@ -21,6 +21,7 @@ export default function Panel({
   return (
     <Fragment>
       <div
+        role="presentation"
         position="fixed"
         top="0"
         left="0"
@@ -48,9 +49,9 @@ export default function Panel({
         {...attributifyAttributes}
       >
         {title && (
-          <p m="0" text="base center" color="black">
+          <h2 m="0" text="base center" color="black">
             {title}
-          </p>
+          </h2>
         )}
         {children}
       </dialog>

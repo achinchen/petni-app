@@ -3,7 +3,7 @@ import type { AnimalId } from '~/models/animal/type';
 import { json } from '@remix-run/node';
 import getAnimalByIds from '~/models/animal/getAnimalsByIds/index.server';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
-import Favorites from '~/features/favorites';
+import FavoritesFeature from '~/features/favorites';
 import Layout from '~/components/common/Layout';
 
 export const action: ActionFunction = async ({ request }) => {
@@ -15,10 +15,10 @@ export const action: ActionFunction = async ({ request }) => {
   return json({ animals });
 };
 
-export default function ThemeColor() {
+export default function Favorites() {
   return (
     <Layout>
-      <Favorites />
+      <FavoritesFeature />
     </Layout>
   );
 }

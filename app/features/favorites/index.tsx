@@ -62,7 +62,9 @@ export default function Favorites() {
       {isLoading ? (
         <Loading />
       ) : (
-        animals && <AnimalCards animals={animals} onDelete={onDeleteAnimal} />
+        Boolean(animals.length) && (
+          <AnimalCards animals={animals} onDelete={onDeleteAnimal} />
+        )
       )}
     </main>
   );

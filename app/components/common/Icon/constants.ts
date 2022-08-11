@@ -71,5 +71,7 @@ export const ICONS = {
 export const ALT_DICT: { [key in keyof typeof ICONS]: string } = {
   ...ICONS,
   ArrowLeft: 'Go previous',
-  ArrowRight: 'Go next'
+  ArrowRight: 'Go next',
+  Close: 'Close',
+  CloseSm: 'Delete'
 };
