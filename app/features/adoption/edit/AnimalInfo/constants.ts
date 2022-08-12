@@ -1,6 +1,5 @@
-import type { Family } from '@prisma/client';
 import { FAMILY, GENDER, SIZE, COLOR } from '~/constants/options';
-import { DEFAULT_GENDER_VALUE } from '~/features/adoption/edit/constants'
+import { DEFAULT_GENDER_VALUE } from '~/features/adoption/edit/constants';
 
 export const DEFAULT_GENDER_OPTION = {
   VALUE: DEFAULT_GENDER_VALUE,
@@ -26,10 +25,11 @@ export const SIZE_OPTION = {
 
 export const NAME_OPTION = {
   LABEL: '牠的名字',
-  PLACEHOLDER: ' 若尚未取名可不填'
+  CATEGORY: 'name',
+  PLACEHOLDER: '若尚未取名可不填'
 };
 
 export const COLOR_OPTION = {
-  LABEL: '毛色',
-  OPTION: (family: Family) => COLOR.OPTION[family]
+  ...COLOR,
+  LABEL: '毛色'
 };

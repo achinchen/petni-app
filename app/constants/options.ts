@@ -17,7 +17,7 @@ export const DEFAULT_VALUE = 'NONE' as const;
 
 export const COLOR = {
   CATEGORY: 'color',
-  OPTION: {
+  OPTIONS: {
     [Family.Cat]: CAT_COLOR_OPTIONS,
     [Family.Dog]: DOG_COLOR_OPTIONS
   }

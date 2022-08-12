@@ -73,5 +73,9 @@ export const ALT_DICT: { [key in keyof typeof ICONS]: string } = {
   ArrowLeft: 'Go previous',
   ArrowRight: 'Go next',
   Close: 'Close',
-  CloseSm: 'Delete'
+  CloseSm: 'Delete',
+  Cat: 'cat',
+  Dog: 'dog',
+  Male: 'male',
+  Female: 'female'
 };

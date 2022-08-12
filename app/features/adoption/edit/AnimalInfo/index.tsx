@@ -122,7 +122,7 @@ export default function AnimalInfo() {
               {COLOR_OPTION.LABEL}
               <RequiredLabel />
               <div grid="~ wrap cols-3" gap="2" mt="2">
-                {COLOR_OPTION.OPTION(family).map(({ LABEL, VALUE }) => {
+                {COLOR_OPTION.OPTIONS[family].map(({ LABEL, VALUE }) => {
                   return (
                     <OptionButton
                       key={VALUE}

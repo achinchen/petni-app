@@ -20,7 +20,7 @@ import { FETCHER_IDLE_STATE } from '~/constants/utils';
 import { DEFAULT_VALUE } from '~/constants/options';
 import type { Animal } from '@prisma/client';
 
-type InitialState = {
+export type InitialState = {
   imageUrl: string;
   setImageUrl: (url: string) => void;
   animalInfo: AnimalInfoState;
@@ -33,7 +33,7 @@ type InitialState = {
   onSubmit: () => void;
 };
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
   imageUrl: '',
   setImageUrl: () => {},
   animalInfo: INITIAL_ANIMAL_INFO,
