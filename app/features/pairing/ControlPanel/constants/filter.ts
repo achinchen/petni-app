@@ -13,8 +13,8 @@ export const DEFAULT_OPTION = {
 } as const;
 
 export const FAMILY_COLOR_OPTIONS = {
-  [Family.Cat]: [...COLOR.OPTION.Cat, DEFAULT_OPTION],
-  [Family.Dog]: [...COLOR.OPTION.Dog, DEFAULT_OPTION],
+  [Family.Cat]: [...COLOR.OPTIONS.Cat, DEFAULT_OPTION],
+  [Family.Dog]: [...COLOR.OPTIONS.Dog, DEFAULT_OPTION],
   [DEFAULT_OPTION.VALUE]: []
 };
 
