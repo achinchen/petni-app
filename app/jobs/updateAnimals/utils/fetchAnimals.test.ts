@@ -1,5 +1,5 @@
 import { fetchAnimals } from './index';
-import { RawAnimal } from './types';
+import type { RawAnimal } from './types';
 import { RAW_ANIMALS } from './mockData';
 
 describe('updateAnimals/utils#fetchAnimals', () => {

@@ -21,7 +21,7 @@ export const INITIAL_OTHER_INFO = {
   note: ''
 };
 
-const getInitialOtherInfo = (animal?: Animal) => {
+export const getInitialOtherInfo = (animal?: Animal) => {
   if (!animal) return INITIAL_OTHER_INFO;
   return {
     location: animal.location,
