@@ -1,3 +1,4 @@
+import type { Animal } from '@prisma/client';
 import type { Dispatch } from 'react';
 import type { EditingAnimal } from '~/models/animal/type';
 import type {
@@ -16,9 +17,9 @@ import useAnimalInfo, {
 import useOtherInfo, {
   INITIAL_OTHER_INFO
 } from '~/features/adoption/edit/hooks/useOtherInfo';
+import { setAdoptionImageUrl } from '~/features/adoption/utils';
 import { FETCHER_IDLE_STATE } from '~/constants/utils';
 import { DEFAULT_VALUE } from '~/constants/options';
-import type { Animal } from '@prisma/client';
 
 export type InitialState = {
   imageUrl: string;
@@ -102,6 +103,8 @@ export const EditAdoptionContextProvider = ({
         : '/adoption/create?index',
       replace: false
     });
+
+    setAdoptionImageUrl('');
   };
 
   useEffect(() => {
