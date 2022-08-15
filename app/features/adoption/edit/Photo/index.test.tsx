@@ -1,5 +1,6 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { getPNGFile } from 'spec/utils/getMockFile';
 import * as Context from '~/features/adoption/edit/context';
 import { getAdoptionImageUrl } from '~/features/adoption/utils';
 import { IMAGE_EXTENSION } from '~/features/adoption/constants';
@@ -56,7 +57,7 @@ describe('rendering', () => {
 });
 
 describe('interaction: upload', () => {
-  const file = new File(['a-dog'], 'a-dog.png', { type: 'image/png' });
+  const file = getPNGFile();
   beforeEach(async () => {
     render(<Photo />);
     await act(() =>
