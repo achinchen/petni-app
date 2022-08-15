@@ -6,7 +6,7 @@ import { IMAGE_EXTENSION } from '~/features/adoption/constants';
 import { FAMILY_LABEL } from '~/constants';
 import { DEFAULT_VALUE } from '~/constants/options';
 
-const UPDATE_IMAGE = '替換照片';
+export const UPDATE_IMAGE = '替換照片';
 
 export default function Photo() {
   const { imageUrl, setImageUrl, animalInfo } = useEditAdoptionContext();
