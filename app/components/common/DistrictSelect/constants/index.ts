@@ -12,3 +12,8 @@ export const DISTRICTS_BY_COUNTRIES: { [key in Country]: string[] } =
   }, {});
 
 export const TAIWAN_COUNTRY_COUNT = 3;
+
+export const PLACEHOLDER = {
+  COUNTRY: '選擇城市',
+  DISTRICT: '選擇地區'
+};
