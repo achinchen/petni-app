@@ -22,7 +22,7 @@ jest.spyOn(Context, 'useEditAdoptionContext').mockImplementation(() => {
   };
 });
 
-const onUpload = jest.fn(() => console.log('QQ'));
+const onUpload = jest.fn();
 jest.mock('~/features/adoption/hooks/useUploadImage', () => ({
   __esModule: true,
   default: () => ({
