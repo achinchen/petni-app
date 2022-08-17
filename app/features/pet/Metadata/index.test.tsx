@@ -19,6 +19,6 @@ describe('rendering', () => {
   });
 
   test('render openAt', () => {
-    expect(screen.getByText(formatDate(`${PET.openAt}`))).toBeDefined();
+    expect(screen.getByText(formatDate(String(PET.openAt)))).toBeDefined();
   });
 });
