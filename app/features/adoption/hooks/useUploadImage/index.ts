@@ -4,7 +4,7 @@ import { useFetcher } from '@remix-run/react';
 import { FETCHER_IDLE_STATE } from '~/constants/utils';
 import { setAdoptionImageUrl } from '~/features/adoption/utils';
 
-type Parameters = {
+export type Parameters = {
   onFinish: (url: string) => void;
 };
 

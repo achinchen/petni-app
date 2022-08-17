@@ -1,7 +1,7 @@
 import type { SimpleAnimal } from '~/models/animal/type';
 import type { User } from '@prisma/client';
 import type { MouseEvent } from 'react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from '@remix-run/react';
 import AnimalCards from '~/components/common/AnimalCards';
 import Icon from '~/components/common/Icon';
@@ -16,8 +16,7 @@ type Props = {
   animals: SimpleAnimal[];
 };
 
-export default function Adoption({ user, animals: propsAnimals }: Props) {
-  const [animals, setAnimals] = useState<SimpleAnimal[]>([]);
+export default function Adoption({ user, animals }: Props) {
   const navigator = useNavigate();
   const [isOpenAuth, setOpenAuth] = useState(false);
 
@@ -34,15 +33,11 @@ export default function Adoption({ user, animals: propsAnimals }: Props) {
 
   const onCloseAuth = () => setOpenAuth(false);
 
-  const onInputClick = (event: MouseEvent<HTMLInputElement>) => {
+  const onClick = (event: MouseEvent<HTMLLabelElement>) => {
     if (user) return;
     event.preventDefault();
     setOpenAuth(true);
   };
-
-  useEffect(() => {
-    setAnimals(propsAnimals);
-  }, [propsAnimals]);
 
   return (
     <main className="content-width" m="4 lg:auto" pt="10">
@@ -62,14 +57,15 @@ export default function Adoption({ user, animals: propsAnimals }: Props) {
             bg="transparent"
             htmlFor="image"
             cursor="pointer"
+            onClick={onClick}
             {...(isUploadLoading && { style: { cursor: 'disabled' } })}
           >
             <input
               type="file"
+              data-testid="input"
               id="image"
               accept={IMAGE_EXTENSION}
               display="none"
-              onClick={onInputClick}
               onChange={onUpload}
               disabled={isUploadLoading}
             />
