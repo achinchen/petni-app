@@ -3,7 +3,13 @@ import React from 'react';
 
 const MyComponent = (props: any = {}) => {
   const updatedProps = Object.entries(props).reduce((temp, [key, value]) => {
-    return { ...temp, [key.match('on') ? 'onClick' : key]: value };
+    const isListener = key.match('on');
+    const formattedKey = isListener ? 'onClick' : key.toLowerCase();
+    const formattedValue = isListener ? value : String(value);
+    return {
+      ...temp,
+      [formattedKey]: formattedValue
+    };
   }, {});
   return <div {...updatedProps} />;
 };
