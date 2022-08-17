@@ -1,6 +1,6 @@
 import type { InitialState } from '~/features/adoption/edit/context';
 import type { OtherInfoState } from '~/features/adoption/edit/hooks/useOtherInfo';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MockComponent } from 'spec/utils/getMockComponent';
 import OtherInfo from '.';
@@ -110,9 +110,7 @@ describe('interaction: input', () => {
             <div />
           </OtherInfo>
         );
-        await act(() =>
-          userEvent.type(screen.getByPlaceholderText(placeholder), input)
-        );
+        await userEvent.type(screen.getByPlaceholderText(placeholder), input);
       });
 
       test('trigger dispatchOtherInfo', () => {
@@ -137,7 +135,7 @@ describe('interaction: select location', () => {
       </OtherInfo>
     );
 
-    await act(() => userEvent.click(screen.getByTestId(testId.districtSelect)));
+    await userEvent.click(screen.getByTestId(testId.districtSelect));
   });
 
   test('trigger dispatchOtherInfo', () => {

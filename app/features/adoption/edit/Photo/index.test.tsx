@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getPNGFile } from 'spec/utils/getMockFile';
 import * as Context from '~/features/adoption/edit/context';
@@ -9,24 +9,23 @@ import Photo, { UPDATE_IMAGE } from '.';
 let mock = {
   animalInfo: Context.initialState.animalInfo,
   imageUrl: 'https://image-url',
-  isLoading: false
+  isLoading: false,
+  onUpload: jest.fn()
 };
 
-const setImageUrl = jest.fn((url) => (mock.imageUrl = url));
 jest.spyOn(Context, 'useEditAdoptionContext').mockImplementation(() => {
   return {
     ...Context.initialState,
     animalInfo: mock.animalInfo,
     imageUrl: mock.imageUrl,
-    setImageUrl
+    setImageUrl: (url) => (mock.imageUrl = url)
   };
 });
 
-const onUpload = jest.fn();
 jest.mock('~/features/adoption/hooks/useUploadImage', () => ({
   __esModule: true,
   default: () => ({
-    onUpload,
+    onUpload: mock.onUpload,
     isLoading: mock.isLoading
   })
 }));
@@ -60,12 +59,10 @@ describe('interaction: upload', () => {
   const file = getPNGFile();
   beforeEach(async () => {
     render(<Photo />);
-    await act(() =>
-      userEvent.upload(screen.getByLabelText(UPDATE_IMAGE), file)
-    );
+    await userEvent.upload(screen.getByLabelText(UPDATE_IMAGE), file);
   });
 
   test('trigger onUpload', () => {
-    expect(onUpload).toBeCalled();
+    expect(mock.onUpload).toBeCalled();
   });
 });
