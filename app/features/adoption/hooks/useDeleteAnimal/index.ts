@@ -9,6 +9,7 @@ export default function useDeleteAnimal() {
 
   const onDelete = (id: AnimalId) => {
     if (isLoading) return;
+
     const formData = new FormData();
     formData.set('id', String(id));
 

@@ -1,10 +1,7 @@
 import { useState, useMemo } from 'react';
 import SearchSelect from '~/components/common/SearchSelect';
-import {
-  TAIWAN_COUNTRY_COUNT,
-  COUNTRIES,
-  DISTRICTS_BY_COUNTRIES
-} from './constants';
+import { formatCityInput, getInitCountryAndDistrict } from './utils';
+import { COUNTRIES, DISTRICTS_BY_COUNTRIES, PLACEHOLDER } from './constants';
 
 export type Payload = {
   country: string;
@@ -15,16 +12,6 @@ type Props = {
   location?: string;
   onFinish: ({ country, district }: Payload) => void;
 };
-
-const getInitCountryAndDistrict = (location = '') => {
-  if (!location) return ['', ''];
-  return [
-    location.slice(0, TAIWAN_COUNTRY_COUNT),
-    location.slice(TAIWAN_COUNTRY_COUNT)
-  ];
-};
-
-const formatCityInput = (input: string) => input.replace('台', '臺');
 
 export default function DistrictSelection({ location, onFinish }: Props) {
   const [initCountry, initDistrict] = useMemo(
@@ -41,7 +28,7 @@ export default function DistrictSelection({ location, onFinish }: Props) {
   );
 
   const onDistrictSelect = (district: Payload['district']) => {
-    if (!country) return;
+    if (!country || !district) return;
     setDistrict(district);
     onFinish({ country, district });
   };
@@ -58,13 +45,13 @@ export default function DistrictSelection({ location, onFinish }: Props) {
       <SearchSelect
         initValue={country}
         options={COUNTRIES}
-        placeholder="選擇城市"
+        placeholder={PLACEHOLDER.COUNTRY}
         onSelect={onCountrySelect}
         formatFilterInput={formatCityInput}
       />
       <SearchSelect
         options={districtOptions}
-        placeholder="選擇地區"
+        placeholder={PLACEHOLDER.DISTRICT}
         disabled={!country}
         initValue={district}
         onSelect={onDistrictSelect}

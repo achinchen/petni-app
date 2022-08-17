@@ -3,12 +3,19 @@ import { useEditAdoptionContext } from '~/features/adoption/edit/context';
 import { getAdoptionImageUrl } from '~/features/adoption/utils';
 import useUploadImage from '~/features/adoption/hooks/useUploadImage';
 import { IMAGE_EXTENSION } from '~/features/adoption/constants';
+import { FAMILY_LABEL } from '~/constants';
+import { DEFAULT_VALUE } from '~/constants/options';
 
-const UPDATE_IMAGE = '替換照片';
+export const UPDATE_IMAGE = '替換照片';
 
 export default function Photo() {
-  const { imageUrl, setImageUrl } = useEditAdoptionContext();
+  const { imageUrl, setImageUrl, animalInfo } = useEditAdoptionContext();
 
+  const { family, name } = animalInfo;
+  const alt =
+    family === DEFAULT_VALUE
+      ? `送養動物的照片`
+      : `${name}${FAMILY_LABEL[family]}的照片`;
   const { onUpload, isLoading } = useUploadImage({ onFinish: setImageUrl });
 
   useEffect(() => {
@@ -17,13 +24,9 @@ export default function Photo() {
 
   return (
     <div p="4" bg="md:white" border="rounded-3xl">
-      <div
-        w="52"
-        h="70"
-        border="rounded-2xl"
-        bg="center cover"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      />
+      <figure w="52" h="70">
+        <img w="100%" h="100%" border="rounded-2xl" src={imageUrl} alt={alt} />
+      </figure>
       <label
         htmlFor="image"
         display="flex"

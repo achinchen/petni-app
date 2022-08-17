@@ -44,7 +44,7 @@ export default function Select({
       transition="~ duration-500"
       style={{ visibility: show ? 'visible' : 'hidden' }}
     >
-      <li role="option" aria-selected="false" p="2" text="black">
+      <li role="option" aria-selected="false" disabled p="2" text="black">
         {placeholder}
       </li>
       {options.map((option) => (

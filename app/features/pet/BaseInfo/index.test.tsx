@@ -1,5 +1,5 @@
 import * as Remix from '@remix-run/react';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
 import BaseInfo from '.';
@@ -58,7 +58,7 @@ describe('interaction', () => {
     jest.spyOn(Remix, 'useLoaderData').mockReturnValueOnce({ pet: PET });
     render(<BaseInfo />);
     const favoriteButtons = screen.getByRole('button');
-    await act(() => userEvent.click(favoriteButtons));
+    await userEvent.click(favoriteButtons);
   });
 
   test('call onAdd after clicking button', () => {

@@ -35,7 +35,7 @@ jest.mock('@remix-run/react', () => {
 
 const testId = {
   loading: 'loading',
-  animalCards: 'animalCards'
+  animalCards: ANIMAL_CARDS_TEST_ID
 };
 
 const mocked = {
@@ -83,13 +83,13 @@ describe('rendering', () => {
   });
 
   test('not render AnimalCards when animals is falsy', () => {
-    expect(screen.queryByTestId(ANIMAL_CARDS_TEST_ID)).toBeFalsy();
+    expect(screen.queryByTestId(testId.animalCards)).toBeFalsy();
   });
 
   test('render AnimalCards when animals is truthy', () => {
     RemixReact.useFetcher().data = { animals: ANIMALS };
     renderComponent();
-    expect(screen.getByTestId(ANIMAL_CARDS_TEST_ID)).toBeDefined();
+    expect(screen.getByTestId(testId.animalCards)).toBeDefined();
   });
 });
 
@@ -116,13 +116,13 @@ describe('onDelete', () => {
   });
 
   test('update ids', async () => {
-    const animalCards = screen.getByTestId(ANIMAL_CARDS_TEST_ID);
+    const animalCards = screen.getByTestId(testId.animalCards);
     await act(() => userEvent.click(animalCards));
     expect(mocked.ids).not.toContain(DELETE_ID);
   });
 
   test('update animals', async () => {
-    const animalCards = screen.getByTestId(ANIMAL_CARDS_TEST_ID);
+    const animalCards = screen.getByTestId(testId.animalCards);
     await act(() => userEvent.click(animalCards));
     expect(animalCards.getAttribute('animals')?.split(',')).toHaveLength(
       ANIMALS.length - 1
