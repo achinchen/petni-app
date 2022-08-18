@@ -12,7 +12,8 @@ export function Pairing() {
   const showLoading = isLoading || !init;
 
   useEffect(() => {
-    setTimeout(() => setInit(true), 0);
+    const id = setTimeout(() => setInit(true), 0);
+    return () => clearInterval(id);
   }, []);
 
   return (
