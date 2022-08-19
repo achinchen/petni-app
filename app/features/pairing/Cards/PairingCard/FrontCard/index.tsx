@@ -1,13 +1,14 @@
 import type { Animal } from '@prisma/client';
-import type { SoundType } from '~/hooks/useSound';
+import type { Animation } from './constants';
 import { useState } from 'react';
 import { Link } from '@remix-run/react';
 import Icon from '~/components/common/Icon';
 import IconButton from '~/components/common/IconButton';
-import useSwipe from '~/features/pairing/hooks/useSwipe';
+import useSwipe from './hooks/useSwipe';
 import useSound from '~/hooks/useSound';
 import useFavorite from '~/hooks/useFavorite';
 import { IMAGE_MISSING, PLACEHOLDER_IMG } from '~/constants/pet';
+import { ANIMATION, FAMILY_SOUND } from './constants';
 import { getIconByGenderAndFamily } from '~/utils';
 
 type Props = {
@@ -16,23 +17,23 @@ type Props = {
 };
 
 export default function FrontCard({ currentCard, onNext }: Props) {
-  const [animation, setAnimation] = useState<'close' | 'favorite'>();
+  const [animation, setAnimation] = useState<Animation>();
 
   const { imageUrl, id, location, gender, family } = currentCard;
 
   const withImage = Boolean(imageUrl);
   const style = withImage ? { backgroundImage: `url(${imageUrl})` } : {};
   const genderIcon = getIconByGenderAndFamily({ gender, family });
-  const onPlay = useSound();
+  const { onPlay } = useSound();
   const { onAdd } = useFavorite();
 
   const onClose = () => {
-    setAnimation('close');
+    setAnimation(ANIMATION.CLOSE);
   };
   const onFavorite = () => {
     onAdd(id);
-    setAnimation('favorite');
-    onPlay((family ? family.toLowerCase() : 'general') as SoundType);
+    setAnimation(ANIMATION.FAVORITE);
+    onPlay(FAMILY_SOUND[family]);
   };
   const onAnimationEnd = () => {
     onNext();

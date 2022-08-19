@@ -9,7 +9,7 @@ export type SettingState = {
 
 export const initialSetting = {
   [Setting.SearchNear]: true,
-  [Setting.Sounds]: true
+  [Setting.Sound]: true
 };
 
 function reducer(state: SettingState, type: Setting) {

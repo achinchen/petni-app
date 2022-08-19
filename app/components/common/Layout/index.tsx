@@ -4,7 +4,7 @@ import {
   NavigationMobile
 } from '~/components/common/Layout/Navigation';
 import HeaderMobile from './Header';
-import BackgroundSounds from '~/components/common/Layout/BackgroundSounds';
+import BackgroundSound from '~/components/common/Layout/BackgroundSound';
 
 type Props = {
   children: JSX.Element;
@@ -18,7 +18,7 @@ export default function Layout({ children, withMobileHeader = true }: Props) {
       {withMobileHeader && <HeaderMobile />}
       {children}
       <NavigationMobile />
-      <BackgroundSounds />
+      <BackgroundSound />
     </Fragment>
   );
 }

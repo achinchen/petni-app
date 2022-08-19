@@ -13,9 +13,9 @@ function Panel() {
 
   const updatePreference = () => {
     return new Promise((resolve) => {
-      const { sounds } = setting;
+      const { sound } = setting;
       setFilter(filter);
-      setSoundPreference(sounds);
+      setSoundPreference(sound);
       resolve(null);
     });
   };

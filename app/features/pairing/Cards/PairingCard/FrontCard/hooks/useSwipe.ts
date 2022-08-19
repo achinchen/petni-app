@@ -1,6 +1,6 @@
 import { useRef, useEffect, useCallback } from 'react';
 
-type Parameters = {
+export type Parameters = {
   dom?: HTMLElement;
   onSwipeLeft: () => void;
   onSwipeRight: () => void;
