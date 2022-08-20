@@ -10,6 +10,7 @@ import useFavorite from '~/hooks/useFavorite';
 import { IMAGE_MISSING, PLACEHOLDER_IMG } from '~/constants/pet';
 import { ANIMATION, FAMILY_SOUND } from './constants';
 import { getIconByGenderAndFamily } from '~/utils';
+import { getLabelById } from '~/features/pairing/Cards/PairingCard/utils';
 
 type Props = {
   currentCard: Animal;
@@ -48,6 +49,7 @@ export default function FrontCard({ currentCard, onNext }: Props) {
   return (
     <div
       position="absolute"
+      aria-label={getLabelById(id)}
       left="1/2"
       top="1/2"
       w="70vmin sm:56vmin md:80"
