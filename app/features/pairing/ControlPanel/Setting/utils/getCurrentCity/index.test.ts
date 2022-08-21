@@ -1,8 +1,7 @@
 import * as utils from './utils';
-import { getCurrentCity } from '.';
+import getCurrentCity from '.';
 
 import * as ControlPanelUtils from '~/features/pairing/ControlPanel/utils';
-
 jest.spyOn(ControlPanelUtils, 'setLocationCity');
 
 const city = '臺北市';

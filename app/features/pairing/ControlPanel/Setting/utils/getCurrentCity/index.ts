@@ -5,7 +5,7 @@ import {
   getCityFromAddressXML
 } from './utils';
 
-export async function getCurrentCity() {
+export default async function getCurrentCity() {
   const geolocation = await getGeolocation();
   const addressXML = await fetchAddressXMLByGeolocation(geolocation);
   const city = getCityFromAddressXML(addressXML);
