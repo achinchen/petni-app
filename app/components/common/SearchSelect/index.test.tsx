@@ -34,7 +34,7 @@ describe('rendering', () => {
   });
 });
 
-describe('initial', () => {
+describe('initialization', () => {
   const initValue = 'QQ';
 
   beforeEach(() => {
