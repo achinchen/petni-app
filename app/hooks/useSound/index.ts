@@ -2,7 +2,7 @@ import { SOUND } from '~/components/common/Layout/BackgroundSound/constants';
 import { useEffect, useRef } from 'react';
 import { getShouldPlaySound } from './utils';
 
-const DEFAULT_VOLUME = 0.25;
+export const DEFAULT_VOLUME = 0.25;
 
 export type SoundType = keyof typeof SOUND;
 type Refs = {
