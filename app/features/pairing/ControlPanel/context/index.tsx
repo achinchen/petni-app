@@ -23,7 +23,7 @@ type InitialState = {
   dispatchSetting: Dispatch<Setting>;
 };
 
-const initialState = {
+export const initialState = {
   filter: initialFilter,
   dispatchFilter: () => {},
   setting: initialSetting,
