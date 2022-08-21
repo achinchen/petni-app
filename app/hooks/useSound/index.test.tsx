@@ -37,7 +37,7 @@ describe('return value', () => {
   });
 });
 
-describe('initial', () => {
+describe('initialization', () => {
   beforeEach(() => {
     render(<BackgroundSound />);
     renderHook(() => useSound());
