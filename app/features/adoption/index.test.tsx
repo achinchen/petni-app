@@ -8,8 +8,7 @@ import MockAnimalCards, {
 } from 'spec/__mock__/components/AnimalCards';
 import { getPNGFile } from 'spec/utils/getMockFile';
 import { BrowserRouter as Router } from 'react-router-dom';
-import * as RemixReact from '@remix-run/react';
-import { TITLE, UPLOAD_IMAGE_PLACEHOLDER } from './constants';
+import { UPLOAD_IMAGE_PLACEHOLDER } from './constants';
 
 import Adoption from '.';
 
