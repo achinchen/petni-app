@@ -1,5 +1,7 @@
 /* eslint-disable react/display-name */
 import React from 'react';
+import { screen } from '@testing-library/react';
+import kebabCase from 'kebab-case';
 
 const BOOLEAN_ATTRIBUTES = [
   'allowfullscreen',
@@ -31,7 +33,7 @@ const BOOLEAN_ATTRIBUTES = [
 const MyComponent = (props: any = {}) => {
   const updatedProps = Object.entries(props).reduce((temp, [key, value]) => {
     const isListener = key.match(/^on/);
-    const formattedKey = isListener ? 'onClick' : key.toLowerCase();
+    const formattedKey = isListener ? 'onClick' : kebabCase(key);
     const shouldUseOriginValue = isListener || BOOLEAN_ATTRIBUTES.includes(key);
     const formattedValue = shouldUseOriginValue ? value : String(value);
     return {
@@ -42,9 +44,14 @@ const MyComponent = (props: any = {}) => {
   return <div {...updatedProps} />;
 };
 
+let testId = '';
+export const getProp = (prop: string) =>
+  screen.getByTestId(testId).getAttribute(kebabCase(prop));
+
 export const MockComponent =
   (name: string, mockProps: any = {}) =>
   (props: any = {}) => {
+    testId = name;
     return React.createElement(MyComponent, {
       'data-testid': name,
       ...props,
