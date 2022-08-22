@@ -30,7 +30,7 @@ const BOOLEAN_ATTRIBUTES = [
 
 const MyComponent = (props: any = {}) => {
   const updatedProps = Object.entries(props).reduce((temp, [key, value]) => {
-    const isListener = key.match('on');
+    const isListener = key.match(/^on/);
     const formattedKey = isListener ? 'onClick' : key.toLowerCase();
     const shouldUseOriginValue = isListener || BOOLEAN_ATTRIBUTES.includes(key);
     const formattedValue = shouldUseOriginValue ? value : String(value);
