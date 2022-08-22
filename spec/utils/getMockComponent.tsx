@@ -46,7 +46,7 @@ const MyComponent = (props: any = {}) => {
 
 let testId = '';
 export const getProp = (prop: string) =>
-  screen.getByTestId(testId).getAttribute(kebabCase(prop));
+  screen.getAllByTestId(testId)[0].getAttribute(kebabCase(prop));
 
 export const MockComponent =
   (name: string, mockProps: any = {}) =>
