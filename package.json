@@ -53,6 +53,7 @@
     "jest": "^28.0.3",
     "jest-environment-jsdom": "^28.0.2",
     "jest-mock-extended": "^2.0.5",
+    "kebab-case": "^1.0.1",
     "node-fetch": "^3.2.10",
     "prettier": "^2.5.1",
     "prisma": "^4.1.0",

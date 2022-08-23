@@ -1,3 +1,5 @@
 import './singleton';
+import './remix-node';
 
-export { prismaMock } from './singleton';
+export { PrismaMock } from './singleton';
+export { RemixNodeMock } from './remix-node';

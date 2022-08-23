@@ -1,7 +1,7 @@
 import { formatGender } from './index';
 import { Gender } from '@prisma/client';
 
-describe('updateAnimals/utils#formatGender', () => {
+describe('basic', () => {
   const testCases = [
     {
       input: 'F',
@@ -22,7 +22,7 @@ describe('updateAnimals/utils#formatGender', () => {
   ];
 
   testCases.forEach(({ input, output }) => {
-    it(`input: "${input}" returns ${output} expectedly`, () => {
+    test(`input: "${input}" returns ${output} expectedly`, () => {
       expect(formatGender(input)).toBe(output);
     });
   });

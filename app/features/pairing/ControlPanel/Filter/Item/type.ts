@@ -1,10 +1,9 @@
 import type {
-  Family,
   FamilyOptions,
   GenderOptions,
   SizeOptions,
   ColorOptions
-} from '~/features/pairing/ControlPanel/Filter/type';
+} from '~/features/pairing/ControlPanel/hooks/useFilterState/type';
 import type {
   DYNAMIC_FILTER_OPTIONS,
   GENERAL_FILTER_OPTIONS

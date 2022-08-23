@@ -1,4 +1,4 @@
-export const Actions = [
+export const ACTIONS = [
   {
     to: '/',
     label: '配對',

@@ -1,6 +1,5 @@
 import type { SimpleAnimal } from '~/models/animal/type';
 import type { FavoriteIdSet } from '~/hooks/useFavorite/utils';
-
 import { useEffect, useState } from 'react';
 import { useFetcher } from '@remix-run/react';
 import AnimalCards from '~/components/common/AnimalCards';

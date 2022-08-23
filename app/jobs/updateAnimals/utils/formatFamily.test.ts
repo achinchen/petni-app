@@ -1,7 +1,7 @@
 import { formatFamily } from './index';
 import { Family } from '@prisma/client';
 
-describe('updateAnimals/utils#formatFamily', () => {
+describe('basic', () => {
   const testCases = [
     {
       input: '貓',
@@ -22,7 +22,7 @@ describe('updateAnimals/utils#formatFamily', () => {
   ];
 
   testCases.forEach(({ input, output }) => {
-    it(`input: "${input}" returns ${output} expectedly`, () => {
+    test(`input: "${input}" returns ${output} expectedly`, () => {
       expect(formatFamily(input)).toBe(output);
     });
   });

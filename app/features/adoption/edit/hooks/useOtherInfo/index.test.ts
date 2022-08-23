@@ -1,5 +1,5 @@
 import { getInitialOtherInfo, INITIAL_OTHER_INFO } from '.';
-import { ANIMAL } from '~/features/adoption/edit/hooks/mockData';
+import { ANIMAL } from 'spec/__mock__/constants/animal';
 
 describe('getInitialOtherInfo', () => {
   test('return INITIAL_OTHER_INFO when arg is undefined', () => {

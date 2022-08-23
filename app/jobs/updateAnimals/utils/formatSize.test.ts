@@ -1,7 +1,7 @@
 import { formatSize } from './index';
 import { Size } from '@prisma/client';
 
-describe('updateAnimals/utils#formatSize', () => {
+describe('basic', () => {
   const testCases = [
     {
       input: 'BIG',
@@ -22,7 +22,7 @@ describe('updateAnimals/utils#formatSize', () => {
   ];
 
   testCases.forEach(({ input, output }) => {
-    it(`input: "${input}" returns ${output} expectedly`, () => {
+    test(`input: "${input}" returns ${output} expectedly`, () => {
       expect(formatSize(input)).toBe(output);
     });
   });

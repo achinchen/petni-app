@@ -1,10 +1,5 @@
+import type { Family, Gender, Size, Color } from './type';
 import { useEffect, useReducer } from 'react';
-import type {
-  Family,
-  Gender,
-  Size,
-  Color
-} from '~/features/pairing/ControlPanel/Filter/type';
 import { DEFAULT_VALUE } from '~/constants/options';
 import { getFilter } from '~/features/pairing/ControlPanel/utils';
 
@@ -15,8 +10,8 @@ export type FilterState = {
   size: Size;
 };
 
-type FilterType = keyof FilterState;
-type Payload = ValueOf<FilterState>;
+export type FilterType = keyof FilterState;
+export type Payload = ValueOf<FilterState>;
 export type Action = {
   type: FilterType;
   value: Payload;

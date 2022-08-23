@@ -2,6 +2,7 @@ import { Link } from '@remix-run/react';
 import Icon from '~/components/common/Icon';
 import { usePairContext } from '~/features/pairing/context';
 import { getIconByGenderAndFamily } from '~/utils';
+import { getLabelById } from '~/features/pairing/Cards/PairingCard/utils';
 
 export default function RecommendCards() {
   const { recommendCards } = usePairContext();
@@ -23,16 +24,15 @@ export default function RecommendCards() {
           shadow="default"
           to={`/pets/${id}`}
         >
-          <div
-            w="12"
-            h="12"
-            mr="2"
-            border="rounded-1/2"
-            bg="cover"
-            style={{
-              backgroundImage: `url(${imageUrl})`
-            }}
-          />
+          <figure w="12" h="12" mr="2">
+            <img
+              w="100%"
+              h="100%"
+              border="rounded-1/2"
+              src={imageUrl}
+              alt={getLabelById(id)}
+            />
+          </figure>
           <div>
             <span flex="~" text="4.5" font="medium">
               {id}

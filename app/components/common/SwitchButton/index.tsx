@@ -6,6 +6,8 @@ type Props = {
 export default function SwitchButton({ checked, onChange }: Props) {
   return (
     <div
+      role="checkbox"
+      aria-checked={checked}
       position="relative"
       display="inline-block"
       h="7"
@@ -18,9 +20,6 @@ export default function SwitchButton({ checked, onChange }: Props) {
       onClick={onChange}
     >
       <span
-        role="checkbox"
-        aria-checked={checked}
-        tabIndex={0}
         position="absolute"
         top="1/2"
         left="1"

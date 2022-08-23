@@ -1,15 +1,14 @@
 import type { Parameters as UseUploadImageParameters } from './hooks/useUploadImage';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MockComponent } from 'spec/utils/getMockComponent';
+import { MockComponent, getProp } from 'spec/utils/getMockComponent';
 import MockAnimalCards, {
   TEST_ID as ANIMAL_CARDS_TEST_ID,
   ANIMALS
 } from 'spec/__mock__/components/AnimalCards';
 import { getPNGFile } from 'spec/utils/getMockFile';
 import { BrowserRouter as Router } from 'react-router-dom';
-import * as RemixReact from '@remix-run/react';
-import { TITLE, UPLOAD_IMAGE_PLACEHOLDER } from './constants';
+import { UPLOAD_IMAGE_PLACEHOLDER } from './constants';
 
 import Adoption from '.';
 
@@ -136,24 +135,18 @@ describe('interaction: click uploader', () => {
 
   test('not open LoginPanel when user is truthy', async () => {
     await setupComponentAndClickUploader(true);
-    expect(screen.getByTestId(testId.loginPanel).getAttribute('isopen')).toBe(
-      'false'
-    );
+    expect(getProp('isOpen', testId.loginPanel)).toBe('false');
   });
 
   test('open LoginPanel when user is null', async () => {
     await setupComponentAndClickUploader(false);
-    await expect(
-      screen.getByTestId(testId.loginPanel).getAttribute('isopen')
-    ).toBe('true');
+    await expect(getProp('isOpen', testId.loginPanel)).toBe('true');
   });
 
   test('close LoginPanel when trigger onClose', async () => {
     await setupComponentAndClickUploader(false);
     await userEvent.click(screen.getByTestId(testId.loginPanel));
-    expect(screen.getByTestId(testId.loginPanel).getAttribute('isopen')).toBe(
-      'false'
-    );
+    expect(getProp('isOpen', testId.loginPanel)).toBe('false');
   });
 });
 

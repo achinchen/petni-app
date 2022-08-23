@@ -42,9 +42,7 @@ export default function useFavorite({ refresh }: Parameters = {}) {
 
   useEffect(() => {
     if (fetcher.data && refresh) {
-      console.log('~~~~');
       window.location.replace(window.location.href);
-      console.log('~~~~', window.location.replace);
     }
   }, [fetcher.data, refresh]);
 
