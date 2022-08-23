@@ -1,4 +1,4 @@
-import { fetchAnimals } from './index';
+import { fetchAnimals, getIsAvailableAnimal } from './index';
 import type { RawAnimal } from './types';
 import { RAW_ANIMALS } from './mockData';
 
@@ -31,8 +31,8 @@ describe('updateAnimals/utils#fetchAnimals', () => {
       result = (await fetchAnimals()) as RawAnimal[];
     });
 
-    it('return expected raw animals', async () => {
-      expect(result).toEqual(RAW_ANIMALS);
+    it('return expected availableAnimal animals', async () => {
+      expect(result).toEqual(RAW_ANIMALS.filter(getIsAvailableAnimal));
     });
   });
 });

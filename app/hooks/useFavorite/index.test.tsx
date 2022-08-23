@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react-hooks';
 import useFavorite from '.';
 import * as RemixReact from '@remix-run/react';
 import * as utils from './utils';
@@ -98,14 +98,14 @@ describe('onAdd', () => {
   let ids: ReturnResult['ids'];
   const testId = 4293838;
   const fetcher = RemixReact.useFetcher();
-  beforeEach(() => {
+  beforeEach(async () => {
     jest.spyOn(utils, 'setFavoriteIdsPreference');
     const {
       result: { current }
     } = renderHook(() => useFavorite());
 
     ids = current.ids;
-    current.onAdd(testId);
+    await act(() => current.onAdd(testId));
   });
 
   test('call setFavoriteIdsPreference', () => {
@@ -134,7 +134,7 @@ describe('onDelete', () => {
     } = renderHook(() => useFavorite());
 
     ids = current.ids;
-    current.onDelete(testId);
+    act(() => current.onDelete(testId));
   });
 
   test('call setFavoriteIdsPreference', () => {

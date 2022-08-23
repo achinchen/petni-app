@@ -1,6 +1,6 @@
 import type { InitialState } from '~/features/pairing/context';
 import { render, screen } from '@testing-library/react';
-import { MockComponent } from 'spec/utils/getMockComponent';
+import { MockComponent, getProp } from 'spec/utils/getMockComponent';
 import { ANIMAL } from 'spec/__mock__/constants/animal';
 import PairingCard from '.';
 
@@ -35,15 +35,11 @@ describe('rendering: empty', () => {
   });
 
   test('render BackCard', () => {
-    expect(screen.getByTestId(testId.backCard).getAttribute('isempty')).toBe(
-      'true'
-    );
+    expect(getProp('isEmpty', testId.backCard)).toBe('true');
   });
 
   test('render CenterCard', () => {
-    expect(screen.getByTestId(testId.centerCard).getAttribute('isempty')).toBe(
-      'true'
-    );
+    expect(getProp('isEmpty', testId.centerCard)).toBe('true');
   });
 
   test('not render FrontCard', () => {
@@ -58,15 +54,11 @@ describe('rendering: not empty', () => {
   });
 
   test('render BackCard with empty', () => {
-    expect(screen.getByTestId(testId.backCard).getAttribute('isempty')).toBe(
-      'false'
-    );
+    expect(getProp('isEmpty', testId.backCard)).toBe('false');
   });
 
   test('render CenterCard with empty', () => {
-    expect(screen.getByTestId(testId.centerCard).getAttribute('isempty')).toBe(
-      'false'
-    );
+    expect(getProp('isEmpty', testId.centerCard)).toBe('false');
   });
 
   test('render FrontCard', () => {
