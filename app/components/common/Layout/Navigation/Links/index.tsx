@@ -5,7 +5,7 @@ import type { IsActive } from './types';
 import type { IconType } from '~/components/common/Icon';
 import Icon from '~/components/common/Icon';
 import Label from './Label';
-import { Actions } from './constants';
+import { ACTIONS } from './constants';
 
 type Props = {
   withLabel?: boolean;
@@ -30,7 +30,7 @@ export default function Links({
 
   return (
     <div flex="~" ml="auto" bg="white" {...attributifyOptions}>
-      {Actions.map(({ icon, label, to }, index) => (
+      {ACTIONS.map(({ icon, label, to }, index) => (
         <NavLink
           key={to}
           to={to}
