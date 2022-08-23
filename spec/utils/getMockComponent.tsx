@@ -50,7 +50,7 @@ export const getProp = (prop: string, targetTestId = testId) =>
 
 export const MockComponent =
   (name: string, mockProps: any = {}) =>
-  (props: any = {}) => {
+  (props: any = {}): JSX.Element => {
     testId = name;
     return React.createElement(MyComponent, {
       'data-testid': name,
