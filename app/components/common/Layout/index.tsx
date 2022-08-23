@@ -1,21 +1,18 @@
 import { Fragment } from 'react';
-import {
-  NavigationDesktop,
-  NavigationMobile
-} from '~/components/common/Layout/Navigation';
-import HeaderMobile from './Header';
-import BackgroundSound from '~/components/common/Layout/BackgroundSound';
+import { NavigationDesktop, NavigationMobile } from './Navigation';
+import Header from './Header';
+import BackgroundSound from './BackgroundSound';
 
 type Props = {
   children: JSX.Element;
-  withMobileHeader?: boolean;
+  withHeader?: boolean;
 };
 
-export default function Layout({ children, withMobileHeader = true }: Props) {
+export default function Layout({ children, withHeader = true }: Props) {
   return (
     <Fragment>
       <NavigationDesktop />
-      {withMobileHeader && <HeaderMobile />}
+      {withHeader && <Header />}
       {children}
       <NavigationMobile />
       <BackgroundSound />
