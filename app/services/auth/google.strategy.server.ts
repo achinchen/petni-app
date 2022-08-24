@@ -7,7 +7,7 @@ import { OAuth2Strategy } from 'remix-auth-oauth2';
 
 export const PROVIDER_NAME = 'google';
 
-const SCOPE = {
+export const SCOPE = {
   USER_INFO: 'https://www.googleapis.com/auth/userinfo.profile',
   USER_EMAIL: 'https://www.googleapis.com/auth/userinfo.email'
 };

@@ -1,4 +1,4 @@
-module.exports = {
+const CONFIG = {
   moduleNameMapper: {
     '~/(.*)$': '<rootDir>/app/$1',
     'spec/(.*)$': '<rootDir>/spec/$1',
@@ -10,6 +10,21 @@ module.exports = {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
     '<rootDir>/spec/utils/fileTransformer.ts',
   },
-  testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/spec/setup/index.ts'],
+}
+module.exports = {
+  projects: [
+    {
+      ...CONFIG,
+      displayName: 'client',
+      testEnvironment: 'jsdom',
+      testPathIgnorePatterns: ['server.test.tsx?']
+    },
+    {
+      ...CONFIG,
+      displayName: 'server',
+      testEnvironment: 'node',
+      testRegex: [/server.test.tsx?/],
+    },
+  ]
 };
