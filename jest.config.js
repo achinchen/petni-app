@@ -1,15 +1,4 @@
-module.exports = {
-  projects: [
-    {
-      displayName: 'client',
-      testEnvironment: 'jsdom',
-    },
-    {
-      displayName: 'server',
-      testEnvironment: 'node',
-      testMatch: ['<rootDir>/**/*.server.test.tsx'],
-    },
-  ],
+const CONFIG = {
   moduleNameMapper: {
     '~/(.*)$': '<rootDir>/app/$1',
     'spec/(.*)$': '<rootDir>/spec/$1',
@@ -22,4 +11,20 @@ module.exports = {
     '<rootDir>/spec/utils/fileTransformer.ts',
   },
   setupFilesAfterEnv: ['<rootDir>/spec/setup/index.ts'],
+}
+module.exports = {
+  projects: [
+    {
+      ...CONFIG,
+      displayName: 'client',
+      testEnvironment: 'jsdom',
+      testPathIgnorePatterns: ['server.test.tsx?']
+    },
+    {
+      ...CONFIG,
+      displayName: 'server',
+      testEnvironment: 'node',
+      testRegex: [/server.test.tsx?/],
+    },
+  ]
 };
