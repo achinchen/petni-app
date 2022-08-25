@@ -2,8 +2,6 @@ import { fetchAnimals, getIsAvailableAnimal } from './index';
 import type { RawAnimal } from './types';
 import { RAW_ANIMALS } from './mockData';
 
-jest.mock('@remix-run/node');
-
 describe('updateAnimals/utils#fetchAnimals', () => {
   describe('failure happened', () => {
     let result: undefined;

@@ -1,6 +1,4 @@
 import { GoogleStrategy, SCOPE } from './google.strategy.server';
-import fetchMock from 'jest-fetch-mock';
-fetchMock.enableMocks();
 
 const verify = jest.fn();
 const callbackURL = 'https://example.app/callback';
