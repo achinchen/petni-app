@@ -4,8 +4,8 @@ type Parameters = {
 };
 
 export default function parsePayloadByJson({ formData, fallback }: Parameters) {
-  const payload = formData.get('json') as string | null;
   try {
+    const payload = formData.get('json') as string | null;
     return payload ? JSON.parse(payload) : fallback;
   } catch {
     return fallback;
