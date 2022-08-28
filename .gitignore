@@ -2,10 +2,10 @@ node_modules
 
 .cache
 .env
-.local.env
-.test.env
+.env.local
 .vercel
 .output
+yarn-error.log
 
 /build/
 /public/build
