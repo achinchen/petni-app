@@ -25,7 +25,7 @@ module.exports = {
       displayName: 'server',
       testEnvironment: 'node',
       testRegex: [/server.test.tsx?/],
-      setupFilesAfterEnv: ['<rootDir>/spec/setup/client.ts', '<rootDir>/spec/setup/server.ts'],
+      setupFilesAfterEnv: ['<rootDir>/spec/setup/server.ts'],
     },
   ]
 };
