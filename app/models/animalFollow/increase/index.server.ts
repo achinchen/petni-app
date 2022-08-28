@@ -1,7 +1,7 @@
 import type { AnimalId } from '~/models/animal/type';
 import { db } from '~/utils/db/index.server';
 
-export default async function createFollow(animalId: AnimalId) {
+export default async function increaseFollow(animalId: AnimalId) {
   const animal = await db.animalFollow.findFirst({ where: { animalId } });
 
   if (!animal) {
@@ -10,7 +10,6 @@ export default async function createFollow(animalId: AnimalId) {
         animalId
       }
     });
-
     return animalFollow;
   }
 

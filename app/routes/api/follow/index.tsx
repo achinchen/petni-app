@@ -1,11 +1,11 @@
 import type { ActionFunction } from '@remix-run/node';
 import type { AnimalId } from '~/models/animal/type';
 import { json } from '@remix-run/node';
-import increaseFollow from '~/models/animalFollow/increaseFollow/index.server';
-import decreaseFollow from '~/models/animalFollow/decreaseFollow/index.server';
+import increaseFollow from '~/models/AnimalFollow/increase/index.server';
+import decreaseFollow from '~/models/AnimalFollow/decrease/index.server';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
 
-const METHOD_DIST = {
+export const METHOD_DIST = {
   DELETE: decreaseFollow,
   PATCH: increaseFollow
 };
@@ -23,5 +23,5 @@ export const action: ActionFunction = async ({ request }) => {
   const animals = await action(id);
   if (!animals) return json(null, 500);
 
-  return json({ animals });
+  return json(null, 200);
 };
