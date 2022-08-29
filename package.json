@@ -13,7 +13,10 @@
     "postinstall": "remix setup node",
     "db:seed": "node --require esbuild-register ./database/seed.ts",
     "img:album": "node --require esbuild-register ./app/utils/imgur/album/index.server.ts ",
-    "test": "jest -i"
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "test:migration": "npx prisma migrate dev", 
+    "test": "NODE_ENV=test yarn docker:up && jest -i"
   },
   "dependencies": {
     "@lottiefiles/lottie-player": "^1.5.6",
