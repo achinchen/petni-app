@@ -13,7 +13,7 @@ export default function useFavorite({ refresh }: Parameters = {}) {
 
   const createFollow = async (targetId: FavoriteId) => {
     const formData = new FormData();
-    formData.set('json', JSON.stringify(targetId));
+    formData.set('json', String(targetId));
 
     fetcher.submit(formData, {
       method: 'patch',
