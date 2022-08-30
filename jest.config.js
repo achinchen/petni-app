@@ -11,6 +11,7 @@ const CONFIG = {
     '<rootDir>/spec/utils/fileTransformer.ts',
   }
 }
+
 module.exports = {
   projects: [
     {
