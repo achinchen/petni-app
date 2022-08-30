@@ -18,7 +18,7 @@ export const action: ActionFunction = async ({ request }) => {
   );
 
   const result = await uploadImage(formData);
-  if (!result) return json({}, 500);
+  if (!result) return json(null, 500);
 
-  return json({ url: result.url });
+  return json({ url: result.url }, 200);
 };
