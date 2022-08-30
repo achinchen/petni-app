@@ -5,7 +5,8 @@ import { installGlobals } from '@remix-run/node';
 jest.mock('@remix-run/node', () => ({
   __esModule: true,
   installGlobals: jest.fn(),
-  redirect: jest.fn()
+  redirect: jest.fn(),
+  json: jest.fn()
 }));
 
 beforeEach(() => {

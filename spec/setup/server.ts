@@ -1,8 +1,9 @@
 import path from 'node:path';
 import dotenv from 'dotenv';
-import fetchMock from 'jest-fetch-mock';
+import './modules/remix-node';
+import './modules/fetch';
+import './modules/form-data';
 
-fetchMock.enableMocks();
 dotenv.config({
   path: path.resolve(__dirname, `../../.env.${process.env.NODE_ENV}`)
 });
