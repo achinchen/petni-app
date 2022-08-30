@@ -4,7 +4,8 @@ import uploadImage from '~/utils/imgur/image/upload.server';
 import { action } from './update';
 
 const mock = {
-  request: new Request('', { method: 'DELETE' })
+  request: new Request('', { method: 'DELETE' }),
+  uploadImage: uploadImage as jest.Mock
 };
 
 const context = getContext({ request: mock.request });
@@ -19,11 +20,11 @@ describe('upload image', () => {
 
   it('trigger uploadImage', async () => {
     await action(context);
-    expect(uploadImage).toBeCalled();
+    expect(mock.uploadImage).toBeCalled();
   });
 
   it('uploadImage failed: return 500', async () => {
-    (uploadImage as jest.Mock).mockReturnValue(null);
+    mock.uploadImage.mockReturnValue(null);
 
     await action(context);
     expect(json).toBeCalledWith(null, 500);
@@ -31,7 +32,7 @@ describe('upload image', () => {
 
   it('uploadImage succeed: return 500', async () => {
     const result = { url: 'https://placeholder.com' };
-    (uploadImage as jest.Mock).mockReturnValue(result);
+    mock.uploadImage.mockReturnValue(result);
 
     await action(context);
     expect(json).toBeCalledWith({ url: result.url }, 200);
