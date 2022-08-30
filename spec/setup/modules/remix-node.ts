@@ -6,7 +6,8 @@ jest.mock('@remix-run/node', () => ({
   __esModule: true,
   installGlobals: jest.fn(),
   redirect: jest.fn(),
-  json: jest.fn()
+  json: jest.fn(),
+  unstable_parseMultipartFormData: jest.fn()
 }));
 
 beforeEach(() => {
