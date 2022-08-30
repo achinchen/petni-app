@@ -13,15 +13,14 @@ export const METHOD_DIST = {
 export const action: ActionFunction = async ({ request }) => {
   const { method } = request;
   const formData = await request.formData();
-
   const id: AnimalId = Number(parsePayloadByJson({ formData, fallback: 0 }));
-  if (!id) return;
+  if (!id) return json(null, 400);
 
   const action = METHOD_DIST[method as keyof typeof METHOD_DIST];
-  if (!action) return;
+  if (!action) return json(null, 405);
 
-  const animals = await action(id);
-  if (!animals) return json(null, 500);
+  const result = await action(id);
+  if (!result) return json(null, 500);
 
   return json(null, 200);
 };

@@ -1,40 +1,110 @@
-// import type { ActionFunction } from '@remix-run/node';
-// import type { AnimalId } from '~/models/animal/type';
-// import { json } from '@remix-run/node';
-// import increaseFollow from '';
-// import decreaseFollow from '~/models/animalFollow/decreaseFollow/index.server';
-// import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
+import type { DataFunctionArgs } from '@remix-run/node';
+import getJsonFormData from 'spec/utils/getJsonFormData';
+import increaseFollow from '~/models/AnimalFollow/increase/index.server';
+import decreaseFollow from '~/models/AnimalFollow/decrease/index.server';
+import { json } from '@remix-run/node';
+
+import { action, METHOD_DIST } from '.';
 
 const mock = {
-  increaseFollow: jest.fn(),
-  decreaseFollow: jest.fn()
+  request: new Request('', { method: 'DELETE' })
 };
 
-jest.mock('~/models/animalFollow/increaseFollow/index.server', () => {
-  return mock.increaseFollow;
+jest.mock('~/models/AnimalFollow/increase/index.server');
+jest.mock('~/models/AnimalFollow/decrease/index.server');
+
+const USED_METHODS = Object.keys(METHOD_DIST);
+
+const context = { request: mock.request } as DataFunctionArgs;
+
+describe('request.formData', () => {
+  test('incorrect payload: return 400', async () => {
+    const formData = getJsonFormData('');
+    context.request.formData = jest.fn().mockReturnValue(formData);
+    context.request = { ...context.request };
+    await action(context);
+    expect(json).toBeCalledWith(null, 400);
+  });
+
+  test('correct payload: not return 400', async () => {
+    const formData = getJsonFormData(1);
+    context.request.formData = jest.fn().mockReturnValue(formData);
+    context.request = { ...context.request };
+    await action(context);
+    expect(json).not.toBeCalledWith(null, 400);
+  });
 });
 
-jest.mock('~/models/animalFollow/decreaseFollow/index.server', () => {
-  return mock.decreaseFollow;
+describe('methods', () => {
+  const methods = {
+    whitelist: USED_METHODS,
+    outOfWhitelist: ['GET', 'POST', 'PUT']
+  };
+
+  const formData = getJsonFormData(1);
+  context.request.formData = jest.fn().mockReturnValue(formData);
+
+  methods.outOfWhitelist.forEach((method) => {
+    it(`${method}: return 405`, async () => {
+      context.request = { ...context.request, method };
+      await action(context);
+      expect(json).toBeCalledWith(null, 405);
+    });
+  });
+
+  methods.whitelist.forEach((method) => {
+    it(`${method}: not return 405`, async () => {
+      context.request = { ...context.request, method };
+      await action(context);
+      expect(json).not.toBeCalledWith(null, 405);
+    });
+  });
 });
 
-// const METHOD_DIST = {
-//   DELETE: decreaseFollow,
-//   PATCH: increaseFollow
-// };
+describe('falsy result', () => {
+  const id = 1;
+  const formData = getJsonFormData(id);
+  context.request.formData = jest.fn().mockReturnValue(formData);
 
-// export const action: ActionFunction = async ({ request }) => {
-//   const { method } = request;
-//   const formData = await request.formData();
+  beforeAll(() => {
+    (increaseFollow as jest.Mock).mockReturnValue(null);
+    (decreaseFollow as jest.Mock).mockReturnValue(null);
+  });
 
-//   const id: AnimalId = Number(parsePayloadByJson({ formData, fallback: 0 }));
-//   if (!id) return;
+  Object.entries(METHOD_DIST).forEach(([method, callback]) => {
+    beforeEach(async () => {
+      context.request = { ...context.request, method };
+      await action(context);
+    });
 
-//   const action = METHOD_DIST[method as keyof typeof METHOD_DIST];
-//   if (!action) return;
+    it(`${method}: call ${callback.name}`, () => {
+      expect(callback).toBeCalledWith(id);
+    });
 
-//   const animals = await action(id);
-//   if (!animals) return json(null, 500);
+    it(`${method}: return 500`, () => {
+      expect(json).toBeCalledWith(null, 500);
+    });
+  });
+});
 
-//   return json({ animals });
-// };
+describe('truthy result', () => {
+  beforeAll(() => {
+    (increaseFollow as jest.Mock).mockReturnValue({});
+    (decreaseFollow as jest.Mock).mockReturnValue({});
+  });
+
+  Object.entries(METHOD_DIST).forEach(([method, callback]) => {
+    beforeEach(async () => {
+      context.request = { ...context.request, method };
+      await action(context);
+    });
+
+    it(`${method}: call ${callback.name}`, () => {
+      expect(callback).toBeCalled();
+    });
+
+    it(`${method}: return 200`, () => {
+      expect(json).toBeCalledWith(null, 200);
+    });
+  });
+});
