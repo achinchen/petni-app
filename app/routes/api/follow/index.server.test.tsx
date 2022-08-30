@@ -1,5 +1,5 @@
-import type { DataFunctionArgs } from '@remix-run/node';
 import getJsonFormData from 'spec/utils/getJsonFormData';
+import getContext from 'spec/utils/getContext';
 import increaseFollow from '~/models/AnimalFollow/increase/index.server';
 import decreaseFollow from '~/models/AnimalFollow/decrease/index.server';
 import { json } from '@remix-run/node';
@@ -15,7 +15,7 @@ jest.mock('~/models/AnimalFollow/decrease/index.server');
 
 const USED_METHODS = Object.keys(METHOD_DIST);
 
-const context = { request: mock.request } as DataFunctionArgs;
+const context = getContext({ request: mock.request });
 
 describe('request.formData', () => {
   test('incorrect payload: return 400', async () => {
