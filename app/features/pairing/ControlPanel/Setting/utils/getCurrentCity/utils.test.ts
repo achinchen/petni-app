@@ -69,8 +69,6 @@ describe('fetchAddressXMLByGeolocation', () => {
 });
 
 describe('getGeolocation', () => {
-  console.error = jest.fn();
-
   test('throw error when navigator.geolocation not supports', async () => {
     await getGeolocation();
     expect(console.error).toBeCalled();

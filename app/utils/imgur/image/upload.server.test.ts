@@ -34,7 +34,6 @@ describe('upload', () => {
     mock.fetch.mockResolvedValueOnce({
       json: {}
     });
-    console.error = jest.fn();
     await uploadImage(formData);
     expect(console.error).toBeCalled();
   });
