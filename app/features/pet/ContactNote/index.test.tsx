@@ -1,4 +1,4 @@
-import * as Remix from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { render, screen } from '@testing-library/react';
 import ContactNote from '.';
 import { PET } from '~/features/pet/mockData';
@@ -6,7 +6,7 @@ import { getAddressLink, getTelephoneLink } from '~/utils';
 
 describe('rendering', () => {
   beforeEach(() => {
-    jest.spyOn(Remix, 'useLoaderData').mockReturnValueOnce({ pet: PET });
+    (useLoaderData as jest.Mock).mockReturnValueOnce({ pet: PET });
     render(<ContactNote />);
   });
 
