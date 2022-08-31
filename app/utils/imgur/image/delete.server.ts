@@ -1,7 +1,6 @@
-import fetch from 'node-fetch';
 import { ENDPOINT, HEADERS } from '~/utils/imgur/constants';
 
-export async function deleteImage(deletehash: string) {
+export default async function deleteImage(deletehash: string) {
   try {
     const response = await fetch(`${ENDPOINT.IMAGE}/${deletehash}`, {
       method: 'DELETE',
