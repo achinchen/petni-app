@@ -13,10 +13,10 @@
     "postinstall": "remix setup node",
     "db:seed": "node --require esbuild-register ./database/seed.ts",
     "img:album": "node --require esbuild-register ./app/utils/imgur/album/index.server.ts ",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down",
-    "test:migration": "npx prisma migrate dev",
-    "test": "NODE_ENV=test yarn docker:up && jest -i"
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "test:db": "dotenv -e .env.test prisma db push",
+    "test": "NODE_ENV=test yarn docker:up && yarn test:db && jest -i"
   },
   "dependencies": {
     "@lottiefiles/lottie-player": "^1.5.6",
@@ -49,6 +49,7 @@
     "@unocss/transformer-directives": "^0.34.1",
     "concurrently": "^7.0.0",
     "cross-env": "^7.0.3",
+    "dotenv-cli": "^6.0.0",
     "esbuild-register": "^3.3.2",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.5.0",
