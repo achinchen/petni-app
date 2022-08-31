@@ -4,7 +4,11 @@ import { installGlobals } from '@remix-run/node';
 
 jest.mock('@remix-run/node', () => ({
   __esModule: true,
-  installGlobals: jest.fn()
+  installGlobals: jest.fn(),
+  redirect: jest.fn(),
+  json: jest.fn(),
+  unstable_parseMultipartFormData: jest.fn(),
+  unstable_createFileUploadHandler: jest.fn()
 }));
 
 beforeEach(() => {

@@ -1,4 +1,4 @@
-import * as Remix from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { render, screen } from '@testing-library/react';
 import AppearanceInfo from '.';
 import { PET } from '~/features/pet/mockData';
@@ -8,7 +8,7 @@ describe('rendering', () => {
   const { color, gender } = PET;
 
   beforeEach(() => {
-    jest.spyOn(Remix, 'useLoaderData').mockReturnValueOnce({ pet: PET });
+    (useLoaderData as jest.Mock).mockReturnValueOnce({ pet: PET });
     render(<AppearanceInfo />);
   });
 

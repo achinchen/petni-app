@@ -1,5 +1,3 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
 import { ENDPOINT, HEADERS, ALBUM_HASH } from '~/utils/imgur/constants';
 
 type ImgurImage = {

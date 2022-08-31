@@ -1,4 +1,4 @@
-import * as Remix from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -19,7 +19,7 @@ jest.mock('~/hooks/useFavorite', () => ({
 describe('rendering', () => {
   const { location, id } = PET;
   beforeEach(() => {
-    jest.spyOn(Remix, 'useLoaderData').mockReturnValueOnce({ pet: PET });
+    (useLoaderData as jest.Mock).mockReturnValueOnce({ pet: PET });
     render(<BaseInfo />);
   });
 
@@ -36,9 +36,10 @@ describe('rendering', () => {
   });
 
   test('render link when editable is true', () => {
-    jest
-      .spyOn(Remix, 'useLoaderData')
-      .mockReturnValueOnce({ pet: { ...PET, editable: true } });
+    (useLoaderData as jest.Mock).mockReturnValueOnce({
+      pet: { ...PET, editable: true }
+    });
+
     render(
       <Router>
         <BaseInfo />
@@ -55,7 +56,7 @@ describe('rendering', () => {
 describe('interaction', () => {
   const { id } = PET;
   beforeEach(async () => {
-    jest.spyOn(Remix, 'useLoaderData').mockReturnValueOnce({ pet: PET });
+    (useLoaderData as jest.Mock).mockReturnValueOnce({ pet: PET });
     render(<BaseInfo />);
     const favoriteButtons = screen.getByRole('button');
     await userEvent.click(favoriteButtons);

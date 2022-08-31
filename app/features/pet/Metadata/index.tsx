@@ -15,7 +15,7 @@ export default function Metadata() {
           <div text="xl" font="medium" color="black">
             {code}
           </div>
-          {openAt && <div>{formatDate(openAt.toDateString())}</div>}
+          {openAt && <div>{formatDate(new Date(openAt).toDateString())}</div>}
         </div>
         <div flex="~ col" text="sm:right">
           <span text="xl" font="medium" color="black">
