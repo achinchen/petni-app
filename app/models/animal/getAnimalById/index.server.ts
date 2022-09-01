@@ -19,9 +19,11 @@ export default async function getAnimalById(
     }
   });
 
-  if (!animal) return animal;
+  if (!animal) return null;
+
   const { follows, user, ...restInfo } = animal;
   const count = follows[0]?.count || 0;
+
   return Object.assign(restInfo, {
     follows: count,
     editable: userId ? userId === user?.id : false
