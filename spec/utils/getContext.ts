@@ -1,9 +1,10 @@
 import type { DataFunctionArgs } from '@remix-run/node';
 
 type Parameters = {
-  request: any;
+  request?: any;
+  params?: any;
 };
 
-export default function getContext({ request }: Parameters) {
-  return { request } as DataFunctionArgs;
+export default function getContext({ request, params }: Parameters) {
+  return { request, params } as DataFunctionArgs;
 }
