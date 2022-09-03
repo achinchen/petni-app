@@ -8,6 +8,8 @@ import Layout from '~/components/common/Layout';
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
+  if (!formData) return json(400);
+
   const ids: AnimalId[] = parsePayloadByJson({ formData, fallback: [] });
   if (!ids.length) return json({ animals: [] });
 
