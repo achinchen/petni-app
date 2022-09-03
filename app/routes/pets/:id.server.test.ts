@@ -52,7 +52,6 @@ describe('loader', () => {
   });
 
   it('trigger getAnimalById', async () => {
-    // (getAnimalById as jest.Mock).mockResolvedValueOnce(PET);
     const id = 1;
     const context = getContext({ params: { id } });
     await loader(context);
