@@ -34,16 +34,12 @@ export const meta: MetaFunction = ({
 export type LoaderData = { pet: PetType };
 
 export const loader: LoaderFunction = async ({ request, params: { id } }) => {
-  if (!id) redirect('/');
+  if (!id) return redirect('/');
 
   const user = await authenticator.isAuthenticated(request);
   const animal = await getAnimalById(Number(id), user?.id);
 
-  if (!animal) {
-    throw new Response(`找不到 No.${id} 的浪浪`, {
-      status: 404
-    });
-  }
+  if (!animal) return json(`找不到 No.${id} 的浪浪`, 404);
 
   const data: LoaderData = {
     pet: animal
@@ -56,8 +52,8 @@ export default function PetRouter() {
   const data = useLoaderData<LoaderData>();
 
   return (
-    <Layout withMobileHeader={false}>
-      <Pet pet={data.pet} />
+    <Layout withHeader={false}>
+      <Pet pet={data.pet as any} />
     </Layout>
   );
 }
