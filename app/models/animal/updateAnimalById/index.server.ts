@@ -35,22 +35,26 @@ export default async (
   } = payload;
 
   let updatePayload = {} as EditingAnimal;
-  if (family) updatePayload.family = family;
-  if (color) updatePayload.color = color;
-  if (gender) updatePayload.gender = gender;
-  if (size) updatePayload.size = size;
-  if (name) updatePayload.name = name;
-  if (imageUrl) updatePayload.imageUrl = imageUrl;
-  if (location) updatePayload.location = location;
-  if (tel) updatePayload.tel = tel;
-  if (note) updatePayload.note = note;
+  updatePayload.family ??= family;
+  updatePayload.color ??= color;
+  updatePayload.gender ??= gender;
+  updatePayload.size ??= size;
+  updatePayload.name ??= name;
+  updatePayload.imageUrl ??= imageUrl;
+  updatePayload.location ??= location;
+  updatePayload.tel ??= tel;
+  updatePayload.note ??= note;
 
-  const record = await db.animal.update({
-    data: updatePayload,
-    where: {
-      id
-    }
-  });
-
-  return record;
+  try {
+    const record = await db.animal.update({
+      data: updatePayload,
+      where: {
+        id
+      }
+    });
+    return record;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
