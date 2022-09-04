@@ -7,17 +7,18 @@ import type { Animal } from '@prisma/client';
 import { json, redirect } from '@remix-run/node';
 import { Link, useLoaderData, useCatch, useParams } from '@remix-run/react';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
+import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
 import { authenticator } from '~/services/auth/index.server';
 import updateAnimalById from '~/models/animal/updateAnimalById/index.server';
 import getAnimalById from '~/models/animal/getAnimalById/index.server';
 import Loading from '~/components/common/LoadingAnimation';
 import Layout from '~/components/common/Layout';
 import EditAdoption from '~/features/adoption/edit';
-import { DEFAULT_META } from '~/constants/meta';
-import { APP_NAME } from '~/constants';
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
+  if (!formData) return json({}, 400);
+
   const user = await authenticator.isAuthenticated(request);
   if (!user) return json({}, 401);
 
@@ -25,7 +26,7 @@ export const action: ActionFunction = async ({ request }) => {
     formData,
     fallback: null
   });
-  if (!payload) return json({}, 500);
+  if (!payload) return json({}, 404);
 
   const animal = await updateAnimalById(payload, user);
   if (!animal) return json({}, 500);
@@ -38,15 +39,10 @@ export const meta: MetaFunction = ({
 }: {
   data: LoaderData | undefined;
 }) => {
-  if (!data) {
-    return DEFAULT_META;
-  }
-
-  const { id, location } = data.animal;
-  return {
-    title: `編輯 No.${id} ｜ ${APP_NAME} - 陪你找家`,
-    description: `No.${id} - 正在 ${location} 等家`
-  };
+  return getMetaBaseByAnimal({
+    animal: data?.animal,
+    prefix: { title: '編輯 ' }
+  });
 };
 
 type LoaderData = { animal: Animal };
@@ -72,8 +68,15 @@ export default function PetRouter() {
   const data = useLoaderData<LoaderData>();
 
   return (
-    <Layout withMobileHeader={false}>
-      <EditAdoption animal={data.animal} />
+    <Layout withHeader={false}>
+      <EditAdoption
+        animal={{
+          ...data.animal,
+          openAt: data.animal.openAt ? new Date(data.animal.openAt) : null,
+          createdAt: new Date(data.animal.createdAt),
+          updatedAt: new Date(data.animal.updatedAt)
+        }}
+      />
     </Layout>
   );
 }
