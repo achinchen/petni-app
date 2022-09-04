@@ -12,23 +12,14 @@ import Layout from '~/components/common/Layout';
 import Loading from '~/components/common/LoadingAnimation';
 import { authenticator } from '~/services/auth/index.server';
 import getAnimalById from '~/models/animal/getAnimalById/index.server';
-import { APP_NAME } from '~/constants';
-import { DEFAULT_META } from '~/constants/meta';
+import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
 
 export const meta: MetaFunction = ({
   data
 }: {
   data: LoaderData | undefined;
 }) => {
-  if (!data) {
-    return DEFAULT_META;
-  }
-
-  const { id, location } = data.pet;
-  return {
-    title: `No.${id} ｜ ${APP_NAME} - 陪你找家`,
-    description: `No.${id} - 正在 ${location} 等家`
-  };
+  return getMetaBaseByAnimal({ animal: data?.pet });
 };
 
 export type LoaderData = { pet: PetType };
