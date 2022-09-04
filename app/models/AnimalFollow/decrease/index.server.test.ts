@@ -56,10 +56,3 @@ describe('AnimalFollow exists', () => {
     expect(result).toBeTruthy();
   });
 });
-
-// const animalFollow = await db.animalFollow.updateMany({
-//   where: { animalId },
-//   data: { count: { decrement: 1 } }
-// });
-
-// return animalFollow;
