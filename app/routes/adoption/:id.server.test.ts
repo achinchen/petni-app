@@ -52,7 +52,7 @@ describe('action', () => {
     expect(json).toBeCalledWith({}, 400);
   });
 
-  it('return 401 when user is not isAuthenticated', async () => {
+  it('return 401 when user is not authenticated', async () => {
     context.request.formData = jest
       .fn()
       .mockResolvedValueOnce(getJsonFormData(1));
