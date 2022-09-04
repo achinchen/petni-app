@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import upsertUser from '~/models/user/upsertUser/index.server';
+import upsertUser from '~/models/User/upsertUser/index.server';
 import { GoogleStrategy, PROVIDER_NAME } from './google.strategy.server';
 export { PROVIDER_NAME };
 

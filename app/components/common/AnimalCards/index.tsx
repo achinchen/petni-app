@@ -1,5 +1,5 @@
 import type { MouseEvent } from 'react';
-import type { SimpleAnimal } from '~/models/animal/type';
+import type { SimpleAnimal } from '~/models/Animal/type';
 import { useState } from 'react';
 import { Link } from '@remix-run/react';
 import { getIconByGenderAndFamily } from '~/utils';

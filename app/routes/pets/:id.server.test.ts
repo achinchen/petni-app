@@ -1,7 +1,7 @@
 import type { MetaFunction } from '@remix-run/node';
 import { meta, loader } from './:id';
 import getContext from 'spec/utils/getContext';
-import getAnimalById from '~/models/animal/getAnimalById/index.server';
+import getAnimalById from '~/models/Animal/getAnimalById/index.server';
 import { redirect, json } from '@remix-run/node';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
 import { PET } from 'spec/__mock__/constants/pet';

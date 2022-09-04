@@ -1,11 +1,11 @@
 import type { User } from '@prisma/client';
 import type { LoaderFunction, ActionFunction } from '@remix-run/node';
-import type { SimpleAnimal, AnimalId } from '~/models/animal/type';
+import type { SimpleAnimal, AnimalId } from '~/models/Animal/type';
 import { json, Response } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { authenticator } from '~/services/auth/index.server';
-import getAnimalByUserId from '~/models/animal/getAnimalsByUserId/index.server';
-import deleteAnimalById from '~/models/animal/deleteAnimalById/index.server';
+import getAnimalByUserId from '~/models/Animal/getAnimalsByUserId/index.server';
+import deleteAnimalById from '~/models/Animal/deleteAnimalById/index.server';
 import Layout from '~/components/common/Layout';
 import Adoption from '~/features/adoption';
 

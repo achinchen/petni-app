@@ -1,4 +1,4 @@
-import type { AnimalId } from '~/models/animal/type';
+import type { AnimalId } from '~/models/Animal/type';
 import { db } from '~/utils/db/index.server';
 
 export default async function increaseFollow(animalId: AnimalId) {

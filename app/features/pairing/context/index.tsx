@@ -1,5 +1,5 @@
 import type { Animal } from '@prisma/client';
-import type { Options } from '~/models/animal/getAnimalsByOptions/index.server';
+import type { Options } from '~/models/Animal/getAnimalsByOptions/index.server';
 import { createContext, useState, useEffect, useContext } from 'react';
 import { useFetcher } from '@remix-run/react';
 import {
