@@ -2,11 +2,11 @@ import getAnimalById from './index.server';
 import type { Pet as PetType } from '~/features/pet/types';
 import { db } from '~/utils/db/index.server';
 import { ANIMAL } from 'spec/__mock__/constants/animal';
-import { User } from 'spec/__mock__/constants/user';
+import { USER } from 'spec/__mock__/constants/user';
 
 beforeAll(async () => {
   await db.user.create({
-    data: User
+    data: USER
   });
 });
 
@@ -32,7 +32,7 @@ describe('Animal exist', () => {
 
   beforeAll(async () => {
     await db.animal.create({
-      data: { ...ANIMAL, userId: User.id }
+      data: { ...ANIMAL, userId: USER.id }
     });
     result = await getAnimalById(animalId, anotherUserId);
   });
@@ -46,7 +46,7 @@ describe('Animal exist', () => {
   });
 
   test('editable is true when animal.user is current user', async () => {
-    result = await getAnimalById(animalId, User.id);
+    result = await getAnimalById(animalId, USER.id);
     expect(result).toHaveProperty('editable', true);
   });
 });

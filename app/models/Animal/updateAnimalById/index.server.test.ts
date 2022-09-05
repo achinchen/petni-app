@@ -1,14 +1,14 @@
-import type { User as UserType } from '@prisma/client';
+import type { User } from '@prisma/client';
 import type { Animal } from '@prisma/client';
 import type { EditingAnimal } from '~/models/Animal/type';
 import { db } from '~/utils/db/index.server';
-import { User } from 'spec/__mock__/constants/user';
+import { USER } from 'spec/__mock__/constants/user';
 import { ANIMAL, ANIMALS } from 'spec/__mock__/constants/animal';
 import updateAnimalById from './index.server';
 
-let user: UserType;
+let user: User;
 beforeAll(async () => {
-  const { id, ...payload } = User;
+  const { id, ...payload } = USER;
   user = await db.user.create({ data: payload });
   await db.animal.create({ data: { ...ANIMAL, userId: user.id } });
 });

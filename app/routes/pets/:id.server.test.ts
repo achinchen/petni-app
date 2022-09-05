@@ -5,7 +5,7 @@ import getAnimalById from '~/models/Animal/getAnimalById/index.server';
 import { redirect, json } from '@remix-run/node';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
 import { PET } from 'spec/__mock__/constants/pet';
-import { User } from 'spec/__mock__/constants/user';
+import { USER } from 'spec/__mock__/constants/user';
 
 type MetaFunctionParameters = Parameters<MetaFunction>[0];
 
@@ -13,11 +13,11 @@ jest.mock('~/models/animal/getAnimalById/index.server');
 jest.mock('~/utils/seo/getMetaBaseByAnimal');
 
 jest.mock('~/services/auth/index.server', () => {
-  const { User } = jest.requireActual('spec/__mock__/constants/user');
+  const { USER } = jest.requireActual('spec/__mock__/constants/user');
   return {
     __esModule: true,
     authenticator: {
-      isAuthenticated: jest.fn().mockResolvedValue(User)
+      isAuthenticated: jest.fn().mockResolvedValue(USER)
     }
   };
 });
@@ -46,7 +46,7 @@ describe('loader', () => {
     const id = 1;
     const context = getContext({ params: { id } });
     await loader(context);
-    expect(getAnimalById).toBeCalledWith(id, User.id);
+    expect(getAnimalById).toBeCalledWith(id, USER.id);
   });
 
   it('return 404 when animal cannot find', async () => {

@@ -1,6 +1,6 @@
 import upsertUser from './index.server';
 import { db } from '~/utils/db/index.server';
-import { User } from 'spec/__mock__/constants/user';
+import { USER } from 'spec/__mock__/constants/user';
 
 afterAll(async () => {
   const deleteUser = db.user.deleteMany();
@@ -8,7 +8,7 @@ afterAll(async () => {
   await db.$disconnect();
 });
 
-const { id, ...payload } = User;
+const { id, ...payload } = USER;
 
 describe('user', () => {
   test('create user: not exist', async () => {
