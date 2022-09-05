@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import 'spec/__mock__/components/Layout/Header';
+import 'spec/mock/components/Layout/Header';
 import Portal from '.';
 import { STATE } from './constants';
 

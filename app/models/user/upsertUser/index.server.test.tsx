@@ -1,6 +1,6 @@
 import upsertUser from './index.server';
 import { db } from '~/utils/db/index.server';
-import { USER } from 'spec/__mock__/constants/user';
+import { USER } from 'spec/mock/constants/user';
 
 afterAll(async () => {
   const deleteUser = db.user.deleteMany();

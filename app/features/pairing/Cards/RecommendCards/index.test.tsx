@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { ANIMALS } from 'spec/__mock__/constants/animal';
+import { ANIMALS } from 'spec/mock/constants/animal';
 import RecommendCards from '.';
 import { getIconByGenderAndFamily } from '~/utils';
 import { getLabelById } from '~/features/pairing/Cards/PairingCard/utils';

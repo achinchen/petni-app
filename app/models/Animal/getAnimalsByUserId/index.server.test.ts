@@ -1,8 +1,8 @@
 import type { User } from '@prisma/client';
 import getAnimalsByUserId from './index.server';
 import { db } from '~/utils/db/index.server';
-import { ANIMALS } from 'spec/__mock__/constants/animal';
-import { USER } from 'spec/__mock__/constants/user';
+import { ANIMALS } from 'spec/mock/constants/animal';
+import { USER } from 'spec/mock/constants/user';
 
 let user: User;
 beforeAll(async () => {

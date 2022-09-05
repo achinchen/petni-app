@@ -4,8 +4,8 @@ import getContext from 'spec/utils/getContext';
 import getAnimalById from '~/models/Animal/getAnimalById/index.server';
 import { redirect, json } from '@remix-run/node';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
-import { PET } from 'spec/__mock__/constants/pet';
-import { USER } from 'spec/__mock__/constants/user';
+import { PET } from 'spec/mock/constants/pet';
+import { USER } from 'spec/mock/constants/user';
 
 type MetaFunctionParameters = Parameters<MetaFunction>[0];
 
@@ -13,7 +13,7 @@ jest.mock('~/models/animal/getAnimalById/index.server');
 jest.mock('~/utils/seo/getMetaBaseByAnimal');
 
 jest.mock('~/services/auth/index.server', () => {
-  const { USER } = jest.requireActual('spec/__mock__/constants/user');
+  const { USER } = jest.requireActual('spec/mock//constants/user');
   return {
     __esModule: true,
     authenticator: {

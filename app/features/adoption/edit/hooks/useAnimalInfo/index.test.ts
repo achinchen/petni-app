@@ -1,5 +1,5 @@
 import { getInitialAnimalInfo, INITIAL_ANIMAL_INFO } from '.';
-import { ANIMAL } from 'spec/__mock__/constants/animal';
+import { ANIMAL } from 'spec/mock/constants/animal';
 
 describe('getInitialAnimalInfo', () => {
   test('return INITIAL_ANIMAL_INFO when arg is undefined', () => {

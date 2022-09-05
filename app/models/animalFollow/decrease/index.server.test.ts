@@ -1,7 +1,7 @@
 import type { AnimalFollow } from '@prisma/client';
 import decreaseFollow from './index.server';
 import { db } from '~/utils/db/index.server';
-import { ANIMAL } from 'spec/__mock__/constants/animal';
+import { ANIMAL } from 'spec/mock/constants/animal';
 
 beforeAll(async () => {
   await db.animal.create({

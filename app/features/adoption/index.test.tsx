@@ -5,7 +5,7 @@ import { MockComponent, getProp } from 'spec/utils/getMockComponent';
 import MockAnimalCards, {
   TEST_ID as ANIMAL_CARDS_TEST_ID,
   ANIMALS
-} from 'spec/__mock__/components/AnimalCards';
+} from 'spec/mock/components/AnimalCards';
 import { getPNGFile } from 'spec/utils/getMockFile';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { UPLOAD_IMAGE_PLACEHOLDER } from './constants';

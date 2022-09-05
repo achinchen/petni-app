@@ -2,8 +2,8 @@ import type { User } from '@prisma/client';
 import type { Animal } from '@prisma/client';
 import type { EditingAnimal } from '~/models/Animal/type';
 import { db } from '~/utils/db/index.server';
-import { USER } from 'spec/__mock__/constants/user';
-import { ANIMAL, ANIMALS } from 'spec/__mock__/constants/animal';
+import { USER } from 'spec/mock/constants/user';
+import { ANIMAL, ANIMALS } from 'spec/mock/constants/animal';
 import updateAnimalById from './index.server';
 
 let user: User;

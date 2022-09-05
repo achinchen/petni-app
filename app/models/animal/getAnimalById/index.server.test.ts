@@ -1,8 +1,8 @@
 import getAnimalById from './index.server';
 import type { Pet as PetType } from '~/features/pet/types';
 import { db } from '~/utils/db/index.server';
-import { ANIMAL } from 'spec/__mock__/constants/animal';
-import { USER } from 'spec/__mock__/constants/user';
+import { ANIMAL } from 'spec/mock/constants/animal';
+import { USER } from 'spec/mock/constants/user';
 
 beforeAll(async () => {
   await db.user.create({

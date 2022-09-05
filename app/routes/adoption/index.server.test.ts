@@ -1,8 +1,8 @@
 import { json, Response } from '@remix-run/node';
 import { action, loader } from './index';
 import getContext from 'spec/utils/getContext';
-import { ANIMAL, ANIMALS } from 'spec/__mock__/constants/animal';
-import { USER } from 'spec/__mock__/constants/user';
+import { ANIMAL, ANIMALS } from 'spec/mock/constants/animal';
+import { USER } from 'spec/mock/constants/user';
 import { authenticator } from '~/services/auth/index.server';
 import getAnimalsByUserId from '~/models/Animal/getAnimalsByUserId/index.server';
 import deleteAnimalById from '~/models/Animal/deleteAnimalById/index.server';

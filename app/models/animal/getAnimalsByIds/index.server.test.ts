@@ -1,6 +1,6 @@
 import getAnimalsByIds from './index.server';
 import { db } from '~/utils/db/index.server';
-import { ANIMALS } from 'spec/__mock__/constants/animal';
+import { ANIMALS } from 'spec/mock/constants/animal';
 
 const ids = ANIMALS.map(({ id }) => id);
 

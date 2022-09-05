@@ -1,6 +1,6 @@
 import getMetaBaseByAnimal from './getMetaBaseByAnimal';
 import { DEFAULT_META } from '~/constants/meta';
-import { ANIMAL } from 'spec/__mock__/constants/animal';
+import { ANIMAL } from 'spec/mock/constants/animal';
 import { APP_NAME } from '~/constants';
 
 describe('without animal', () => {
