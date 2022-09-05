@@ -2,13 +2,13 @@ import type { MetaFunction } from '@remix-run/node';
 import { json, redirect } from '@remix-run/node';
 import getJsonFormData from 'spec/utils/getJsonFormData';
 import getContext from 'spec/utils/getContext';
-import { authenticator } from '~/services/auth/index.server';
+import { authenticator } from 'spec/utils/authenticator';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
 import updateAnimalById from '~/models/Animal/updateAnimalById/index.server';
 import getAnimalById from '~/models/Animal/getAnimalById/index.server';
 import { action, loader, meta } from './:id';
-import { ANIMAL } from 'spec/__mock__/constants/animal';
-import { USER } from 'spec/__mock__/constants/user';
+import { ANIMAL } from 'spec/mock/constants/animal';
+import { USER } from 'spec/mock/constants/user';
 
 type MetaFunctionParameters = Parameters<MetaFunction>[0];
 
@@ -19,13 +19,6 @@ const mock = {
 jest.mock('~/models/animal/updateAnimalById/index.server');
 jest.mock('~/models/animal/getAnimalById/index.server');
 jest.mock('~/utils/seo/getMetaBaseByAnimal');
-
-jest.mock('~/services/auth/index.server', () => ({
-  __esModule: true,
-  authenticator: {
-    isAuthenticated: jest.fn().mockResolvedValue(null)
-  }
-}));
 
 describe('meta', () => {
   it('trigger getMetaBaseByAnimal', () => {
@@ -64,7 +57,7 @@ describe('action', () => {
     context.request.formData = jest
       .fn()
       .mockResolvedValueOnce(getJsonFormData(null));
-    authenticator.isAuthenticated = jest.fn().mockResolvedValueOnce(USER);
+    authenticator.isAuthenticated.mockResolvedValueOnce(USER);
     await action(context);
     expect(json).toBeCalledWith({}, 404);
   });
@@ -73,7 +66,7 @@ describe('action', () => {
     context.request.formData = jest
       .fn()
       .mockResolvedValueOnce(getJsonFormData(mock.id));
-    authenticator.isAuthenticated = jest.fn().mockResolvedValueOnce(USER);
+    authenticator.isAuthenticated.mockResolvedValueOnce(USER);
     await action(context);
     expect(updateAnimalById).toBeCalledWith(mock.id, USER);
   });
@@ -82,7 +75,7 @@ describe('action', () => {
     context.request.formData = jest
       .fn()
       .mockResolvedValueOnce(getJsonFormData(mock.id));
-    authenticator.isAuthenticated = jest.fn().mockResolvedValueOnce(USER);
+    authenticator.isAuthenticated.mockResolvedValueOnce(USER);
     (updateAnimalById as jest.Mock).mockResolvedValueOnce(null);
     await action(context);
     expect(json).toBeCalledWith({}, 500);
@@ -92,7 +85,7 @@ describe('action', () => {
     context.request.formData = jest
       .fn()
       .mockResolvedValueOnce(getJsonFormData(mock.id));
-    authenticator.isAuthenticated = jest.fn().mockResolvedValueOnce(USER);
+    authenticator.isAuthenticated.mockResolvedValueOnce(USER);
     (updateAnimalById as jest.Mock).mockResolvedValueOnce(null);
     await action(context);
     expect(json).toBeCalledWith({}, 500);
@@ -110,14 +103,14 @@ describe('loader', () => {
   });
 
   it('trigger getAnimalById', async () => {
-    authenticator.isAuthenticated = jest.fn().mockResolvedValueOnce(USER);
+    authenticator.isAuthenticated.mockResolvedValueOnce(USER);
     (getAnimalById as jest.Mock).mockResolvedValueOnce(ANIMAL);
     await loader(context);
     expect(getAnimalById).toBeCalledWith(context.params.id);
   });
 
   it('throw Response when animal is not founded', async () => {
-    authenticator.isAuthenticated = jest.fn().mockResolvedValueOnce(USER);
+    authenticator.isAuthenticated.mockResolvedValueOnce(USER);
     let result;
     try {
       await loader(context);
@@ -133,7 +126,7 @@ describe('loader', () => {
   });
 
   it('return animal when animal is founded', async () => {
-    authenticator.isAuthenticated = jest.fn().mockResolvedValueOnce(USER);
+    authenticator.isAuthenticated.mockResolvedValueOnce(USER);
     (getAnimalById as jest.Mock).mockResolvedValueOnce(ANIMAL);
     await loader(context);
     expect(json).toBeCalledWith({ animal: ANIMAL });
