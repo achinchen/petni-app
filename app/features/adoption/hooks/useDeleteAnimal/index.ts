@@ -1,4 +1,4 @@
-import type { AnimalId } from '~/models/animal/type';
+import type { AnimalId } from '~/models/Animal/type';
 import { useFetcher } from '@remix-run/react';
 import { FETCHER_IDLE_STATE } from '~/constants/utils';
 

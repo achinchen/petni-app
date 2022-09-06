@@ -1,6 +1,6 @@
 import type { Animal } from '@prisma/client';
 import type { Dispatch } from 'react';
-import type { EditingAnimal } from '~/models/animal/type';
+import type { EditingAnimal } from '~/models/Animal/type';
 import type {
   AnimalInfoState,
   AnimalInfoAction

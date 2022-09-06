@@ -1,5 +1,5 @@
 import type { ActionFunction } from '@remix-run/node';
-import type { AnimalId } from '~/models/animal/type';
+import type { AnimalId } from '~/models/Animal/type';
 import { json } from '@remix-run/node';
 import increaseFollow from '~/models/AnimalFollow/increase/index.server';
 import decreaseFollow from '~/models/AnimalFollow/decrease/index.server';

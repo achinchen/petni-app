@@ -1,8 +1,8 @@
 import { json } from '@remix-run/node';
-import getAnimalByIds from '~/models/animal/getAnimalsByIds/index.server';
+import getAnimalByIds from '~/models/Animal/getAnimalsByIds/index.server';
 import getContext from 'spec/utils/getContext';
 import getJsonFormData from 'spec/utils/getJsonFormData';
-import { ANIMALS } from 'spec/__mock__/constants/animal';
+import { ANIMALS } from 'spec/mock/constants/animal';
 import { action } from './index';
 
 jest.mock('~/models/animal/getAnimalsByIds/index.server');

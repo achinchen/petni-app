@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
 import FrontCard from '.';
-import { ANIMAL } from 'spec/__mock__/constants/animal';
+import { ANIMAL } from 'spec/mock/constants/animal';
 import { getIconByGenderAndFamily } from '~/utils';
 import { getLabelById } from '~/features/pairing/Cards/PairingCard/utils';
 import { IMAGE_MISSING } from '~/constants/pet';

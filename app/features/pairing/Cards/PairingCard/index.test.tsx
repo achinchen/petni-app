@@ -1,7 +1,7 @@
 import type { InitialState } from '~/features/pairing/context';
 import { render, screen } from '@testing-library/react';
 import { MockComponent, getProp } from 'spec/utils/getMockComponent';
-import { ANIMAL } from 'spec/__mock__/constants/animal';
+import { ANIMAL } from 'spec/mock/constants/animal';
 import PairingCard from '.';
 
 const testId = {

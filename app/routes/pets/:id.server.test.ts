@@ -1,45 +1,31 @@
 import type { MetaFunction } from '@remix-run/node';
 import { meta, loader } from './:id';
+import { authenticator } from 'spec/utils/authenticator';
 import getContext from 'spec/utils/getContext';
-import getAnimalById from '~/models/animal/getAnimalById/index.server';
+import getAnimalById from '~/models/Animal/getAnimalById/index.server';
 import { redirect, json } from '@remix-run/node';
-import { APP_NAME } from '~/constants';
-import { DEFAULT_META } from '~/constants/meta';
-import { PET } from 'spec/__mock__/constants/pet';
-import { User } from 'spec/__mock__/constants/user';
+import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
+import { PET } from 'spec/mock/constants/pet';
+import { USER } from 'spec/mock/constants/user';
 
 type MetaFunctionParameters = Parameters<MetaFunction>[0];
 
 jest.mock('~/models/animal/getAnimalById/index.server');
+jest.mock('~/utils/seo/getMetaBaseByAnimal');
 
-jest.mock('~/services/auth/index.server', () => {
-  const { User } = jest.requireActual('spec/__mock__/constants/user');
-  return {
-    __esModule: true,
-    authenticator: {
-      isAuthenticated: jest.fn().mockResolvedValue(User)
-    }
-  };
+beforeEach(() => {
+  authenticator.isAuthenticated.mockResolvedValue(USER);
 });
 
 describe('meta', () => {
-  it('return DEFAULT_META when data is undefined', () => {
-    const context = {
-      data: undefined
-    } as unknown as MetaFunctionParameters;
-
-    expect(meta(context)).toBe(DEFAULT_META);
-  });
-
-  it('return expected metadata when data is truthy', () => {
+  it('trigger getMetaBaseByAnimal', () => {
     const context = {
       data: { pet: PET }
     } as unknown as MetaFunctionParameters;
-    const { id, location } = PET;
 
-    expect(meta(context)).toEqual({
-      title: `No.${id} ｜ ${APP_NAME} - 陪你找家`,
-      description: `No.${id} - 正在 ${location} 等家`
+    meta(context);
+    expect(getMetaBaseByAnimal).toBeCalledWith({
+      animal: PET
     });
   });
 });
@@ -55,7 +41,7 @@ describe('loader', () => {
     const id = 1;
     const context = getContext({ params: { id } });
     await loader(context);
-    expect(getAnimalById).toBeCalledWith(id, User.id);
+    expect(getAnimalById).toBeCalledWith(id, USER.id);
   });
 
   it('return 404 when animal cannot find', async () => {

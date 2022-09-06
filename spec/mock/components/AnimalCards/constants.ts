@@ -1,4 +1,4 @@
-import type { SimpleAnimal } from '~/models/animal/type';
+import type { SimpleAnimal } from '~/models/Animal/type';
 
 export const ANIMALS: SimpleAnimal[] = [
   {

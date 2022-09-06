@@ -3,7 +3,7 @@ import MockAnimalCards, {
   TEST_ID as ANIMAL_CARDS_TEST_ID,
   ANIMALS,
   DELETE_ID
-} from 'spec/__mock__/components/AnimalCards';
+} from 'spec/mock/components/AnimalCards';
 import { MockComponent } from 'spec/utils/getMockComponent';
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

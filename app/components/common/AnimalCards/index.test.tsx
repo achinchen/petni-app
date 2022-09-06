@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
 import type { Props } from '.';
 import AnimalCards from '.';
-import { ANIMALS } from 'spec/__mock__/components/AnimalCards/constants';
+import { ANIMALS } from 'spec/mock/components/AnimalCards/constants';
 import { CANCEL, CONFIRM } from '~/components/common/DeletePanel/constants';
 
 let onDelete = jest.fn();

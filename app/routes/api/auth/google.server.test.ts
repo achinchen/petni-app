@@ -1,27 +1,23 @@
 import type { DataFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { action, loader } from './google';
-import { authenticator } from '~/services/auth/index.server';
+import { authenticator } from 'spec/utils/authenticator';
 import { PROVIDER_NAME } from '~/services/auth/google.server';
+import { USER } from 'spec/mock/constants/user';
 
 const mock = {
   request: new Request(''),
-  result: 'result'
+  result: USER
 };
 
 const context = { request: mock.request } as DataFunctionArgs;
 
-jest.mock('~/services/auth/index.server', () => ({
-  __esModule: true,
-  authenticator: {
-    authenticate: jest.fn(() => mock.result)
-  }
-}));
-
 describe('action', () => {
   let result: string;
-  beforeEach(() => {
-    result = action(context);
+
+  beforeEach(async () => {
+    authenticator.authenticate.mockResolvedValueOnce(mock.result);
+    result = await action(context);
   });
 
   test('trigger authenticator.authenticate', () => {
