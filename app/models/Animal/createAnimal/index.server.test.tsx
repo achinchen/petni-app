@@ -1,5 +1,4 @@
 import type { User, Animal } from '@prisma/client';
-import type { EditingAnimal } from '~/models/Animal/type';
 import createAnimal from './index.server';
 import { db } from '~/utils/db/index.server';
 import { ANIMAL } from 'spec/mock/constants/animal';
@@ -41,15 +40,3 @@ describe('createAnimal', () => {
     expect(createdAnimal).toBeTruthy();
   });
 });
-
-// export default async (animal: EditingAnimal, user: User): Promise<Animal> => {
-//   const record = await db.animal.create({
-//     data: {
-//       ...animal,
-//       address: animal.location,
-//       userId: user.id
-//     }
-//   });
-
-//   return record;
-// };
