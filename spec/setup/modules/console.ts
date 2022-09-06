@@ -1,11 +1,11 @@
 Object.assign(globalThis, {
   console: {
     ...console,
-    log: jest.fn(),
-    debug: jest.fn(),
-    info: jest.fn(),
-    warn: jest.fn(),
-    error: jest.fn()
+    log: jest.fn(console.log),
+    debug: jest.fn(console.debug),
+    info: jest.fn(console.info),
+    warn: jest.fn(console.warn),
+    error: jest.fn(console.error)
   }
 });
 
