@@ -16,8 +16,8 @@ const mock = {
   id: ANIMAL.id
 };
 
-jest.mock('~/models/animal/updateAnimalById/index.server');
-jest.mock('~/models/animal/getAnimalById/index.server');
+jest.mock('~/models/Animal/updateAnimalById/index.server');
+jest.mock('~/models/Animal/getAnimalById/index.server');
 jest.mock('~/utils/seo/getMetaBaseByAnimal');
 
 describe('meta', () => {
@@ -86,9 +86,9 @@ describe('action', () => {
       .fn()
       .mockResolvedValueOnce(getJsonFormData(mock.id));
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
-    (updateAnimalById as jest.Mock).mockResolvedValueOnce(null);
+    (updateAnimalById as jest.Mock).mockResolvedValueOnce(ANIMAL);
     await action(context);
-    expect(json).toBeCalledWith({}, 500);
+    expect(json).toBeCalledWith({ animal: ANIMAL });
   });
 });
 
