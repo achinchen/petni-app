@@ -8,15 +8,16 @@
     "build": "npm run build:css && cross-env NODE_ENV=production remix build",
     "build:css": "unocss './app/**/*.{ts,tsx}' -o ./app/styles/uno.css",
     "dev": "concurrently 'npm run dev:css' 'npm run dev:remix' ",
-    "dev:remix": "cross-env NODE_ENV=development remix dev",
+    "dev:remix": "dotenv -e .env.local cross-env NODE_ENV=development remix dev",
     "dev:css": "unocss './app/**/*.{ts,tsx}' -o ./app/styles/uno.css --watch",
+    "dev:seed": "node --require esbuild-register ./database/seed/dev.ts",
     "postinstall": "remix setup node",
-    "db:seed": "node --require esbuild-register ./database/seed.ts",
     "img:album": "node --require esbuild-register ./app/utils/imgur/album/index.server.ts ",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "test:db": "dotenv -e .env.test prisma db push",
-    "test": "NODE_ENV=test yarn docker:up && yarn test:db && jest -i"
+    "test:seed": "NODE_ENV=test node --require esbuild-register ./database/seed/test.ts",
+    "test": "NODE_ENV=test yarn docker:up && yarn test:db && yarn test:seed && jest -i"
   },
   "dependencies": {
     "@lottiefiles/lottie-player": "^1.5.6",
