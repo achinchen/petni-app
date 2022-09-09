@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Loading from '~/components/common/LoadingAnimation';
 import ControlPanel from './ControlPanel';
 import PairCards from './Cards';
@@ -33,10 +33,12 @@ export function Pairing() {
 export default function PairingWithProvider() {
   return (
     <main flex="~" className="content-height">
-      <Portal />
-      <ControlPanel />
       <PairingContextProvider>
-        <Pairing />
+        <Fragment>
+          <Portal />
+          <ControlPanel />
+          <Pairing />
+        </Fragment>
       </PairingContextProvider>
     </main>
   );
