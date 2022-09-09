@@ -25,6 +25,7 @@ export default defineConfig({
     '[w="24"]',
     '[h="10"]',
     '[color="status-active"]',
+    '[color="status-general"]',
     '[color="white"]',
     '[color="black"]',
     '[cursor="not-allowed"]',
