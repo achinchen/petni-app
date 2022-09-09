@@ -1,19 +1,23 @@
-import getAnimalById from './index.server';
+import type { User } from '@prisma/client';
 import type { Pet as PetType } from '~/features/pet/types';
+import getAnimalById from './index.server';
 import { db } from '~/utils/db/index.server';
-import { ANIMAL } from 'spec/mock/constants/animal';
-import { USER } from 'spec/mock/constants/user';
+import { USER, EXISTED_USER } from 'spec/mock/constants/user';
+import { getAnimal } from 'spec/mock/constants/animal';
 
+let user: User;
+const ANIMAL = getAnimal();
 beforeAll(async () => {
-  await db.user.create({
-    data: USER
+  user = await db.user.findUniqueOrThrow({
+    where: {
+      email: EXISTED_USER.email
+    }
   });
 });
 
 afterAll(async () => {
-  const deleteUser = db.user.deleteMany();
-  const deleteAnimal = db.animal.deleteMany();
-  await db.$transaction([deleteUser, deleteAnimal]);
+  const deleteAnimal = db.animal.delete({ where: { id: ANIMAL.id } });
+  await db.$transaction([deleteAnimal]);
   await db.$disconnect();
 });
 
@@ -28,11 +32,11 @@ describe('Animal not exist', () => {
 
 describe('Animal exist', () => {
   let result: PetType | null;
-  const anotherUserId = 1;
+  const anotherUserId = USER.id;
 
   beforeAll(async () => {
     await db.animal.create({
-      data: { ...ANIMAL, userId: USER.id }
+      data: { ...ANIMAL, userId: user.id }
     });
     result = await getAnimalById(animalId, anotherUserId);
   });
@@ -46,7 +50,7 @@ describe('Animal exist', () => {
   });
 
   test('editable is true when animal.user is current user', async () => {
-    result = await getAnimalById(animalId, USER.id);
+    result = await getAnimalById(animalId, user.id);
     expect(result).toHaveProperty('editable', true);
   });
 });

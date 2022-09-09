@@ -1,21 +1,22 @@
 import type { User, Animal } from '@prisma/client';
 import createAnimal from './index.server';
 import { db } from '~/utils/db/index.server';
-import { ANIMAL } from 'spec/mock/constants/animal';
-import { USER } from 'spec/mock/constants/user';
+import { getAnimal } from 'spec/mock/constants/animal';
+import { EXISTED_USER } from 'spec/mock/constants/user';
 
 let user: User;
+const ANIMAL = getAnimal();
 beforeAll(async () => {
-  const { id, ...payload } = USER;
-  user = await db.user.create({
-    data: payload
+  user = await db.user.findUniqueOrThrow({
+    where: {
+      email: EXISTED_USER.email
+    }
   });
 });
 
 afterAll(async () => {
-  const deleteUsers = db.user.deleteMany();
-  const deleteAnimals = db.animal.deleteMany();
-  await db.$transaction([deleteUsers, deleteAnimals]);
+  const deleteAnimal = db.animal.delete({ where: { id: ANIMAL.id } });
+  await db.$transaction([deleteAnimal]);
   await db.$disconnect();
 });
 

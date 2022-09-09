@@ -778,3 +778,8 @@ export const EXISTED_ANIMALS = [
   updatedAt: new Date(updatedAt),
   userId: 1
 })) as Animal[];
+
+export const getAnimal = () => ({
+  ...ANIMAL,
+  id: Math.floor(Math.random() * 3000)
+});

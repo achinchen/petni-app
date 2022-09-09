@@ -1,17 +1,22 @@
 import type { AnimalFollow } from '@prisma/client';
 import decreaseFollow from './index.server';
 import { db } from '~/utils/db/index.server';
-import { ANIMAL } from 'spec/mock/constants/animal';
+import { getAnimal } from 'spec/mock/constants/animal';
+import { EXISTED_USER } from 'spec/mock/constants/user';
+
+const ANIMAL = getAnimal();
 
 beforeAll(async () => {
   await db.animal.create({
-    data: ANIMAL
+    data: { ...ANIMAL, userId: EXISTED_USER.id }
   });
 });
 
 afterAll(async () => {
-  const deleteAnimal = db.animal.deleteMany();
-  const deleteAnimalFollow = db.animalFollow.deleteMany();
+  const deleteAnimal = db.animal.delete({ where: { id: ANIMAL.id } });
+  const deleteAnimalFollow = db.animalFollow.deleteMany({
+    where: { animalId: ANIMAL.id }
+  });
   await db.$transaction([deleteAnimal, deleteAnimalFollow]);
   await db.$disconnect();
 });

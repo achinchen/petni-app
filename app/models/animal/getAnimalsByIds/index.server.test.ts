@@ -1,20 +1,7 @@
 import getAnimalsByIds from './index.server';
-import { db } from '~/utils/db/index.server';
-import { ANIMALS } from 'spec/mock/constants/animal';
+import { EXISTED_ANIMALS } from 'spec/mock/constants/animal';
 
-const ids = ANIMALS.map(({ id }) => id);
-
-beforeAll(async () => {
-  await db.animal.createMany({
-    data: ANIMALS
-  });
-});
-
-afterAll(async () => {
-  const deleteAnimals = db.animal.deleteMany();
-  await db.$transaction([deleteAnimals]);
-  await db.$disconnect();
-});
+const ids = EXISTED_ANIMALS.map(({ id }) => id);
 
 test('return SimpleAnimal', async () => {
   const animals = await getAnimalsByIds(ids);
