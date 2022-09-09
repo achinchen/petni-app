@@ -1,9 +1,11 @@
+import type { User } from '@prisma/client';
 import upsertUser from './index.server';
 import { db } from '~/utils/db/index.server';
 import { USER } from 'spec/mock/constants/user';
 
+let user: User;
 afterAll(async () => {
-  const deleteUser = db.user.deleteMany();
+  const deleteUser = db.user.deleteMany({ where: { id: USER.id } });
   await db.$transaction([deleteUser]);
   await db.$disconnect();
 });
@@ -13,7 +15,7 @@ const { id, ...payload } = USER;
 describe('user', () => {
   test('create user: not exist', async () => {
     await upsertUser(payload);
-    const user = await db.user.findUnique({
+    user = await db.user.findUniqueOrThrow({
       where: { email: payload.email }
     });
     expect(user).toBeTruthy();
@@ -30,7 +32,7 @@ describe('user', () => {
 
   test('return user', async () => {
     const result = await upsertUser(payload);
-    const user = await db.user.findFirstOrThrow({
+    user = await db.user.findFirstOrThrow({
       where: { email: payload.email }
     });
     expect(result).toEqual(user);

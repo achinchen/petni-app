@@ -6,7 +6,6 @@ export const USERS = [
     name: 'example-user'
   },
   {
-    id: 200,
     email: 'another-example@example.com',
     imageUrl: 'https://another-example.com',
     name: 'another-example-user'
@@ -14,3 +13,5 @@ export const USERS = [
 ];
 
 export const USER = USERS[0];
+
+export const EXISTED_USER = USERS[1];

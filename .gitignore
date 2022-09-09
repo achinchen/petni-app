@@ -5,9 +5,10 @@ node_modules
 .env.local
 .vercel
 .output
+
 yarn-error.log
 
 /build/
 /public/build
-/api/index.js
+/api/*
 /app/styles/uno.css

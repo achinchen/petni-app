@@ -8,7 +8,7 @@ import getAnimalsByOptions from '~/models/Animal/getAnimalsByOptions/index.serve
 import parsePayloadByFormData from '~/utils/action/parsePayloadByFormData';
 import { json } from '@remix-run/node';
 
-const LOADING_SECONDS = 1000 * 1.5;
+const LOADING_SECONDS = 1_500;
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -18,7 +18,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function Index() {
-  const [loaded, setLoaded] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setLoaded(true), LOADING_SECONDS);
