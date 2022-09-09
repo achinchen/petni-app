@@ -36,7 +36,7 @@ describe('rendering', () => {
   });
 
   test('renders expected telephone icon', () => {
-    expect(screen.getAllByAltText(/phone/)).toBeDefined();
+    expect(screen.getAllByLabelText(/phone/)).toBeTruthy();
   });
 
   test('renders expected address', () => {
