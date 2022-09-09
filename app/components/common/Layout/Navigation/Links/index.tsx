@@ -1,9 +1,7 @@
+import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { NavLink } from '@remix-run/react';
 import { Fragment, useState } from 'react';
-import type { AttributifyOptions } from '@unocss/preset-attributify';
-import type { IsActive } from './types';
-import type { IconType } from '~/components/common/Icon';
-import Icon from '~/components/common/Icon';
+import Icon from '~/components/common/Icon/svg';
 import Label from './Label';
 import { ACTIONS } from './constants';
 
@@ -24,10 +22,6 @@ export default function Links({
 
   const getHovered = (index: Index) => index === hoveredIndex;
 
-  const getIcon = (icon: string, isActive: IsActive) => {
-    return (isActive ? `${icon}Active` : icon) as IconType;
-  };
-
   return (
     <div flex="~" ml="auto" bg="white" {...attributifyOptions}>
       {ACTIONS.map(({ icon, label, to }, index) => (
@@ -45,7 +39,12 @@ export default function Links({
         >
           {({ isActive }) => (
             <Fragment>
-              <Icon w="9" icon={getIcon(icon, isActive)} />
+              <Icon
+                size="md"
+                icon={icon}
+                label={withLabel ? '' : label}
+                color={isActive ? 'status-active' : 'status-general'}
+              />
               {withLabel && (
                 <Label isActive={isActive} hovered={getHovered(index)}>
                   {label}
