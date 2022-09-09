@@ -1,6 +1,11 @@
 import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { useThemeColorContext } from '~/features/theme/color/context';
-import Icon from '~/components/common/Icon';
+import Icon, { ChevronLeft, ChevronRight } from '~/components/common/Icon/svg';
+
+const LABEL = {
+  next: 'go next',
+  previous: 'go previous'
+};
 
 type Props = {
   isNext?: boolean;
@@ -10,7 +15,8 @@ export default function ControlButton({
   isNext,
   ...attributifyOptions
 }: Props) {
-  const icon = isNext ? 'ArrowRight' : 'ArrowLeft';
+  const icon = isNext ? ChevronRight : ChevronLeft;
+  const label = LABEL[isNext ? 'next' : 'previous'];
   const { setIndex, familyInformation } = useThemeColorContext();
   const { length } = familyInformation;
 
@@ -42,7 +48,7 @@ export default function ControlButton({
       {...attributifyOptions}
       onClick={onClick}
     >
-      <Icon icon={icon} w="5" />
+      <Icon size="md" label={label} icon={icon} w="5" />
     </button>
   );
 }
