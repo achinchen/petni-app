@@ -25,6 +25,8 @@ export default defineConfig({
     '[w="24"]',
     '[h="10"]',
     '[color="status-active"]',
+    '[color="status-general"]',
+    '[color="blue-350"]',
     '[color="white"]',
     '[color="black"]',
     '[cursor="not-allowed"]',
@@ -43,6 +45,9 @@ export default defineConfig({
   theme: {
     colors: {
       black: '#262626',
+      blue: {
+        350: '#70D4F4'
+      },
       gray: {
         50: '#F8F8F8',
         450: '#878787'
@@ -59,6 +64,9 @@ export default defineConfig({
       'card-dark': '0px 9px 11px rgba(0, 0, 0, 0.25)',
       header: '0px 1px 9px rgba(38, 38, 38, 0.05)',
       tabs: '0px -3.6px 8px rgba(38, 38, 38, 0.05)'
+    },
+    textShadow: {
+      icon: '4px 4px 10px rgb(255, 255, 255, 0.5)'
     },
     animation: {
       keyframes: {

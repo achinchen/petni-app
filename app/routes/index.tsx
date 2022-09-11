@@ -18,7 +18,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function Index() {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true);
 
   useEffect(() => {
     setTimeout(() => setLoaded(true), LOADING_SECONDS);

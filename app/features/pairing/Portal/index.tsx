@@ -2,7 +2,8 @@ import { Fragment } from 'react';
 import { usePairContext } from '~/features/pairing/context';
 import { HeaderPortal } from '~/components/common/Layout/Header';
 import IconButton from '~/components/common/IconButton';
-import { STATE } from './constants';
+import { Tune, ChevronLeft, Undo } from '~/components/common/Icon';
+import { STATE, LABEL } from './constants';
 
 export default function Portal() {
   const { showPanel, setShowPanel, refreshCards } = usePairContext();
@@ -17,24 +18,25 @@ export default function Portal() {
       <Fragment>
         {showPanel ? (
           <IconButton
-            iconAttributifyOptions={{ w: 5 }}
-            icon="ArrowLeft"
+            label={LABEL.BACK}
+            icon={ChevronLeft}
             onClick={onClosePanel}
             bg="transparent"
           />
         ) : (
           <IconButton
-            iconAttributifyOptions={{ w: 6 }}
-            icon="Undo"
+            label={LABEL.REFRESH}
+            icon={Undo}
             onClick={refreshCards}
             bg="transparent"
           />
         )}
         <div m="auto">{state}</div>
         <IconButton
+          aria-hidden={showPanel}
+          label={LABEL.FILTER}
           bg="transparent"
-          iconAttributifyOptions={{ w: 6 }}
-          icon="Filter"
+          icon={Tune}
           onClick={onOpenPanel}
           style={{ visibility: showPanel ? 'hidden' : 'visible' }}
         />

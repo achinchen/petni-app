@@ -1,12 +1,14 @@
 import type { AttributifyOptions } from '@unocss/preset-attributify';
 import type { LoaderData } from '~/routes/pets/:id';
 import { useLoaderData } from '@remix-run/react';
-import { getIconByGenderAndFamily } from '~/utils';
+import { getIconByGenderAndFamily } from '~/utils/icon';
 import useFavorite from '~/hooks/useFavorite';
 import IconButton from '~/components/common/IconButton';
-import Icon from '~/components/common/Icon';
+import Icon, { Heart, Edit } from '~/components/common/Icon';
 
 type Props = AttributifyOptions;
+
+const iconOptions = { size: 'md', color: 'status-active' };
 
 export default function BaseInfo({ ...attributifyOptions }: Props) {
   const { pet } = useLoaderData<LoaderData>();
@@ -26,9 +28,9 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
   return (
     <div flex="~" justify="between" py="md:4" {...attributifyOptions}>
       <div text="sm">
-        <span flex="~" text="lg" font="medium">
+        <span flex="~" items="center" text="lg" font="medium">
           {id}
-          <Icon display="at-md:none" w="5" ml="1" icon={genderIcon} />
+          <Icon display="md:none" size="base" ml="1" {...genderIcon} />
         </span>
         <div>{location}</div>
       </div>
@@ -43,8 +45,8 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
           bg="white"
           border="rounded-1/2"
           shadow="default"
-          icon="Edit"
-          iconAttributifyOptions={{ w: 5 }}
+          icon={Edit}
+          iconOptions={iconOptions}
         />
       ) : (
         <IconButton
@@ -55,8 +57,8 @@ export default function BaseInfo({ ...attributifyOptions }: Props) {
           h="10 sm:12"
           border="rounded-1/2"
           shadow="default"
-          icon="LoveActiveFill"
-          iconAttributifyOptions={{ w: 10 }}
+          icon={Heart}
+          iconOptions={iconOptions}
           onClick={onFavorite}
           disabled={alreadyFavorite}
         />

@@ -52,4 +52,4 @@ export const CATS = [
     CHARACTERISTIC: '脾氣最好、愛撒嬌、不挑食，99%以上都是母貓，親人也親貓。',
     IMAGE: TortoiseshellCat
   }
-];
+].map((info) => ({ ...info, LABEL: `${info.LABEL.replace('色', '')}貓` }));

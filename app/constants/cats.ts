@@ -9,11 +9,11 @@ export enum CatColor {
 }
 
 export const CAT_COLOR_LABEL = {
-  [CatColor.Orange]: '橘貓',
-  [CatColor.Calico]: '三花貓',
-  [CatColor.White]: '白貓',
-  [CatColor.Black]: '黑貓',
-  [CatColor.Tuxedo]: '乳牛貓',
-  [CatColor.Tabby]: '虎斑貓',
-  [CatColor.Tortoiseshell]: '玳瑁貓'
+  [CatColor.Orange]: '橘色',
+  [CatColor.Calico]: '三花色',
+  [CatColor.White]: '白色',
+  [CatColor.Black]: '黑色',
+  [CatColor.Tuxedo]: '乳牛色',
+  [CatColor.Tabby]: '虎斑色',
+  [CatColor.Tortoiseshell]: '玳瑁色'
 };

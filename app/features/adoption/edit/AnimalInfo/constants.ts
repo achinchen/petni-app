@@ -3,7 +3,10 @@ import { DEFAULT_GENDER_VALUE } from '~/features/adoption/edit/constants';
 
 export const DEFAULT_GENDER_OPTION = {
   VALUE: DEFAULT_GENDER_VALUE,
-  LABEL: () => '不明'
+  LABEL: () => ({
+    label: '不明',
+    icon: ''
+  })
 };
 
 export const FAMILY_OPTION = {

@@ -2,14 +2,14 @@ import type { Animal } from '@prisma/client';
 import type { Animation } from './constants';
 import { useState } from 'react';
 import { Link } from '@remix-run/react';
-import Icon from '~/components/common/Icon';
+import Icon, { Close, Info, Heart } from '~/components/common/Icon';
 import IconButton from '~/components/common/IconButton';
 import useSwipe from './hooks/useSwipe';
 import useSound from '~/hooks/useSound';
 import useFavorite from '~/hooks/useFavorite';
 import { IMAGE_MISSING, PLACEHOLDER_IMG } from '~/constants/pet';
-import { ANIMATION, FAMILY_SOUND } from './constants';
-import { getIconByGenderAndFamily } from '~/utils';
+import { ANIMATION, FAMILY_SOUND, LABEL } from './constants';
+import { getIconByGenderAndFamily } from '~/utils/icon';
 import { getLabelById } from '~/features/pairing/Cards/PairingCard/utils';
 
 type Props = {
@@ -83,16 +83,21 @@ export default function FrontCard({ currentCard, onNext }: Props) {
       })}
       onAnimationEnd={onAnimationEnd}
     >
-      <Link to={`/pets/${id}`}>
+      <Link
+        to={`/pets/${id}`}
+        position="absolute"
+        w="10 sm:13"
+        top="4"
+        right="4"
+        transform="rotate-5"
+      >
         <Icon
-          position="absolute"
-          role="button"
-          icon={withImage ? 'Info' : 'InfoDark'}
-          w="10 sm:13"
-          top="4"
-          right="4"
-          transform="rotate-5"
-          cursor="pointer"
+          role="presentation"
+          icon={Info}
+          color={withImage ? 'white' : 'dark'}
+          size="xl"
+          label={LABEL.INFO}
+          text-shadow="icon"
         />
       </Link>
       {!withImage && (
@@ -115,6 +120,7 @@ export default function FrontCard({ currentCard, onNext }: Props) {
         transform="rotate-5"
       >
         <IconButton
+          label={LABEL.SKIP}
           flex="~"
           justify="center"
           items="center"
@@ -122,18 +128,25 @@ export default function FrontCard({ currentCard, onNext }: Props) {
           h="10 sm:12"
           border="rounded-1/2"
           shadow="default"
-          icon="Close"
-          iconAttributifyOptions={{ w: 7 }}
+          icon={Close}
+          iconOptions={{ size: 'base' }}
           onClick={onClose}
         />
         <div color={withImage ? `white` : 'black'} m="0">
-          <span flex="~" text="4.5" font="medium">
+          <span
+            flex="~"
+            justify="center"
+            items="center"
+            text="4.5"
+            font="medium"
+          >
             {id}
-            <Icon ml="2" icon={genderIcon} />
+            <Icon label={LABEL.GENDER} ml="2" size="md" {...genderIcon} />
           </span>
           <div text="sm">{location}</div>
         </div>
         <IconButton
+          label={LABEL.FAVORITE}
           flex="~"
           justify="center"
           items="center"
@@ -141,8 +154,11 @@ export default function FrontCard({ currentCard, onNext }: Props) {
           h="10 sm:12"
           border="rounded-1/2"
           shadow="default"
-          icon="LoveActiveFill"
-          iconAttributifyOptions={{ w: 10 }}
+          icon={Heart}
+          iconOptions={{
+            size: 'md',
+            color: 'status-active'
+          }}
           onClick={onFavorite}
         />
       </div>

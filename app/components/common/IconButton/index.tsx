@@ -1,20 +1,22 @@
 import type { MouseEvent } from 'react';
 import type { AttributifyOptions } from '@unocss/preset-attributify';
-import type { IconType } from '~/components/common/Icon';
+import type { Props as IconProps } from '~/components/common/Icon';
 import { Link } from '@remix-run/react';
 import Icon from '~/components/common/Icon';
 
 type Props = {
-  icon: IconType;
-  iconAttributifyOptions?: AttributifyOptions;
+  icon: string;
+  label?: string;
+  iconOptions?: Omit<IconProps, 'icon'>;
   to?: string;
   onClick?: () => void;
 } & AttributifyOptions;
 
 export default function IconButton({
   icon,
+  label,
+  iconOptions,
   onClick,
-  iconAttributifyOptions,
   to,
   ...attributifyOptions
 }: Props) {
@@ -26,13 +28,18 @@ export default function IconButton({
   if (to)
     return (
       <Link to={to} bg="white" {...attributifyOptions} onClick={click}>
-        <Icon icon={icon} {...iconAttributifyOptions} />
+        <Icon icon={icon} {...iconOptions} />
       </Link>
     );
 
   return (
-    <button bg="white" {...attributifyOptions} onClick={click}>
-      <Icon icon={icon} {...iconAttributifyOptions} />
+    <button
+      aria-label={label}
+      bg="white"
+      {...attributifyOptions}
+      onClick={click}
+    >
+      <Icon icon={icon} {...iconOptions} />
     </button>
   );
 }

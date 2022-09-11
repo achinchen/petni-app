@@ -53,9 +53,7 @@ describe('rendering', () => {
 
   test('render Family option button', () => {
     FAMILY_OPTION.OPTIONS.forEach(({ LABEL }) => {
-      expect(
-        screen.getByRole('button', { name: new RegExp(LABEL(false), 'i') })
-      ).toBeDefined();
+      expect(screen.getByRole('button', { name: LABEL().label })).toBeDefined();
     });
   });
 
@@ -67,9 +65,8 @@ describe('rendering', () => {
 
   test('render Gender option button', () => {
     GENDER_OPTION.OPTIONS.forEach(({ LABEL }) => {
-      expect(
-        screen.getByRole('button', { name: LABEL().toLowerCase() })
-      ).toBeDefined();
+      const { label } = LABEL();
+      expect(screen.getByRole('button', { name: label })).toBeDefined();
     });
   });
 
@@ -120,12 +117,12 @@ describe('interaction: button case', () => {
     {
       type: 'family',
       selectedOption: selected.family,
-      selectedButtonName: new RegExp(selected.family.LABEL(false), 'i')
+      selectedButtonName: selected.family.LABEL().label
     },
     {
       type: 'gender',
       selectedOption: selected.gender,
-      selectedButtonName: selected.gender.LABEL().toLowerCase()
+      selectedButtonName: selected.gender.LABEL().label
     },
     {
       type: 'size',

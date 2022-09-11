@@ -1,7 +1,7 @@
 import { Link } from '@remix-run/react';
 import Icon from '~/components/common/Icon';
 import { usePairContext } from '~/features/pairing/context';
-import { getIconByGenderAndFamily } from '~/utils';
+import { getIconByGenderAndFamily } from '~/utils/icon';
 import { getLabelById } from '~/features/pairing/Cards/PairingCard/utils';
 
 export default function RecommendCards() {
@@ -34,11 +34,18 @@ export default function RecommendCards() {
             />
           </figure>
           <div>
-            <span flex="~" text="4.5" font="medium">
+            <span
+              flex="~"
+              justify="center"
+              items="center"
+              text="4.5"
+              font="medium"
+            >
               {id}
               <Icon
                 ml="2"
-                icon={getIconByGenderAndFamily({ gender, family })}
+                size="md"
+                {...getIconByGenderAndFamily({ gender, family })}
               />
             </span>
             <div text="sm" color="gray-450">

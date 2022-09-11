@@ -1,6 +1,6 @@
 import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { Link } from '@remix-run/react';
-import Icon from '~/components/common/Icon';
+import Icon, { Search } from '~/components/common/Icon';
 
 type Props = {
   search: string;
@@ -27,17 +27,19 @@ export default function SearchBar({
       {...attributifyOptions}
     >
       <span ml="4">搜尋{label}</span>
-      <span
+      <Icon
+        role="presentation"
         display="flex"
         content="center"
         justify="center"
-        w="9"
-        h="9"
+        w="10"
+        h="10"
+        p="1"
         border="rounded-2xl"
         bg="black"
-      >
-        <Icon icon="Search" />
-      </span>
+        color="white"
+        icon={Search}
+      />
     </Link>
   );
 }

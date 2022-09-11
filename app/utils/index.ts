@@ -1,21 +1,3 @@
-import type { IconType } from '~/components/common/Icon';
-import { Gender, Family } from '@prisma/client';
-
-export const getIconByFamily = (family: Family): IconType => {
-  return family === Family.Dog ? 'Bone' : 'Fish';
-};
-
-export const getIconByGenderAndFamily = ({
-  gender,
-  family
-}: {
-  gender: Gender;
-  family: Family;
-}): IconType => {
-  if (gender === Gender.Null) return getIconByFamily(family);
-  return gender;
-};
-
 export const getTelephoneLink = (telephone: string | string[]) => {
   const tel = Array.isArray(telephone) ? telephone[0] : telephone;
   return `tel:${tel.replace(/ /g, '')}`;

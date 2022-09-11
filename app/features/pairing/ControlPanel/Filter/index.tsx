@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from 'react';
 import FilterItem from '~/features/pairing/ControlPanel/Filter/Item';
 import { useControlContext } from '~/features/pairing/ControlPanel/context';
 import { GENERAL_FILTER_OPTIONS } from '~/features/pairing/ControlPanel/constants/filter';
@@ -5,7 +6,6 @@ import {
   DEFAULT_OPTION,
   COLOR_OPTION
 } from '~/features/pairing/ControlPanel/constants/filter';
-import { useCallback, useEffect } from 'react';
 
 export default function FilterPanel() {
   const { filter, dispatchFilter } = useControlContext();

@@ -1,11 +1,4 @@
-import { Gender, Family } from '@prisma/client';
-import {
-  getIconByFamily,
-  getIconByGenderAndFamily,
-  getTelephoneLink,
-  getAddressLink,
-  formatDate
-} from '.';
+import { getTelephoneLink, getAddressLink, formatDate } from '.';
 
 describe('getTelephoneLink', () => {
   const tel = ['02 2245 748', '02 2245 689'];
@@ -40,34 +33,5 @@ describe('getAddressLink', () => {
     expect(getAddressLink(address)).toBe(
       `http://maps.google.com/maps?q=${address}`
     );
-  });
-});
-
-describe('getIconByFamily', () => {
-  const testCases: [Family, string][] = [
-    [Family.Dog, 'Bone'],
-    [Family.Cat, 'Fish']
-  ];
-  test('get expected output', () => {
-    testCases.forEach(([input, output]) => {
-      expect(getIconByFamily(input)).toBe(output);
-    });
-  });
-});
-
-describe('getIconByGenderAndFamily', () => {
-  const testCases: [[Gender, Family], string][] = [
-    [[Gender.Null, Family.Dog], 'Bone'],
-    [[Gender.Null, Family.Cat], 'Fish'],
-    [[Gender.Male, Family.Dog], Gender.Male],
-    [[Gender.Male, Family.Cat], Gender.Male],
-    [[Gender.Female, Family.Dog], Gender.Female],
-    [[Gender.Female, Family.Cat], Gender.Female]
-  ];
-  test('get expected output', () => {
-    testCases.forEach(([input, output]) => {
-      const [gender, family] = input;
-      expect(getIconByGenderAndFamily({ gender, family })).toBe(output);
-    });
   });
 });

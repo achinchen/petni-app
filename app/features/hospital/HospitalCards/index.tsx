@@ -1,6 +1,6 @@
 import type { Hospital } from './types';
 import type { City } from '~/features/hospital/constants';
-import Icon from '~/components/common/Icon';
+import Icon, { OutlinePhone } from '~/components/common/Icon';
 import { LABEL_OF_OPEN_DURING_COVID } from './constants';
 import { getTelephoneLink, getAddressLink } from '~/utils';
 
@@ -57,15 +57,23 @@ export default function HospitalCards({ city, hospitals }: Props) {
             <a
               href={getTelephoneLink(TEL)}
               target="_blank"
+              flex="~"
               rel="noreferrer"
               position="absolute"
               right="3"
               bottom="3"
-              p="2"
+              w="10"
+              h="10"
               bg="black"
               border="rounded-1/2"
             >
-              <Icon icon="Phone" />
+              <Icon
+                size="sm"
+                m="auto"
+                color="white"
+                icon={OutlinePhone}
+                label="phone"
+              />
             </a>
           </section>
         )

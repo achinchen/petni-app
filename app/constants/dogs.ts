@@ -10,11 +10,11 @@ export enum DogColor {
 }
 
 export const DOG_COLOR_LABEL = {
-  [DogColor.Brown]: '棕色狗',
-  [DogColor.Gold]: '黃色狗',
-  [DogColor.White]: '白色狗',
-  [DogColor.Black]: '黑色狗',
-  [DogColor.TwoColor]: '雙色狗',
-  [DogColor.Tabby]: '虎斑狗',
-  [DogColor.Gray]: '灰色狗'
+  [DogColor.Brown]: '棕色',
+  [DogColor.Gold]: '黃色',
+  [DogColor.White]: '白色',
+  [DogColor.Black]: '黑色',
+  [DogColor.TwoColor]: '雙色',
+  [DogColor.Tabby]: '虎斑',
+  [DogColor.Gray]: '灰色'
 };

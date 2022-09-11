@@ -23,6 +23,15 @@ const geolocation = {
   latitude: 201
 };
 
+let originalConsoleError = console.error;
+beforeAll(() => {
+  console.error = jest.fn();
+});
+
+afterAll(() => {
+  console.error = originalConsoleError;
+});
+
 describe('getCityFromAddressXML', () => {
   const testCases = [
     ['TEST123', ''],

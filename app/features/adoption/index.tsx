@@ -4,7 +4,7 @@ import type { MouseEvent } from 'react';
 import { useState, useCallback } from 'react';
 import { useNavigate } from '@remix-run/react';
 import AnimalCards from '~/components/common/AnimalCards';
-import Icon from '~/components/common/Icon';
+import Icon, { OutlineCircleAdd } from '~/components/common/Icon';
 import { HeaderPortal } from '~/components/common/Layout/Header';
 import { TITLE, UPLOAD_IMAGE_PLACEHOLDER, IMAGE_EXTENSION } from './constants';
 import useUploadImage from './hooks/useUploadImage';
@@ -69,7 +69,12 @@ export default function Adoption({ user, animals }: Props) {
               onChange={onUpload}
               disabled={isUploadLoading}
             />
-            <Icon w="11" mb="2" icon="AddCircleOutline" />
+            <Icon
+              mb="2"
+              size="lg"
+              color="status-active"
+              icon={OutlineCircleAdd}
+            />
             {UPLOAD_IMAGE_PLACEHOLDER}
           </label>
         </AnimalCards>
