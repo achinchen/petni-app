@@ -1,6 +1,6 @@
 import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { Link } from '@remix-run/react';
-import Icon, { Search } from '~/components/common/Icon/svg';
+import Icon, { Search } from '~/components/common/Icon';
 
 type Props = {
   search: string;

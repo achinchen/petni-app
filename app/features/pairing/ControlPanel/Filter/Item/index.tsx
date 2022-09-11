@@ -48,11 +48,7 @@ export default function Filter({ category, label, options }: Props) {
               isPressed={isPressed}
               size={buttonSize}
             >
-              {typeof LABEL === 'function' ? (
-                <Icon icon={LABEL(isPressed)} />
-              ) : (
-                LABEL
-              )}
+              {typeof LABEL === 'function' ? <Icon {...LABEL()} /> : LABEL}
             </OptionButton>
           );
         })}

@@ -1,36 +1,39 @@
-import type { IconType } from '~/components/common/Icon';
+import type { Props as IconProps } from '~/components/common/Icon';
 import IconButton from '~/components/common/IconButton';
-import { ICONS } from '~/components/common/Icon';
 import Button from '~/components/common/Button';
 
 type Props = {
   isPressed: boolean;
-  label: IconType | string;
+  label: string;
+  icon?: string;
+  color?: string;
   onClick: () => void;
   shape?: 'square' | 'rectangle';
 };
 
-const isIcon = (x: any): x is IconType => Object.keys(ICONS).includes(x);
-
 export default function OptionButton({
   isPressed,
-  label,
   onClick,
-  shape = 'square'
+  shape = 'square',
+  icon,
+  label,
+  color
 }: Props) {
   const bg = isPressed ? 'black' : 'gray-50';
-  const color = isPressed ? 'white' : 'black';
+  const stateColor = isPressed ? 'white' : 'black';
 
-  if (isIcon(label))
+  if (icon)
     return (
       <IconButton
-        icon={label}
         onClick={onClick}
         h="13 md:15"
         w="13 md:15"
         bg={bg}
         border="rounded-xl"
         transition="150"
+        icon={icon}
+        iconOptions={{ color: color || stateColor }}
+        label={label}
       />
     );
 
@@ -41,7 +44,7 @@ export default function OptionButton({
         h="13 md:15"
         w="13 md:15"
         bg={bg}
-        color={color}
+        color={stateColor}
         border="rounded-xl"
         shadow="none"
         transition="150"
@@ -55,7 +58,7 @@ export default function OptionButton({
       onClick={onClick}
       h="10"
       bg={bg}
-      color={color}
+      color={stateColor}
       border="rounded-xl"
       shadow="none"
       transition="150"

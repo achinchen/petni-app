@@ -50,4 +50,4 @@ export const DOGS = [
     CHARACTERISTIC: '善良優雅、好奇心重、喜歡嘗試新鮮事物、樂於取悅主人。',
     IMAGE: GrayDog
   }
-];
+].map((info) => ({ ...info, LABEL: `${info.LABEL}狗` }));

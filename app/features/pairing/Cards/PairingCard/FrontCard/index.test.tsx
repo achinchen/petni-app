@@ -4,10 +4,9 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
 import FrontCard from '.';
 import { ANIMAL } from 'spec/mock/constants/animal';
-import { getIconByGenderAndFamily } from '~/utils';
 import { getLabelById } from '~/features/pairing/Cards/PairingCard/utils';
 import { IMAGE_MISSING } from '~/constants/pet';
-import { ANIMATION, FAMILY_SOUND } from './constants';
+import { ANIMATION, FAMILY_SOUND, LABEL as A11Y_LABEL } from './constants';
 
 const mock = {
   favoriteIds: new Set(),
@@ -61,23 +60,21 @@ describe('rendering: with image', () => {
   });
 
   test('render favorite button', () => {
-    expect(screen.getByRole('button', { name: /love/ })).toBeDefined();
-  });
-
-  test('render gender icon', () => {
-    const { gender, family } = ANIMAL;
-    const genderIcon = getIconByGenderAndFamily({ gender, family });
     expect(
-      screen.getByRole('img', { name: genderIcon.toLowerCase() })
+      screen.getByRole('button', { name: A11Y_LABEL.FAVORITE })
     ).toBeDefined();
   });
 
-  test('render info button', () => {
-    expect(screen.getByRole('button', { name: /info/ })).toBeDefined();
+  test('render gender icon', () => {
+    expect(screen.getByRole('img', { name: A11Y_LABEL.GENDER })).toBeDefined();
+  });
+
+  test('render info link', () => {
+    expect(screen.getByRole('link', { name: A11Y_LABEL.INFO })).toBeDefined();
   });
 
   test('render close button', () => {
-    expect(screen.getByRole('button', { name: /close/i })).toBeDefined();
+    expect(screen.getByRole('button', { name: A11Y_LABEL.SKIP })).toBeDefined();
   });
 
   test('not render IMAGE_MISSING', () => {
@@ -118,7 +115,9 @@ describe('interaction: onClose', () => {
         <FrontCard onNext={mock.onNext} currentCard={ANIMAL} />
       </Router>
     );
-    await userEvent.click(screen.getByRole('button', { name: /close/i }));
+    await userEvent.click(
+      screen.getByRole('button', { name: A11Y_LABEL.SKIP })
+    );
   });
 
   test('use close animation', () => {
@@ -149,7 +148,9 @@ describe('interaction: onFavorite', () => {
         <FrontCard onNext={mock.onNext} currentCard={ANIMAL} />
       </Router>
     );
-    await userEvent.click(screen.getByRole('button', { name: /love/i }));
+    await userEvent.click(
+      screen.getByRole('button', { name: A11Y_LABEL.FAVORITE })
+    );
   });
 
   test('trigger onAdd', () => {

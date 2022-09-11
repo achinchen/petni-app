@@ -1,7 +1,8 @@
 import type { DogColor } from '~/constants/dogs';
 import type { CatColor } from '~/constants/cats';
-import type { IconType } from '~/components/common/Icon';
-import { Family, Gender, Size } from '~/constants';
+import type { Props as IconProps } from '~/components/common/Icon';
+import { Cat, Dog, Female, Male } from '~/components/common/Icon';
+import { Family, Gender, Size, FAMILY_LABEL, GENDER_LABEL } from '~/constants';
 import { DOG_COLOR_LABEL } from '~/constants/dogs';
 import { CAT_COLOR_LABEL } from '~/constants/cats';
 
@@ -28,11 +29,19 @@ export const FAMILY = {
   OPTIONS: [
     {
       VALUE: Family.Cat,
-      LABEL: (isPressed: boolean): IconType => (isPressed ? 'CatActive' : 'Cat')
+      LABEL: (): IconProps => ({
+        label: FAMILY_LABEL[Family.Cat],
+        icon: Cat,
+        size: 'md'
+      })
     },
     {
       VALUE: Family.Dog,
-      LABEL: (isPressed: boolean): IconType => (isPressed ? 'DogActive' : 'Dog')
+      LABEL: (): IconProps => ({
+        label: FAMILY_LABEL[Family.Dog],
+        icon: Dog,
+        size: 'md'
+      })
     }
   ]
 } as const;
@@ -42,11 +51,21 @@ export const GENDER = {
   OPTIONS: [
     {
       VALUE: Gender.Male,
-      LABEL: (): IconType => 'Male'
+      LABEL: (): IconProps => ({
+        label: GENDER_LABEL[Gender.Male],
+        icon: Male,
+        size: 'base',
+        color: 'blue-350'
+      })
     },
     {
       VALUE: Gender.Female,
-      LABEL: (): IconType => 'Female'
+      LABEL: (): IconProps => ({
+        label: GENDER_LABEL[Gender.Female],
+        icon: Female,
+        size: 'base',
+        color: 'status-active'
+      })
     }
   ]
 } as const;

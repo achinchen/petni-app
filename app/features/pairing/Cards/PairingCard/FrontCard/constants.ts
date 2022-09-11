@@ -12,3 +12,10 @@ export const FAMILY_SOUND = {
   [Family.Cat]: 'cat',
   [Family.Dog]: 'dog'
 } as { [key in Family]: SoundType };
+
+export const LABEL = {
+  INFO: '資訊',
+  GENDER: '性別',
+  FAVORITE: '喜歡',
+  SKIP: '跳過'
+};

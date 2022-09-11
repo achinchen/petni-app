@@ -50,12 +50,14 @@ export default function AnimalInfo() {
               <div flex="~" gap="1" mt="2">
                 {FAMILY_OPTION.OPTIONS.map(({ LABEL, VALUE }) => {
                   const isPressed = VALUE === family;
+                  const { icon, label } = LABEL();
                   return (
                     <OptionButton
                       key={VALUE}
                       isPressed={isPressed}
-                      label={LABEL(isPressed)}
                       onClick={onFamilyChange(VALUE)}
+                      icon={icon}
+                      label={label!}
                     />
                   );
                 })}
@@ -68,11 +70,13 @@ export default function AnimalInfo() {
               <RequiredLabel />
               <div flex="~" gap="1" mt="2">
                 {GENDER_OPTION.OPTIONS.map(({ LABEL, VALUE }) => {
+                  const { icon, label } = LABEL();
                   return (
                     <OptionButton
                       key={VALUE}
                       isPressed={VALUE === gender}
-                      label={LABEL()}
+                      icon={icon}
+                      label={label!}
                       onClick={onGenderChange(VALUE)}
                     />
                   );

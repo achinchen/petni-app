@@ -1,5 +1,5 @@
 import type { City } from './constants';
-import Icon from '~/components/common/Icon';
+import Icon, { Location } from '~/components/common/Icon';
 import { HeaderPortal } from '~/components/common/Layout/Header';
 import HospitalCards from './HospitalCards';
 import HospitalAreaPanel from './AreaPanel';
@@ -27,8 +27,8 @@ function Hospital() {
       {Object.entries(HOSPITALS).map(([city, hospitals]) => (
         <section key={city} mx="4 lg:1" mt="8 lg:14">
           <HospitalAreaHashId city={city as City} />
-          <header flex="~" text="lg" font="bold" mt="0" mb="2">
-            <Icon icon="Location" />
+          <header flex="~" items="center" text="lg" font="bold" mt="0" mb="2">
+            <Icon icon={Location} size="md" color="status-active" />
             <h2>{CITY_LABEL[city as City]}</h2>
           </header>
           <HospitalCards city={city as City} hospitals={hospitals} />

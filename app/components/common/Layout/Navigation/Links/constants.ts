@@ -4,7 +4,7 @@ import {
   ColorPlatte,
   MedicalBriefCase,
   Collar
-} from '~/components/common/Icon/svg';
+} from '~/components/common/Icon';
 
 export const ACTIONS = [
   {

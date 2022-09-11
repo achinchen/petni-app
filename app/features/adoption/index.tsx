@@ -4,7 +4,7 @@ import type { MouseEvent } from 'react';
 import { useState, useCallback } from 'react';
 import { useNavigate } from '@remix-run/react';
 import AnimalCards from '~/components/common/AnimalCards';
-import Icon, { OutlineCircleAdd } from '~/components/common/Icon/svg';
+import Icon, { OutlineCircleAdd } from '~/components/common/Icon';
 import { HeaderPortal } from '~/components/common/Layout/Header';
 import { TITLE, UPLOAD_IMAGE_PLACEHOLDER, IMAGE_EXTENSION } from './constants';
 import useUploadImage from './hooks/useUploadImage';

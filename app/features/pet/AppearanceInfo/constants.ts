@@ -1,4 +1,11 @@
-import { Gender } from '@prisma/client';
+import { Gender, Family } from '@prisma/client';
+import { DOG_COLOR_LABEL } from '~/constants/dogs';
+import { CAT_COLOR_LABEL } from '~/constants/cats';
+
+export const FAMILY_COLOR_LABEL = {
+  [Family.Dog]: DOG_COLOR_LABEL,
+  [Family.Cat]: CAT_COLOR_LABEL
+} as const;
 
 export const ADAPT_ME_LABEL = '求包養';
 

@@ -1,7 +1,7 @@
 import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { NavLink } from '@remix-run/react';
 import { Fragment, useState } from 'react';
-import Icon from '~/components/common/Icon/svg';
+import Icon from '~/components/common/Icon';
 import Label from './Label';
 import { ACTIONS } from './constants';
 

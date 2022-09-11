@@ -2,9 +2,9 @@ import type { MouseEvent } from 'react';
 import type { SimpleAnimal } from '~/models/Animal/type';
 import { useState } from 'react';
 import { Link } from '@remix-run/react';
-import { getIconByGenderAndFamily } from '~/utils';
+import { getIconByGenderAndFamily } from '~/utils/icon';
 import Card from './Card';
-import Icon from '~/components/common/Icon';
+import Icon, { Close } from '~/components/common/Icon';
 import DeletePanel from '~/components/common/DeletePanel';
 
 export type Props = {
@@ -61,7 +61,7 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
                   position="absolute"
                   flex="~"
                   justify="center"
-                  content="center"
+                  items="center"
                   top="2"
                   right="3"
                   w="6"
@@ -71,18 +71,30 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
                   shadow="default"
                   onClick={onDeleteButton(id)}
                 >
-                  <Icon icon="CloseSm" label="delete" />
+                  <Icon
+                    size="md"
+                    color="gray-450"
+                    icon={Close}
+                    label="delete"
+                  />
                 </button>
               </figure>
-              <h2 position="relative" text="base" mt="2" mb="0" mx="0">
+              <h2
+                position="relative"
+                flex="~"
+                justify="between"
+                items="center"
+                text="base"
+                m="0"
+                mx="1"
+              >
                 {id}
                 <Icon
-                  icon={getIconByGenderAndFamily({ gender, family })}
-                  position="absolute"
-                  right="0"
+                  size="base"
+                  {...getIconByGenderAndFamily({ gender, family })}
                 />
               </h2>
-              <div color="gray-450" text="sm" font="medium" m="0">
+              <div color="gray-450" text="sm" font="medium" mx="1">
                 {location}
               </div>
             </Link>

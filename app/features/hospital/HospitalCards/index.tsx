@@ -1,6 +1,6 @@
 import type { Hospital } from './types';
 import type { City } from '~/features/hospital/constants';
-import Icon, { OutlinePhone } from '~/components/common/Icon/svg';
+import Icon, { OutlinePhone } from '~/components/common/Icon';
 import { LABEL_OF_OPEN_DURING_COVID } from './constants';
 import { getTelephoneLink, getAddressLink } from '~/utils';
 

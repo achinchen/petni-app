@@ -1,6 +1,6 @@
 import type { AttributifyOptions } from '@unocss/preset-attributify';
 import { useThemeColorContext } from '~/features/theme/color/context';
-import Icon, { ChevronLeft, ChevronRight } from '~/components/common/Icon/svg';
+import Icon, { ChevronLeft, ChevronRight } from '~/components/common/Icon';
 
 const LABEL = {
   next: 'go next',
