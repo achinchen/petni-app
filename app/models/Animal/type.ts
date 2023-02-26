@@ -1,4 +1,5 @@
 import type { Animal } from '@prisma/client';
+export type { Options } from './getAnimalsByOptions/index.server';
 
 export type AnimalId = Animal['id'];
 
