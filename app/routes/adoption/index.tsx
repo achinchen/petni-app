@@ -3,7 +3,7 @@ import type { LoaderFunction, ActionFunction } from '@remix-run/node';
 import type { SimpleAnimal, AnimalId } from '~/models/Animal/type';
 import { json, Response } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { authenticator } from '~/services/auth/index.server';
+import { authenticator } from 'server/services/auth/index.server';
 import getAnimalsByUserId from '~/models/Animal/getAnimalsByUserId/index.server';
 import deleteAnimalById from '~/models/Animal/deleteAnimalById/index.server';
 import Layout from '~/components/common/Layout';

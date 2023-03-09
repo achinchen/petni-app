@@ -8,7 +8,7 @@ import { json, redirect } from '@remix-run/node';
 import { Link, useLoaderData, useCatch, useParams } from '@remix-run/react';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
-import { authenticator } from '~/services/auth/index.server';
+import { authenticator } from 'server/services/auth/index.server';
 import updateAnimalById from '~/models/Animal/updateAnimalById/index.server';
 import getAnimalById from '~/models/Animal/getAnimalById/index.server';
 import Loading from '~/components/common/LoadingAnimation';

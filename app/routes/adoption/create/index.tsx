@@ -1,7 +1,7 @@
 import type { ActionFunction, LoaderFunction } from '@remix-run/node';
 import type { EditingAnimal } from '~/models/Animal/type';
 import { json, redirect } from '@remix-run/node';
-import { authenticator } from '~/services/auth/index.server';
+import { authenticator } from 'server/services/auth/index.server';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
 import createAnimal from '~/models/Animal/createAnimal/index.server';
 import Layout from '~/components/common/Layout';

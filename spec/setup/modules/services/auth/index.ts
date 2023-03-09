@@ -1,6 +1,6 @@
 import type { DeepMockProxy } from 'jest-mock-extended';
 import { mockReset, mockDeep } from 'jest-mock-extended';
-import { authenticator } from '~/services/auth/index.server';
+import { authenticator } from 'server/services/auth/index.server';
 
 type Authenticator = typeof authenticator;
 

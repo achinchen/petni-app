@@ -10,7 +10,7 @@ import { redirect, json } from '@remix-run/node';
 import Pet from '~/features/pet';
 import Layout from '~/components/common/Layout';
 import Loading from '~/components/common/LoadingAnimation';
-import { authenticator } from '~/services/auth/index.server';
+import { authenticator } from 'server/services/auth/index.server';
 import getAnimalById from '~/models/Animal/getAnimalById/index.server';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
 
