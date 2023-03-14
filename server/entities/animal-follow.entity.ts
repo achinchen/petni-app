@@ -3,7 +3,7 @@ export class AnimalFollow {
     public id: string,
     public animalId: string,
     public createdAt: Date | string,
-    public updatedA: Date | string,
+    public updatedAt: Date | string,
     public count: number
   ) {}
 }
