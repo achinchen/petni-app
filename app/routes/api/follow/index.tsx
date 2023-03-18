@@ -3,8 +3,8 @@ import type { AnimalFollow } from 'server/entities/animal-follow';
 import { json } from '@remix-run/node';
 import { AnimalFollowUseCase } from 'server/usecases/animal-follow';
 import { AnimalFollowRepositoryPostgres } from 'server/gateways/animal-follow/index.postgres';
-import { AnimalFollowController } from 'server/adapters/animal-follow.controller';
-import { AnimalFollowPresenter } from 'server/adapters/animal-follow.presenter';
+import { AnimalFollowController } from 'server/adapters/animal-follow/index.controller';
+import { AnimalFollowPresenter } from 'server/adapters/animal-follow/index.presenter';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
 
 const animalFollowRepository = new AnimalFollowRepositoryPostgres();

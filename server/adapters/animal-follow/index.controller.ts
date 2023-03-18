@@ -3,7 +3,7 @@ import type { AnimalFollowUseCase } from 'server/usecases/animal-follow';
 import type {
   AnimalFollowPresenter,
   Payload
-} from 'server/adapters/animal-follow.presenter';
+} from 'server/adapters/animal-follow/index.presenter';
 
 export class AnimalFollowController {
   constructor(
@@ -13,9 +13,12 @@ export class AnimalFollowController {
 
   async followRequest(animalId: AnimalFollow['animalId']): Promise<Payload> {
     if (!animalId) return this.animalFollowPresenter.invalidInput();
-    const result = await this.animalFollowUseCase.follow(animalId);
-    if (!result) return this.animalFollowPresenter.failed();
-    return this.animalFollowPresenter.success();
+    try {
+      await this.animalFollowUseCase.follow(animalId);
+      return this.animalFollowPresenter.success();
+    } catch {
+      return this.animalFollowPresenter.failed();
+    }
   }
 
   async unfollowRequest(animalId: AnimalFollow['animalId']): Promise<Payload> {
