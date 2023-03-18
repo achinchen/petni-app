@@ -1,7 +1,7 @@
 import type { EditingAnimal } from '~/models/Animal/type';
-import type { Animal } from 'server/entities/animal.entity';
-import type { AnimalRepository } from 'server/gateways/animal.repository';
-import type { User } from 'server/entities/user.entity';
+import type { Animal } from 'server/entities/animal';
+import type { AnimalRepository } from 'server/gateways/animal';
+import type { User } from 'server/entities/user';
 
 export class AnimalUseCase {
   constructor(private readonly animalRepository: AnimalRepository) {}

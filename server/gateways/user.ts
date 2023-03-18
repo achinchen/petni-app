@@ -1,4 +1,4 @@
-import type { User } from 'server/entities/user.entity';
+import type { User } from 'server/entities/user';
 
 export type Payload = Omit<User, 'id'>;
 

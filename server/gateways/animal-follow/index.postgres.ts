@@ -1,6 +1,6 @@
-import type { AnimalFollow } from 'server/entities/animal-follow.entity';
+import type { AnimalFollow } from 'server/entities/animal-follow';
 import type { AnimalFollow as AnimalFollowPrisma } from '@prisma/client';
-import type { AnimalFollowRepository } from './index.repository';
+import type { AnimalFollowRepository } from '.';
 import { db } from '~/utils/db/index.server';
 
 const converter = ({

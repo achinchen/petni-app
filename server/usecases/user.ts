@@ -1,5 +1,5 @@
-import type { User } from 'server/entities/user.entity';
-import type { Payload, UserRepository } from 'server/gateways/user.repository';
+import type { User } from 'server/entities/user';
+import type { Payload, UserRepository } from 'server/gateways/user';
 
 export class UserUseCase {
   constructor(private readonly userRepository: UserRepository) {}

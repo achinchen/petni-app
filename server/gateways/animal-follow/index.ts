@@ -1,4 +1,4 @@
-import type { AnimalFollow } from 'server/entities/animal-follow.entity';
+import type { AnimalFollow } from 'server/entities/animal-follow';
 
 export interface AnimalFollowRepository {
   increase(animalId: AnimalFollow['animalId']): Promise<AnimalFollow>;

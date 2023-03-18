@@ -1,6 +1,6 @@
 import type { Options } from '~/models/Animal/type';
-import type { Animal } from 'server/entities/animal.entity';
-import type { AnimalRepository } from 'server/gateways/animal.repository';
+import type { Animal } from 'server/entities/animal';
+import type { AnimalRepository } from 'server/gateways/animal';
 
 export class PairingUseCase {
   constructor(private readonly animalRepository: AnimalRepository) {}

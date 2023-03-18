@@ -1,5 +1,5 @@
-import type { Animal } from 'server/entities/animal.entity';
-import type { User } from 'server/entities/user.entity';
+import type { Animal } from 'server/entities/animal';
+import type { User } from 'server/entities/user';
 import type { EditingAnimal, Options } from '~/models/Animal/type';
 
 type AnimalId = Animal['id'];
