@@ -4,7 +4,7 @@ import { authenticator } from 'server/services/auth/index.server';
 
 type Authenticator = typeof authenticator;
 
-jest.mock('~/services/auth/index.server', () => ({
+jest.mock('server/services/auth/index.server', () => ({
   __esModule: true,
   authenticator: mockDeep<Authenticator>()
 }));

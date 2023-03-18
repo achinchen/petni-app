@@ -1,7 +1,8 @@
 const CONFIG = {
   moduleNameMapper: {
     '~/(.*)$': '<rootDir>/app/$1',
-    'spec/(.*)$': '<rootDir>/spec/$1'
+    'spec/(.*)$': '<rootDir>/spec/$1',
+    'server/(.*)$': '<rootDir>/server/$1'
   },
   clearMocks: true,
   preset: 'ts-jest',
@@ -18,14 +19,14 @@ module.exports = {
       ...CONFIG,
       displayName: 'client',
       testEnvironment: 'jsdom',
-      testPathIgnorePatterns: ['server.test.tsx?'],
+      testPathIgnorePatterns: ['server/*'],
       setupFilesAfterEnv: ['<rootDir>/spec/setup/client.ts']
     },
     {
       ...CONFIG,
       displayName: 'server',
       testEnvironment: 'node',
-      testRegex: [/server.test.tsx?/, '/server/**/*.test.ts?'],
+      testRegex: ['server/*'],
       setupFilesAfterEnv: ['<rootDir>/spec/setup/server.ts']
     }
   ]

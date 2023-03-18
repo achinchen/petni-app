@@ -6,14 +6,12 @@ export class AnimalFollowUseCase {
     private readonly animalFollowRepository: AnimalFollowRepository
   ) {}
 
-  async followAnimal(
-    animalId: AnimalFollow['animalId']
-  ): Promise<AnimalFollow> {
+  async follow(animalId: AnimalFollow['animalId']): Promise<AnimalFollow> {
     const result = await this.animalFollowRepository.increase(animalId);
     return result;
   }
 
-  async unfollowAnimal(
+  async unfollow(
     animalId: AnimalFollow['animalId']
   ): Promise<AnimalFollow | null> {
     const result = await this.animalFollowRepository.decrease(animalId);
