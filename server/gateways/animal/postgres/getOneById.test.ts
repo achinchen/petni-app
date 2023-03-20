@@ -1,6 +1,6 @@
 import type { User } from '@prisma/client';
 import type { Pet as PetType } from '~/features/pet/types';
-import getAnimalById from './index.server';
+import getAnimalById from './getOneById';
 import { db } from '~/utils/db/index.server';
 import { USER, EXISTED_USER } from 'spec/mock/constants/user';
 import { getAnimal } from 'spec/mock/constants/animal';
