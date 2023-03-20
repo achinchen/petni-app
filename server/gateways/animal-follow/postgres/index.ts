@@ -1,5 +1,5 @@
 import type { AnimalFollow } from 'server/entities/animal-follow';
-import type { AnimalFollowRepository } from '.';
+import type { AnimalFollowRepository } from '..';
 import { db } from '~/utils/db/index.server';
 
 export class AnimalFollowRepositoryPostgres implements AnimalFollowRepository {

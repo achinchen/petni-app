@@ -1,5 +1,5 @@
 import type { AnimalFollow } from '@prisma/client';
-import { AnimalFollowRepositoryPostgres } from './index.postgres';
+import { AnimalFollowRepositoryPostgres } from './postgres';
 import { db } from '~/utils/db/index.server';
 import { getAnimal } from 'spec/mock/constants/animal';
 import { EXISTED_USER } from 'spec/mock/constants/user';
