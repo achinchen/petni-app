@@ -4,16 +4,30 @@ import type {
   MetaFunction
 } from '@remix-run/node';
 import type { Animal } from '@prisma/client';
+import type { AnimalInfo } from 'server/adapters/animal/index.presenter';
 import { json, redirect } from '@remix-run/node';
 import { Link, useLoaderData, useCatch, useParams } from '@remix-run/react';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
+import { AnimalUseCase } from 'server/usecases/animal';
+import { AnimalFollowRepositoryPostgres } from 'server/gateways/animal-follow/postgres';
+import { AnimalRepositoryPostgres } from 'server/gateways/animal/postgres';
+import { AnimalController } from 'server/adapters/animal/index.controller';
+import { AnimalPresenter } from 'server/adapters/animal/index.presenter';
 import { authenticator } from 'server/services/auth/index.server';
 import updateAnimalById from '~/models/Animal/updateAnimalById/index.server';
-import getAnimalById from '~/models/Animal/getAnimalById/index.server';
 import Loading from '~/components/common/LoadingAnimation';
 import Layout from '~/components/common/Layout';
 import EditAdoption from '~/features/adoption/edit';
+
+const animalRepository = new AnimalRepositoryPostgres();
+const animalFollowRepositoryPostgres = new AnimalFollowRepositoryPostgres();
+const animalUseCase = new AnimalUseCase(
+  animalRepository,
+  animalFollowRepositoryPostgres
+);
+const animalPresenter = new AnimalPresenter();
+const animalController = new AnimalController(animalUseCase, animalPresenter);
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -34,28 +48,24 @@ export const action: ActionFunction = async ({ request }) => {
   return json({ animal });
 };
 
-export const meta: MetaFunction = ({
-  data
-}: {
-  data: LoaderData | undefined;
-}) => {
+export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
   return getMetaBaseByAnimal({
-    animal: data?.animal,
+    animal: data.animal,
     prefix: { title: '編輯 ' }
   });
 };
 
-type LoaderData = { animal: Animal };
+type LoaderData = { animal: AnimalInfo };
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const user = await authenticator.isAuthenticated(request);
   if (!user) return redirect('/');
 
-  const animal = await getAnimalById(Number(params.id));
+  const [status, animal] = await animalController.getInfo(Number(params.id));
 
   if (!animal) {
     throw new Response(`找不到 No.${params.id} 的浪浪`, {
-      status: 404
+      status
     });
   }
 
