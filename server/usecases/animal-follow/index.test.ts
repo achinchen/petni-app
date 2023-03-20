@@ -4,9 +4,9 @@ import { AnimalFollowUseCase } from '.';
 describe('AnimalFollowUseCase', () => {
   let useCase: AnimalFollowUseCase;
   let repository: jest.Mocked<AnimalFollowRepository>;
-  const animalId = '1';
+  const animalId = 1;
   const animalFollow = {
-    id: '1',
+    id: 1,
     animalId,
     createdAt: new Date('2022/12/31'),
     updatedAt: new Date('2022/12/31')

@@ -6,7 +6,7 @@ import type {
 import { AnimalFollowController } from 'server/adapters/animal-follow/index.controller';
 import type { AnimalFollow } from 'server/entities/animal-follow';
 
-const animalId = '123';
+const animalId = 123;
 let useCase: jest.Mocked<AnimalFollowUseCase>;
 let presenter: jest.Mocked<AnimalFollowPresenter>;
 let controller: AnimalFollowController;

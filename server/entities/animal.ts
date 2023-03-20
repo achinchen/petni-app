@@ -32,6 +32,6 @@ export class Animal {
     public openAt: Date | string,
     public createdAt: Date | string,
     public updatedAt: Date | string,
-    public userId: string
+    public userId: number
   ) {}
 }

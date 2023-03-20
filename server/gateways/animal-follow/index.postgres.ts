@@ -1,32 +1,21 @@
 import type { AnimalFollow } from 'server/entities/animal-follow';
-import type { AnimalFollow as AnimalFollowPrisma } from '@prisma/client';
 import type { AnimalFollowRepository } from '.';
 import { db } from '~/utils/db/index.server';
-
-const converter = ({
-  id,
-  animalId,
-  ...rest
-}: AnimalFollowPrisma): AnimalFollow => ({
-  id: String(id),
-  animalId: String(animalId),
-  ...rest
-});
 
 export class AnimalFollowRepositoryPostgres implements AnimalFollowRepository {
   async increase(animalId: AnimalFollow['animalId']) {
     const animal = await db.animalFollow.findFirst({
-      where: { animalId: Number(animalId) }
+      where: { animalId }
     });
 
     if (!animal) {
       const animalFollow = await db.animalFollow.create({
         data: {
-          animalId: Number(animalId)
+          animalId
         }
       });
 
-      return converter(animalFollow);
+      return animalFollow;
     }
 
     // work around: https://github.com/prisma/prisma/issues/7290
@@ -39,21 +28,28 @@ export class AnimalFollowRepositoryPostgres implements AnimalFollowRepository {
       }
     });
 
-    return converter({ ...animal, count });
+    return { ...animal, count };
   }
 
   async decrease(animalId: AnimalFollow['animalId']) {
     const animal = await db.animalFollow.findFirst({
-      where: { animalId: Number(animalId) }
+      where: { animalId }
     });
 
     if (!animal) return null;
 
     const { count } = await db.animalFollow.updateMany({
-      where: { animalId: Number(animalId) },
+      where: { animalId },
       data: { count: { decrement: 1 } }
     });
 
-    return converter({ ...animal, count });
+    return { ...animal, count };
+  }
+
+  async getOneByAnimalId(animalId: AnimalFollow['animalId']) {
+    const animal = await db.animalFollow.findFirst({
+      where: { animalId }
+    });
+    return animal;
   }
 }
