@@ -7,12 +7,12 @@ export class AnimalUseCase {
   constructor(private readonly animalRepository: AnimalRepository) {}
 
   async getCreatedAnimals(userId: User['id']): Promise<Animal[]> {
-    const animals = await this.animalRepository.getManyByUserId(userId);
+    const animals = await this.animalRepository.getManyByUserId!(userId);
     return animals;
   }
 
   async getFavoritesAnimals(animalIds: Animal['id'][]): Promise<Animal[]> {
-    const animals = await this.animalRepository.getManyByIds(animalIds);
+    const animals = await this.animalRepository.getManyByIds!(animalIds);
     return animals;
   }
 
@@ -25,15 +25,15 @@ export class AnimalUseCase {
   }
 
   async createAnimal(payload: EditingAnimal): Promise<Animal> {
-    const animal = await this.animalRepository.create(payload);
+    const animal = await this.animalRepository.create!(payload);
     return animal;
   }
 
   async updateAnimal(animalId: Animal['id']): Promise<void> {
-    await this.animalRepository.update(animalId);
+    await this.animalRepository.update!(animalId);
   }
 
   async deleteAnimal(animal: Animal): Promise<void> {
-    await this.animalRepository.delete(animal);
+    await this.animalRepository.delete!(animal);
   }
 }
