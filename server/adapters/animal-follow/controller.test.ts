@@ -31,11 +31,11 @@ beforeEach(() => {
   controller = new AnimalFollowController(useCase, presenter);
 });
 
-describe('followRequest', () => {
+describe('follow', () => {
   describe('when animalId is not provided', () => {
     let payload: Payload;
     beforeEach(async () => {
-      payload = await controller.followRequest('');
+      payload = await controller.follow('');
     });
 
     it('return invalid input', async () => {
@@ -54,7 +54,7 @@ describe('followRequest', () => {
   describe('when the follow request is successful', () => {
     let payload: Payload;
     beforeEach(async () => {
-      payload = await controller.followRequest(animalId);
+      payload = await controller.follow(animalId);
     });
 
     it('return success', async () => {
@@ -74,7 +74,7 @@ describe('followRequest', () => {
     let payload: Payload;
     beforeEach(async () => {
       useCase.follow.mockRejectedValue('error');
-      payload = await controller.followRequest(animalId);
+      payload = await controller.follow(animalId);
     });
 
     it('return failed', async () => {
@@ -95,7 +95,7 @@ describe('unfollowRequest', () => {
   describe('when animalId is not provided', () => {
     let payload: Payload;
     beforeEach(async () => {
-      payload = await controller.unfollowRequest('');
+      payload = await controller.unfollow('');
     });
 
     it('return invalid input', async () => {
@@ -115,7 +115,7 @@ describe('unfollowRequest', () => {
     let payload: Payload;
     beforeEach(async () => {
       useCase.unfollow.mockResolvedValue({} as AnimalFollow);
-      payload = await controller.unfollowRequest(animalId);
+      payload = await controller.unfollow(animalId);
     });
 
     it('return success', async () => {
@@ -135,7 +135,7 @@ describe('unfollowRequest', () => {
     let payload: Payload;
     beforeEach(async () => {
       useCase.unfollow.mockResolvedValue(null);
-      payload = await controller.unfollowRequest(animalId);
+      payload = await controller.unfollow(animalId);
     });
 
     it('return failed', async () => {

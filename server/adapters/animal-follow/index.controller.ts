@@ -11,7 +11,7 @@ export class AnimalFollowController {
     private readonly animalFollowPresenter: AnimalFollowPresenter
   ) {}
 
-  async followRequest(animalId: AnimalFollow['animalId']): Promise<Payload> {
+  async follow(animalId: AnimalFollow['animalId']): Promise<Payload> {
     if (!animalId) return this.animalFollowPresenter.invalidInput();
     try {
       await this.animalFollowUseCase.follow(animalId);
@@ -21,7 +21,7 @@ export class AnimalFollowController {
     }
   }
 
-  async unfollowRequest(animalId: AnimalFollow['animalId']): Promise<Payload> {
+  async unfollow(animalId: AnimalFollow['animalId']): Promise<Payload> {
     if (!animalId) return this.animalFollowPresenter.invalidInput();
     const result = await this.animalFollowUseCase.unfollow(animalId);
     if (!result) return this.animalFollowPresenter.failed();
