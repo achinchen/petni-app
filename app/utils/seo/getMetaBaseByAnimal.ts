@@ -1,4 +1,4 @@
-import type { Animal } from '@prisma/client';
+import type { AnimalInfo as Animal } from 'server/adapters/animal/index.presenter';
 import { DEFAULT_META } from '~/constants/meta';
 import { APP_NAME } from '~/constants';
 

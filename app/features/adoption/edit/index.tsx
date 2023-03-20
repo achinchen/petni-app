@@ -1,4 +1,4 @@
-import type { Animal } from '@prisma/client';
+import type { AnimalInfo as Animal } from 'server/adapters/animal/index.presenter';
 import { Form } from '@remix-run/react';
 import { HeaderPortal } from '~/components/common/Layout/Header';
 import Button from '~/components/common/Button';
