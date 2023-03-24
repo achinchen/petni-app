@@ -5,10 +5,11 @@ import getContext from 'spec/utils/getContext';
 import { authenticator } from 'spec/utils/authenticator';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
 import updateAnimalById from '~/models/Animal/updateAnimalById/index.server';
-import getAnimalById from '~/models/Animal/getAnimalById/index.server';
-import { action, loader, meta } from './:id';
+import { controller } from 'spec/mock/server/adapters/animal/index.controller';
 import { ANIMAL } from 'spec/mock/constants/animal';
 import { USER } from 'spec/mock/constants/user';
+
+import { action, loader, meta } from './:id';
 
 type MetaFunctionParameters = Parameters<MetaFunction>[0];
 
@@ -16,8 +17,9 @@ const mock = {
   id: ANIMAL.id
 };
 
+jest.mock('server/gateways/animal/postgres/index');
+jest.mock('server/gateways/animal-follow/postgres/index');
 jest.mock('~/models/Animal/updateAnimalById/index.server');
-jest.mock('~/models/Animal/getAnimalById/index.server');
 jest.mock('~/utils/seo/getMetaBaseByAnimal');
 
 describe('meta', () => {
@@ -102,32 +104,19 @@ describe('loader', () => {
     expect(redirect).toBeCalledWith('/');
   });
 
-  it('trigger getAnimalById', async () => {
-    authenticator.isAuthenticated.mockResolvedValueOnce(USER);
-    (getAnimalById as jest.Mock).mockResolvedValueOnce(ANIMAL);
-    await loader(context);
-    expect(getAnimalById).toBeCalledWith(context.params.id);
-  });
-
   it('throw Response when animal is not founded', async () => {
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
-    let result;
-    try {
-      await loader(context);
-    } catch (response) {
-      result = response;
-    }
+    controller.getInfo.mockResolvedValueOnce([404, undefined]);
 
-    expect(result).toEqual(
-      new Response(`找不到 No.${context.params.id} 的浪浪`, {
-        status: 404
-      })
+    const result = loader(context);
+    await expect(result).rejects.toEqual(
+      new Response(`找不到 No.${context.params.id} 的浪浪`, { status: 404 })
     );
   });
 
   it('return animal when animal is founded', async () => {
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
-    (getAnimalById as jest.Mock).mockResolvedValueOnce(ANIMAL);
+    controller.getInfo.mockResolvedValueOnce([200, ANIMAL]);
     await loader(context);
     expect(json).toBeCalledWith({ animal: ANIMAL });
   });

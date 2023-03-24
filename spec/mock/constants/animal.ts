@@ -1,4 +1,5 @@
 import type { Animal } from '@prisma/client';
+import type { AnimalInfo } from 'server/adapters/animal/index.presenter';
 
 export const ANIMALS = [
   {
@@ -383,12 +384,12 @@ export const ANIMALS = [
   }
 ].map(({ openAt, createdAt, updatedAt, ...animal }) => ({
   ...animal,
-  openAt: openAt ? new Date(openAt) : openAt,
+  openAt: typeof openAt === 'string' ? new Date(openAt) : openAt,
   createdAt: new Date(createdAt),
   updatedAt: new Date(updatedAt)
 })) as Animal[];
 
-export const ANIMAL = ANIMALS[0];
+export const ANIMAL = ANIMALS[0] as unknown as AnimalInfo;
 
 export const EXISTED_ANIMALS = [
   {

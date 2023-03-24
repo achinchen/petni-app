@@ -61,8 +61,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const user = await authenticator.isAuthenticated(request);
   if (!user) return redirect('/');
 
-  const [status, animal] = await animalController.getInfo(Number(params.id));
-
+  const result = await animalController.getInfo(Number(params.id));
+  const [status, animal] = result;
   if (!animal) {
     throw new Response(`找不到 No.${params.id} 的浪浪`, {
       status
@@ -82,7 +82,7 @@ export default function PetRouter() {
       <EditAdoption
         animal={{
           ...data.animal,
-          openAt: data.animal.openAt ? new Date(data.animal.openAt) : null,
+          openAt: data.animal.openAt ? new Date(data.animal.openAt) : '',
           createdAt: new Date(data.animal.createdAt),
           updatedAt: new Date(data.animal.updatedAt)
         }}
