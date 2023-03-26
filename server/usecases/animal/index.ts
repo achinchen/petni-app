@@ -48,8 +48,12 @@ export class AnimalUseCase {
     return animal;
   }
 
-  async updateAnimal(animalId: Animal['id']): Promise<void> {
-    await this.animalRepository.update!(animalId);
+  async updateAnimal(
+    payload: Partial<Animal> & Pick<Animal, 'id'>,
+    userId: User['id']
+  ): Promise<Animal | null> {
+    const animal = await this.animalRepository.update(payload, userId);
+    return animal;
   }
 
   async deleteAnimal(animal: Animal): Promise<void> {
