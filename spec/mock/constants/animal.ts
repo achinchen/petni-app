@@ -389,7 +389,8 @@ export const ANIMALS = [
   updatedAt: new Date(updatedAt)
 })) as Animal[];
 
-export const ANIMAL = ANIMALS[0] as unknown as AnimalInfo;
+export const ANIMAL_INFO = ANIMALS[0] as unknown as AnimalInfo;
+export const ANIMAL = ANIMALS[0];
 
 export const EXISTED_ANIMALS = [
   {

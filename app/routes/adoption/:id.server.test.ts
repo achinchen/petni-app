@@ -4,9 +4,9 @@ import getJsonFormData from 'spec/utils/getJsonFormData';
 import getContext from 'spec/utils/getContext';
 import { authenticator } from 'spec/utils/authenticator';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
-import updateAnimalById from '~/models/Animal/updateAnimalById/index.server';
+import updateAnimalById from 'server/gateways/animal/postgres/updateAnimalById/updateAnimalById';
 import { controller } from 'spec/mock/server/adapters/animal/index.controller';
-import { ANIMAL } from 'spec/mock/constants/animal';
+import { ANIMAL_INFO } from 'spec/mock/constants/animal';
 import { USER } from 'spec/mock/constants/user';
 
 import { action, loader, meta } from './:id';
@@ -14,7 +14,7 @@ import { action, loader, meta } from './:id';
 type MetaFunctionParameters = Parameters<MetaFunction>[0];
 
 const mock = {
-  id: ANIMAL.id
+  id: ANIMAL_INFO.id
 };
 
 jest.mock('server/gateways/animal/postgres/index');
@@ -25,12 +25,12 @@ jest.mock('~/utils/seo/getMetaBaseByAnimal');
 describe('meta', () => {
   it('trigger getMetaBaseByAnimal', () => {
     const context = {
-      data: { animal: ANIMAL }
+      data: { animal: ANIMAL_INFO }
     } as unknown as MetaFunctionParameters;
     meta(context);
 
     expect(getMetaBaseByAnimal).toBeCalledWith({
-      animal: ANIMAL,
+      animal: ANIMAL_INFO,
       prefix: { title: '編輯 ' }
     });
   });
@@ -88,7 +88,7 @@ describe('action', () => {
       .fn()
       .mockResolvedValueOnce(getJsonFormData(mock.id));
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
-    (updateAnimalById as jest.Mock).mockResolvedValueOnce(ANIMAL);
+    (updateAnimalById as jest.Mock).mockResolvedValueOnce(ANIMAL_INFO);
     await action(context);
     expect(json).toBeCalledWith({ animal: ANIMAL });
   });
@@ -116,8 +116,8 @@ describe('loader', () => {
 
   it('return animal when animal is founded', async () => {
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
-    controller.getInfo.mockResolvedValueOnce([200, ANIMAL]);
+    controller.getInfo.mockResolvedValueOnce([200, ANIMAL_INFO]);
     await loader(context);
-    expect(json).toBeCalledWith({ animal: ANIMAL });
+    expect(json).toBeCalledWith({ animal: ANIMAL_INFO });
   });
 });

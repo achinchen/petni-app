@@ -5,7 +5,7 @@ import getContext from 'spec/utils/getContext';
 import { controller } from 'spec/mock/server/adapters/animal/index.controller';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
 import { USER } from 'spec/mock/constants/user';
-import { ANIMAL } from 'spec/mock/constants/animal';
+import { ANIMAL_INFO } from 'spec/mock/constants/animal';
 import { meta, loader } from './:id';
 
 jest.mock('server/gateways/animal/postgres/index');
@@ -21,12 +21,12 @@ beforeEach(() => {
 describe('meta', () => {
   it('trigger getMetaBaseByAnimal', () => {
     const context = {
-      data: { pet: ANIMAL }
+      data: { pet: ANIMAL_INFO }
     } as unknown as MetaFunctionParameters;
 
     meta(context);
     expect(getMetaBaseByAnimal).toBeCalledWith({
-      animal: ANIMAL
+      animal: ANIMAL_INFO
     });
   });
 });
@@ -58,8 +58,8 @@ describe('loader', () => {
   it('return data when animal is found', async () => {
     const id = 1;
     const context = getContext({ params: { id } });
-    controller.getInfo.mockResolvedValueOnce([200, ANIMAL]);
+    controller.getInfo.mockResolvedValueOnce([200, ANIMAL_INFO]);
     await loader(context);
-    expect(json).toBeCalledWith({ pet: ANIMAL });
+    expect(json).toBeCalledWith({ pet: ANIMAL_INFO });
   });
 });

@@ -2,9 +2,9 @@ import type { AnimalRepository } from 'server/gateways/animal';
 import type { AnimalFollowRepository } from 'server/gateways/animal-follow';
 import { AnimalUseCase } from '.';
 import { ANIMAL_FOLLOW } from 'spec/mock/constants/animal-follow';
-import { ANIMAL } from 'spec/mock/constants/animal';
+import { ANIMAL_INFO } from 'spec/mock/constants/animal';
 
-const animalWithUserId = { ...ANIMAL, userId: 1 };
+const animalWithUserId = { ...ANIMAL_INFO, userId: 1 };
 
 describe('AnimalUseCase', () => {
   let useCase: AnimalUseCase;
