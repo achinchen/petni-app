@@ -2,7 +2,8 @@ import type { AnimalRepository } from 'server/gateways/animal';
 import type { AnimalFollowRepository } from 'server/gateways/animal-follow';
 import { AnimalUseCase } from '.';
 import { ANIMAL_FOLLOW } from 'spec/mock/constants/animal-follow';
-import { ANIMAL_INFO } from 'spec/mock/constants/animal';
+import { ANIMAL, ANIMAL_INFO } from 'spec/mock/constants/animal';
+import type { Animal } from 'server/entities/animal';
 
 const animalWithUserId = { ...ANIMAL_INFO, userId: 1 };
 
@@ -16,7 +17,8 @@ describe('AnimalUseCase', () => {
 
   beforeEach(() => {
     animalRepository = {
-      getOneById: jest.fn()
+      getOneById: jest.fn(),
+      update: jest.fn()
     } as unknown as jest.Mocked<AnimalRepository>;
     animalFollowRepository = {
       getOneByAnimalId: jest.fn()
@@ -94,6 +96,28 @@ describe('AnimalUseCase', () => {
         result = await useCase.getAnimalInfo(animalId, userId);
 
         expect(result!.editable).toBe(true);
+      });
+    });
+  });
+
+  describe('updateAnimal', () => {
+    describe('invoke repository', () => {
+      let result: Awaited<ReturnType<AnimalUseCase['updateAnimal']>>;
+      let payload = { name: 'new name', id: animalId };
+      beforeEach(async () => {
+        animalRepository.update.mockResolvedValueOnce({
+          ...ANIMAL,
+          ...payload
+        } as unknown as Animal);
+        result = await useCase.updateAnimal(payload, userId);
+      });
+
+      it('invoke AnimalRepository.update with the given animalId', () => {
+        expect(animalRepository.update).toHaveBeenCalledWith(payload, userId);
+      });
+
+      it('return updated animal', () => {
+        expect(result!.name).toBe(payload.name);
       });
     });
   });
