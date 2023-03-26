@@ -35,7 +35,7 @@ describe('follow', () => {
   describe('when animalId is not provided', () => {
     let payload: Payload;
     beforeEach(async () => {
-      payload = await controller.follow('');
+      payload = await controller.follow(0);
     });
 
     it('return invalid input', async () => {
@@ -95,7 +95,7 @@ describe('unfollowRequest', () => {
   describe('when animalId is not provided', () => {
     let payload: Payload;
     beforeEach(async () => {
-      payload = await controller.unfollow('');
+      payload = await controller.unfollow(0);
     });
 
     it('return invalid input', async () => {
