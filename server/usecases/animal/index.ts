@@ -33,7 +33,7 @@ export class AnimalUseCase {
     const animalFollow = await this.animalFollowRepository?.getOneByAnimalId(
       animalId
     );
-    const count = animalFollow?.count || 0;
+    const count = animalFollow?.count ?? 0;
     const editable = userId ? animal?.userId === userId : false;
 
     return {
