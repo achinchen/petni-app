@@ -1,10 +1,11 @@
 import type { Animal } from 'server/entities/animal';
 import type { User } from 'server/entities/user';
 import type { Prisma } from '@prisma/client';
+import type { LooseAnimal } from 'server/gateways/animal/index';
 import { db } from '~/utils/db/index.server';
 
 export default async function updateById(
-  payload: Animal,
+  payload: LooseAnimal,
   userId: User['id']
 ): Promise<Animal | null> {
   const animal = await db.animal.findFirst({
@@ -60,4 +61,4 @@ export default async function updateById(
     console.error(error);
     return null;
   }
-};
+}
