@@ -1,16 +1,17 @@
-import type { Animal, User } from '@prisma/client';
-import type { EditingAnimal } from '~/models/Animal/type';
+import type { Animal } from 'server/entities/animal';
+import type { User } from 'server/entities/user';
+import type { Prisma } from '@prisma/client';
 import { db } from '~/utils/db/index.server';
 
-export default async (
-  payload: EditingAnimal,
-  user: User
-): Promise<Animal | null> => {
+export default async function updateById(
+  payload: Animal,
+  userId: User['id']
+): Promise<Animal | null> {
   const animal = await db.animal.findFirst({
     where: {
       AND: [
         {
-          userId: user.id
+          userId
         },
         {
           id: payload.id
@@ -34,11 +35,13 @@ export default async (
     note
   } = payload;
 
-  let updatePayload = {} as EditingAnimal;
-  updatePayload.family ??= family;
+  let updatePayload = {} as Prisma.AnimalUncheckedUpdateInput;
+  updatePayload.family ??=
+    family as Prisma.EnumFamilyFieldUpdateOperationsInput;
   updatePayload.color ??= color;
-  updatePayload.gender ??= gender;
-  updatePayload.size ??= size;
+  updatePayload.gender ??=
+    gender as Prisma.EnumGenderFieldUpdateOperationsInput;
+  updatePayload.size ??= size as Prisma.EnumSizeFieldUpdateOperationsInput;
   updatePayload.name ??= name;
   updatePayload.imageUrl ??= imageUrl;
   updatePayload.location ??= location;
@@ -52,7 +55,7 @@ export default async (
         id
       }
     });
-    return record;
+    return record as unknown as Animal;
   } catch (error) {
     console.error(error);
     return null;

@@ -7,7 +7,7 @@ type UserId = User['id'];
 
 export interface AnimalRepository {
   create?(animal: EditingAnimal): Promise<Animal>;
-  update?(animal: AnimalId): Promise<void>;
+  update(animal: Animal, userId: UserId): Promise<Animal | null>;
   delete?(animal: Animal): Promise<void>;
   getOneById(id: AnimalId, userId?: UserId): Promise<Animal | null>;
   getManyByIds?(animalIds: AnimalId[]): Promise<Animal[]>;

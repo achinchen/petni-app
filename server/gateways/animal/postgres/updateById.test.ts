@@ -1,10 +1,9 @@
-import type { User } from '@prisma/client';
-import type { Animal } from '@prisma/client';
-import type { EditingAnimal } from '~/models/Animal/type';
+import type { User } from 'server/entities/user';
+import type { Animal } from 'server/entities/animal';
 import { db } from '~/utils/db/index.server';
 import { EXISTED_USER } from 'spec/mock/constants/user';
 import { ANIMAL, ANIMALS } from 'spec/mock/constants/animal';
-import updateAnimalById from './index.server';
+import updateAnimalById from './updateById';
 
 let user: User;
 beforeAll(async () => {
@@ -14,7 +13,9 @@ beforeAll(async () => {
     }
   });
 
-  await db.animal.create({ data: { ...ANIMAL, userId: user.id } });
+  await db.animal.create({
+    data: { ...ANIMAL, userId: user.id }
+  });
 });
 
 afterAll(async () => {
@@ -35,10 +36,10 @@ const editingAnimal = {
   location: mock.location,
   tel: mock.tel,
   note: mock.note
-} as EditingAnimal;
+} as unknown as Animal;
 
 describe('update Animal', () => {
-  const payload = { id: 999 } as EditingAnimal;
+  const payload = { id: 999 } as Animal;
   it('return null when animal is not founded', async () => {
     const result = await updateAnimalById(payload, user);
     expect(result).toBe(null);
