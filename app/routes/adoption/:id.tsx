@@ -3,7 +3,7 @@ import type {
   ActionFunction,
   MetaFunction
 } from '@remix-run/node';
-import type { Animal } from '@prisma/client';
+import type { Animal } from 'server/entities/animal';
 import type { AnimalInfo } from 'server/adapters/animal/index.presenter';
 import { json, redirect } from '@remix-run/node';
 import { Link, useLoaderData, useCatch, useParams } from '@remix-run/react';
@@ -15,7 +15,6 @@ import { AnimalRepositoryPostgres } from 'server/gateways/animal/postgres';
 import { AnimalController } from 'server/adapters/animal/index.controller';
 import { AnimalPresenter } from 'server/adapters/animal/index.presenter';
 import { authenticator } from 'server/services/auth/index.server';
-import updateAnimalById from '~/models/Animal/updateAnimalById/index.server';
 import Loading from '~/components/common/LoadingAnimation';
 import Layout from '~/components/common/Layout';
 import EditAdoption from '~/features/adoption/edit';
@@ -42,8 +41,11 @@ export const action: ActionFunction = async ({ request }) => {
   });
   if (!payload) return json({}, 404);
 
-  const animal = await updateAnimalById(payload, user);
-  if (!animal) return json({}, 500);
+  const [status, animal] = await animalController.updateAnimal(
+    payload,
+    user.id
+  );
+  if (!animal) return json({}, status);
 
   return json({ animal });
 };
@@ -69,7 +71,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     });
   }
 
-  const data: LoaderData = { animal };
+  const data = { animal } as LoaderData;
 
   return json(data);
 };
