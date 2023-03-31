@@ -1,12 +1,17 @@
+import type { Animal } from 'server/entities/animal';
 import type { AnimalInfo } from 'server/usecases/animal';
 
 type StatusCode = number;
-export type Payload = [StatusCode, AnimalInfo?];
+export type Payload = [StatusCode, (AnimalInfo | Animal)?];
 export type { AnimalInfo };
 
 export class AnimalPresenter {
   invalidInput(): Payload {
     return [400];
+  }
+
+  forbidden(): Payload {
+    return [403];
   }
 
   notFound(): Payload {
@@ -21,7 +26,7 @@ export class AnimalPresenter {
     return [500];
   }
 
-  success(animalInfo: AnimalInfo): Payload {
-    return [200, animalInfo];
+  success(payload: AnimalInfo | Animal): Payload {
+    return [200, payload];
   }
 }
