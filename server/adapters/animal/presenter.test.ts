@@ -10,6 +10,10 @@ describe('AnimalPresenter', () => {
       method: animalFollowPresenter.invalidInput
     },
     {
+      expected: [403],
+      method: animalFollowPresenter.forbidden
+    },
+    {
       expected: [405],
       method: animalFollowPresenter.invalidMethod
     },
