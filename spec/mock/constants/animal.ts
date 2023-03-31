@@ -1,5 +1,6 @@
 import type { Animal } from '@prisma/client';
 import type { AnimalInfo } from 'server/adapters/animal/index.presenter';
+import type { Animal as EntityAnimal } from 'server/entities/animal';
 
 export const ANIMALS = [
   {
@@ -382,15 +383,10 @@ export const ANIMALS = [
     updatedAt: '2022-07-17T10:10:26.673Z',
     userId: null
   }
-].map(({ openAt, createdAt, updatedAt, ...animal }) => ({
-  ...animal,
-  openAt: typeof openAt === 'string' ? new Date(openAt) : openAt,
-  createdAt: new Date(createdAt),
-  updatedAt: new Date(updatedAt)
-})) as Animal[];
+] as unknown as Animal[];
 
 export const ANIMAL_INFO = ANIMALS[0] as unknown as AnimalInfo;
-export const ANIMAL = ANIMALS[0];
+export const ANIMAL = ANIMALS[0] as unknown as EntityAnimal;
 
 export const EXISTED_ANIMALS = [
   {
@@ -773,13 +769,7 @@ export const EXISTED_ANIMALS = [
     updatedAt: '2022-07-17T10:10:26.676Z',
     userId: null
   }
-].map(({ openAt, createdAt, updatedAt, ...animal }) => ({
-  ...animal,
-  openAt: openAt ? new Date(openAt) : openAt,
-  createdAt: new Date(createdAt),
-  updatedAt: new Date(updatedAt),
-  userId: 1
-})) as Animal[];
+];
 
 export const getAnimal = () => ({
   ...ANIMAL,
