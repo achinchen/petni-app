@@ -1,6 +1,6 @@
 import type { EditingAnimal } from '~/models/Animal/type';
 import type { Animal } from 'server/entities/animal';
-import type { AnimalRepository } from 'server/gateways/animal';
+import type { AnimalRepository, LooseAnimal } from 'server/gateways/animal';
 import type { AnimalFollowRepository } from 'server/gateways/animal-follow';
 import type { AnimalFollow } from 'server/entities/animal-follow';
 import type { User } from 'server/entities/user';
@@ -49,7 +49,7 @@ export class AnimalUseCase {
   }
 
   async updateAnimal(
-    payload: Partial<Animal> & Pick<Animal, 'id'>,
+    payload: LooseAnimal,
     userId: User['id']
   ): Promise<Animal | null> {
     const animal = await this.animalRepository.update(payload, userId);

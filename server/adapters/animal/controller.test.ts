@@ -4,10 +4,12 @@ import type {
   Payload
 } from 'server/adapters/animal/index.presenter';
 import { AnimalController } from 'server/adapters/animal/index.controller';
-import { ANIMAL_INFO } from 'spec/mock/constants/animal';
+import { ANIMAL_INFO, ANIMAL } from 'spec/mock/constants/animal';
+import type { LooseAnimal } from 'server/gateways/animal';
 
-const animalId = 123;
 const userId = 456;
+const animal = { ...ANIMAL, userId };
+
 let useCase: jest.Mocked<AnimalUseCase>;
 let presenter: jest.Mocked<AnimalPresenter>;
 let controller: AnimalController;
@@ -31,6 +33,7 @@ beforeEach(() => {
       mockPresenterResult.success,
       payload
     ]),
+    forbidden: jest.fn().mockReturnValue(mockPresenterResult.forbidden),
     notFound: jest.fn().mockReturnValue(mockPresenterResult.notFound),
     invalidInput: jest.fn().mockReturnValue(mockPresenterResult.invalidInput),
     failed: jest.fn().mockReturnValue(mockPresenterResult.failed)
@@ -40,6 +43,8 @@ beforeEach(() => {
 });
 
 describe('getInfo', () => {
+  const animalId = ANIMAL_INFO.id;
+
   describe('when animalId is not provided', () => {
     let payload: Payload;
     beforeEach(async () => {
@@ -98,7 +103,7 @@ describe('getInfo', () => {
     });
   });
 
-  describe('when the follow request fails', () => {
+  describe('when the get info request fails', () => {
     let payload: Payload;
     beforeEach(async () => {
       useCase.getAnimalInfo.mockRejectedValue('error');
@@ -115,6 +120,107 @@ describe('getInfo', () => {
 
     it('call usecase', () => {
       expect(useCase.getAnimalInfo).toBeCalledWith(animalId, userId);
+    });
+  });
+});
+
+describe('updateAnimal', () => {
+  const animalId = animal.id;
+  describe('when userId is not provided', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      payload = await controller.updateAnimal(animal, undefined!);
+    });
+
+    it('return forbidden input', () => {
+      expect(payload).toBe(mockPresenterResult.forbidden);
+    });
+
+    it('invoke presenter.forbidden', () => {
+      expect(presenter.forbidden).toBeCalledTimes(1);
+    });
+
+    it('not call usecase', () => {
+      expect(useCase.updateAnimal).not.toBeCalled();
+    });
+  });
+
+  describe('when the payload is falsy', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      payload = await controller.updateAnimal({ id: animalId }, userId);
+    });
+
+    it('return invalid input', () => {
+      expect(payload).toBe(mockPresenterResult.invalidInput);
+    });
+
+    it('invoke presenter.invalidInput', () => {
+      expect(presenter.invalidInput).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.updateAnimal).not.toBeCalled();
+    });
+  });
+
+  describe('when the retrieved result is falsy', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      useCase.updateAnimal.mockResolvedValue(null);
+      payload = await controller.updateAnimal(animal, userId);
+    });
+
+    it('return failed', () => {
+      expect(payload).toEqual(mockPresenterResult.failed);
+    });
+
+    it('invoke presenter.failed', () => {
+      expect(presenter.failed).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.updateAnimal).toBeCalledWith(animal, userId);
+    });
+  });
+
+  describe('when the retrieved result is truthy', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      useCase.updateAnimal.mockResolvedValue(animal);
+      payload = await controller.updateAnimal(animal, userId);
+    });
+
+    it('return success', () => {
+      expect(payload).toEqual([mockPresenterResult.success, animal]);
+    });
+
+    it('invoke presenter.success', () => {
+      expect(presenter.success).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.updateAnimal).toBeCalledWith(animal, userId);
+    });
+  });
+
+  describe('when the update request fails', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      useCase.updateAnimal.mockRejectedValue('error');
+      payload = await controller.updateAnimal(animal, userId);
+    });
+
+    it('return failed', () => {
+      expect(payload).toBe(mockPresenterResult.failed);
+    });
+
+    it('invoke presenter.failed', () => {
+      expect(presenter.failed).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.updateAnimal).toBeCalledWith(animal, userId);
     });
   });
 });

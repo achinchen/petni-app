@@ -1,5 +1,6 @@
 import type { User } from 'server/entities/user';
 import type { Animal } from 'server/entities/animal';
+import type { LooseAnimal } from 'server/gateways/animal';
 import type { AnimalUseCase } from 'server/usecases/animal';
 import type {
   AnimalPresenter,
@@ -24,7 +25,7 @@ export class AnimalController {
   }
 
   async updateAnimal(
-    payload: Partial<Animal> & Pick<Animal, 'id'>,
+    payload: LooseAnimal,
     userId: User['id']
   ): Promise<Payload> {
     const { id, ...rest } = payload;
