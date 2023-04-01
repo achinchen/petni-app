@@ -28,12 +28,29 @@ export class AnimalController {
     payload: LooseAnimal,
     userId: User['id']
   ): Promise<Payload> {
-    const { id, ...rest } = payload;
     if (!userId) return this.animalPresenter.forbidden();
+
+    const { id, ...rest } = payload;
+    if (!Object.entries(rest).flat().filter(Boolean).length)
+      return this.animalPresenter.invalidInput();
+
+    try {
+      const result = await this.animalUseCase.updateAnimal(payload, userId);
+      if (!result) return this.animalPresenter.failed();
+      return this.animalPresenter.success(result);
+    } catch {
+      return this.animalPresenter.failed();
+    }
+  }
+
+  async createAnimal(payload: Animal, userId: User['id']): Promise<Payload> {
+    if (!userId) return this.animalPresenter.forbidden();
+
+    const { id, ...rest } = payload;
     if (!Object.entries(rest).flat().filter(Boolean).length)
       return this.animalPresenter.invalidInput();
     try {
-      const result = await this.animalUseCase.updateAnimal(payload, userId);
+      const result = await this.animalUseCase.createAnimal(payload, userId);
       if (!result) return this.animalPresenter.failed();
       return this.animalPresenter.success(result);
     } catch {

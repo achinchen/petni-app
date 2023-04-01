@@ -1,5 +1,6 @@
 import type { User } from 'server/entities/user';
 import type { Animal } from 'server/entities/animal';
+import type { Prisma } from '@prisma/client';
 import { db } from '~/utils/db/index.server';
 import { EXISTED_USER } from 'spec/mock/constants/user';
 import { ANIMAL, ANIMALS } from 'spec/mock/constants/animal';
@@ -14,7 +15,7 @@ beforeAll(async () => {
   });
 
   await db.animal.create({
-    data: { ...ANIMAL, userId: user.id }
+    data: { ...ANIMAL, userId: user.id } as unknown as Prisma.AnimalCreateInput
   });
 });
 
@@ -41,13 +42,13 @@ const editingAnimal = {
 describe('update Animal', () => {
   const payload = { id: 999 } as Animal;
   it('return null when animal is not founded', async () => {
-    const result = await updateAnimalById(payload, user);
+    const result = await updateAnimalById(payload, user.id);
     expect(result).toBe(null);
   });
 
   it('update animal', async () => {
     const { id, ...properties } = editingAnimal;
-    await updateAnimalById(editingAnimal, user);
+    await updateAnimalById(editingAnimal, user.id);
     const animal = await db.animal.findFirst({ where: { id } });
     Object.entries(properties).forEach(([key, value]) => {
       expect(animal![key as keyof Animal]).toBe(value);
@@ -55,7 +56,7 @@ describe('update Animal', () => {
   });
 
   it('return animal', async () => {
-    const result = await updateAnimalById(editingAnimal, user);
+    const result = await updateAnimalById(editingAnimal, user.id);
     expect(result).toBeTruthy();
   });
 });

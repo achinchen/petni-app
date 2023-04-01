@@ -43,8 +43,11 @@ export class AnimalUseCase {
     } as AnimalInfo;
   }
 
-  async createAnimal(payload: EditingAnimal): Promise<Animal> {
-    const animal = await this.animalRepository.create!(payload);
+  async createAnimal(
+    payload: Animal,
+    userId: User['id']
+  ): Promise<Animal | null> {
+    const animal = await this.animalRepository.create(payload, userId);
     return animal;
   }
 

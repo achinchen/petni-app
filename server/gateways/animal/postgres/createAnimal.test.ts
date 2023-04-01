@@ -1,5 +1,6 @@
-import type { User, Animal } from '@prisma/client';
-import createAnimal from './index.server';
+import type { Animal } from 'server/entities/animal';
+import type { User } from 'server/entities/user';
+import createAnimal from './createAnimal';
 import { db } from '~/utils/db/index.server';
 import { getAnimal } from 'spec/mock/constants/animal';
 import { EXISTED_USER } from 'spec/mock/constants/user';
@@ -23,7 +24,7 @@ afterAll(async () => {
 describe('createAnimal', () => {
   let animal: Animal;
   beforeAll(async () => {
-    animal = await createAnimal(ANIMAL, user);
+    animal = await createAnimal(ANIMAL, user.id);
   });
 
   it('animal.address is same with animal.location', () => {

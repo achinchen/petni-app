@@ -4,7 +4,7 @@ import getContext from 'spec/utils/getContext';
 import getJsonFormData from 'spec/utils/getJsonFormData';
 import { loader, action } from './index';
 import { authenticator } from 'spec/utils/authenticator';
-import createAnimal from '~/models/Animal/createAnimal/index.server';
+import createAnimal from 'server/gateways/animal/postgres/createAnimal/createAnimal';
 import { USER } from 'spec/mock/constants/user';
 import { ANIMAL } from 'spec/mock/constants/animal';
 

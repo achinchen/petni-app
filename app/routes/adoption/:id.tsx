@@ -33,17 +33,14 @@ export const action: ActionFunction = async ({ request }) => {
   if (!formData) return json({}, 400);
 
   const user = await authenticator.isAuthenticated(request);
-  if (!user) return json({}, 401);
-
   const payload: Animal = parsePayloadByJson({
     formData,
     fallback: null
   });
-  if (!payload) return json({}, 404);
 
   const [status, animal] = await animalController.updateAnimal(
     payload,
-    user.id
+    user?.id!
   );
   if (!animal) return json({}, status);
 
