@@ -39,3 +39,4 @@ export class AnimalController {
       return this.animalPresenter.failed();
     }
   }
+}
