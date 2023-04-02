@@ -3,6 +3,9 @@ export const controller = {
   getInfo: jest.fn() as jest.MockedFunction<AnimalController['getInfo']>,
   updateAnimal: jest.fn() as jest.MockedFunction<
     AnimalController['updateAnimal']
+  >,
+  createAnimal: jest.fn() as jest.MockedFunction<
+    AnimalController['createAnimal']
   >
 };
 

@@ -43,7 +43,7 @@ export class AnimalController {
     }
   }
 
-  async createAnimal(payload: Animal, userId: User['id']): Promise<Payload> {
+  async createAnimal(payload: Animal, userId?: User['id']): Promise<Payload> {
     if (!userId) return this.animalPresenter.forbidden();
 
     const { id, ...rest } = payload;

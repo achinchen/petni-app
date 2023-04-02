@@ -91,7 +91,7 @@ describe('AnimalUseCase', () => {
         expect(result!.editable).toBe(false);
       });
 
-      it('return treu when animal.userId is not equal with args.userId', async () => {
+      it('return true when animal.userId is not equal with args.userId', async () => {
         animalRepository.getOneById.mockResolvedValueOnce(animalWithUserId);
         result = await useCase.getAnimalInfo(animalId, userId);
 
