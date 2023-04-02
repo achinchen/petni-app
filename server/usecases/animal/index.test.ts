@@ -18,7 +18,8 @@ describe('AnimalUseCase', () => {
   beforeEach(() => {
     animalRepository = {
       getOneById: jest.fn(),
-      update: jest.fn()
+      update: jest.fn(),
+      create: jest.fn()
     } as unknown as jest.Mocked<AnimalRepository>;
     animalFollowRepository = {
       getOneByAnimalId: jest.fn()
@@ -118,6 +119,27 @@ describe('AnimalUseCase', () => {
 
       it('return updated animal', () => {
         expect(result!.name).toBe(payload.name);
+      });
+    });
+  });
+
+  describe('createAnimal', () => {
+    describe('invoke repository', () => {
+      let result: Awaited<ReturnType<AnimalUseCase['createAnimal']>>;
+      beforeEach(async () => {
+        animalRepository.create.mockResolvedValueOnce({
+          ...ANIMAL,
+          userId
+        } as unknown as Animal);
+        result = await useCase.createAnimal(ANIMAL, userId);
+      });
+
+      it('invoke AnimalRepository.create with the given animalId', () => {
+        expect(animalRepository.create).toHaveBeenCalledWith(ANIMAL, userId);
+      });
+
+      it('return animal', () => {
+        expect(result?.userId).toBe(userId);
       });
     });
   });
