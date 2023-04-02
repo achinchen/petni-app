@@ -63,6 +63,7 @@ export class AnimalController {
     userId: User['id']
   ): Promise<Payload> {
     if (!userId) return this.animalPresenter.forbidden();
+    if (!animalId) return this.animalPresenter.invalidInput();
     try {
       await this.animalUseCase.deleteAnimal(animalId, userId);
       return this.animalPresenter.saveSuccess();
