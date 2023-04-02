@@ -18,13 +18,17 @@ describe('AnimalPresenter', () => {
       method: animalFollowPresenter.invalidMethod
     },
     { expected: [500], method: animalFollowPresenter.failed },
-    { expected: [200, ANIMAL], method: animalFollowPresenter.success }
+    {
+      expected: [200, ANIMAL],
+      method: () => animalFollowPresenter.success(ANIMAL)
+    },
+    { expected: [204], method: animalFollowPresenter.saveSuccess }
   ];
 
   it.concurrent.each(testCases)(
     'return $expected when $method.name',
     ({ expected, method }) => {
-      expect(method(ANIMAL)).toEqual(expected);
+      expect(method()).toEqual(expected);
     }
   );
 });

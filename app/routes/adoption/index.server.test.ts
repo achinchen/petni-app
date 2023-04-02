@@ -5,7 +5,7 @@ import { ANIMAL, ANIMALS } from 'spec/mock/constants/animal';
 import { USER } from 'spec/mock/constants/user';
 import { authenticator } from 'spec/utils/authenticator';
 import getAnimalsByUserId from '~/models/Animal/getAnimalsByUserId/index.server';
-import deleteAnimalById from '~/models/Animal/deleteAnimalById/index.server';
+import deleteAnimalById from 'server/gateways/animal/postgres/deleteAnimalById/deleteAnimalById';
 
 jest.mock('~/models/Animal/getAnimalsByUserId/index.server');
 jest.mock('~/models/Animal/deleteAnimalById/index.server');

@@ -29,4 +29,8 @@ export class AnimalPresenter {
   success(payload: AnimalInfo | Animal): Payload {
     return [200, payload];
   }
+
+  saveSuccess(): Payload {
+    return [204];
+  }
 }

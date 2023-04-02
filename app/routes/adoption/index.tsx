@@ -5,7 +5,7 @@ import { json, Response } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { authenticator } from 'server/services/auth/index.server';
 import getAnimalsByUserId from '~/models/Animal/getAnimalsByUserId/index.server';
-import deleteAnimalById from '~/models/Animal/deleteAnimalById/index.server';
+import deleteAnimalById from 'server/gateways/animal/postgres/deleteAnimalById/deleteAnimalById';
 import Layout from '~/components/common/Layout';
 import Adoption from '~/features/adoption';
 

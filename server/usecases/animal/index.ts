@@ -59,7 +59,10 @@ export class AnimalUseCase {
     return animal;
   }
 
-  async deleteAnimal(animal: Animal): Promise<void> {
-    await this.animalRepository.delete!(animal);
+  async deleteAnimal(
+    animalId: Animal['id'],
+    userId: User['id']
+  ): Promise<void> {
+    await this.animalRepository.deleteById(animalId, userId);
   }
 }

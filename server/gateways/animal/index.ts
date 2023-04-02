@@ -9,7 +9,7 @@ export type LooseAnimal = Partial<Animal> & Pick<Animal, 'id'>;
 export interface AnimalRepository {
   create(animal: Animal, userId: UserId): Promise<Animal | null>;
   update(animal: LooseAnimal, userId: UserId): Promise<Animal | null>;
-  delete?(animal: Animal): Promise<void>;
+  deleteById(animalId: AnimalId, userId: UserId): Promise<void>;
   getOneById(id: AnimalId, userId?: UserId): Promise<Animal | null>;
   getManyByIds?(animalIds: AnimalId[]): Promise<Animal[]>;
   getManyByOptions?(options: Options): Promise<Animal[]>;

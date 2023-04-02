@@ -57,4 +57,17 @@ export class AnimalController {
       return this.animalPresenter.failed();
     }
   }
+
+  async deleteAnimal(
+    animalId: Animal['id'],
+    userId: User['id']
+  ): Promise<Payload> {
+    if (!userId) return this.animalPresenter.forbidden();
+    try {
+      await this.animalUseCase.deleteAnimal(animalId, userId);
+      return this.animalPresenter.saveSuccess();
+    } catch {
+      return this.animalPresenter.failed();
+    }
+  }
 }
