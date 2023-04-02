@@ -1,6 +1,6 @@
-import type { Animal } from '@prisma/client';
+import type { Animal } from 'server/entities/animal';
+import type { LooseAnimal } from 'server/gateways/animal';
 import type { Dispatch } from 'react';
-import type { EditingAnimal } from '~/models/Animal/type';
 import type {
   AnimalInfoState,
   AnimalInfoAction
@@ -93,7 +93,7 @@ export const EditAdoptionContextProvider = ({
       location: otherInfo.location,
       tel: otherInfo.contact,
       note: otherInfo.note
-    } as EditingAnimal;
+    } as unknown as LooseAnimal;
     formData.set('json', JSON.stringify(info));
 
     fetcher.submit(formData, {
