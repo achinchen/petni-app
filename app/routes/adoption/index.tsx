@@ -22,7 +22,7 @@ export const action: ActionFunction = async ({ request }) => {
   if (method !== 'DELETE') return json({}, 400);
 
   const formData = await request.formData();
-  const animalId: AnimalId = Number(formData.get('id'));
+  const animalId: AnimalId = Number(formData?.get('id'));
   const user = await authenticator.isAuthenticated(request);
 
   const [status] = await animalController.deleteAnimal(animalId, user?.id!);

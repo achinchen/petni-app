@@ -6,6 +6,9 @@ export const controller = {
   >,
   createAnimal: jest.fn() as jest.MockedFunction<
     AnimalController['createAnimal']
+  >,
+  deleteAnimal: jest.fn() as jest.MockedFunction<
+    AnimalController['deleteAnimal']
   >
 };
 
