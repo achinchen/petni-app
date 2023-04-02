@@ -5,29 +5,29 @@ import { json, Response } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { authenticator } from 'server/services/auth/index.server';
 import getAnimalsByUserId from '~/models/Animal/getAnimalsByUserId/index.server';
-import deleteAnimalById from 'server/gateways/animal/postgres/deleteAnimalById/deleteAnimalById';
 import Layout from '~/components/common/Layout';
 import Adoption from '~/features/adoption';
+import { AnimalUseCase } from 'server/usecases/animal';
+import { AnimalRepositoryPostgres } from 'server/gateways/animal/postgres';
+import { AnimalController } from 'server/adapters/animal/index.controller';
+import { AnimalPresenter } from 'server/adapters/animal/index.presenter';
+
+const animalRepository = new AnimalRepositoryPostgres();
+const animalUseCase = new AnimalUseCase(animalRepository);
+const animalPresenter = new AnimalPresenter();
+const animalController = new AnimalController(animalUseCase, animalPresenter);
 
 export const action: ActionFunction = async ({ request }) => {
   const { method } = request;
   if (method !== 'DELETE') return json({}, 400);
 
   const formData = await request.formData();
-  if (!formData) return json({}, 400);
-
-  const id: AnimalId = Number(formData.get('id'));
-  if (!id) return json({}, 400);
-
+  const animalId: AnimalId = Number(formData.get('id'));
   const user = await authenticator.isAuthenticated(request);
-  if (!user) return json({}, 401);
 
-  try {
-    await deleteAnimalById(id, user);
-    return new Response(null, { status: 204 });
-  } catch {
-    return json({}, 500);
-  }
+  const [status] = await animalController.deleteAnimal(animalId, user?.id!);
+  if (status !== 204) return json({}, status);
+  return new Response(null, { status });
 };
 
 type LoaderData = { user: User | null; animals: SimpleAnimal[] };
