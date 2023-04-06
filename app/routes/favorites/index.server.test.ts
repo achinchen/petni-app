@@ -1,5 +1,5 @@
 import { json } from '@remix-run/node';
-import getAnimalByIds from '~/models/Animal/getAnimalsByIds/index.server';
+import getAnimalByIds from 'server/gateways/animal/postgres/getAnimalsByIds/getAnimalsByIds';
 import getContext from 'spec/utils/getContext';
 import getJsonFormData from 'spec/utils/getJsonFormData';
 import { ANIMALS } from 'spec/mock/constants/animal';

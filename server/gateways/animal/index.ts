@@ -11,7 +11,7 @@ export interface AnimalRepository {
   update(animal: LooseAnimal, userId: UserId): Promise<Animal | null>;
   deleteById(animalId: AnimalId, userId: UserId): Promise<void>;
   getOneById(id: AnimalId, userId?: UserId): Promise<Animal | null>;
-  getManyByIds?(animalIds: AnimalId[]): Promise<Animal[]>;
+  getManyByIds(animalIds: AnimalId[]): Promise<Animal[] | null>;
   getManyByOptions?(options: Options): Promise<Animal[]>;
   getManyByUserId?(userId: UserId): Promise<Animal[]>;
 }

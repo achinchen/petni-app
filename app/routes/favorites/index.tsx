@@ -1,7 +1,7 @@
 import type { ActionFunction } from '@remix-run/node';
 import type { AnimalId } from '~/models/Animal/type';
 import { json } from '@remix-run/node';
-import getAnimalByIds from '~/models/Animal/getAnimalsByIds/index.server';
+import getAnimalByIds from 'server/gateways/animal/postgres/getManyByIds';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
 import FavoritesFeature from '~/features/favorites';
 import Layout from '~/components/common/Layout';
