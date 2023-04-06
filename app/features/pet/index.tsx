@@ -1,13 +1,11 @@
-import type { Pet as PetType } from './types';
+import type { AnimalInfo } from 'server/usecases/animal';
 import BaseInfo from './BaseInfo';
 import Metadata from './Metadata';
 import AppearanceInfo from './AppearanceInfo';
 import ContactNote from './ContactNote';
 import Photo from './Photo';
 
-type Props = {
-  pet: PetType;
-};
+type Props = { pet: AnimalInfo };
 
 export default function Pet({ pet }: Props) {
   const { imageUrl } = pet;

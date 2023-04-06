@@ -5,7 +5,7 @@ import type { AnimalFollow } from 'server/entities/animal-follow';
 import type { User } from 'server/entities/user';
 
 export type AnimalInfo = Animal & {
-  count: AnimalFollow['count'];
+  follows: AnimalFollow['count'];
   editable: boolean;
 };
 
@@ -35,12 +35,12 @@ export class AnimalUseCase {
     const animalFollow = await this.animalFollowRepository?.getOneByAnimalId(
       animalId
     );
-    const count = animalFollow?.count ?? 0;
+    const follows = animalFollow?.count ?? 0;
     const editable = userId ? animal?.userId === userId : false;
 
     return {
       ...animal,
-      count,
+      follows,
       editable
     } as AnimalInfo;
   }

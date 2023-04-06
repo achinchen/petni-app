@@ -384,7 +384,11 @@ export const ANIMALS = [
   }
 ] as unknown as Animal[];
 
-export const ANIMAL_INFO = ANIMALS[0] as unknown as AnimalInfo;
+export const ANIMAL_INFO = {
+  ...ANIMALS[0],
+  editable: false,
+  follows: 1
+} as unknown as AnimalInfo;
 export const ANIMAL = ANIMALS[0];
 
 export const EXISTED_ANIMALS = [

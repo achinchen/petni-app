@@ -46,18 +46,18 @@ export const loader: LoaderFunction = async ({ request, params: { id } }) => {
   if (!animal) return json(`找不到 No.${id} 的浪浪`, status);
 
   const data: LoaderData = {
-    pet: animal
+    pet: animal as AnimalInfo
   };
 
   return json(data);
 };
 
 export default function PetRouter() {
-  const { data } = useLoaderData<LoaderData>();
+  const data = useLoaderData<LoaderData>();
 
   return (
     <Layout withHeader={false}>
-      <Pet pet={data.pet as any} />
+      <Pet pet={data.pet} />
     </Layout>
   );
 }
