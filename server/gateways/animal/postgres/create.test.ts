@@ -1,6 +1,6 @@
 import type { Animal } from 'server/entities/animal';
 import type { User } from 'server/entities/user';
-import createAnimal from './createAnimal';
+import createAnimal from './create';
 import { db } from '~/utils/db/index.server';
 import { getAnimal } from 'spec/mock/constants/animal';
 import { EXISTED_USER } from 'spec/mock/constants/user';

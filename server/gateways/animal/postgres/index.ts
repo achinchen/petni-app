@@ -1,13 +1,13 @@
 import type { AnimalRepository } from 'server/gateways/animal';
 import getOneById from './getOneById';
-import updateAnimalById from './updateById';
-import createAnimal from './createAnimal';
-import deleteAnimalById from './deleteAnimalById';
+import updateById from './updateById';
+import create from './create';
+import deleteById from './deleteById';
 
 type GetOneById = typeof getOneById;
-type UpdateAnimalById = typeof updateAnimalById;
-type CreateAnimal = typeof createAnimal;
-type DeleteAnimalById = typeof deleteAnimalById;
+type UpdateById = typeof updateById;
+type Create = typeof create;
+type DeleteById = typeof deleteById;
 export class AnimalRepositoryPostgres implements AnimalRepository {
   async getOneById(
     animalId: Parameters<GetOneById>[0]
@@ -17,25 +17,25 @@ export class AnimalRepositoryPostgres implements AnimalRepository {
   }
 
   async update(
-    payload: Parameters<UpdateAnimalById>[0],
-    userId: Parameters<UpdateAnimalById>[1]
-  ): ReturnType<UpdateAnimalById> {
-    const animal = await updateAnimalById(payload, userId);
+    payload: Parameters<UpdateById>[0],
+    userId: Parameters<UpdateById>[1]
+  ): ReturnType<UpdateById> {
+    const animal = await updateById(payload, userId);
     return animal;
   }
 
   async create(
-    payload: Parameters<CreateAnimal>[0],
-    userId: Parameters<CreateAnimal>[1]
-  ): ReturnType<CreateAnimal> {
-    const animal = await createAnimal(payload, userId);
+    payload: Parameters<Create>[0],
+    userId: Parameters<Create>[1]
+  ): ReturnType<Create> {
+    const animal = await create(payload, userId);
     return animal;
   }
 
   async deleteById(
-    animalId: Parameters<DeleteAnimalById>[0],
-    userId: Parameters<DeleteAnimalById>[1]
-  ): ReturnType<DeleteAnimalById> {
-    await deleteAnimalById(animalId, userId);
+    animalId: Parameters<DeleteById>[0],
+    userId: Parameters<DeleteById>[1]
+  ): ReturnType<DeleteById> {
+    await deleteById(animalId, userId);
   }
 }
