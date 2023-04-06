@@ -1,5 +1,6 @@
 import type { User } from 'server/entities/user';
 import type { Animal } from 'server/entities/animal';
+import type { LooseAnimal } from 'server/gateways/animal'
 import type { Prisma } from '@prisma/client';
 import { db } from '~/utils/db/index.server';
 import { EXISTED_USER } from 'spec/mock/constants/user';
@@ -37,10 +38,10 @@ const editingAnimal = {
   location: mock.location,
   tel: mock.tel,
   note: mock.note
-} as unknown as Animal;
+} as unknown as LooseAnimal;
 
 describe('update Animal', () => {
-  const payload = { id: 999 } as Animal;
+  const payload = { id: 999 } as LooseAnimal;
   it('return null when animal is not founded', async () => {
     const result = await updateAnimalById(payload, user.id);
     expect(result).toBe(null);

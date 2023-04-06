@@ -1,4 +1,3 @@
-import type { EditingAnimal } from '~/models/Animal/type';
 import type { Animal } from 'server/entities/animal';
 import type { AnimalRepository, LooseAnimal } from 'server/gateways/animal';
 import type { AnimalFollowRepository } from 'server/gateways/animal-follow';
@@ -9,6 +8,7 @@ export type AnimalInfo = Animal & {
   count: AnimalFollow['count'];
   editable: boolean;
 };
+
 export class AnimalUseCase {
   constructor(
     private readonly animalRepository: AnimalRepository,
@@ -20,8 +20,10 @@ export class AnimalUseCase {
     return animals;
   }
 
-  async getFavoritesAnimals(animalIds: Animal['id'][]): Promise<Animal[]> {
-    const animals = await this.animalRepository.getManyByIds!(animalIds);
+  async getFavoritesAnimals(
+    animalIds: Animal['id'][]
+  ): Promise<Animal[] | null> {
+    const animals = await this.animalRepository.getManyByIds(animalIds);
     return animals;
   }
 

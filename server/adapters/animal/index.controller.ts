@@ -24,6 +24,17 @@ export class AnimalController {
     }
   }
 
+  async getFavorites(animalIds: Animal['id'][]): Promise<Payload> {
+    if (!animalIds.length) return this.animalPresenter.invalidInput();
+    try {
+      const result = await this.animalUseCase.getFavoritesAnimals(animalIds);
+      if (!result) return this.animalPresenter.notFound();
+      return this.animalPresenter.success(result);
+    } catch {
+      return this.animalPresenter.failed();
+    }
+  }
+
   async updateAnimal(
     payload: LooseAnimal,
     userId: User['id']

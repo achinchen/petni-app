@@ -4,7 +4,7 @@ import type {
   Payload
 } from 'server/adapters/animal/index.presenter';
 import { AnimalController } from 'server/adapters/animal/index.controller';
-import { ANIMAL_INFO, ANIMAL } from 'spec/mock/constants/animal';
+import { ANIMAL_INFO, ANIMAL, ANIMALS } from 'spec/mock/constants/animal';
 import type { Animal } from 'server/entities/animal';
 
 const userId = 456;
@@ -26,6 +26,7 @@ const mockPresenterResult = {
 beforeEach(() => {
   useCase = {
     getAnimalInfo: jest.fn(),
+    getFavoritesAnimals: jest.fn(),
     updateAnimal: jest.fn(),
     createAnimal: jest.fn(),
     deleteAnimal: jest.fn()
@@ -124,6 +125,88 @@ describe('getInfo', () => {
 
     it('call usecase', () => {
       expect(useCase.getAnimalInfo).toBeCalledWith(animalId, userId);
+    });
+  });
+});
+
+describe('getFavorites', () => {
+  const animalIds = ANIMALS.map(({ id }) => id);
+
+  describe('when animalId is not provided', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      payload = await controller.getFavorites([]);
+    });
+
+    it('return invalid input', () => {
+      expect(payload).toBe(mockPresenterResult.invalidInput);
+    });
+
+    it('invoke presenter.invalidInput', () => {
+      expect(presenter.invalidInput).toBeCalledTimes(1);
+    });
+
+    it('not call usecase', () => {
+      expect(useCase.getFavoritesAnimals).not.toBeCalled();
+    });
+  });
+
+  describe('when the retrieved result is falsy', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      payload = await controller.getFavorites(animalIds);
+    });
+
+    it('return notFound', () => {
+      expect(payload).toBe(mockPresenterResult.notFound);
+    });
+
+    it('invoke presenter.notFound', () => {
+      expect(presenter.notFound).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.getFavoritesAnimals).toBeCalledWith(animalIds);
+    });
+  });
+
+  describe('when the retrieved result is truthy', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      useCase.getFavoritesAnimals.mockResolvedValue(ANIMALS);
+      payload = await controller.getFavorites(animalIds);
+    });
+
+    it('return success', () => {
+      expect(payload).toEqual([mockPresenterResult.success, ANIMALS]);
+    });
+
+    it('invoke presenter.success', () => {
+      expect(presenter.success).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.getFavoritesAnimals).toBeCalledWith(animalIds);
+    });
+  });
+
+  describe('when the get favorites request fails', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      useCase.getFavoritesAnimals.mockRejectedValue('error');
+      payload = await controller.getFavorites(animalIds);
+    });
+
+    it('return failed', () => {
+      expect(payload).toBe(mockPresenterResult.failed);
+    });
+
+    it('invoke presenter.failed', () => {
+      expect(presenter.failed).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.getFavoritesAnimals).toBeCalledWith(animalIds);
     });
   });
 });

@@ -2,7 +2,7 @@ import type { Animal } from 'server/entities/animal';
 import type { AnimalInfo } from 'server/usecases/animal';
 
 type StatusCode = number;
-export type Payload = [StatusCode, (AnimalInfo | Animal)?];
+export type Payload = [StatusCode, (AnimalInfo | Animal | Animal[])?];
 export type { AnimalInfo };
 
 export class AnimalPresenter {
@@ -26,7 +26,7 @@ export class AnimalPresenter {
     return [500];
   }
 
-  success(payload: AnimalInfo | Animal): Payload {
+  success(payload: AnimalInfo | Animal | Animal[]): Payload {
     return [200, payload];
   }
 

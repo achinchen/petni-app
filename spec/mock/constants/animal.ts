@@ -1,6 +1,5 @@
-import type { Animal } from '@prisma/client';
 import type { AnimalInfo } from 'server/adapters/animal/index.presenter';
-import type { Animal as EntityAnimal } from 'server/entities/animal';
+import type { Animal } from 'server/entities/animal';
 
 export const ANIMALS = [
   {
@@ -386,7 +385,7 @@ export const ANIMALS = [
 ] as unknown as Animal[];
 
 export const ANIMAL_INFO = ANIMALS[0] as unknown as AnimalInfo;
-export const ANIMAL = ANIMALS[0] as unknown as EntityAnimal;
+export const ANIMAL = ANIMALS[0];
 
 export const EXISTED_ANIMALS = [
   {

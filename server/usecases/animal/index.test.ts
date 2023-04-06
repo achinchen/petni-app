@@ -2,7 +2,7 @@ import type { AnimalRepository } from 'server/gateways/animal';
 import type { AnimalFollowRepository } from 'server/gateways/animal-follow';
 import { AnimalUseCase } from '.';
 import { ANIMAL_FOLLOW } from 'spec/mock/constants/animal-follow';
-import { ANIMAL, ANIMAL_INFO } from 'spec/mock/constants/animal';
+import { ANIMAL, ANIMALS, ANIMAL_INFO } from 'spec/mock/constants/animal';
 import type { Animal } from 'server/entities/animal';
 
 const animalWithUserId = { ...ANIMAL_INFO, userId: 1 };
@@ -17,6 +17,7 @@ const userId = animalWithUserId.userId;
 beforeEach(() => {
   animalRepository = {
     getOneById: jest.fn(),
+    getManyByIds: jest.fn(),
     update: jest.fn(),
     create: jest.fn(),
     deleteById: jest.fn()
@@ -101,67 +102,76 @@ describe('getAnimalInfo', () => {
   });
 });
 
+describe('getFavoritesAnimals', () => {
+  let result: Awaited<ReturnType<AnimalUseCase['getFavoritesAnimals']>>;
+  const animalIds = ANIMALS.map(({ id }) => id);
+
+  beforeEach(async () => {
+    animalRepository.getManyByIds.mockResolvedValueOnce(ANIMALS);
+    result = await useCase.getFavoritesAnimals(animalIds);
+  });
+
+  it('invoke AnimalRepository.getManyByIds with the given animalIds', () => {
+    expect(animalRepository.getManyByIds).toHaveBeenCalledWith(animalIds);
+  });
+
+  it('return animal', () => {
+    expect(result).toEqual(ANIMALS);
+  });
+});
+
 describe('updateAnimal', () => {
-  describe('invoke repository', () => {
-    let result: Awaited<ReturnType<AnimalUseCase['updateAnimal']>>;
-    let payload = { name: 'new name', id: animalId };
-    beforeEach(async () => {
-      animalRepository.update.mockResolvedValueOnce({
-        ...ANIMAL,
-        ...payload
-      } as unknown as Animal);
-      result = await useCase.updateAnimal(payload, userId);
-    });
+  let result: Awaited<ReturnType<AnimalUseCase['updateAnimal']>>;
+  let payload = { name: 'new name', id: animalId };
+  beforeEach(async () => {
+    animalRepository.update.mockResolvedValueOnce({
+      ...ANIMAL,
+      ...payload
+    } as unknown as Animal);
+    result = await useCase.updateAnimal(payload, userId);
+  });
 
-    it('invoke AnimalRepository.update with the given animalId', () => {
-      expect(animalRepository.update).toHaveBeenCalledWith(payload, userId);
-    });
+  it('invoke AnimalRepository.update with the given animalId', () => {
+    expect(animalRepository.update).toHaveBeenCalledWith(payload, userId);
+  });
 
-    it('return updated animal', () => {
-      expect(result!.name).toBe(payload.name);
-    });
+  it('return updated animal', () => {
+    expect(result!.name).toBe(payload.name);
   });
 });
 
 describe('createAnimal', () => {
-  describe('invoke repository', () => {
-    let result: Awaited<ReturnType<AnimalUseCase['createAnimal']>>;
-    beforeEach(async () => {
-      animalRepository.create.mockResolvedValueOnce({
-        ...ANIMAL,
-        userId
-      } as unknown as Animal);
-      result = await useCase.createAnimal(ANIMAL, userId);
-    });
+  let result: Awaited<ReturnType<AnimalUseCase['createAnimal']>>;
+  beforeEach(async () => {
+    animalRepository.create.mockResolvedValueOnce({
+      ...ANIMAL,
+      userId
+    } as unknown as Animal);
+    result = await useCase.createAnimal(ANIMAL, userId);
+  });
 
-    it('invoke AnimalRepository.create with the given animalId', () => {
-      expect(animalRepository.create).toHaveBeenCalledWith(ANIMAL, userId);
-    });
+  it('invoke AnimalRepository.create with the given animalId', () => {
+    expect(animalRepository.create).toHaveBeenCalledWith(ANIMAL, userId);
+  });
 
-    it('return animal', () => {
-      expect(result?.userId).toBe(userId);
-    });
+  it('return animal', () => {
+    expect(result?.userId).toBe(userId);
   });
 });
 
 describe('deleteAnimal', () => {
   const animalId = ANIMAL.id;
-  describe('invoke repository', () => {
-    let result: Awaited<ReturnType<AnimalUseCase['deleteAnimal']>>;
-    beforeEach(async () => {
-      animalRepository.deleteById.mockResolvedValueOnce();
-      result = await useCase.deleteAnimal(animalId, userId);
-    });
+  let result: Awaited<ReturnType<AnimalUseCase['deleteAnimal']>>;
+  beforeEach(async () => {
+    animalRepository.deleteById.mockResolvedValueOnce();
+    result = await useCase.deleteAnimal(animalId, userId);
+  });
 
-    it('invoke AnimalRepository.deleteById with the given animalId', () => {
-      expect(animalRepository.deleteById).toHaveBeenCalledWith(
-        animalId,
-        userId
-      );
-    });
+  it('invoke AnimalRepository.deleteById with the given animalId', () => {
+    expect(animalRepository.deleteById).toHaveBeenCalledWith(animalId, userId);
+  });
 
-    it('return nothing', () => {
-      expect(result).toBe(undefined);
-    });
+  it('return nothing', () => {
+    expect(result).toBe(undefined);
   });
 });

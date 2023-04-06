@@ -1,19 +1,25 @@
 import type { ActionFunction } from '@remix-run/node';
 import type { AnimalId } from '~/models/Animal/type';
 import { json } from '@remix-run/node';
-import getAnimalByIds from 'server/gateways/animal/postgres/getManyByIds';
+import { AnimalUseCase } from 'server/usecases/animal';
+import { AnimalRepositoryPostgres } from 'server/gateways/animal/postgres';
+import { AnimalController } from 'server/adapters/animal/index.controller';
+import { AnimalPresenter } from 'server/adapters/animal/index.presenter';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
 import FavoritesFeature from '~/features/favorites';
 import Layout from '~/components/common/Layout';
 
+const animalRepository = new AnimalRepositoryPostgres();
+const animalUseCase = new AnimalUseCase(animalRepository);
+const animalPresenter = new AnimalPresenter();
+const animalController = new AnimalController(animalUseCase, animalPresenter);
+
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  if (!formData) return json(400);
-
   const ids: AnimalId[] = parsePayloadByJson({ formData, fallback: [] });
-  if (!ids.length) return json({ animals: [] });
+  const [status, animals] = await animalController.getFavorites(ids);
+  if (!animals) return json({ animals: [] }, status);
 
-  const animals = await getAnimalByIds(ids);
   return json({ animals });
 };
 

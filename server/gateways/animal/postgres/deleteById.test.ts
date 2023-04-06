@@ -1,6 +1,6 @@
 import type { User } from 'server/entities/user';
 import type { Prisma } from '@prisma/client';
-import deleteAnimalByUserId from './deleteAnimalById';
+import deleteAnimalByUserId from './deleteById';
 import { db } from '~/utils/db/index.server';
 import { getAnimal } from 'spec/mock/constants/animal';
 import { EXISTED_USER } from 'spec/mock/constants/user';

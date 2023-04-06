@@ -1,5 +1,5 @@
 import { AnimalPresenter } from './index.presenter';
-import { ANIMAL } from 'spec/mock/constants/animal';
+import { ANIMAL, ANIMALS } from 'spec/mock/constants/animal';
 
 describe('AnimalPresenter', () => {
   const animalFollowPresenter = new AnimalPresenter();
@@ -21,6 +21,10 @@ describe('AnimalPresenter', () => {
     {
       expected: [200, ANIMAL],
       method: () => animalFollowPresenter.success(ANIMAL)
+    },
+    {
+      expected: [200, ANIMALS],
+      method: () => animalFollowPresenter.success(ANIMALS)
     },
     { expected: [204], method: animalFollowPresenter.saveSuccess }
   ];
