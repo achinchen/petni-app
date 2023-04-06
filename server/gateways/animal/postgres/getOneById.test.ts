@@ -1,8 +1,9 @@
-import type { User } from '@prisma/client';
-import type { Pet as PetType } from '~/features/pet/types';
+import type { User } from 'server/entities/user';
+import type { Animal } from 'server/entities/animal';
+import type { Prisma } from '@prisma/client';
 import getAnimalById from './getOneById';
 import { db } from '~/utils/db/index.server';
-import { USER, EXISTED_USER } from 'spec/mock/constants/user';
+import { EXISTED_USER } from 'spec/mock/constants/user';
 import { getAnimal } from 'spec/mock/constants/animal';
 
 let user: User;
@@ -31,26 +32,19 @@ describe('Animal not exist', () => {
 });
 
 describe('Animal exist', () => {
-  let result: PetType | null;
-  const anotherUserId = USER.id;
+  let result: Animal | null;
 
   beforeAll(async () => {
     await db.animal.create({
-      data: { ...ANIMAL, userId: user.id }
+      data: {
+        ...ANIMAL,
+        userId: user.id
+      } as unknown as Prisma.AnimalCreateInput
     });
-    result = await getAnimalById(animalId, anotherUserId);
+    result = await getAnimalById(animalId);
   });
 
   test('include follows', () => {
     expect(result).toHaveProperty('follows');
-  });
-
-  test('editable is false when animal.user is not current user', () => {
-    expect(result).toHaveProperty('editable', false);
-  });
-
-  test('editable is true when animal.user is current user', async () => {
-    result = await getAnimalById(animalId, user.id);
-    expect(result).toHaveProperty('editable', true);
   });
 });
