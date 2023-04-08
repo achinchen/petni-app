@@ -1,5 +1,5 @@
-import { Gender, Family } from '@prisma/client';
-import { ICON_COLOR_CONFIG, getIconByGenderAndFamily } from '.';
+import { Gender, Family } from 'server/entities/animal';
+import { ICON_COLOR_CONFIG, ICON, getIconByGenderAndFamily } from '.';
 
 describe('getIconByGenderAndFamily', () => {
   const testCases: [
@@ -16,23 +16,23 @@ describe('getIconByGenderAndFamily', () => {
     ],
     [
       [Gender.Male, Family.Dog],
-      { icon: Gender.Male, color: ICON_COLOR_CONFIG.Male }
+      { icon: ICON[Gender.Male], color: ICON_COLOR_CONFIG[Gender.Male] }
     ],
     [
       [Gender.Male, Family.Dog],
-      { icon: Gender.Male, color: ICON_COLOR_CONFIG.Male }
+      { icon: ICON[Gender.Male], color: ICON_COLOR_CONFIG[Gender.Male] }
     ],
     [
       [Gender.Male, Family.Cat],
-      { icon: Gender.Male, color: ICON_COLOR_CONFIG.Male }
+      { icon: ICON[Gender.Male], color: ICON_COLOR_CONFIG[Gender.Male] }
     ],
     [
       [Gender.Female, Family.Dog],
-      { icon: Gender.Female, color: ICON_COLOR_CONFIG.Female }
+      { icon: ICON[Gender.Female], color: ICON_COLOR_CONFIG[Gender.Female] }
     ],
     [
       [Gender.Female, Family.Cat],
-      { icon: Gender.Female, color: ICON_COLOR_CONFIG.Female }
+      { icon: ICON[Gender.Female], color: ICON_COLOR_CONFIG[Gender.Female] }
     ]
   ];
   test('get expected output', () => {
