@@ -5,10 +5,8 @@ import getContext from 'spec/utils/getContext';
 import { ANIMAL, ANIMALS } from 'spec/mock/constants/animal';
 import { USER } from 'spec/mock/constants/user';
 import { authenticator } from 'spec/utils/authenticator';
-import getAnimalsByUserId from '~/models/Animal/getAnimalsByUserId/index.server';
 
 jest.mock('server/gateways/animal/postgres/index');
-jest.mock('~/models/Animal/getAnimalsByUserId/index.server');
 
 const mock = {
   form: new FormData(),
@@ -75,21 +73,23 @@ describe('action', () => {
 describe('loader', () => {
   const context = getContext({});
 
-  it('return empty array when user is not authenticated', async () => {
+  it('return 403 when user is not authenticated', async () => {
+    controller.getCreated.mockResolvedValueOnce([403]);
     await loader(context);
-    expect(json).toBeCalledWith({ user: undefined, animals: [] });
+    expect(json).toBeCalledWith({ user: undefined }, 403);
   });
 
   it('trigger getAnimalsByUserId', async () => {
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
+    controller.getCreated.mockResolvedValueOnce([200, ANIMALS]);
     await loader(context);
-    expect(getAnimalsByUserId).toBeCalledWith(USER.id);
+    expect(controller.getCreated).toBeCalledWith(USER.id);
   });
 
   it('return user and animals when user is authenticated', async () => {
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
-    (getAnimalsByUserId as jest.Mock).mockResolvedValueOnce(ANIMALS);
+    controller.getCreated.mockResolvedValueOnce([200, ANIMALS]);
     await loader(context);
-    expect(json).toBeCalledWith({ user: USER, animals: ANIMALS });
+    expect(json).toBeCalledWith({ user: USER, animals: ANIMALS }, 200);
   });
 });

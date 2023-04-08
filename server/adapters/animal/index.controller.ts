@@ -24,6 +24,17 @@ export class AnimalController {
     }
   }
 
+  async getCreated(userId: User['id']): Promise<Payload> {
+    if (!userId) return this.animalPresenter.forbidden();
+    try {
+      const result = await this.animalUseCase.getCreatedAnimals(userId);
+      if (!result) return this.animalPresenter.notFound();
+      return this.animalPresenter.success(result);
+    } catch {
+      return this.animalPresenter.failed();
+    }
+  }
+
   async getFavorites(animalIds: Animal['id'][]): Promise<Payload> {
     if (!animalIds.length) return this.animalPresenter.invalidInput();
     try {

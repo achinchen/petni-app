@@ -27,6 +27,7 @@ beforeEach(() => {
   useCase = {
     getAnimalInfo: jest.fn(),
     getFavoritesAnimals: jest.fn(),
+    getCreatedAnimals: jest.fn(),
     updateAnimal: jest.fn(),
     createAnimal: jest.fn(),
     deleteAnimal: jest.fn()
@@ -125,6 +126,89 @@ describe('getInfo', () => {
 
     it('call usecase', () => {
       expect(useCase.getAnimalInfo).toBeCalledWith(animalId, userId);
+    });
+  });
+});
+
+describe('getCreated', () => {
+  const animal = ANIMALS.map((animal) => ({ ...animal, userId }));
+
+  describe('when userId is not provided', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      payload = await controller.getCreated(null!);
+    });
+
+    it('return forbidden', () => {
+      expect(payload).toBe(mockPresenterResult.forbidden);
+    });
+
+    it('invoke presenter.forbidden', () => {
+      expect(presenter.forbidden).toBeCalledTimes(1);
+    });
+
+    it('not call usecase', () => {
+      expect(useCase.getCreatedAnimals).not.toBeCalled();
+    });
+  });
+
+  describe('when the retrieved result is falsy', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      payload = await controller.getCreated(userId);
+    });
+
+    it('return notFound', () => {
+      expect(payload).toBe(mockPresenterResult.notFound);
+    });
+
+    it('invoke presenter.notFound', () => {
+      expect(presenter.notFound).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.getCreatedAnimals).toBeCalledWith(userId);
+    });
+  });
+
+  describe('when the retrieved result is truthy', () => {
+    let payload: Payload;
+
+    beforeEach(async () => {
+      useCase.getCreatedAnimals.mockResolvedValue(animal);
+      payload = await controller.getCreated(userId);
+    });
+
+    it('return success', () => {
+      expect(payload).toEqual([mockPresenterResult.success, animal]);
+    });
+
+    it('invoke presenter.success', () => {
+      expect(presenter.success).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.getCreatedAnimals).toBeCalledWith(userId);
+    });
+  });
+
+  describe('when the get created request fails', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      useCase.getCreatedAnimals.mockRejectedValue('error');
+      payload = await controller.getCreated(userId);
+    });
+
+    it('return failed', () => {
+      expect(payload).toBe(mockPresenterResult.failed);
+    });
+
+    it('invoke presenter.failed', () => {
+      expect(presenter.failed).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.getCreatedAnimals).toBeCalledWith(userId);
     });
   });
 });

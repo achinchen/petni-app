@@ -1,10 +1,9 @@
-import type { User } from '@prisma/client';
+import type { Animal } from 'server/entities/animal';
+import type { User } from 'server/entities/user';
 import type { LoaderFunction, ActionFunction } from '@remix-run/node';
-import type { SimpleAnimal, AnimalId } from '~/models/Animal/type';
 import { json, Response } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { authenticator } from 'server/services/auth/index.server';
-import getAnimalsByUserId from '~/models/Animal/getAnimalsByUserId/index.server';
 import Layout from '~/components/common/Layout';
 import Adoption from '~/features/adoption';
 import { AnimalUseCase } from 'server/usecases/animal';
@@ -22,7 +21,7 @@ export const action: ActionFunction = async ({ request }) => {
   if (method !== 'DELETE') return json({}, 400);
 
   const formData = await request.formData();
-  const animalId: AnimalId = Number(formData?.get('id'));
+  const animalId: Animal['id'] = Number(formData?.get('id'));
   const user = await authenticator.isAuthenticated(request);
 
   const [status] = await animalController.deleteAnimal(animalId, user?.id!);
@@ -30,14 +29,13 @@ export const action: ActionFunction = async ({ request }) => {
   return new Response(null, { status });
 };
 
-type LoaderData = { user: User | null; animals: SimpleAnimal[] };
+type LoaderData = { user: User | null; animals: Animal[] | null };
 
 export let loader: LoaderFunction = async ({ request }) => {
   const user = await authenticator.isAuthenticated(request);
-  const animals = user ? await getAnimalsByUserId(user.id) : [];
-
-  const data: LoaderData = { user, animals };
-  return json(data);
+  const [status, animals] = await animalController.getCreated(user?.id!);
+  const data = { animals, user } as LoaderData;
+  return json(data, status);
 };
 
 export default function AdoptionRoutes() {

@@ -18,6 +18,7 @@ beforeEach(() => {
   animalRepository = {
     getOneById: jest.fn(),
     getManyByIds: jest.fn(),
+    getManyByUserId: jest.fn(),
     update: jest.fn(),
     create: jest.fn(),
     deleteById: jest.fn()
@@ -53,27 +54,27 @@ describe('getAnimalInfo', () => {
     });
   });
 
-  describe('result.count', () => {
+  describe('result.follow', () => {
     let result: Awaited<ReturnType<AnimalUseCase['getAnimalInfo']>>;
 
     beforeEach(() => {
       animalRepository.getOneById.mockResolvedValueOnce(animalWithUserId);
     });
 
-    it('return fallback count', async () => {
+    it('return fallback follow', async () => {
       animalFollowRepository.getOneByAnimalId.mockResolvedValueOnce(null);
       result = await useCase.getAnimalInfo(animalId, userId);
 
-      expect(result!.count).toBe(0);
+      expect(result!.follows).toBe(0);
     });
 
-    it('return count', async () => {
+    it('return follow', async () => {
       animalFollowRepository.getOneByAnimalId.mockResolvedValueOnce(
         ANIMAL_FOLLOW
       );
       result = await useCase.getAnimalInfo(animalId, userId);
 
-      expect(result!.count).toBe(ANIMAL_FOLLOW.count);
+      expect(result!.follows).toBe(ANIMAL_FOLLOW.count);
     });
   });
 
@@ -99,6 +100,23 @@ describe('getAnimalInfo', () => {
 
       expect(result!.editable).toBe(true);
     });
+  });
+});
+
+describe('getCreatedAnimals', () => {
+  let result: Awaited<ReturnType<AnimalUseCase['getCreatedAnimals']>>;
+  const animals = ANIMALS.map((animal) => ({ ...animal, userId }));
+  beforeEach(async () => {
+    animalRepository.getManyByUserId.mockResolvedValueOnce(animals);
+    result = await useCase.getCreatedAnimals(userId);
+  });
+
+  it('invoke AnimalRepository.getManyByUserId with the given userId', () => {
+    expect(animalRepository.getManyByUserId).toHaveBeenCalledWith(userId);
+  });
+
+  it('return animal', () => {
+    expect(result).toEqual(animals);
   });
 });
 

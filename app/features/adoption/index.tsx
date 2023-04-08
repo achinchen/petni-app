@@ -1,5 +1,5 @@
-import type { SimpleAnimal } from '~/models/Animal/type';
-import type { User } from '@prisma/client';
+import type { Animal } from 'server/entities/animal';
+import type { User } from 'server/entities/user';
 import type { MouseEvent } from 'react';
 import { useState, useCallback } from 'react';
 import { useNavigate } from '@remix-run/react';
@@ -13,7 +13,7 @@ import LoginPanel from '~/components/common/LoginPanel';
 
 type Props = {
   user: User | null;
-  animals: SimpleAnimal[];
+  animals: Animal[] | null;
 };
 
 export default function Adoption({ user, animals }: Props) {

@@ -15,8 +15,8 @@ export class AnimalUseCase {
     private readonly animalFollowRepository?: AnimalFollowRepository
   ) {}
 
-  async getCreatedAnimals(userId: User['id']): Promise<Animal[]> {
-    const animals = await this.animalRepository.getManyByUserId!(userId);
+  async getCreatedAnimals(userId: User['id']): Promise<Animal[] | null> {
+    const animals = await this.animalRepository.getManyByUserId(userId);
     return animals;
   }
 

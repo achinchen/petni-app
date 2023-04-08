@@ -1,12 +1,12 @@
-import type { User } from '@prisma/client';
-import type { SimpleAnimal } from '~/models/Animal/type';
+import type { Animal } from 'server/entities/animal';
+import type { User } from 'server/entities/user';
 import { db } from '~/utils/db/index.server';
 
 export type UserId = User['id'];
 
 export default async function getAnimalByIds(
   id: UserId
-): Promise<SimpleAnimal[]> {
+): Promise<Animal[] | null> {
   const animals = await db.animal.findMany({
     where: {
       userId: id
@@ -20,5 +20,6 @@ export default async function getAnimalByIds(
     }
   });
 
-  return animals;
+  if (!animals) return null;
+  return animals as unknown as Animal[];
 }

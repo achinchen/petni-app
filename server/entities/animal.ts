@@ -1,15 +1,15 @@
-enum Gender {
+export enum Gender {
   Female,
   Male,
   Null
 }
 
-enum Family {
+export enum Family {
   Cat,
   Dog
 }
 
-enum Size {
+export enum Size {
   Small,
   Medium,
   Large
