@@ -1,5 +1,6 @@
-import type { AnimalFollow } from '@prisma/client';
-import { AnimalFollowRepositoryPostgres } from './postgres';
+import type { AnimalFollow } from 'server/entities/animal-follow';
+import type { Prisma } from '@prisma/client';
+import { AnimalFollowRepositoryPostgres } from './index';
 import { db } from '~/utils/db/index.server';
 import { getAnimal } from 'spec/mock/constants/animal';
 import { EXISTED_USER } from 'spec/mock/constants/user';
@@ -10,7 +11,10 @@ let animalFollowRepositoryPostgres: AnimalFollowRepositoryPostgres;
 beforeAll(async () => {
   animalFollowRepositoryPostgres = new AnimalFollowRepositoryPostgres();
   await db.animal.create({
-    data: { ...ANIMAL, userId: EXISTED_USER.id }
+    data: {
+      ...ANIMAL,
+      userId: EXISTED_USER.id
+    } as unknown as Prisma.AnimalCreateInput
   });
 });
 
@@ -23,7 +27,7 @@ afterAll(async () => {
   await db.$disconnect();
 });
 
-const animalId = String(ANIMAL.id);
+const animalId = ANIMAL.id;
 let animalFollow: AnimalFollow | null;
 
 describe('AnimalFollow not exist', () => {
