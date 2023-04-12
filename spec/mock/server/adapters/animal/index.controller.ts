@@ -4,6 +4,9 @@ export const controller = {
   getFavorites: jest.fn() as jest.MockedFunction<
     AnimalController['getFavorites']
   >,
+  getFiltered: jest.fn() as jest.MockedFunction<
+    AnimalController['getFiltered']
+  >,
   getCreated: jest.fn() as jest.MockedFunction<AnimalController['getCreated']>,
   updateAnimal: jest.fn() as jest.MockedFunction<
     AnimalController['updateAnimal']

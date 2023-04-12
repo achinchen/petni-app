@@ -2,6 +2,7 @@ import type { AnimalRepository } from 'server/gateways/animal';
 import getOneById from './getOneById';
 import getManyByIds from './getManyByIds';
 import getManyByUserId from './getManyByUserId';
+import getManyByOptions from './getAnimalsByOptions';
 import updateById from './updateById';
 import create from './create';
 import deleteById from './deleteById';
@@ -9,6 +10,7 @@ import deleteById from './deleteById';
 type GetOneById = typeof getOneById;
 type GetManyByIds = typeof getManyByIds;
 type GetManyByUserId = typeof getManyByUserId;
+type GetManyByOptions = typeof getManyByOptions;
 type UpdateById = typeof updateById;
 type Create = typeof create;
 type DeleteById = typeof deleteById;
@@ -32,6 +34,13 @@ export class AnimalRepositoryPostgres implements AnimalRepository {
   ): ReturnType<GetManyByUserId> {
     const animal = await getManyByUserId(userId);
     return animal;
+  }
+
+  async getManyByOptions(
+    options: Parameters<GetManyByOptions>[0]
+  ): ReturnType<GetManyByOptions> {
+    const animals = await getManyByOptions(options);
+    return animals;
   }
 
   async update(

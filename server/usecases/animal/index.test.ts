@@ -19,6 +19,7 @@ beforeEach(() => {
     getOneById: jest.fn(),
     getManyByIds: jest.fn(),
     getManyByUserId: jest.fn(),
+    getManyByOptions: jest.fn(),
     update: jest.fn(),
     create: jest.fn(),
     deleteById: jest.fn()
@@ -131,6 +132,24 @@ describe('getFavoritesAnimals', () => {
 
   it('invoke AnimalRepository.getManyByIds with the given animalIds', () => {
     expect(animalRepository.getManyByIds).toHaveBeenCalledWith(animalIds);
+  });
+
+  it('return animal', () => {
+    expect(result).toEqual(ANIMALS);
+  });
+});
+
+describe('getFilteredAnimals', () => {
+  let result: Awaited<ReturnType<AnimalUseCase['getFilteredAnimals']>>;
+  const options = {};
+
+  beforeEach(async () => {
+    animalRepository.getManyByOptions.mockResolvedValueOnce(ANIMALS);
+    result = await useCase.getFilteredAnimals(options);
+  });
+
+  it('invoke AnimalRepository.getManyByOptions with the given options', () => {
+    expect(animalRepository.getManyByOptions).toHaveBeenCalledWith(options);
   });
 
   it('return animal', () => {

@@ -1,6 +1,6 @@
 import type { User } from 'server/entities/user';
 import type { Animal } from 'server/entities/animal';
-import type { LooseAnimal } from 'server/gateways/animal';
+import type { LooseAnimal, Options } from 'server/gateways/animal';
 import type { AnimalUseCase } from 'server/usecases/animal';
 import type {
   AnimalPresenter,
@@ -39,6 +39,16 @@ export class AnimalController {
     if (!animalIds.length) return this.animalPresenter.invalidInput();
     try {
       const result = await this.animalUseCase.getFavoritesAnimals(animalIds);
+      if (!result) return this.animalPresenter.notFound();
+      return this.animalPresenter.success(result);
+    } catch {
+      return this.animalPresenter.failed();
+    }
+  }
+
+  async getFiltered(options: Options): Promise<Payload> {
+    try {
+      const result = await this.animalUseCase.getFilteredAnimals(options);
       if (!result) return this.animalPresenter.notFound();
       return this.animalPresenter.success(result);
     } catch {

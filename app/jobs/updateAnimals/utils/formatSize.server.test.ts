@@ -1,5 +1,5 @@
 import { formatSize } from './index';
-import { Size } from '@prisma/client';
+import { Size } from 'server/entities/animal';
 
 describe('basic', () => {
   const testCases = [

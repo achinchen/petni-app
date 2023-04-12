@@ -1,5 +1,5 @@
 import { formatGender } from './index';
-import { Gender } from '@prisma/client';
+import type { Gender } from 'server/entities/animal';
 
 describe('basic', () => {
   const testCases = [

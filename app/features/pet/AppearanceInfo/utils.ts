@@ -1,4 +1,4 @@
-import type { Family } from '@prisma/client';
+import type { Family } from 'server/entities/animal';
 import { FAMILY_COLOR_LABEL } from './constants';
 
 type FamilyColorKey = keyof typeof FAMILY_COLOR_LABEL[Family];

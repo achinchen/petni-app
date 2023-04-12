@@ -1,4 +1,4 @@
-import type { Animal } from '@prisma/client';
+import type { Animal } from 'server/entities/animal';
 import type { Animation } from './constants';
 import { useState } from 'react';
 import { Link } from '@remix-run/react';

@@ -1,4 +1,4 @@
-import { Family } from '@prisma/client';
+import { Family } from 'server/entities/animal';
 import bone from '~/assets/images/placeholder/bone.png';
 import fish from '~/assets/images/placeholder/fish.png';
 

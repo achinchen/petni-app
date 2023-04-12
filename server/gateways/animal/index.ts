@@ -1,6 +1,13 @@
-import type { Animal } from 'server/entities/animal';
+import type { Animal, Family, Size, Gender } from 'server/entities/animal';
 import type { User } from 'server/entities/user';
-import type { Options } from '~/models/Animal/type';
+
+export type Options = {
+  family?: Family;
+  gender?: Gender;
+  size?: Size;
+  color?: string;
+  city?: string;
+};
 
 type AnimalId = Animal['id'];
 type UserId = User['id'];
@@ -14,6 +21,6 @@ export interface AnimalRepository {
   deleteById(animalId: AnimalId, userId: UserId): Promise<void>;
   getOneById(id: AnimalId, userId?: UserId): Promise<AnimalOrNull>;
   getManyByIds(animalIds: AnimalId[]): Promise<AnimalsOrNull>;
-  getManyByOptions?(options: Options): Promise<Animal[]>;
+  getManyByOptions(options: Options): Promise<AnimalsOrNull>;
   getManyByUserId(userId: UserId): Promise<AnimalsOrNull>;
 }

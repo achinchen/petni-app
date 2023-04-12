@@ -27,6 +27,7 @@ beforeEach(() => {
   useCase = {
     getAnimalInfo: jest.fn(),
     getFavoritesAnimals: jest.fn(),
+    getFilteredAnimals: jest.fn(),
     getCreatedAnimals: jest.fn(),
     updateAnimal: jest.fn(),
     createAnimal: jest.fn(),
@@ -291,6 +292,69 @@ describe('getFavorites', () => {
 
     it('call usecase', () => {
       expect(useCase.getFavoritesAnimals).toBeCalledWith(animalIds);
+    });
+  });
+});
+
+describe('getOptions', () => {
+  const options = {};
+
+  describe('when the retrieved result is falsy', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      payload = await controller.getFiltered(options);
+    });
+
+    it('return notFound', () => {
+      expect(payload).toBe(mockPresenterResult.notFound);
+    });
+
+    it('invoke presenter.notFound', () => {
+      expect(presenter.notFound).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.getFilteredAnimals).toBeCalledWith(options);
+    });
+  });
+
+  describe('when the retrieved result is truthy', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      useCase.getFilteredAnimals.mockResolvedValue(ANIMALS);
+      payload = await controller.getFiltered(options);
+    });
+
+    it('return success', () => {
+      expect(payload).toEqual([mockPresenterResult.success, ANIMALS]);
+    });
+
+    it('invoke presenter.success', () => {
+      expect(presenter.success).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.getFilteredAnimals).toBeCalledWith(options);
+    });
+  });
+
+  describe('when the get favorites request fails', () => {
+    let payload: Payload;
+    beforeEach(async () => {
+      useCase.getFilteredAnimals.mockRejectedValue('error');
+      payload = await controller.getFiltered(options);
+    });
+
+    it('return failed', () => {
+      expect(payload).toBe(mockPresenterResult.failed);
+    });
+
+    it('invoke presenter.failed', () => {
+      expect(presenter.failed).toBeCalledTimes(1);
+    });
+
+    it('call usecase', () => {
+      expect(useCase.getFilteredAnimals).toBeCalledWith(options);
     });
   });
 });

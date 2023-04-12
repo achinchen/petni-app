@@ -1,25 +1,22 @@
+import type { Prisma } from '@prisma/client';
 import type { DogColor } from '~/constants/dogs';
 import type { CatColor } from '~/constants/cats';
-import type { Animal, Family, Gender, Size } from '@prisma/client';
+import type { Animal, Family, Gender, Size } from 'server/entities/animal';
+import type { Options } from 'server/gateways/animal';
 import { db } from '~/utils/db/index.server';
-import { ANIMAL_COUNT, SEARCH_KEY_DIST } from './constants';
-import getNearCitiesByCity from './getNearCitiesByCity';
-
-export type Options = {
-  family?: Family;
-  gender?: Gender;
-  size?: Size;
-  color?: string;
-  city?: string;
-};
+import {
+  SEARCH_KEY_DIST,
+  FILTERED_ANIMAL_COUNT
+} from 'server/gateways/animal/constants';
+import getNearCitiesByCity from 'server/gateways/animal/utils/getNearCitiesByCity';
 
 export default async function getAnimalByOptions(
   options: Options
-): Promise<Animal[]> {
+): Promise<Animal[] | null> {
   if (!Object.keys(options).length) {
     const animals = await db.$queryRaw<
       Animal[]
-    >`SELECT * FROM "Animal" ORDER BY random() LIMIT ${ANIMAL_COUNT}`;
+    >`SELECT * FROM "Animal" ORDER BY random() LIMIT ${FILTERED_ANIMAL_COUNT}`;
     return animals;
   }
 
@@ -57,16 +54,17 @@ export default async function getAnimalByOptions(
   }
 
   const animalCounts = await db.animal.count({
-    where: query
+    where: query as Prisma.AnimalWhereInput
   });
 
   const skip = Math.floor(Math.random() * animalCounts);
 
   const animals = await db.animal.findMany({
-    where: query,
-    take: ANIMAL_COUNT,
+    where: query as Prisma.AnimalWhereInput,
+    take: FILTERED_ANIMAL_COUNT,
     skip: skip
   });
 
-  return animals;
+  if (!animals) return null;
+  return animals as unknown as Animal[];
 }

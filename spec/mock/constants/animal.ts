@@ -772,7 +772,7 @@ export const EXISTED_ANIMALS = [
     updatedAt: '2022-07-17T10:10:26.676Z',
     userId: null
   }
-];
+] as unknown as Animal[];
 
 export const getAnimal = () => ({
   ...ANIMAL,

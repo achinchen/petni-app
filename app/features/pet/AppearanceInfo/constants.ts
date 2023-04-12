@@ -1,4 +1,4 @@
-import { Gender, Family } from '@prisma/client';
+import { Gender, Family } from 'server/entities/animal';
 import { DOG_COLOR_LABEL } from '~/constants/dogs';
 import { CAT_COLOR_LABEL } from '~/constants/cats';
 

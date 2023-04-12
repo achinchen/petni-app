@@ -1,5 +1,9 @@
 import type { Animal } from 'server/entities/animal';
-import type { AnimalRepository, LooseAnimal } from 'server/gateways/animal';
+import type {
+  AnimalRepository,
+  LooseAnimal,
+  Options
+} from 'server/gateways/animal';
 import type { AnimalFollowRepository } from 'server/gateways/animal-follow';
 import type { AnimalFollow } from 'server/entities/animal-follow';
 import type { User } from 'server/entities/user';
@@ -24,6 +28,11 @@ export class AnimalUseCase {
     animalIds: Animal['id'][]
   ): Promise<Animal[] | null> {
     const animals = await this.animalRepository.getManyByIds(animalIds);
+    return animals;
+  }
+
+  async getFilteredAnimals(options: Options): Promise<Animal[] | null> {
+    const animals = await this.animalRepository.getManyByOptions(options);
     return animals;
   }
 

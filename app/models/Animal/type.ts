@@ -1,5 +1,5 @@
-import type { Animal } from '@prisma/client';
-export type { Options } from './getAnimalsByOptions/index.server';
+import type { Animal } from 'server/entities/animal';
+export type { Options } from '../../../server/gateways/animal/postgres/getAnimalsByOptions';
 
 export type AnimalId = Animal['id'];
 
