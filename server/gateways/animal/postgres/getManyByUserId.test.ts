@@ -1,4 +1,4 @@
-import type { User } from '@prisma/client';
+import type { User } from 'server/entities/user';
 import getAnimalsByUserId from './getManyByUserId';
 import { db } from '~/utils/db/index.server';
 import { EXISTED_USER } from 'spec/mock/constants/user';

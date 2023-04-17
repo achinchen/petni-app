@@ -15,7 +15,7 @@ import { AnimalFollowRepositoryPostgres } from 'server/gateways/animal-follow/po
 import { AnimalRepositoryPostgres } from 'server/gateways/animal/postgres';
 import { AnimalController } from 'server/adapters/animal/index.controller';
 import { AnimalPresenter } from 'server/adapters/animal/index.presenter';
-import { authenticator } from 'server/services/auth/index.server';
+import { authenticator } from 'server/services/auth';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
 
 const animalRepository = new AnimalRepositoryPostgres();

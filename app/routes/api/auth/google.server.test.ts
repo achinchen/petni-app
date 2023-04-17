@@ -2,7 +2,7 @@ import type { DataFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { action, loader } from './google';
 import { authenticator } from 'spec/utils/authenticator';
-import { PROVIDER_NAME } from 'server/services/auth/google.server';
+import { PROVIDER_NAME } from 'server/services/auth/google';
 import { USER } from 'spec/mock/constants/user';
 
 const mock = {

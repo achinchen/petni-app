@@ -1,5 +1,5 @@
-import type { User } from '@prisma/client';
-import upsertUser from './index.server';
+import type { User } from 'server/entities/user';
+import upsertUser from '.';
 import { db } from '~/utils/db/index.server';
 import { USER } from 'spec/mock/constants/user';
 

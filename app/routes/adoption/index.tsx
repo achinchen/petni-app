@@ -3,7 +3,7 @@ import type { User } from 'server/entities/user';
 import type { LoaderFunction, ActionFunction } from '@remix-run/node';
 import { json, Response } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { authenticator } from 'server/services/auth/index.server';
+import { authenticator } from 'server/services/auth';
 import Layout from '~/components/common/Layout';
 import Adoption from '~/features/adoption';
 import { AnimalUseCase } from 'server/usecases/animal';

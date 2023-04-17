@@ -1,7 +1,7 @@
 import type { ActionFunction, LoaderFunction } from '@remix-run/node';
 import type { Animal } from 'server/entities/animal';
 import { json, redirect } from '@remix-run/node';
-import { authenticator } from 'server/services/auth/index.server';
+import { authenticator } from 'server/services/auth';
 import { AnimalUseCase } from 'server/usecases/animal';
 import { AnimalRepositoryPostgres } from 'server/gateways/animal/postgres';
 import { AnimalController } from 'server/adapters/animal/index.controller';
