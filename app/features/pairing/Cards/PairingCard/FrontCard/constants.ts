@@ -1,5 +1,5 @@
 import type { SoundType } from '~/hooks/useSound';
-import { Family } from '@prisma/client';
+import { Family } from 'server/entities/animal';
 
 export const ANIMATION = {
   CLOSE: 'close',

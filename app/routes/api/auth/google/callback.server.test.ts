@@ -1,7 +1,7 @@
 import getContext from 'spec/utils/getContext';
 import { authenticator } from 'spec/utils/authenticator';
 import { loader } from './callback';
-import { PROVIDER_NAME } from '~/services/auth/google.server';
+import { PROVIDER_NAME } from 'server/services/auth/google';
 import { USER } from 'spec/mock/constants/user';
 
 const mock = {

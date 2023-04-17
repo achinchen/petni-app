@@ -1,4 +1,4 @@
-import type { Animal } from '@prisma/client';
+import type { Animal } from 'server/entities/animal';
 import { useReducer } from 'react';
 
 export type OtherInfoState = {

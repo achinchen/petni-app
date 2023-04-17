@@ -3,63 +3,72 @@ import type {
   ActionFunction,
   MetaFunction
 } from '@remix-run/node';
-import type { Animal } from '@prisma/client';
+import type { Animal } from 'server/entities/animal';
+import type { AnimalInfo } from 'server/adapters/animal/index.presenter';
 import { json, redirect } from '@remix-run/node';
 import { Link, useLoaderData, useCatch, useParams } from '@remix-run/react';
 import parsePayloadByJson from '~/utils/action/parsePayloadByFormData';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
-import { authenticator } from '~/services/auth/index.server';
-import updateAnimalById from '~/models/Animal/updateAnimalById/index.server';
-import getAnimalById from '~/models/Animal/getAnimalById/index.server';
+import { AnimalUseCase } from 'server/usecases/animal';
+import { AnimalFollowRepositoryPostgres } from 'server/gateways/animal-follow/postgres';
+import { AnimalRepositoryPostgres } from 'server/gateways/animal/postgres';
+import { AnimalController } from 'server/adapters/animal/index.controller';
+import { AnimalPresenter } from 'server/adapters/animal/index.presenter';
+import { authenticator } from 'server/services/auth';
 import Loading from '~/components/common/LoadingAnimation';
 import Layout from '~/components/common/Layout';
 import EditAdoption from '~/features/adoption/edit';
+
+const animalRepository = new AnimalRepositoryPostgres();
+const animalFollowRepositoryPostgres = new AnimalFollowRepositoryPostgres();
+const animalUseCase = new AnimalUseCase(
+  animalRepository,
+  animalFollowRepositoryPostgres
+);
+const animalPresenter = new AnimalPresenter();
+const animalController = new AnimalController(animalUseCase, animalPresenter);
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   if (!formData) return json({}, 400);
 
   const user = await authenticator.isAuthenticated(request);
-  if (!user) return json({}, 401);
-
   const payload: Animal = parsePayloadByJson({
     formData,
     fallback: null
   });
-  if (!payload) return json({}, 404);
 
-  const animal = await updateAnimalById(payload, user);
-  if (!animal) return json({}, 500);
+  const [status, animal] = await animalController.updateAnimal(
+    payload,
+    user?.id!
+  );
+  if (!animal) return json({}, status);
 
   return json({ animal });
 };
 
-export const meta: MetaFunction = ({
-  data
-}: {
-  data: LoaderData | undefined;
-}) => {
+export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
   return getMetaBaseByAnimal({
-    animal: data?.animal,
+    animal: data.animal,
     prefix: { title: '編輯 ' }
   });
 };
 
-type LoaderData = { animal: Animal };
+type LoaderData = { animal: AnimalInfo };
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const user = await authenticator.isAuthenticated(request);
   if (!user) return redirect('/');
 
-  const animal = await getAnimalById(Number(params.id));
-
+  const result = await animalController.getInfo(Number(params.id));
+  const [status, animal] = result;
   if (!animal) {
     throw new Response(`找不到 No.${params.id} 的浪浪`, {
-      status: 404
+      status
     });
   }
 
-  const data: LoaderData = { animal };
+  const data = { animal } as LoaderData;
 
   return json(data);
 };
@@ -72,7 +81,7 @@ export default function PetRouter() {
       <EditAdoption
         animal={{
           ...data.animal,
-          openAt: data.animal.openAt ? new Date(data.animal.openAt) : null,
+          openAt: data.animal.openAt ? new Date(data.animal.openAt) : '',
           createdAt: new Date(data.animal.createdAt),
           updatedAt: new Date(data.animal.updatedAt)
         }}

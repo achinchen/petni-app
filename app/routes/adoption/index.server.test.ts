@@ -1,14 +1,12 @@
 import { json, Response } from '@remix-run/node';
+import { controller } from 'spec/mock/server/adapters/animal/index.controller';
 import { action, loader } from './index';
 import getContext from 'spec/utils/getContext';
 import { ANIMAL, ANIMALS } from 'spec/mock/constants/animal';
 import { USER } from 'spec/mock/constants/user';
 import { authenticator } from 'spec/utils/authenticator';
-import getAnimalsByUserId from '~/models/Animal/getAnimalsByUserId/index.server';
-import deleteAnimalById from '~/models/Animal/deleteAnimalById/index.server';
 
-jest.mock('~/models/Animal/getAnimalsByUserId/index.server');
-jest.mock('~/models/Animal/deleteAnimalById/index.server');
+jest.mock('server/gateways/animal/postgres/index');
 
 const mock = {
   form: new FormData(),
@@ -30,36 +28,34 @@ describe('action', () => {
 
   it('return 400 when request.formData is falsy', async () => {
     context.request.formData = jest.fn().mockResolvedValueOnce(null);
+    controller.deleteAnimal.mockResolvedValueOnce([400]);
     await action(context);
     expect(json).toBeCalledWith({}, 400);
   });
 
-  it('return 400 when request.formData.id is falsy', async () => {
-    context.request.formData = jest.fn().mockResolvedValueOnce(mock.form);
-    await action(context);
-    expect(json).toBeCalledWith({}, 400);
-  });
-
-  it('return 401 when user is not login', async () => {
+  it('return 403 when user is not login', async () => {
     mock.form.set('id', '123');
     context.request.formData = jest.fn().mockResolvedValueOnce(mock.form);
+    authenticator.isAuthenticated.mockResolvedValueOnce(null!);
+    controller.deleteAnimal.mockResolvedValueOnce([403]);
     await action(context);
-    expect(json).toBeCalledWith({}, 401);
+    expect(json).toBeCalledWith({}, 403);
   });
 
   it('trigger deleteAnimalById', async () => {
     mock.form.set('id', `${mock.id}`);
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
     context.request.formData = jest.fn().mockResolvedValueOnce(mock.form);
+    controller.deleteAnimal.mockResolvedValueOnce([204]);
     await action(context);
-    expect(deleteAnimalById).toBeCalledWith(mock.id, USER);
+    expect(controller.deleteAnimal).toBeCalledWith(mock.id, USER.id);
   });
 
   it('return 500 when delete animal is failed', async () => {
     mock.form.set('id', `${mock.id}`);
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
     context.request.formData = jest.fn().mockResolvedValueOnce(mock.form);
-    (deleteAnimalById as jest.Mock).mockRejectedValueOnce(null);
+    controller.deleteAnimal.mockResolvedValueOnce([500]);
     await action(context);
     expect(json).toBeCalledWith({}, 500);
   });
@@ -68,7 +64,7 @@ describe('action', () => {
     mock.form.set('id', `${mock.id}`);
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
     context.request.formData = jest.fn().mockResolvedValueOnce(mock.form);
-    (deleteAnimalById as jest.Mock).mockResolvedValueOnce(null);
+    controller.deleteAnimal.mockResolvedValueOnce([204]);
     const result = await action(context);
     expect(result).toEqual(new Response(null, { status: 204 }));
   });
@@ -77,21 +73,23 @@ describe('action', () => {
 describe('loader', () => {
   const context = getContext({});
 
-  it('return empty array when user is not authenticated', async () => {
+  it('return 403 when user is not authenticated', async () => {
+    controller.getCreated.mockResolvedValueOnce([403]);
     await loader(context);
-    expect(json).toBeCalledWith({ user: undefined, animals: [] });
+    expect(json).toBeCalledWith({ user: undefined }, 403);
   });
 
   it('trigger getAnimalsByUserId', async () => {
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
+    controller.getCreated.mockResolvedValueOnce([200, ANIMALS]);
     await loader(context);
-    expect(getAnimalsByUserId).toBeCalledWith(USER.id);
+    expect(controller.getCreated).toBeCalledWith(USER.id);
   });
 
   it('return user and animals when user is authenticated', async () => {
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
-    (getAnimalsByUserId as jest.Mock).mockResolvedValueOnce(ANIMALS);
+    controller.getCreated.mockResolvedValueOnce([200, ANIMALS]);
     await loader(context);
-    expect(json).toBeCalledWith({ user: USER, animals: ANIMALS });
+    expect(json).toBeCalledWith({ user: USER, animals: ANIMALS }, 200);
   });
 });

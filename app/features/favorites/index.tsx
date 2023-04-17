@@ -1,4 +1,4 @@
-import type { SimpleAnimal } from '~/models/Animal/type';
+import type { Animal } from 'server/entities/animal';
 import type { FavoriteIdSet } from '~/hooks/useFavorite/utils';
 import { useEffect, useState } from 'react';
 import { useFetcher } from '@remix-run/react';
@@ -10,7 +10,7 @@ import { FETCHER_IDLE_STATE } from '~/constants/utils';
 import Loading from '~/components/common/LoadingAnimation';
 
 export default function Favorites() {
-  const [animals, setAnimals] = useState<SimpleAnimal[]>([]);
+  const [animals, setAnimals] = useState<Animal[]>([]);
 
   const { ids, onDelete } = useFavorite();
 

@@ -1,36 +1,38 @@
-import type { EditingAnimal } from '~/models/Animal/type';
+import type { LooseAnimal } from 'server/gateways/animal';
 import { json, redirect } from '@remix-run/node';
 import getContext from 'spec/utils/getContext';
 import getJsonFormData from 'spec/utils/getJsonFormData';
+import { controller } from 'spec/mock/server/adapters/animal/index.controller';
 import { loader, action } from './index';
 import { authenticator } from 'spec/utils/authenticator';
-import createAnimal from '~/models/Animal/createAnimal/index.server';
 import { USER } from 'spec/mock/constants/user';
 import { ANIMAL } from 'spec/mock/constants/animal';
 
-jest.mock('~/models/Animal/createAnimal/index.server');
+jest.mock('server/gateways/animal/postgres/index');
 
 describe('action', () => {
   let context = getContext({
     request: { formData: jest.fn() }
   });
 
-  const editAnimal = {
+  const animal = {
     family: ANIMAL.family
-  } as EditingAnimal;
+  } as LooseAnimal;
 
   it('return 400 when request.formData is falsy', async () => {
     context.request.formData = jest.fn().mockResolvedValueOnce(null);
+    controller.createAnimal.mockResolvedValue([400]);
     await action(context);
     expect(json).toBeCalledWith({}, 400);
   });
 
-  it('return 401 when user is not authenticated', async () => {
+  it('return 403 when user is not authenticated', async () => {
     context.request.formData = jest
       .fn()
       .mockResolvedValueOnce(getJsonFormData(1));
+    controller.createAnimal.mockResolvedValue([403]);
     await action(context);
-    expect(json).toBeCalledWith({}, 401);
+    expect(json).toBeCalledWith({}, 403);
   });
 
   it('return 404 when id is falsy', async () => {
@@ -38,25 +40,27 @@ describe('action', () => {
       .fn()
       .mockResolvedValueOnce(getJsonFormData(null));
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
+    controller.createAnimal.mockResolvedValue([404]);
     await action(context);
-    expect(json).toBeCalledWith({}, 403);
+    expect(json).toBeCalledWith({}, 404);
   });
 
   it('trigger createAnimal', async () => {
     context.request.formData = jest
       .fn()
-      .mockResolvedValueOnce(getJsonFormData(editAnimal));
+      .mockResolvedValueOnce(getJsonFormData(animal));
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
+    controller.createAnimal.mockResolvedValue([200]);
     await action(context);
-    expect(createAnimal).toBeCalledWith(editAnimal, USER);
+    expect(controller.createAnimal).toBeCalledWith(animal, USER.id);
   });
 
   it('return 500 when create animal is failed', async () => {
     context.request.formData = jest
       .fn()
-      .mockResolvedValueOnce(getJsonFormData(editAnimal));
+      .mockResolvedValueOnce(getJsonFormData(animal));
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
-    (createAnimal as jest.Mock).mockResolvedValueOnce(null);
+    controller.createAnimal.mockResolvedValueOnce([500]);
     await action(context);
     expect(json).toBeCalledWith({}, 500);
   });
@@ -64,9 +68,9 @@ describe('action', () => {
   it('return animal when create animal is succeeded', async () => {
     context.request.formData = jest
       .fn()
-      .mockResolvedValueOnce(getJsonFormData(editAnimal));
+      .mockResolvedValueOnce(getJsonFormData(animal));
     authenticator.isAuthenticated.mockResolvedValueOnce(USER);
-    (createAnimal as jest.Mock).mockResolvedValueOnce(ANIMAL);
+    controller.createAnimal.mockResolvedValueOnce([200, ANIMAL]);
     await action(context);
     expect(json).toBeCalledWith({ animal: ANIMAL });
   });

@@ -1,5 +1,5 @@
 import type { MouseEvent } from 'react';
-import type { SimpleAnimal } from '~/models/Animal/type';
+import type { Animal } from 'server/entities/animal';
 import { useState } from 'react';
 import { Link } from '@remix-run/react';
 import { getIconByGenderAndFamily } from '~/utils/icon';
@@ -8,7 +8,7 @@ import Icon, { Close } from '~/components/common/Icon';
 import DeletePanel from '~/components/common/DeletePanel';
 
 export type Props = {
-  animals: SimpleAnimal[];
+  animals: Animal[];
   onDelete: (id: number) => void;
   children?: JSX.Element;
 };
@@ -27,7 +27,7 @@ export default function AnimalCards({ animals, onDelete, children }: Props) {
   };
 
   const onDeleteButton =
-    (id: SimpleAnimal['id']) => (event: MouseEvent<HTMLButtonElement>) => {
+    (id: Animal['id']) => (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
       setTargetId(id);
     };

@@ -1,5 +1,5 @@
 import type { RawAnimal } from './types';
-import { Family, Gender, Size } from '@prisma/client';
+import { Family, Gender, Size } from 'server/entities/animal';
 import { installGlobals } from '@remix-run/node';
 import { PUBLIC_ADOPT_ANIMALS_API } from './constants';
 

@@ -1,3 +1,5 @@
+import type { User } from 'server/entities/user';
+
 export const USERS = [
   {
     id: 100,
@@ -12,6 +14,6 @@ export const USERS = [
   }
 ];
 
-export const USER = USERS[0];
+export const USER = USERS[0] as User;
 
 export const EXISTED_USER = USERS[1];

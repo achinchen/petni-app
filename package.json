@@ -17,7 +17,8 @@
     "docker:down": "docker compose down",
     "test:db": "dotenv -e .env.test prisma db push",
     "test:seed": "NODE_ENV=test node --require esbuild-register ./database/seed/test.ts",
-    "test": "NODE_ENV=test yarn docker:up && yarn test:db && yarn test:seed && jest -i"
+    "test:integrate": "NODE_ENV=test yarn docker:up && yarn test:db && yarn test:seed && jest -i",
+    "test": "NODE_ENV=test jest -i"
   },
   "dependencies": {
     "@lottiefiles/lottie-player": "^1.5.6",

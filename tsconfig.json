@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"],
+      "server/*": ["./server/*"],
       "database": ["./database/*"]
     },
     "typeRoots": ["./node_modules/@types", "./types"],

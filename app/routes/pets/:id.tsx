@@ -1,5 +1,5 @@
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
-import type { Pet as PetType } from '~/features/pet/types';
+import type { AnimalInfo } from 'server/adapters/animal/index.presenter';
 import {
   Link as RemixLink,
   useLoaderData,
@@ -10,9 +10,22 @@ import { redirect, json } from '@remix-run/node';
 import Pet from '~/features/pet';
 import Layout from '~/components/common/Layout';
 import Loading from '~/components/common/LoadingAnimation';
-import { authenticator } from '~/services/auth/index.server';
-import getAnimalById from '~/models/Animal/getAnimalById/index.server';
+import { AnimalUseCase } from 'server/usecases/animal';
+import { AnimalFollowRepositoryPostgres } from 'server/gateways/animal-follow/postgres';
+import { AnimalRepositoryPostgres } from 'server/gateways/animal/postgres';
+import { AnimalController } from 'server/adapters/animal/index.controller';
+import { AnimalPresenter } from 'server/adapters/animal/index.presenter';
+import { authenticator } from 'server/services/auth';
 import getMetaBaseByAnimal from '~/utils/seo/getMetaBaseByAnimal';
+
+const animalRepository = new AnimalRepositoryPostgres();
+const animalFollowRepositoryPostgres = new AnimalFollowRepositoryPostgres();
+const animalUseCase = new AnimalUseCase(
+  animalRepository,
+  animalFollowRepositoryPostgres
+);
+const animalPresenter = new AnimalPresenter();
+const animalController = new AnimalController(animalUseCase, animalPresenter);
 
 export const meta: MetaFunction = ({
   data
@@ -22,18 +35,18 @@ export const meta: MetaFunction = ({
   return getMetaBaseByAnimal({ animal: data?.pet });
 };
 
-export type LoaderData = { pet: PetType };
+export type LoaderData = { pet: AnimalInfo };
 
 export const loader: LoaderFunction = async ({ request, params: { id } }) => {
   if (!id) return redirect('/');
 
   const user = await authenticator.isAuthenticated(request);
-  const animal = await getAnimalById(Number(id), user?.id);
+  const [status, animal] = await animalController.getInfo(Number(id), user?.id);
 
-  if (!animal) return json(`找不到 No.${id} 的浪浪`, 404);
+  if (!animal) return json(`找不到 No.${id} 的浪浪`, status);
 
   const data: LoaderData = {
-    pet: animal
+    pet: animal as AnimalInfo
   };
 
   return json(data);
@@ -44,7 +57,7 @@ export default function PetRouter() {
 
   return (
     <Layout withHeader={false}>
-      <Pet pet={data.pet as any} />
+      <Pet pet={data.pet} />
     </Layout>
   );
 }

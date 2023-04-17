@@ -1,5 +1,5 @@
 import { formatFamily } from './index';
-import { Family } from '@prisma/client';
+import type { Family } from 'server/entities/animal';
 
 describe('basic', () => {
   const testCases = [

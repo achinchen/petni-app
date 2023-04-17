@@ -1,4 +1,4 @@
-import { Gender } from '@prisma/client';
+import type { Gender } from 'server/entities/animal';
 
 export const BUTTON = {
   SUBMIT: '發佈',

@@ -1,6 +1,6 @@
 import type { MouseEvent } from 'react';
 import type { Props } from '~/components/common/AnimalCards';
-import { ANIMALS } from './constants';
+import { ANIMALS } from 'spec/mock/constants/animal';
 export { ANIMALS };
 
 export const TEST_ID = 'animal-cards';

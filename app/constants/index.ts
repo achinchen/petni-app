@@ -1,5 +1,5 @@
-import { Family, Gender } from '@prisma/client';
-export { Family, Gender, Size } from '@prisma/client';
+import { Family, Gender } from 'server/entities/animal';
+export { Family, Gender, Size } from 'server/entities/animal';
 
 export const APP_NAME = 'PetNi';
 

@@ -1,5 +1,5 @@
 import { getLocalStorage, setLocalStorage } from '~/utils/storage';
-import type { Animal } from '@prisma/client';
+import type { Animal } from 'server/entities/animal';
 
 export type FavoriteId = Animal['id'];
 export type FavoriteIdSet = Set<FavoriteId>;

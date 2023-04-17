@@ -1,10 +1,10 @@
 import type { DeepMockProxy } from 'jest-mock-extended';
 import { mockReset, mockDeep } from 'jest-mock-extended';
-import { authenticator } from '~/services/auth/index.server';
+import { authenticator } from 'server/services/auth';
 
 type Authenticator = typeof authenticator;
 
-jest.mock('~/services/auth/index.server', () => ({
+jest.mock('server/services/auth/index', () => ({
   __esModule: true,
   authenticator: mockDeep<Authenticator>()
 }));
