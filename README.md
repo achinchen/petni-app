@@ -1,7 +1,7 @@
 # Petni App
 
 An application provides cat & dog information in Taiwan for pet adoption.
-
+TEST
 User can use family, color, size and geolocation to set preference to get randomly recommended pets, and save it into favorite collection. User can add new animal for adoption after login. 
 
 The app also provides some useful information about 24hr animal hospital in Taiwan and color information about dog and cat. 
