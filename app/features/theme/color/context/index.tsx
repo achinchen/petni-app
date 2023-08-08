@@ -18,8 +18,8 @@ export const initialState = {
   setFamily: () => {},
   index: 0,
   setIndex: () => {},
-  familyInformation: INFORMATION.Cat,
-  currentInfo: INFORMATION.Cat[0]
+  familyInformation: INFORMATION[Family.Cat],
+  currentInfo: INFORMATION[Family.Cat][0]
 };
 
 export const ThemeColorContext = createContext<InitialState>(initialState);

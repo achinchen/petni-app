@@ -43,8 +43,6 @@ model Animal {
   userId    Int?           @default(0)
   user      User?          @relation(fields: [userId], references: [id])
   follows   AnimalFollow[]
-  
-  @@index([family, gender, size], type: Hash)
 }
 
 enum Gender {

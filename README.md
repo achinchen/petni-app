@@ -10,6 +10,29 @@ The app also provides some useful information about 24hr animal hospital in Taiw
 The data is from open data api of Taiwanese government.
 The design draft is provided by Taiwanese designer K.T.
 
+## Setup 
+Prepare env file
+```
+cp .env.example .env 
+```
+
+Install dependencies
+```
+yarn install
+```
+
+Start db server which provides created table and feed the seed.
+Don't forget to up your docker
+```
+yarn dev:db
+```
+
+Then,
+Start dev server
+``` 
+yarn dev
+```
+
 ## Tech Stack
 - [Remix](https://github.com/remix-run/remix)
 - [React](https://github.com/facebook/react)

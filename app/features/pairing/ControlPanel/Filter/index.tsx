@@ -10,7 +10,7 @@ import {
 export default function FilterPanel() {
   const { filter, dispatchFilter } = useControlContext();
 
-  const showColorFilter = Boolean(COLOR_OPTION.OPTIONS(filter.family).length);
+  const showColorFilter = Boolean(COLOR_OPTION.OPTIONS(filter.family)?.length);
 
   const resetColor = useCallback(() => {
     dispatchFilter({
