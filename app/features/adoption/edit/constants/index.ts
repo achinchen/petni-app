@@ -1,4 +1,4 @@
-import type { Gender } from 'server/entities/animal';
+import { Gender } from 'server/entities/animal';
 
 export const BUTTON = {
   SUBMIT: '發佈',

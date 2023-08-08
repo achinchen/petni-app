@@ -7,14 +7,18 @@ declare global {
   var __db: PrismaClient | undefined;
 }
 
-if (process.env.NODE_ENV === 'production') {
-  db = new PrismaClient({ log: ['warn', 'error'] });
-} else {
-  if (!global.__db) {
-    global.__db = new PrismaClient({ log: ['warn', 'error'] });
+export let prisma: PrismaClient;
+
+if (typeof window === 'undefined') {
+  if (process.env.NODE_ENV === 'production') {
+    db = new PrismaClient({ log: ['warn', 'error'] });
+  } else {
+    if (!global.__db) {
+      global.__db = new PrismaClient({ log: ['warn', 'error'] });
+    }
+    db = global.__db;
+    db.$use(AnimalCodeMiddleware);
   }
-  db = global.__db;
-  db.$use(AnimalCodeMiddleware);
 }
 
 export { db };
