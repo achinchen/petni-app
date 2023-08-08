@@ -26,33 +26,33 @@ export const getIsAvailableAnimal = ({
 export const formatGender = (gender: string) => {
   switch (gender) {
     case 'M':
-      return Gender.Male;
+      return Gender[Gender.Male];
     case 'F':
-      return Gender.Female;
+      return Gender[Gender.Female];
     default:
-      return Gender.Null;
+      return Gender[Gender.Null];
   }
 };
 
 export const formatSize = (size: string) => {
   switch (size) {
     case 'BIG':
-      return Size.Large;
+      return Size[Size.Large];
     case 'MEDIUM':
-      return Size.Medium;
+      return Size[Size.Medium];
     case 'SMALL':
     default:
-      return Size.Small;
+      return Size[Size.Small];
   }
 };
 
 export const formatFamily = (family: string) => {
   switch (family) {
     case '貓':
-      return Family.Cat;
+      return Family[Family.Cat];
     case '狗':
     default:
-      return Family.Dog;
+      return Family[Family.Dog];
   }
 };
 
@@ -70,7 +70,6 @@ export const formatAnimal = ({
   shelter_tel: tel
 }: RawAnimal) => {
   return {
-    id,
     code,
     name: '',
     family: formatFamily(family),
