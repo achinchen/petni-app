@@ -22,7 +22,16 @@ export const getIconByGenderAndFamily = ({
   gender: Gender;
   family: Family;
 }): { icon: string; color: string } => {
-  const key =
-    gender !== Gender.Null ? gender : family === Family.Dog ? 'Bone' : 'Fish';
-  return { icon: ICON[key], color: ICON_COLOR_CONFIG[key] };
+  const key = (
+    Number(Gender[gender]) !== Gender.Null
+      ? Gender[gender]
+      : Number(Family[family]) === Family.Dog
+      ? 'Bone'
+      : 'Fish'
+  ) as keyof typeof ICON;
+  console.log(key);
+  return {
+    icon: ICON[key],
+    color: ICON_COLOR_CONFIG[key]
+  };
 };
